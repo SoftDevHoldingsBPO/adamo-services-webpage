@@ -145,7 +145,7 @@
   }
 
   .heading-2 {
-    @apply text-[32px] leading-[normal] font-semibold tracking-[-1.6px];
+    @apply text-[32px] leading-normal font-semibold tracking-[-1.6px];
   }
 }
 
