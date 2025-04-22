@@ -1,26 +1,160 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme colors {
+  /* AdamoSign */
+  --adamo-sign-25: #fcfcfd;
+  --adamo-sign-50: #f8f9fc;
+  --adamo-sign-100: #eaecf5;
+  --adamo-sign-200: #d5d9eb;
+  --adamo-sign-300: #afb5d9;
+  --adamo-sign-400: #717bbc;
+  --adamo-sign-500: #4e5ba6;
+  --adamo-sign-600: #3e4784;
+  --adamo-sign-700: #363f72;
+  --adamo-sign-800: #293056;
+  --adamo-sign-900: #101323;
+
+  /* AdamoID */
+  --adamo-id-25: #f5fbff;
+  --adamo-id-50: #f0f9ff;
+  --adamo-id-100: #e0f2fe;
+  --adamo-id-200: #b9e6fe;
+  --adamo-id-300: #7cd4fd;
+  --adamo-id-400: #36bffa;
+  --adamo-id-500: #0ba5ec;
+  --adamo-id-600: #0086c9;
+  --adamo-id-700: #026aa2;
+  --adamo-id-800: #065986;
+  --adamo-id-900: #0b4a6f;
+
+  /* AdamoPay */
+  --adamo-pay-25: #f6fefc;
+  --adamo-pay-50: #f0fdf9;
+  --adamo-pay-100: #ccfbef;
+  --adamo-pay-200: #99f6e0;
+  --adamo-pay-300: #5fe9d0;
+  --adamo-pay-400: #2ed3b7;
+  --adamo-pay-500: #15b79e;
+  --adamo-pay-600: #0e9384;
+  --adamo-pay-700: #107569;
+  --adamo-pay-800: #125d56;
+  --adamo-pay-900: #134e48;
+
+  /* AdamoRisk */
+  --adamo-risk-25: #fbfaff;
+  --adamo-risk-50: #f5f3ff;
+  --adamo-risk-100: #ece9fe;
+  --adamo-risk-200: #ddd6fe;
+  --adamo-risk-300: #c3b5fd;
+  --adamo-risk-400: #a48afb;
+  --adamo-risk-500: #875bf7;
+  --adamo-risk-600: #7839ee;
+  --adamo-risk-700: #6927da;
+  --adamo-risk-800: #5720b7;
+  --adamo-risk-900: #491c96;
+
+  /* Neutrals */
+  --neutral-25: #fcfcfd;
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d2d6db;
+  --neutral-400: #9da4ae;
+  --neutral-500: #6c737f;
+  --neutral-600: #4d5761;
+  --neutral-700: #384250;
+  --neutral-800: #1f2a37;
+  --neutral-900: #111927;
+
+  /* Generic */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Error */
+  --error-25: #fffafa;
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-200: #fecaca;
+  --error-300: #fca5a5;
+  --error-400: #f87171;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  --error-700: #b91c1c;
+  --error-800: #991b1b;
+  --error-900: #7f1d1d;
+
+  /* Warning */
+  --warning-25: #fffafa;
+  --warning-50: #fef2f2;
+  --warning-100: #fee2e2;
+  --warning-200: #fecaca;
+  --warning-300: #fca5a5;
+  --warning-400: #f87171;
+  --warning-500: #ef4444;
+  --warning-600: #dc2626;
+  --warning-700: #b91c1c;
+  --warning-800: #991b1b;
+  --warning-900: #7f1d1d;
+
+  /* Success */
+  --success-25: #fbfefc;
+  --success-50: #f0fdf4;
+  --success-100: #dcfce7;
+  --success-200: #bbf7d0;
+  --success-300: #86efac;
+  --success-400: #4ade80;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+  --success-700: #15803d;
+  --success-800: #166534;
+  --success-900: #14532d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
+
+  --color-background: var(--white);
+  --color-foreground: var(--neutral-900);
+  --color-border: var(--neutral-200);
+
+  --color-primary: var(--neutral-900);
+  --color-primary-foreground: var(--white);
+  --color-primary-hover: var(--neutral-800);
+  --color-primary-active: var(--neutral-700);
+
+  --color-secondary: var(--white);
+  --color-secondary-foreground: var(--neutral-900);
+  --color-secondary-hover: var(--neutral-100);
+  --color-secondary-active: var(--neutral-200);
+
+  --color-destructive: var(--error-500);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  .heading-1 {
+    @apply text-5xl leading-[1.2] font-semibold tracking-[-2.4px];
+  }
+
+  .heading-2 {
+    @apply text-[32px] leading-[normal] font-semibold tracking-[-1.6px];
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility container {
+  padding-inline: 1rem;
+  margin-inline: auto;
+  max-width: 1296px;
+
+  @variant md {
+    padding-inline: 2rem;
+  }
 }
