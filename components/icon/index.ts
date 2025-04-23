@@ -40,3 +40,4 @@ export * from "./ZoomIcon";
 export * from "./AccountCircleFilledIcon";
 export * from "./MatchCaseIcon";
 export * from "./UploadIcon";
+export * from "./Logo";

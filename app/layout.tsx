@@ -2,6 +2,8 @@ import LenisProvider from "@/providers/LenisProvider";
 
 import type { Metadata } from "next";
 
+import Footer from "@/components/layout/Footer";
+
 import { inter, sora } from "./fonts";
 import "./globals.css";
 
@@ -17,8 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sora.variable} antialiased`}>
-        <LenisProvider>{children}</LenisProvider>
+      <body
+        className={`${inter.variable} ${sora.variable} antialiased flex flex-col min-h-dvh`}
+      >
+        <LenisProvider>
+          <main className="flex-auto">{children}</main>
+
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );
