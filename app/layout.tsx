@@ -1,3 +1,5 @@
+import LenisProvider from "@/providers/LenisProvider";
+
 import type { Metadata } from "next";
 
 import { inter, sora } from "./fonts";
@@ -16,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${sora.variable} antialiased`}>
-        {children}
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );
