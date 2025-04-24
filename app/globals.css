@@ -119,6 +119,7 @@
   --color-background: var(--white);
   --color-foreground: var(--neutral-900);
   --color-border: var(--neutral-200);
+  --color-divide: var(--neutral-100);
 
   --color-primary: var(--neutral-900);
   --color-primary-foreground: var(--white);
@@ -131,14 +132,21 @@
   --color-secondary-active: var(--neutral-200);
 
   --color-destructive: var(--error-500);
+
+  --color-popover: var(--white);
+  --color-popover-foreground: var(--neutral-900);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border divide-divide;
   }
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 
   .heading-1 {

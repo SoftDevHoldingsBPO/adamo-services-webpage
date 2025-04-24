@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { Logo } from "../icon";
+import LocaleSelect from "../ui/locale-select";
 
 const Footer = () => {
   const t = useTranslations("nav");
@@ -32,7 +33,9 @@ const Footer = () => {
           ))}
         </ul>
       </div>
-      <div>lang</div>
+      <div>
+        <LocaleSelect />
+      </div>
     </footer>
   );
 };
