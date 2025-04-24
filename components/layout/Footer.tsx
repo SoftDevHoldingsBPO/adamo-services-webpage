@@ -1,10 +1,13 @@
 import { mainLinks } from "@/constants/navigation";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { Logo } from "../icon";
 
 const Footer = () => {
+  const t = useTranslations("nav");
+
   return (
     <footer className="container py-10 flex flex-col gap-10 md:flex-row md:justify-between">
       <div className="flex flex-col items-start gap-6">
@@ -23,7 +26,7 @@ const Footer = () => {
                 href={item.href}
                 className="text-sm transition-colors text-neutral-500 hover:text-foreground"
               >
-                {item.label}
+                {t(item.key)}
               </Link>
             </li>
           ))}

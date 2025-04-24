@@ -1,7 +1,7 @@
 export const mainLinks = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "FAQs", href: "/faqs" },
-  { label: "Blog", href: "/blog" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact Sales", href: "/contact" },
+  { key: "solutions", href: "/solutions" },
+  { key: "faqs", href: "/faqs" },
+  { key: "blog", href: "/blog" },
+  { key: "about", href: "/about" },
+  { key: "contact", href: "/contact" },
 ];
