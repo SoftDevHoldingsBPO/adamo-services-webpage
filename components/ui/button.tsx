@@ -15,6 +15,8 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active",
         link: "bg-transparent text-neutral-600 hover:text-neutral-700 active:text-neutral-800 !px-0",
+        ghost:
+          "bg-transparent text-white hover:text-neutral-100 active:text-neutral-200 !px-0",
       },
       size: {
         lg: "h-12 px-5 py-2 text-base",
