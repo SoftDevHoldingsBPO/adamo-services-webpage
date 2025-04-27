@@ -34,7 +34,7 @@ const Footer = () => {
         </ul>
       </div>
       <div>
-        <LocaleSelect />
+        <LocaleSelect hasLangText />
       </div>
     </footer>
   );

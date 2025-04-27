@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 
 import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 
 import { inter, sora } from "./fonts";
 import "./globals.css";
@@ -28,6 +29,7 @@ export default async function RootLayout({
       >
         <LenisProvider>
           <NextIntlClientProvider>
+            <Navbar />
             <main className="flex-auto">{children}</main>
 
             <Footer />
