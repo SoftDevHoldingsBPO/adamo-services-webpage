@@ -30,25 +30,39 @@ const buttonVariants = cva(
   },
 );
 
+interface ButtonProps
+  extends React.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  loading?: boolean;
+  "aria-label"?: string;
+}
+
 function Button({
   className,
   variant,
   size,
   asChild = false,
+  loading = false,
+  children,
+  "aria-label": ariaLabel,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
+}: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      aria-label={ariaLabel}
+      aria-busy={loading}
+      disabled={loading || props.disabled}
       {...props}
-    />
+    >
+      {loading ? <span className="sr-only">Loading</span> : children}
+    </Comp>
   );
 }
 
 export { Button, buttonVariants };
+export type { ButtonProps };

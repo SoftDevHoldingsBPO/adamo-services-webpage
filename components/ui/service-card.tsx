@@ -24,6 +24,7 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   const t = useTranslations("services");
   const title = t(`${id}.title`);
+  const description = t(`${id}.description`);
 
   const CardContent = () => (
     <>
@@ -34,6 +35,7 @@ const ServiceCard = ({
           alt={title}
           className="object-cover object-center"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
         />
       </div>
 
@@ -41,30 +43,44 @@ const ServiceCard = ({
         <h4 className="text-[17px] font-semibold text-neutral-900 leading-[1.25]">
           {title}
         </h4>
-        <Button variant="primary" size="md" className="w-fit" disabled={soon}>
+        {description && (
+          <p className="text-neutral-600 text-sm">{description}</p>
+        )}
+        <Button
+          variant="primary"
+          size="md"
+          className="w-fit"
+          disabled={soon}
+          aria-label={
+            soon ? `${title} - Coming soon` : `${title} - ${t(`${id}.button`)}`
+          }
+        >
           {t(`${id}.button`)}
-          {!soon && <ArrowRight />}
+          {!soon && <ArrowRight aria-hidden="true" />}
         </Button>
       </div>
     </>
   );
 
   return (
-    <div
+    <article
       className={cn(
         "relative rounded-2xl overflow-hidden duration-300",
         soon && "cursor-not-allowed",
         className,
       )}
+      aria-labelledby={`service-${id}-title`}
     >
       {soon ? (
-        <CardContent />
+        <div role="article" aria-label={`${title} - Coming soon`}>
+          <CardContent />
+        </div>
       ) : (
-        <Link href={href} className="block">
+        <Link href={href} className="block" aria-label={title}>
           <CardContent />
         </Link>
       )}
-    </div>
+    </article>
   );
 };
 
