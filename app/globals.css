@@ -139,6 +139,9 @@
   --color-popover-foreground: var(--neutral-900);
 
   --color-tertiary: var(--adamo-pay-300);
+
+  --color-preloader-primary: var(--neutral-900);
+  --color-preloader-secondary: var(--neutral-800);
 }
 
 @layer base {
@@ -146,7 +149,7 @@
     @apply border-border divide-divide;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground overflow-hidden font-sans;
   }
 
   button {
@@ -189,10 +192,10 @@
 }
 
 @layer utilities {
-  /* .overlay-scrollbar {
+  .overlay-scrollbar {
     overflow-y: overlay;
     scrollbar-width: thin;
-  } */
+  }
 
   .overlay-scrollbar::-webkit-scrollbar {
     width: 6px;

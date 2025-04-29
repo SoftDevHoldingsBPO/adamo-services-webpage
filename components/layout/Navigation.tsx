@@ -51,7 +51,7 @@ const Navigation = () => {
       // Animation timeline
       const tl = gsap.timeline({
         paused: true,
-        defaults: { duration: 0.5, ease: "power3.out" },
+        defaults: { duration: 0.6, ease: "power3.out" },
         onReverseComplete: () => {
           setIsOpen(false);
         },
@@ -71,8 +71,10 @@ const Navigation = () => {
         ],
         {
           y: 0,
+          duration: 0.6,
+          ease: "power3.out",
           opacity: 1,
-          stagger: 0.1,
+          stagger: 0.2,
         },
         "-=0.2",
       );

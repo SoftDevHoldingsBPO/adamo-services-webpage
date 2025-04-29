@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="container">
+      <div className="container py-20">
         <h2 className="heading-2">
           Lorem ipsum dolor sit amet. Lorem ipsum, dolor sit amet consectetur
           adipisicing elit. Vitae provident totam accusantium repellat unde
@@ -19,6 +19,10 @@ export default function Home() {
           consequatur temporibus et saepe. Voluptatibus, quaerat iure nemo at
           incidunt ratione voluptate nisi?
         </h2>
+        <p className="mt-10">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos.
+        </p>
       </div>
     </>
   );
