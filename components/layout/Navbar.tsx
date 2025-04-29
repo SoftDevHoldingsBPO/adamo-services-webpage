@@ -1,5 +1,6 @@
 "use client";
 
+import { useNavigation } from "@/providers/NavigationProvider";
 import { gsap } from "gsap";
 import { useLenis } from "lenis/react";
 import { useMediaQuery } from "usehooks-ts";
@@ -11,9 +12,10 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-import { HamburgerMenuIcon, Logo } from "../icon";
+import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";
 import LocaleSelect from "../ui/locale-select";
+import Navigation from "./Navigation";
 
 const HIDE_OFFSET = -100;
 const ANIMATION_DURATION = 0.5;
@@ -30,6 +32,8 @@ const Navbar = () => {
 
   const [isAtTop, setIsAtTop] = useState(true);
   const [isAppearing, setIsAppearing] = useState(false);
+
+  const { isOpen, toggleMenu } = useNavigation();
 
   const killAnimation = () => {
     if (animationRef.current) {
@@ -81,53 +85,78 @@ const Navbar = () => {
     lastScrollRef.current = currentScroll;
   });
 
+  const isVisible = !isAtTop && isAppearing;
+
   return (
-    <div
-      ref={navbarRef}
-      data-visible={isAppearing && !isAtTop}
-      className={cn(
-        "fixed px-4 py-6 left-0 top-0 w-full z-40 transition-colors duration-300 group bg-white border-b border-transparent",
-        isAtTop
-          ? "bg-transparent md:delay-400"
-          : "bg-white delay-200 border-border",
-      )}
-    >
-      <div className="flex items-center justify-between max-w-[1408px] mx-auto">
-        <Link href="/">
-          <Logo className="group-data-[visible=true]:text-primary text-white md:text-primary" />
-        </Link>
-        <div className="flex gap-x-6">
-          <LocaleSelect
-            className="text-white active:text-neutral-100 group-data-[visible=true]:text-neutral-600 group-data-[visible=true]:hover:text-neutral-700 group-data-[visible=true]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800"
-            align={desktop ? "start" : "end"}
-          />
+    <>
+      <div
+        data-fixed
+        ref={navbarRef}
+        data-visible={isVisible}
+        className={cn(
+          "fixed px-4 py-6 left-0 top-0  right-0 z-40 transition-colors duration-200 group bg-white border-b border-transparent",
+          isAtTop ? "bg-transparent" : "bg-white shadow-sm",
+          isOpen && "!bg-primary shadow-none",
+        )}
+      >
+        <div className="flex items-center justify-between max-w-[1408px] mx-auto">
+          <Link href="/">
+            <Logo
+              className={cn(
+                "group-data-[visible=true]:text-primary text-white md:text-primary transition-colors",
+                isOpen && "!text-white",
+              )}
+            />
+          </Link>
+          <div className="flex gap-x-6">
+            <LocaleSelect
+              className={cn(
+                "text-white active:text-neutral-100 group-data-[visible=true]:text-neutral-600 group-data-[visible=true]:hover:text-neutral-700 group-data-[visible=true]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800",
+                isOpen && "!text-white",
+              )}
+              align={desktop ? "start" : "end"}
+            />
 
-          {/* Mobile */}
-          <div className="md:hidden">
-            <Button
-              size="md"
-              variant={isAppearing && !isAtTop ? "primary" : "secondary"}
-            >
-              <HamburgerMenuIcon />
-            </Button>
-          </div>
+            {/* Mobile */}
+            <div className="md:hidden">
+              <Button
+                size="md"
+                onClick={toggleMenu}
+                variant={
+                  isOpen ? "secondary" : isVisible ? "primary" : "secondary"
+                }
+              >
+                {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+              </Button>
+            </div>
 
-          {/* Desktop */}
-          <div className="hidden md:block">
-            <Button asChild size="md">
-              <Link href="/adamo-pay">{t("contact")}</Link>
-            </Button>
-          </div>
+            {/* Desktop */}
+            <div className="hidden md:block">
+              <Button
+                asChild
+                size="md"
+                variant={isOpen ? "secondary" : "primary"}
+              >
+                <Link href="/adamo-pay">{t("contact")}</Link>
+              </Button>
+            </div>
 
-          {/* Desktop */}
-          <div className="hidden md:block">
-            <Button size="md">
-              <HamburgerMenuIcon />
-            </Button>
+            {/* Desktop */}
+            <div className="hidden md:block">
+              <Button
+                size="md"
+                variant={isOpen ? "secondary" : "primary"}
+                onClick={toggleMenu}
+              >
+                {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <Navigation />
+    </>
   );
 };
 

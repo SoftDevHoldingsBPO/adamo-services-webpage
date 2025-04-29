@@ -42,3 +42,7 @@ export * from "./MatchCaseIcon";
 export * from "./UploadIcon";
 export * from "./ArrowRight";
 export * from "./Logo";
+export * from "./Facebook";
+export * from "./Instagram";
+export * from "./LinkedIn";
+export * from "./Threads";

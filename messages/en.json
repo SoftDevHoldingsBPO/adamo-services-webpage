@@ -1,10 +1,35 @@
 {
   "nav": {
+    "servicesTitle": "Solutions that fit your needs",
+    "socialsTitle": "Let's stay in touch",
+    "navigation": "More information",
     "solutions": "Solutions",
     "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
     "contact": "Contact Sales"
+  },
+  "services": {
+    "adamoId": {
+      "title": "Verify your customers' identity with AdamoID",
+      "description": "Use advanced biometric technology. Reduce risks and streamline authentication processes in real-time.",
+      "button": "Learn more"
+    },
+    "adamoPay": {
+      "title": "Optimize your payment management with AdamoPay",
+      "description": "An agile and secure solution. Comply with Colombian regulations hassle-free at competitive costs.",
+      "button": "Learn more"
+    },
+    "adamoRisk": {
+      "title": "Mitigate risks in your business with AdamoRisk",
+      "description": "An advanced platform that provides heat maps, risk scoring, and control plans.",
+      "button": "Coming soon"
+    },
+    "adamoSign": {
+      "title": "Automate documents with AdamoSign",
+      "description": "With data and metadata intelligence, ensure authenticity and prevent fraud with advanced technology.",
+      "button": "Coming soon"
+    }
   },
   "hero": {
     "title": "Automation and <accent>optimization made simple</accent>",

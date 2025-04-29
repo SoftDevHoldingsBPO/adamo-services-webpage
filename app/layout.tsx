@@ -1,4 +1,5 @@
 import LenisProvider from "@/providers/LenisProvider";
+import { NavigationProvider } from "@/providers/NavigationProvider";
 
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -6,6 +7,7 @@ import { getLocale } from "next-intl/server";
 
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import Preloader from "@/components/ui/preloader";
 
 import { inter, sora } from "./fonts";
 import "./globals.css";
@@ -29,10 +31,12 @@ export default async function RootLayout({
       >
         <LenisProvider>
           <NextIntlClientProvider>
-            <Navbar />
-            <main className="flex-auto">{children}</main>
-
-            <Footer />
+            <NavigationProvider>
+              {/* <Preloader /> */}
+              <Navbar />
+              <main className="flex-auto">{children}</main>
+              <Footer />
+            </NavigationProvider>
           </NextIntlClientProvider>
         </LenisProvider>
       </body>
