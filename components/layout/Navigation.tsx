@@ -20,7 +20,7 @@ const ANIMATION_CONFIG = {
   INITIAL: {
     Y: "-100%",
     OPACITY: 0,
-    OFFSET_Y: -32,
+    OFFSET_Y: -48,
   },
   DURATION: 0.6,
   EASE: "power3.out",
@@ -52,9 +52,6 @@ const socialLinks = [
 
 const Navigation = () => {
   const navigation = useRef<HTMLDivElement>(null);
-  const navigationLeft = useRef<HTMLDivElement>(null);
-  const navigationRight = useRef<HTMLDivElement>(null);
-  const navigationHeading = useRef<HTMLHeadingElement>(null);
 
   const { isOpen, timeline, setIsOpen } = useNavigation();
   const t = useTranslations("nav");
@@ -63,15 +60,14 @@ const Navigation = () => {
 
   useGSAP(
     () => {
-      if (!navigationLeft.current || !navigationRight.current) return;
-
       // Initial states
       gsap.set(navigation.current, { y: ANIMATION_CONFIG.INITIAL.Y });
       gsap.set(
         [
-          navigationHeading.current,
-          navigationLeft.current,
-          navigationRight.current,
+          "[data-navigation-heading]",
+          "[data-navigation-service]",
+          "[data-navigation-links]",
+          "[data-navigation-socials]",
         ],
         {
           opacity: ANIMATION_CONFIG.INITIAL.OPACITY,
@@ -98,19 +94,51 @@ const Navigation = () => {
       });
 
       tl.to(
-        [
-          navigationHeading.current,
-          navigationLeft.current,
-          navigationRight.current,
-        ],
+        "[data-navigation-heading]",
         {
           y: 0,
           duration: ANIMATION_CONFIG.DURATION,
           ease: ANIMATION_CONFIG.EASE,
           opacity: 1,
-          stagger: ANIMATION_CONFIG.STAGGER,
         },
         ANIMATION_CONFIG.OFFSET_TIME,
+      );
+
+      tl.to(
+        "[data-navigation-service]",
+        {
+          y: 0,
+          duration: ANIMATION_CONFIG.DURATION,
+          ease: ANIMATION_CONFIG.EASE,
+          opacity: 1,
+          stagger: {
+            each: 0.2,
+            amount: 0.4,
+          },
+        },
+        "-=0.4",
+      );
+
+      tl.to(
+        "[data-navigation-links]",
+        {
+          y: 0,
+          duration: ANIMATION_CONFIG.DURATION,
+          ease: ANIMATION_CONFIG.EASE,
+          opacity: 1,
+        },
+        "-=0.74",
+      );
+
+      tl.to(
+        "[data-navigation-socials]",
+        {
+          y: 0,
+          duration: ANIMATION_CONFIG.DURATION,
+          ease: ANIMATION_CONFIG.EASE,
+          opacity: 1,
+        },
+        "-=0.44",
       );
 
       timeline.current = tl;
@@ -131,19 +159,17 @@ const Navigation = () => {
     >
       <div className="max-w-[1232px] mx-auto h-full flex flex-col min-h-[600px]">
         <h3
-          ref={navigationHeading}
+          data-navigation-heading
           className="heading-2 mb-6 md:mb-10 max-w-[600px]"
         >
           {t("servicesTitle")}
         </h3>
 
         <div className="grid grid-rows-[295px_1fr] md:grid-rows-[1fr] grid-cols-1 md:grid-cols-[1fr_218px] h-full gap-14 md:gap-16 xl:grid-cols-[1fr_380px] xl:gap-[138px] md:h-auto">
-          <div
-            ref={navigationLeft}
-            className="md:grid md:grid-cols-2 gap-8 flex flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar"
-          >
+          <div className="md:grid md:grid-cols-2 gap-8 flex flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar">
             {services.map((service) => (
               <div
+                data-navigation-service
                 key={service.id}
                 className="w-[280px] md:w-auto snap-start shrink-0"
               >
@@ -152,11 +178,8 @@ const Navigation = () => {
             ))}
           </div>
 
-          <div
-            ref={navigationRight}
-            className="flex flex-col flex-auto gap-y-6 md:gap-y-[90px]"
-          >
-            <div className="flex-auto md:flex-[initial]">
+          <div className="flex flex-col flex-auto gap-y-6 md:gap-y-[90px]">
+            <div data-navigation-links className="flex-auto md:flex-[initial]">
               <h3 className="text-sm text-neutral-500 mb-8 hidden md:block">
                 {t("navigation")}
               </h3>
@@ -173,7 +196,7 @@ const Navigation = () => {
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div data-navigation-socials className="space-y-8">
               <h4 className="text-sm text-neutral-500 hidden md:block">
                 {t("socialsTitle")}
               </h4>

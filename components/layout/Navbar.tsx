@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="flex items-center gap-x-6">
         <LocaleSelect
           align={desktop ? "start" : "end"}
-          className="text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:text-white"
+          className="text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:!text-white"
         />
 
         {/* Mobile */}

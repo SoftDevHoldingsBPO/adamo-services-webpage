@@ -3,11 +3,11 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { Logo } from "../icon";
 
-const isHidden = true;
+const isHidden = false;
 
 const Preloader = () => {
   // Refs for animation targets
@@ -16,6 +16,12 @@ const Preloader = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const bgOverlayRef = useRef<HTMLDivElement>(null);
   const opacityRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isHidden) {
+      document.body.setAttribute("data-preloader-complete", "true");
+    }
+  }, []);
 
   useGSAP(
     () => {
@@ -71,7 +77,7 @@ const Preloader = () => {
     { dependencies: [], scope: preloaderRef },
   );
 
-  // if (isHidden) return null;
+  if (isHidden) return null;
 
   return (
     <div
