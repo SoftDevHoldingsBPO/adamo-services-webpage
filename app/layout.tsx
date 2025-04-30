@@ -7,6 +7,7 @@ import { getLocale } from "next-intl/server";
 
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import Navigation from "@/components/layout/Navigation";
 import Preloader from "@/components/layout/Preloader";
 
 import { inter, sora } from "./fonts";
@@ -34,6 +35,7 @@ export default async function RootLayout({
             <NavigationProvider>
               <Preloader />
               <Navbar />
+              <Navigation />
               <main className="flex-auto">{children}</main>
               <Footer />
             </NavigationProvider>
