@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 import { Logo } from "../icon";
 
-const isVisible = false;
+const isHidden = true;
 
 const Preloader = () => {
   // Refs for animation targets
@@ -68,7 +68,7 @@ const Preloader = () => {
     { dependencies: [], scope: preloaderRef },
   );
 
-  // if (!isVisible) return null;
+  // if (isHidden) return null;
 
   return (
     <div

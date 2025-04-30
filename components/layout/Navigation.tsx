@@ -6,7 +6,7 @@ import { useNavigation } from "@/providers/NavigationProvider";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
-import { useRef } from "react";
+import { memo, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -16,8 +16,41 @@ import { useLockScroll } from "@/hooks/useLockScroll";
 import { Facebook, Instagram, LinkedIn, Threads } from "../icon";
 import ServiceCard from "../ui/service-card";
 
+const ANIMATION_CONFIG = {
+  INITIAL: {
+    Y: "-100%",
+    OPACITY: 0,
+    OFFSET_Y: -32,
+  },
+  DURATION: 0.6,
+  EASE: "power3.out",
+  STAGGER: 0.2,
+  OFFSET_TIME: "-=0.3",
+} as const;
+
+interface SocialLinkProps {
+  href: string;
+  icon: React.ComponentType<{ size: number }>;
+}
+
+const SocialLink = memo(({ href, icon: Icon }: SocialLinkProps) => (
+  <Link
+    href={href}
+    className="text-white hover:text-neutral-300 transition-colors"
+  >
+    <Icon size={20} />
+  </Link>
+));
+SocialLink.displayName = "SocialLink";
+
+const socialLinks = [
+  { href: "#", icon: Facebook },
+  { href: "#", icon: Instagram },
+  { href: "#", icon: Threads },
+  { href: "#", icon: LinkedIn },
+];
+
 const Navigation = () => {
-  // Refs for GSAP animations
   const navigation = useRef<HTMLDivElement>(null);
   const navigationLeft = useRef<HTMLDivElement>(null);
   const navigationRight = useRef<HTMLDivElement>(null);
@@ -26,16 +59,14 @@ const Navigation = () => {
   const { isOpen, timeline, setIsOpen } = useNavigation();
   const t = useTranslations("nav");
 
-  // Lock body scroll when navigation is open
   useLockScroll({ isOpen });
 
-  // GSAP animation setup
   useGSAP(
     () => {
       if (!navigationLeft.current || !navigationRight.current) return;
 
       // Initial states
-      gsap.set(navigation.current, { y: "-100%" });
+      gsap.set(navigation.current, { y: ANIMATION_CONFIG.INITIAL.Y });
       gsap.set(
         [
           navigationHeading.current,
@@ -43,15 +74,18 @@ const Navigation = () => {
           navigationRight.current,
         ],
         {
-          opacity: 0,
-          y: -32,
+          opacity: ANIMATION_CONFIG.INITIAL.OPACITY,
+          y: ANIMATION_CONFIG.INITIAL.OFFSET_Y,
         },
       );
 
       // Animation timeline
       const tl = gsap.timeline({
         paused: true,
-        defaults: { duration: 0.6, ease: "power3.out" },
+        defaults: {
+          duration: ANIMATION_CONFIG.DURATION,
+          ease: ANIMATION_CONFIG.EASE,
+        },
         onReverseComplete: () => {
           setIsOpen(false);
         },
@@ -59,8 +93,8 @@ const Navigation = () => {
 
       tl.to(navigation.current, {
         y: 0,
-        duration: 0.6,
-        ease: "power3.out",
+        duration: ANIMATION_CONFIG.DURATION,
+        ease: ANIMATION_CONFIG.EASE,
       });
 
       tl.to(
@@ -71,12 +105,12 @@ const Navigation = () => {
         ],
         {
           y: 0,
-          duration: 0.6,
-          ease: "power3.out",
+          duration: ANIMATION_CONFIG.DURATION,
+          ease: ANIMATION_CONFIG.EASE,
           opacity: 1,
-          stagger: 0.2,
+          stagger: ANIMATION_CONFIG.STAGGER,
         },
-        "-=0.2",
+        ANIMATION_CONFIG.OFFSET_TIME,
       );
 
       timeline.current = tl;
@@ -93,7 +127,7 @@ const Navigation = () => {
     <div
       ref={navigation}
       data-lenis-prevent
-      className="fixed z-[35] inset-0 h-dvh bg-primary text-white pt-[104px] px-4 overflow-y-auto overlay-scrollbar pb-10"
+      className="fixed z-[35] inset-0 h-dvh bg-primary text-white pt-[104px] px-4 overflow-y-auto overlay-scrollbar pb-10 translate-y-full"
     >
       <div className="max-w-[1232px] mx-auto h-full flex flex-col min-h-[600px]">
         <h3
@@ -103,9 +137,7 @@ const Navigation = () => {
           {t("servicesTitle")}
         </h3>
 
-        {/* Main content grid */}
         <div className="grid grid-rows-[295px_1fr] md:grid-rows-[1fr] grid-cols-1 md:grid-cols-[1fr_218px] h-full gap-14 md:gap-16 xl:grid-cols-[1fr_380px] xl:gap-[138px] md:h-auto">
-          {/* Services section - horizontal scroll on mobile, grid on desktop */}
           <div
             ref={navigationLeft}
             className="md:grid md:grid-cols-2 gap-8 flex flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar"
@@ -120,7 +152,6 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Navigation links and social icons */}
           <div
             ref={navigationRight}
             className="flex flex-col flex-auto gap-y-6 md:gap-y-[90px]"
@@ -142,23 +173,14 @@ const Navigation = () => {
               </div>
             </div>
 
-            <div>
-              <h4 className="text-sm text-neutral-500 mb-8 hidden md:block">
+            <div className="space-y-8">
+              <h4 className="text-sm text-neutral-500 hidden md:block">
                 {t("socialsTitle")}
               </h4>
               <div className="flex justify-center md:justify-start md:flex-col items-start gap-6">
-                <Link href="#" className="text-white hover:text-neutral-300">
-                  <Facebook size={20} />
-                </Link>
-                <Link href="#" className="text-white hover:text-neutral-300">
-                  <Instagram size={20} />
-                </Link>
-                <Link href="#" className="text-white hover:text-neutral-300">
-                  <Threads size={20} />
-                </Link>
-                <Link href="#" className="text-white hover:text-neutral-300">
-                  <LinkedIn size={20} />
-                </Link>
+                {socialLinks.map((link, index) => (
+                  <SocialLink key={index} {...link} />
+                ))}
               </div>
             </div>
           </div>

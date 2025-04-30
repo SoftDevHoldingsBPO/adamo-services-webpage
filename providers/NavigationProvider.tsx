@@ -1,13 +1,32 @@
 "use client";
 
-import { createContext, useContext, useRef, useState } from "react";
+import { gsap } from "gsap";
 
-type NavigationContextType = {
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react";
+
+const ANIMATION_CONFIG = {
+  OPEN: {
+    TIMESCALE: 1,
+    DURATION: 0.6,
+    EASE: "power3.out",
+  },
+  CLOSE: {
+    TIMESCALE: 1.2,
+  },
+} as const;
+
+interface NavigationContextType {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   toggleMenu: () => void;
   timeline: React.RefObject<gsap.core.Timeline | null>;
-};
+}
 
 const NavigationContext = createContext<NavigationContextType | undefined>(
   undefined,
@@ -21,26 +40,26 @@ export const NavigationProvider = ({
   const [isOpen, setIsOpen] = useState(false);
   const timeline = useRef<gsap.core.Timeline | null>(null);
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     if (!timeline.current) return;
 
     if (!isOpen) {
       setIsOpen(true);
-      timeline.current.timeScale(1).play();
+      timeline.current.timeScale(ANIMATION_CONFIG.OPEN.TIMESCALE).play();
     } else {
-      timeline.current.timeScale(1.5).reverse();
+      timeline.current.timeScale(ANIMATION_CONFIG.CLOSE.TIMESCALE).reverse();
     }
+  }, [isOpen]);
+
+  const contextValue = {
+    isOpen,
+    setIsOpen,
+    toggleMenu,
+    timeline,
   };
 
   return (
-    <NavigationContext.Provider
-      value={{
-        isOpen,
-        setIsOpen,
-        toggleMenu,
-        timeline,
-      }}
-    >
+    <NavigationContext.Provider value={contextValue}>
       {children}
     </NavigationContext.Provider>
   );
