@@ -173,7 +173,7 @@
   }
 
   .heading-2 {
-    @apply font-display text-[30px] leading-[1.25] font-semibold tracking-[-1.6px] md:text-[32px];
+    @apply font-display text-2xl leading-[1.25] font-semibold tracking-[-1.6px] md:text-[32px];
   }
 }
 
