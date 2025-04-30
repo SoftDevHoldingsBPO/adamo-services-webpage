@@ -37,53 +37,47 @@ const Navbar = () => {
       data-fixed
       data-at-top={isAtTop}
       data-open={isOpen}
-      className="fixed px-4 py-6 top-0 inset-x-0 z-40 group bg-transparent md:bg-white data-[at-top=false]:bg-white data-[at-top=false]:shadow-sm data-[at-top=false]:py-3 data-[open=true]:bg-primary data-[open=true]:shadow-none data-[open=true]:py-6"
+      className="flex items-center justify-between px-4 py-6 lg:px-6 fixed top-0 inset-x-0 z-40 group bg-transparent md:bg-white data-[at-top=false]:bg-white data-[at-top=false]:shadow-sm data-[at-top=false]:py-3 data-[open=true]:bg-primary data-[open=true]:shadow-none data-[open=true]:py-6"
       style={{
         transition: "all 350ms ease-out, background-color 100ms ease-out",
       }}
     >
-      <div className="flex items-center justify-between max-w-[1408px] mx-auto">
-        <Link href="/">
-          <Logo className="text-white md:text-primary group-data-[at-top=false]:text-primary transition-colors group-data-[open=true]:text-white" />
-        </Link>
-        <div className="flex items-center gap-x-6">
-          <LocaleSelect
-            align={desktop ? "start" : "end"}
-            className="text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:text-white"
-          />
+      <Link href="/">
+        <Logo className="text-white md:text-primary group-data-[at-top=false]:text-primary transition-colors group-data-[open=true]:text-white" />
+      </Link>
+      <div className="flex items-center gap-x-6">
+        <LocaleSelect
+          align={desktop ? "start" : "end"}
+          className="text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:text-white"
+        />
 
-          {/* Mobile */}
-          <div className="md:hidden">
-            <Button
-              size="md"
-              onClick={toggleMenu}
-              variant={isOpen ? "secondary" : isAtTop ? "secondary" : "primary"}
-            >
-              {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
-            </Button>
-          </div>
+        {/* Mobile */}
+        <div className="md:hidden">
+          <Button
+            size="md"
+            onClick={toggleMenu}
+            variant={isOpen ? "secondary" : isAtTop ? "secondary" : "primary"}
+          >
+            {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+          </Button>
+        </div>
 
-          {/* Desktop */}
-          <div className="hidden md:block">
-            <Button
-              asChild
-              size="md"
-              variant={isOpen ? "secondary" : "primary"}
-            >
-              <Link href="/adamo-pay">{t("contact")}</Link>
-            </Button>
-          </div>
+        {/* Desktop */}
+        <div className="hidden md:block">
+          <Button asChild size="md" variant={isOpen ? "secondary" : "primary"}>
+            <Link href="/adamo-pay">{t("contact")}</Link>
+          </Button>
+        </div>
 
-          {/* Desktop */}
-          <div className="hidden md:block">
-            <Button
-              size="md"
-              variant={isOpen ? "secondary" : "primary"}
-              onClick={toggleMenu}
-            >
-              {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
-            </Button>
-          </div>
+        {/* Desktop */}
+        <div className="hidden md:block">
+          <Button
+            size="md"
+            variant={isOpen ? "secondary" : "primary"}
+            onClick={toggleMenu}
+          >
+            {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+          </Button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ const Hero = () => {
 
   return (
     <section
-      className="h-screen min-h-[720px] max-h-[960px] max-w-[1456px] mx-auto md:px-6 md:pt-[88px] md:pb-6"
+      className="h-screen min-h-[720px] max-h-[960px] mx-auto lg:px-6 md:pt-[88px] md:pb-6"
       aria-labelledby="hero-title"
     >
       <div className="h-full px-4 md:rounded-4xl overflow-hidden relative">
