@@ -47,6 +47,9 @@ const Preloader = () => {
             height: "0%",
             duration: 0.7,
             ease: "power3.inOut",
+            onStart: () => {
+              document.body.setAttribute("data-preloader-complete", "true");
+            },
           },
           "-=0.8",
         )
