@@ -24,7 +24,6 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   const t = useTranslations("services");
   const title = t(`${id}.title`);
-  const description = t(`${id}.description`);
 
   const CardContent = () => (
     <>
@@ -43,9 +42,7 @@ const ServiceCard = ({
         <h4 className="text-[17px] font-semibold text-neutral-900 leading-[1.25]">
           {title}
         </h4>
-        {description && (
-          <p className="text-neutral-600 text-sm">{description}</p>
-        )}
+
         <Button
           variant="primary"
           size="md"

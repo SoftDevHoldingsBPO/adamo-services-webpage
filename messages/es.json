@@ -10,6 +10,10 @@
     "contact": "Hablar con ventas"
   },
   "services": {
+    "servicesTitle": "Soluciones que se ajustan a tus necesidades",
+    "servicesDescription": "Ya sea para proteger tus operaciones, agilizar pagos o verificar documentos, tenemos la solución que se adapta a ti.",
+    "soon": "Próximamente",
+    "viewService": "Ver solución",
     "adamoId": {
       "title": "Verifica la identidad de tus clientes con AdamoID",
       "description": "Utiliza tecnología biométrica avanzada. Reduce riesgos y agiliza procesos de autenticación en tiempo real.",
