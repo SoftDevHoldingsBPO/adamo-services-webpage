@@ -80,11 +80,7 @@ const Preloader = () => {
   if (isHidden) return null;
 
   return (
-    <div
-      ref={preloaderRef}
-      className="fixed inset-0 z-50 pointer-events-none"
-      aria-hidden="true"
-    >
+    <div ref={preloaderRef} className="fixed inset-0 z-50" aria-hidden="true">
       <div ref={overlayRef} className="fixed inset-0 z-[15] bg-primary" />
       <div
         ref={bgOverlayRef}

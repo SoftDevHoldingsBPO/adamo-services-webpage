@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Navigation from "@/components/layout/Navigation";
 import Preloader from "@/components/layout/Preloader";
+import MouseFollowerCursor from "@/components/ui/MouseFollowerCursor";
 
 import { inter, sora } from "./fonts";
 import "./globals.css";
@@ -27,9 +28,16 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.css"
+        />
+      </head>
       <body
         className={`${inter.variable} ${sora.variable} antialiased flex flex-col min-h-dvh`}
       >
+        <MouseFollowerCursor />
         <LenisProvider>
           <NextIntlClientProvider>
             <NavigationProvider>

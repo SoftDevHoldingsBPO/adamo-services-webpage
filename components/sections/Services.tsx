@@ -1,6 +1,7 @@
 "use client";
 
 import { services } from "@/constants/services";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -118,14 +119,41 @@ const ServiceItem = ({
 const Services = () => {
   const t = useTranslations("services");
 
+  useGSAP(() => {
+    const items = document.querySelectorAll("[data-service-item]");
+    if (!items.length) return;
+    items.forEach((item, i) => {
+      gsap.fromTo(
+        item,
+        { autoAlpha: 0, y: 40 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none none",
+            // markers: true, // Uncomment for debugging
+          },
+        },
+      );
+    });
+  });
+
   return (
     <section
+      id="services"
       className="pt-20 pb-6 md:pt-20 md:pb-10"
       aria-labelledby="services-title"
       role="region"
     >
       <div className="container">
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 xl:gap-8 xl:py-10">
+        <div
+          data-service-item
+          className="grid grid-cols-1 gap-6 xl:grid-cols-2 xl:gap-8 xl:py-10"
+        >
           <h2 id="services-title" className="heading-2">
             {t("servicesTitle")}
           </h2>
@@ -133,8 +161,10 @@ const Services = () => {
         </div>
 
         <div className="mt-6 md:mt-8" role="list">
-          {services.map((service) => (
-            <ServiceItem key={service.id} service={service} t={t} />
+          {services.map((service, idx) => (
+            <div key={service.id} data-service-item>
+              <ServiceItem service={service} t={t} />
+            </div>
           ))}
         </div>
       </div>

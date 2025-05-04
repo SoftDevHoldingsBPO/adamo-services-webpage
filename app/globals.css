@@ -331,3 +331,16 @@ body[data-preloader-complete="true"] [data-animation-down="5"] {
     opacity: 1;
   }
 }
+
+/* Mouse Follower */
+.mf-cursor:before {
+  @apply text-tertiary;
+}
+
+.mf-cursor.-inverse {
+  @apply !mix-blend-difference;
+}
+
+.mf-cursor-text {
+  @apply !text-xs;
+}
