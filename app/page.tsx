@@ -1,3 +1,4 @@
+import FaqSection from "@/components/sections/FaqSection";
 import FeatureCard from "@/components/sections/FeatureCard";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <Services />
       <FeatureCard />
+      <FaqSection />
     </>
   );
 }

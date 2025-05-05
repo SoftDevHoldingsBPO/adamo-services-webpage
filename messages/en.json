@@ -41,5 +41,26 @@
     "button1": "Explore solutions",
     "button2": "Contact sales",
     "cursor-text": "DISCOVER"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "What solutions does the platform offer?",
+        "answer": "Our platform integrates biometric identification, payment management, risk management, and document verification solutions, designed to protect, optimize, and automate key processes in your business."
+      },
+      {
+        "question": "How does the platform ensure data security?",
+        "answer": "Our platform integrates biometric identification, payment management, risk management, and document verification solutions, designed to protect, optimize, and automate key processes in your business."
+      },
+      {
+        "question": "Can I customize the solutions according to my needs?",
+        "answer": "Our platform integrates biometric identification, payment management, risk management, and document verification solutions, designed to protect, optimize, and automate key processes in your business."
+      },
+      {
+        "question": "What support does the platform offer?",
+        "answer": "Our platform integrates biometric identification, payment management, risk management, and document verification solutions, designed to protect, optimize, and automate key processes in your business."
+      }
+    ]
   }
 }
