@@ -25,7 +25,7 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <ReactLenis options={{ autoRaf: false }} root ref={lenisRef}>
+    <ReactLenis options={{ autoRaf: false, lerp: 0.06 }} root ref={lenisRef}>
       {children}
     </ReactLenis>
   );

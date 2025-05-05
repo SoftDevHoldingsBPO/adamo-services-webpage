@@ -39,6 +39,28 @@
     "title": "Automatización y <accent>optimización sin complicaciones</accent>",
     "subtitle": "En Adamo te ofrecemos una solución impulsada por IA, creada para hacer tus procesos más eficientes, seguros y sin fricciones.",
     "button1": "Conocer soluciones",
-    "button2": "Hablar con ventas"
+    "button2": "Hablar con ventas",
+    "cursor-text": "DESCUBRIR"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "question": "¿Qué soluciones ofrece la plataforma?",
+        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+      },
+      {
+        "question": "¿Cómo garantiza la plataforma la seguridad de los datos?",
+        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+      },
+      {
+        "question": "¿Puedo personalizar las soluciones según mis necesidades?",
+        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+      },
+      {
+        "question": "¿Cuál es el soporte que ofrecen?",
+        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+      }
+    ]
   }
 }
