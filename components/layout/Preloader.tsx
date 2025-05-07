@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 import { Logo } from "../icon";
 
-const isHidden = false;
+const isHidden = true;
 
 const Preloader = () => {
   // Refs for animation targets
