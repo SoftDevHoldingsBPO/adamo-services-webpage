@@ -67,5 +67,9 @@
     "title": "Connect our technology to your systems in minutes",
     "description": "Automate processes, optimize data management, and take security to the next level without complications.",
     "button": "View documentation"
+  },
+  "sliderDesktop": {
+    "readPost": "Read post",
+    "goToBlog": "Go to blog"
   }
 }

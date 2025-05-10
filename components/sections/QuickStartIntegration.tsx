@@ -9,6 +9,7 @@ const QuickStartIntegration = () => {
   const title = t("title");
   const description = t("description");
   const button = t("button");
+
   return (
     <section className="container py-8 md:py-10 ">
       <div className="relative -mx-4 md:-mx-0 md:rounded-3xl overflow-hidden">

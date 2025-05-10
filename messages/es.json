@@ -67,5 +67,9 @@
     "title": "Conecta nuestra tecnología con tus sistemas en minutos",
     "description": "Automatiza procesos, optimiza la gestión de datos y lleva la seguridad a otro nivel, sin complicaciones.",
     "button": "Ver documentación"
+  },
+  "sliderDesktop": {
+    "readPost": "Leer post",
+    "goToBlog": "Ir al blog"
   }
 }

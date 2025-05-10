@@ -1,3 +1,4 @@
+import BlogSlider from "@/components/sections/BlogSlider";
 import FaqSection from "@/components/sections/FaqSection";
 import FeatureCard from "@/components/sections/FeatureCard";
 import Hero from "@/components/sections/Hero";
@@ -12,6 +13,7 @@ export default function Home() {
       <FeatureCard />
       <FaqSection />
       <QuickStartIntegration />
+      <BlogSlider />
     </>
   );
 }
