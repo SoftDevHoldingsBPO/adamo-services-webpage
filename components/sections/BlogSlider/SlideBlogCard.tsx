@@ -24,8 +24,10 @@ const SlideBlogCard = ({
   const t = useTranslations("blogSlider");
 
   return (
-    <div className={cn("p-4 rounded-2xl bg-white max-w-[309px]", className)}>
-      <Image src={img} alt={title} width={277} height={215} />
+    <article
+      className={cn("p-4 rounded-2xl bg-white max-w-[309px]", className)}
+    >
+      <Image src={img} alt={title} width={277} height={215} loading="lazy" />
 
       <SlideTag className="mt-6">Blog</SlideTag>
 
@@ -45,7 +47,7 @@ const SlideBlogCard = ({
           </Link>
         </Button>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -1,3 +1,4 @@
+import SliderCTA from "./SliderCTA";
 import SliderDesktop from "./SliderDesktop";
 import SliderMobile from "./SliderMobile";
 
@@ -22,6 +23,7 @@ const BlogSlider = async () => {
       <div className="block lg:hidden">
         <SliderMobile posts={data} />
       </div>
+      <SliderCTA />
     </section>
   );
 };

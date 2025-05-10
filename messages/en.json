@@ -70,6 +70,9 @@
   },
   "blogSlider": {
     "readPost": "Read post",
-    "goToBlog": "Go to blog"
+    "goToBlog": "Go to blog",
+    "ctaTitle": "Don't know which solution is ideal for your business?",
+    "ctaDescription": "Answer some simple questions and discover which Adamo product best suits your needs.",
+    "ctaButton": "Take the questionnaire"
   }
 }
