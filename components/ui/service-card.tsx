@@ -1,6 +1,7 @@
 "use client";
 
 import { Service } from "@/constants/services";
+import { cva } from "class-variance-authority";
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -13,33 +14,94 @@ import { Button } from "./button";
 
 interface ServiceCardProps extends Service {
   className?: string;
+  size?: "compact" | "default";
 }
+
+const cardHeroVariants = cva(
+  "relative w-full overflow-hidden transition-colors",
+  {
+    variants: {
+      variant: {
+        adamoId: "bg-adamo-id-700 text-adamo-id-900",
+        adamoPay: "bg-adamo-pay-700 text-adamo-pay-900",
+        disabled: "bg-neutral-200 text-neutral-400",
+      },
+      size: {
+        compact: "h-[132px]",
+        default: "h-[132px] lg:h-[200px]",
+      },
+    },
+    compoundVariants: [
+      {
+        variant: "disabled",
+        size: "default",
+        className: "!h-[132px]",
+      },
+    ],
+  },
+);
 
 const ServiceCard = ({
   id,
   href,
   imagePath,
-  soon,
+  iconPath,
   className,
+  size = "default",
+  variant = "disabled",
 }: ServiceCardProps) => {
   const t = useTranslations("services");
   const title = t(`${id}.title`);
 
+  const isDisabled = variant === "disabled";
+
   const CardContent = () => (
     <>
-      <div className="relative h-[132px] w-full">
+      <div className={cn(cardHeroVariants({ size, variant }))}>
         <Image
-          fill
           src={imagePath}
           alt={title}
-          className="object-cover object-center"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
+          width="280"
+          height="132"
+          className={cn(
+            "absolute z-10 left-1/2 top-7 -translate-x-1/2 w-[250px]   transition-all duration-300 ease-in-out group-hover:rotate-2  ",
+            isDisabled
+              ? "lg:top-10 lg:group-hover:top-6"
+              : "shadow-2xl lg:top-24 lg:group-hover:top-12",
+            size === "default" && "lg:w-[386px] lg:group-hover:w-[420px]",
+            size === "compact" && "!top-7 lg:group-hover:!top-6",
+          )}
         />
+
+        {!isDisabled && (
+          <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out" />
+        )}
       </div>
 
-      <div className="bg-neutral-100 flex flex-col gap-6 pt-6 px-4 pb-8">
-        <h4 className="text-[17px] font-semibold text-neutral-900 leading-[1.25]">
+      <div
+        className={cn(
+          "bg-neutral-100 pb-8 transition-all relative",
+          size === "default" &&
+            "lg:group-hover:pl-24 duration-300 ease-in-out p-6 lg:px-10",
+          size === "compact" && "px-4 pt-6",
+        )}
+      >
+        {size === "default" && (
+          <Image
+            src={iconPath}
+            alt={title}
+            width="40"
+            height="40"
+            className="transition-all duration-300 ease-in-out lg:opacity-0 group-hover:opacity-100 mb-3 lg:mb-0 lg:absolute left-6 top-6"
+          />
+        )}
+        <h4
+          className={cn(
+            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 ",
+            isDisabled && "text-neutral-400",
+          )}
+        >
           {title}
         </h4>
 
@@ -47,13 +109,15 @@ const ServiceCard = ({
           variant="primary"
           size="md"
           className="w-fit"
-          disabled={soon}
+          disabled={isDisabled}
           aria-label={
-            soon ? `${title} - Coming soon` : `${title} - ${t(`${id}.button`)}`
+            isDisabled
+              ? `${title} - Coming soon`
+              : `${title} - ${t(`${id}.button`)}`
           }
         >
           {t(`${id}.button`)}
-          {!soon && <ArrowRight aria-hidden="true" />}
+          {!isDisabled && <ArrowRight aria-hidden="true" />}
         </Button>
       </div>
     </>
@@ -62,13 +126,13 @@ const ServiceCard = ({
   return (
     <article
       className={cn(
-        "relative rounded-2xl overflow-hidden duration-300",
-        soon && "cursor-not-allowed",
+        "relative rounded-2xl lg:rounded-3xl overflow-hidden group",
+        isDisabled && "cursor-not-allowed",
         className,
       )}
       aria-labelledby={`service-${id}-title`}
     >
-      {soon ? (
+      {isDisabled ? (
         <div role="article" aria-label={`${title} - Coming soon`}>
           <CardContent />
         </div>

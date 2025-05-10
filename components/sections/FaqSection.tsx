@@ -42,7 +42,7 @@ const FaqSection = () => {
   if (!faqItems.length) return null;
 
   return (
-    <section className="container py-8 md:py-20">
+    <section className="container py-8 md:py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
         <h2 className="heading-2 mb-6 lg:mb-0 lg:py-10">{t("title")}</h2>
         <Accordion type="single" collapsible>

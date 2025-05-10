@@ -62,5 +62,17 @@
         "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
       }
     ]
+  },
+  "quickStart": {
+    "title": "Conecta nuestra tecnología con tus sistemas en minutos",
+    "description": "Automatiza procesos, optimiza la gestión de datos y lleva la seguridad a otro nivel, sin complicaciones.",
+    "button": "Ver documentación"
+  },
+  "blogSlider": {
+    "readPost": "Leer post",
+    "goToBlog": "Ir al blog",
+    "ctaTitle": "¿No sabes cual es la solución ideal para tu negocio?",
+    "ctaDescription": "Responde unas simples preguntas y descubre qué producto de Adamo se adapta mejor a tus necesidades.",
+    "ctaButton": "Realizar cuestionario"
   }
 }

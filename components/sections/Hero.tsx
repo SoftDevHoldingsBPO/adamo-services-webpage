@@ -109,7 +109,7 @@ const Hero = () => {
               data-cursor-text=""
               className="relative z-30"
             >
-              <Link href="/contacts">
+              <Link href="/contact">
                 {t("button2")} <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

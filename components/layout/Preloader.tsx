@@ -25,6 +25,8 @@ const Preloader = () => {
 
   useGSAP(
     () => {
+      if (isHidden) return;
+
       const tl = gsap.timeline();
       tl.to(logoRef.current, {
         opacity: 1,
