@@ -173,7 +173,7 @@ const Navigation = () => {
                 key={service.id}
                 className="w-[280px] md:w-auto snap-start shrink-0"
               >
-                <ServiceCard {...service} />
+                <ServiceCard size="compact" {...service} />
               </div>
             ))}
           </div>

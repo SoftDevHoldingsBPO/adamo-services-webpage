@@ -154,6 +154,12 @@
 
   --color-preloader-primary: var(--neutral-900);
   --color-preloader-secondary: var(--neutral-800);
+
+  --color-adamo-id-700: var(--adamo-id-700);
+  --color-adamo-id-900: var(--adamo-id-900);
+
+  --color-adamo-pay-700: var(--adamo-pay-700);
+  --color-adamo-pay-900: var(--adamo-pay-900);
 }
 
 @layer base {
