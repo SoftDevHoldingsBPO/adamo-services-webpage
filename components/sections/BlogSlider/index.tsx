@@ -1,4 +1,5 @@
 import SliderDesktop from "./SliderDesktop";
+import SliderMobile from "./SliderMobile";
 
 export type Post = {
   id: number;
@@ -13,9 +14,13 @@ const BlogSlider = async () => {
   const data = await res.json();
 
   return (
-    <section className="py-8 md:py-10">
+    <section className="pb-10 md:py-10">
       <div className="hidden lg:block">
         <SliderDesktop posts={data} />
+      </div>
+
+      <div className="block lg:hidden">
+        <SliderMobile posts={data} />
       </div>
     </section>
   );

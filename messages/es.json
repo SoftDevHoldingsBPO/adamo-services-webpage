@@ -68,7 +68,7 @@
     "description": "Automatiza procesos, optimiza la gestión de datos y lleva la seguridad a otro nivel, sin complicaciones.",
     "button": "Ver documentación"
   },
-  "sliderDesktop": {
+  "blogSlider": {
     "readPost": "Leer post",
     "goToBlog": "Ir al blog"
   }

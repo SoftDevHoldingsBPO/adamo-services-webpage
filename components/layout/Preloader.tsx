@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 import { Logo } from "../icon";
 
-const isHidden = true;
+const isHidden = false;
 
 const Preloader = () => {
   // Refs for animation targets
@@ -25,6 +25,8 @@ const Preloader = () => {
 
   useGSAP(
     () => {
+      if (isHidden) return;
+
       const tl = gsap.timeline();
       tl.to(logoRef.current, {
         opacity: 1,

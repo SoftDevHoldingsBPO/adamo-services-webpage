@@ -16,6 +16,7 @@ import { ArrowRight } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 
 import type { Post } from ".";
+import SlideTag from "./SlideTag";
 
 interface SliderDesktopProps {
   posts: Post[];
@@ -30,7 +31,7 @@ const getWrappedIndex = (index: number, length: number) =>
   (index + length) % length;
 
 const SliderDesktop = ({ posts }: SliderDesktopProps) => {
-  const t = useTranslations("sliderDesktop");
+  const t = useTranslations("blogSlider");
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [previousIndex, setPreviousIndex] = useState(0);
@@ -195,10 +196,21 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
       const inactive =
         "[data-slot-blog-slider='inactive'] > [data-slot-blog-slider-content]";
 
-      tl.fromTo(active, { x: -32, opacity: 0 }, { x: 0, opacity: 1 }, 0);
-      tl.fromTo(inactive, { x: 0, opacity: 1 }, { x: 32, opacity: 0 }, 0);
+      if (direction === "forward") {
+        tl.fromTo(active, { x: -32, opacity: 0 }, { x: 0, opacity: 1 }, 0);
+
+        if (document.querySelector(inactive)) {
+          tl.fromTo(inactive, { x: 0, opacity: 1 }, { x: 32, opacity: 0 }, 0);
+        }
+      } else {
+        tl.fromTo(active, { x: 32, opacity: 0 }, { x: 0, opacity: 1 }, 0);
+
+        if (document.querySelector(inactive)) {
+          tl.fromTo(inactive, { x: 0, opacity: 1 }, { x: -32, opacity: 0 }, 0);
+        }
+      }
     },
-    { dependencies: [activeIndex] },
+    { dependencies: [activeIndex, direction] },
   );
 
   return (
@@ -239,10 +251,8 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
             })}
           </div>
 
-          <div>
-            <div className="text-neutral-500 bg-white inline-block py-3 px-6 rounded-full mb-14">
-              Blog
-            </div>
+          <div className="space-y-14">
+            <SlideTag>Blog</SlideTag>
 
             <div className="relative min-h-[312px]">
               {posts.map((post, index) => {

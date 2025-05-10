@@ -11,7 +11,7 @@ const QuickStartIntegration = () => {
   const button = t("button");
 
   return (
-    <section className="container py-8 md:py-10 ">
+    <section className="container pt-8 md:py-10 ">
       <div className="relative -mx-4 md:-mx-0 md:rounded-3xl overflow-hidden">
         <Image
           src="/images/quick-start-bg.png"
