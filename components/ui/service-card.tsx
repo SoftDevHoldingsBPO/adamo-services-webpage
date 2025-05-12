@@ -58,21 +58,25 @@ const ServiceCard = ({
   const CardContent = () => (
     <>
       <div className={cn(cardHeroVariants({ size, variant }))}>
-        <Image
-          src={imagePath}
-          alt={title}
-          priority={false}
-          width="280"
-          height="132"
+        <div
           className={cn(
-            "absolute z-10 left-1/2 top-7 -translate-x-1/2 w-[250px]   transition-all duration-300 ease-in-out group-hover:rotate-2  ",
+            "absolute z-10 left-1/2 top-7 -translate-x-1/2 w-[250px] h-[178px] transition-all duration-300 ease-in-out group-hover:rotate-2",
             isDisabled
               ? "lg:top-10 lg:group-hover:top-6"
               : "shadow-2xl lg:top-24 lg:group-hover:top-12",
-            size === "default" && "lg:w-[386px] lg:group-hover:w-[420px]",
+            size === "default" &&
+              "lg:w-[386px] lg:h-[274px] lg:group-hover:w-[420px] lg:group-hover:h-[298px]",
             size === "compact" && "!top-7 lg:group-hover:!top-6",
           )}
-        />
+        >
+          <Image
+            src={imagePath}
+            alt={title}
+            priority={false}
+            quality={100}
+            fill
+          />
+        </div>
 
         {!isDisabled && (
           <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out" />

@@ -245,6 +245,7 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
                     width={240}
                     height={300}
                     className="object-cover w-full h-full pointer-events-none"
+                    quality={100}
                   />
                 </div>
               );

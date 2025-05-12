@@ -167,7 +167,7 @@
     @apply border-border divide-divide;
   }
   body {
-    @apply bg-background text-foreground overflow-hidden font-sans;
+    @apply bg-background text-foreground font-sans;
   }
 
   button {
