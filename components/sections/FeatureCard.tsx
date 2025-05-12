@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -5,6 +6,8 @@ import { ArrowRight } from "../icon";
 import { Button } from "../ui/button";
 
 const FeatureCard = () => {
+  const t = useTranslations("featureCard");
+
   return (
     <section className="py-6 md:py-10 ">
       <div className="container">
@@ -20,13 +23,12 @@ const FeatureCard = () => {
           </div>
           <div className="space-y-8">
             <h2 className="heading-2 text-white leading-relaxed tracking-normal md:leading-[1.25] md:tracking-[-1.6px]">
-              Evita fraudes, automatiza procesos y mantén el control de tu
-              negocio en todo momento.
+              {t("title")}
             </h2>
 
             <Button asChild variant="ghost">
               <Link href="/contact">
-                Hablar con ventas <ArrowRight />
+                {t("button")} <ArrowRight />
               </Link>
             </Button>
           </div>

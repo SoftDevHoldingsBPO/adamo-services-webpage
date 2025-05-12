@@ -77,5 +77,9 @@
     "ctaTitle": "Don't know which solution is ideal for your business?",
     "ctaDescription": "Answer some simple questions and discover which Adamo product best suits your needs.",
     "ctaButton": "Take the questionnaire"
+  },
+  "featureCard": {
+    "title": "Avoid fraud, automate processes, and maintain control of your business at all times.",
+    "button": "Contact sales"
   }
 }

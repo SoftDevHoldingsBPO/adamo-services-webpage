@@ -27,7 +27,14 @@ const SlideBlogCard = ({
     <article
       className={cn("p-4 rounded-2xl bg-white max-w-[309px]", className)}
     >
-      <Image src={img} alt={title} width={277} height={215} loading="lazy" />
+      <Image
+        src={img}
+        alt={title}
+        width={277}
+        height={215}
+        loading="lazy"
+        quality={100}
+      />
 
       <SlideTag className="mt-6">Blog</SlideTag>
 
