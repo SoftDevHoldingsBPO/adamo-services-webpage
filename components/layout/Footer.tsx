@@ -8,6 +8,7 @@ import LocaleSelect from "../ui/locale-select";
 
 const Footer = () => {
   const t = useTranslations("nav");
+  const tFooter = useTranslations("footer");
 
   return (
     <footer className="container py-10 flex flex-col gap-10 md:flex-row md:justify-between">
@@ -16,9 +17,7 @@ const Footer = () => {
           <Logo className="w-[26.76px] h-6" />
         </Link>
 
-        <p className="text-sm">
-          Adamo Services Todos los derechos reservados &copy;
-        </p>
+        <p className="text-sm">{tFooter("copyright")}</p>
 
         <ul className="flex gap-6 flex-wrap">
           {mainLinks.map((item) => (

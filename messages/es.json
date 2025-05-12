@@ -81,5 +81,8 @@
   "featureCard": {
     "title": "Evita fraudes, automatiza procesos y mantén el control de tu negocio en todo momento.",
     "button": "Hablar con ventas"
+  },
+  "footer": {
+    "copyright": "Adamo Services Todos los derechos reservados"
   }
 }

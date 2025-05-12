@@ -81,5 +81,8 @@
   "featureCard": {
     "title": "Avoid fraud, automate processes, and maintain control of your business at all times.",
     "button": "Contact sales"
+  },
+  "footer": {
+    "copyright": "Adamo Services All rights reserved"
   }
 }
