@@ -11,7 +11,8 @@ export type Post = {
 };
 
 const BlogSlider = async () => {
-  const res = await fetch("http://localhost:3000/api/posts");
+  // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  const res = await fetch("https://localhost:3000/api/posts");
   const data = await res.json();
 
   return (
