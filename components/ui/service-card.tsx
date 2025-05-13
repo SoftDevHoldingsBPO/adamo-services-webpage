@@ -137,7 +137,11 @@ const ServiceCard = ({
       aria-labelledby={`service-${id}-title`}
     >
       {isDisabled ? (
-        <div role="article" aria-label={`${title} - Coming soon`}>
+        <div
+          role="article"
+          aria-label={`${title} - Coming soon`}
+          className="flex flex-col h-full"
+        >
           <CardContent />
         </div>
       ) : (
