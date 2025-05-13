@@ -64,7 +64,7 @@ const Services = () => {
                 key={service.id}
                 className="snap-start shrink-0 w-[278px] md:w-auto"
               >
-                <ServiceCard {...service} />
+                <ServiceCard className="h-full" {...service} />
               </div>
             ))}
           </div>

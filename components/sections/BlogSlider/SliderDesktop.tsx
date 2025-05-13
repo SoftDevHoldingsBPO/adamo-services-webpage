@@ -175,11 +175,12 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
         tl.set(next2, VARS_FORWARD.next2Initial, 0);
         tl.to(next2, VARS_FORWARD.next2, 0);
       } else {
+        console.log(active);
         tl.set(active, VARS_BACKWARD.activeInitial, 0);
         tl.to(active, VARS_BACKWARD.active, 0);
         tl.to(next1, VARS_BACKWARD.next1, 0);
         tl.to(next2, VARS_BACKWARD.next2, 0);
-        tl.to(next3, VARS_BACKWARD.next3, 0);
+        // tl.to(next3, VARS_BACKWARD.next3, 0);
       }
     },
     { dependencies: [activeIndex, direction, isTablet] },

@@ -85,7 +85,7 @@ const ServiceCard = ({
 
       <div
         className={cn(
-          "bg-neutral-100 pb-8 transition-all relative",
+          "bg-neutral-100 pb-8 transition-all relative flex-auto flex flex-col",
           size === "default" &&
             "lg:group-hover:pl-24 duration-300 ease-in-out p-6 lg:px-10",
           size === "compact" && "px-4 pt-6",
@@ -102,7 +102,7 @@ const ServiceCard = ({
         )}
         <h4
           className={cn(
-            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 ",
+            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 flex-auto",
             isDisabled && "text-neutral-400",
           )}
         >
@@ -141,7 +141,7 @@ const ServiceCard = ({
           <CardContent />
         </div>
       ) : (
-        <Link href={href} className="block" aria-label={title}>
+        <Link href={href} className="flex flex-col h-full" aria-label={title}>
           <CardContent />
         </Link>
       )}
