@@ -2,14 +2,18 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
 
 import { useEffect, useRef } from "react";
+
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   const lenisRef = useRef<any>(null);
+  const lenis = useLenis();
+  const pathname = usePathname();
 
   useEffect(() => {
     const update = (time: number) => {
@@ -23,6 +27,10 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
       gsap.ticker.remove(update);
     };
   }, []);
+
+  useEffect(() => {
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+  }, [lenis, pathname]);
 
   return (
     <ReactLenis options={{ autoRaf: false, lerp: 0.06 }} root ref={lenisRef}>

@@ -84,5 +84,11 @@
   },
   "footer": {
     "copyright": "Adamo Services All rights reserved"
+  },
+  "adamoPay": {
+    "hero": {
+      "title": "Adamo Pay",
+      "description": "Optimize your payments with a platform that combines speed, efficient costs, and strict compliance with local regulations."
+    }
   }
 }
