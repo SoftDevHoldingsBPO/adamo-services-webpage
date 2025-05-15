@@ -13,7 +13,7 @@ import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";
 import LocaleSelect from "../ui/locale-select";
 
-const SCROLL_TOP_THRESHOLD = 32;
+const SCROLL_TOP_THRESHOLD = 64;
 
 const Navbar = () => {
   const t = useTranslations("nav");

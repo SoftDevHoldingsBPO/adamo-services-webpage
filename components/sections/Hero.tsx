@@ -1,33 +1,33 @@
+import React from "react";
+
 import { cn } from "@/lib/utils";
 
 interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
   bgColor?: string;
 }
 
-const Hero = ({
-  children,
-  bgColor = "bg-adamo-pay-700",
-  ...rest
-}: HeroProps) => {
-  return (
-    <section
-      data-animation-opacity
-      aria-labelledby="hero-title"
-      className="h-screen min-h-[780px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 lg:min-h-[820px] md:h-[calc(100vh-88px)]"
-      {...rest}
-    >
-      <div
-        className={cn(
-          "h-full px-4 md:rounded-4xl overflow-hidden relative pt-32 lg:pt-48",
-          bgColor,
-        )}
+const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
+  ({ children, bgColor = "bg-adamo-pay-700", ...rest }, ref) => {
+    return (
+      <section
+        ref={ref}
+        data-animation-opacity
+        aria-labelledby="hero-title"
+        className="h-screen min-h-[780px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 lg:min-h-[820px] md:h-[calc(100vh-88px)]"
+        {...rest}
       >
-        <div className="max-w-3xl mx-auto md:text-center text-white">
-          {children}
+        <div
+          className={cn(
+            "h-full px-4 md:rounded-4xl overflow-hidden relative pt-32 lg:pt-48",
+            bgColor,
+          )}
+        >
+          <div className="max-w-3xl mx-auto md:text-center text-white">
+            {children}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
+      </section>
+    );
+  },
+);
 export default Hero;

@@ -30,7 +30,7 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (lenis) lenis.scrollTo(0, { immediate: true });
-  }, [lenis, pathname]);
+  }, [pathname]);
 
   return (
     <ReactLenis options={{ autoRaf: false, lerp: 0.06 }} root ref={lenisRef}>
