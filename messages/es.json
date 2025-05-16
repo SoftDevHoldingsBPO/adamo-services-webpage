@@ -93,6 +93,14 @@
     "feature1": {
       "title": "Gestión de pagos y divisas",
       "description": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento."
+    },
+    "exchangeBanner": {
+      "exchangeTitle": "Intercambio exitoso",
+      "exchangeDescription": "USD a COP",
+      "exchangeDate": "29 Enero",
+      "exchangeAmount": "+ 250 USD",
+      "title": "Intercambio de divisas a la mejor cotización y sin demoras.",
+      "button": "Hablar con ventas ahora"
     }
   }
 }

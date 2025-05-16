@@ -79,7 +79,7 @@ const AdamoPayHero = () => {
       >
         <Image
           ref={mobileImageRef}
-          src="/images/adamo-pay-hero-mobile.png"
+          src="/images/adamo-pay/adamo-pay-hero-mobile.png"
           alt="Adamo Pay"
           width={361}
           height={614}
@@ -91,7 +91,7 @@ const AdamoPayHero = () => {
           quality={100}
           width={864}
           height={614}
-          src="/images/adamo-pay-hero.png"
+          src="/images/adamo-pay/adamo-pay-hero.png"
           alt="Adamo Pay"
           className="hidden lg:block shadow-2xl rounded-4xl"
         />

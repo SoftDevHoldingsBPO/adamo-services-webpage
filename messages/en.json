@@ -93,6 +93,14 @@
     "feature1": {
       "title": "Payment and currency management",
       "description": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement."
+    },
+    "exchangeBanner": {
+      "exchangeTitle": "Successful exchange",
+      "exchangeDescription": "USD to COP",
+      "exchangeDate": "January 29",
+      "exchangeAmount": "+ 250 USD",
+      "title": "Exchange currencies at the best rate and without delays.",
+      "button": "Talk to sales now"
     }
   }
 }
