@@ -16,6 +16,11 @@ export default function Page() {
         description={t("feature1.description")}
       />
       <ExchangeBanner />
+      <FeatureBlock
+        className="my-10"
+        title={t("feature2.title")}
+        description={t("feature2.description")}
+      />
     </>
   );
 }

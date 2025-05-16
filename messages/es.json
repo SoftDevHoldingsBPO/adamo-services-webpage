@@ -94,6 +94,10 @@
       "title": "Gestión de pagos y divisas",
       "description": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento."
     },
+    "feature2": {
+      "title": "Control, análisis y reportes",
+      "description": "Evita fraudes y errores con reportes detallados y alertas inteligentes. Supervisa riesgos, corrige datos y toma el control de cada operación fácilmente."
+    },
     "exchangeBanner": {
       "exchangeTitle": "Intercambio exitoso",
       "exchangeDescription": "USD a COP",

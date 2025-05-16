@@ -94,6 +94,10 @@
       "title": "Payment and currency management",
       "description": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement."
     },
+    "feature2": {
+      "title": "Control, analysis, and reports",
+      "description": "Avoid fraud and errors with detailed reports and intelligent alerts. Monitor risks, correct data, and easily take control of each operation."
+    },
     "exchangeBanner": {
       "exchangeTitle": "Successful exchange",
       "exchangeDescription": "USD to COP",
