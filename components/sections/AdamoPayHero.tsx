@@ -34,7 +34,6 @@ const AdamoPayHero = () => {
           end: isMobile ? "+=500" : "+=800",
           scrub: true,
           pin: true,
-          markers: true,
         },
       });
 
