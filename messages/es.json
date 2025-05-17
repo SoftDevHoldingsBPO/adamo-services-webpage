@@ -105,6 +105,13 @@
       "exchangeAmount": "+ 250 USD",
       "title": "Intercambio de divisas a la mejor cotización y sin demoras.",
       "button": "Hablar con ventas ahora"
+    },
+    "paymentList": {
+      "title": "Procesa grandes lotes de pagos",
+      "description": "Carga tu archivo, revisa los pagos con novedades y decide si dispersarlos o archivarlos. Adamo Pay te da el poder de gestionar cada transacción, evitando errores y manteniendo tus pagos organizados.",
+      "button": "Saber más sobre pagos en lote",
+      "buttonMobile": "Saber más",
+      "link": "Ir al blog"
     }
   }
 }

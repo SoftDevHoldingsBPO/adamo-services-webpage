@@ -105,6 +105,13 @@
       "exchangeAmount": "+ 250 USD",
       "title": "Exchange currencies at the best rate and without delays.",
       "button": "Talk to sales now"
+    },
+    "paymentList": {
+      "title": "Process large payment batches",
+      "description": "Upload your file, review payments with updates, and decide whether to disperse or archive them. Adamo Pay gives you the power to manage each transaction, avoiding errors and keeping your payments organized.",
+      "button": "Learn more about batch payments",
+      "buttonMobile": "Learn more",
+      "link": "Go to blog"
     }
   }
 }
