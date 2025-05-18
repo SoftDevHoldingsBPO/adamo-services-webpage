@@ -4,7 +4,6 @@ import Image from "next/image";
 import { ArrowRight } from "@/components/icon";
 import AdamoPayHero from "@/components/sections/AdamoPayHero";
 import ExchangeBanner from "@/components/sections/ExchangeBanner";
-import FeatureBlock from "@/components/sections/FeatureBlock";
 import FeatureParallax from "@/components/sections/FeatureParallax";
 import PageParallax from "@/components/sections/PageParallax";
 import { Button } from "@/components/ui/button";
@@ -15,12 +14,7 @@ export default function Page() {
   return (
     <>
       <AdamoPayHero />
-      <FeatureBlock
-        className="my-10"
-        title={t("feature1.title")}
-        description={t("feature1.description")}
-      />
-      <ExchangeBanner />
+      <ExchangeBanner className="pt-20 md:pt-16 lg:pt-24" />
       <FeatureParallax
         className="md:mt-[104px]"
         textContent={
@@ -79,12 +73,12 @@ export default function Page() {
         }
       />
 
-      <FeatureBlock
-        title={t("feature2.title")}
-        description={t("feature2.description")}
+      <PageParallax
+        className="py-20 md:pt-16 lg:pt-24 md:pb-0"
+        title={t("pageParallax.title")}
+        description={t("pageParallax.description")}
+        pageImage="/images/adamo-pay/page-parallax.png"
       />
-
-      <PageParallax pageImage="/images/adamo-pay/page-parallax.png" />
 
       <FeatureParallax
         className="md:mt-[104px]"

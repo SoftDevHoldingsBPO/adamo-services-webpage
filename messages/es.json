@@ -90,15 +90,13 @@
       "title": "Adamo Pay",
       "description": "Optimiza tus pagos con una plataforma que combina velocidad, costos eficientes y cumplimiento riguroso de las normativas locales."
     },
-    "feature1": {
-      "title": "Gestión de pagos y divisas",
-      "description": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento."
-    },
-    "feature2": {
+    "pageParallax": {
       "title": "Control, análisis y reportes",
       "description": "Evita fraudes y errores con reportes detallados y alertas inteligentes. Supervisa riesgos, corrige datos y toma el control de cada operación fácilmente."
     },
     "exchangeBanner": {
+      "introTitle": "Gestión de pagos y divisas",
+      "introDescription": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento. ",
       "exchangeTitle": "Intercambio exitoso",
       "exchangeDescription": "USD a COP",
       "exchangeDate": "29 Enero",

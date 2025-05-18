@@ -90,15 +90,13 @@
       "title": "Adamo Pay",
       "description": "Optimize your payments with a platform that combines speed, efficient costs, and strict compliance with local regulations."
     },
-    "feature1": {
-      "title": "Payment and currency management",
-      "description": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement."
-    },
-    "feature2": {
+    "pageParallax": {
       "title": "Control, analysis, and reports",
       "description": "Avoid fraud and errors with detailed reports and intelligent alerts. Monitor risks, correct data, and easily take control of each operation."
     },
     "exchangeBanner": {
+      "introTitle": "Payment and currency management",
+      "introDescription": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement.",
       "exchangeTitle": "Successful exchange",
       "exchangeDescription": "USD to COP",
       "exchangeDate": "January 29",

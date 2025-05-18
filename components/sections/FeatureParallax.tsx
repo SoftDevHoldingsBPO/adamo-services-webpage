@@ -44,7 +44,7 @@ const FeatureParallax = ({
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: container,
-            start: "top 50%",
+            start: "top center",
             end: "+=80%",
             scrub: true,
             // markers: true,
