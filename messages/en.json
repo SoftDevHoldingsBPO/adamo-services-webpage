@@ -112,6 +112,12 @@
       "button": "Learn more about batch payments",
       "buttonMobile": "Learn more",
       "link": "Go to blog"
+    },
+    "paymentForm": {
+      "title": "Beneficiary management and individual payments",
+      "description": "Search among your saved contacts or enter the information manually. Complete the bank and fiscal data easily and save the beneficiary for future transactions.",
+      "button": "Talk to sales now",
+      "buttonMobile": "Talk to sales"
     }
   }
 }

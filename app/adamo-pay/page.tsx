@@ -54,6 +54,7 @@ export default function Page() {
               width={345}
               height={428}
               priority
+              quality={100}
             />
             <Image
               className="hidden sm:block lg:hidden drop-shadow-parallax"
@@ -62,6 +63,7 @@ export default function Page() {
               width={896}
               height={684}
               priority
+              quality={100}
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
@@ -70,6 +72,7 @@ export default function Page() {
               width={552}
               height={684}
               priority
+              quality={100}
             />
           </>
         }
@@ -86,22 +89,19 @@ export default function Page() {
         textContent={
           <>
             <h2 className="text-[17px] font-semibold">
-              {t("paymentList.title")}
+              {t("paymentForm.title")}
             </h2>
             <p className="mt-4 md:mt-8 text-sm md:text-base">
-              {t("paymentList.description")}
+              {t("paymentForm.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
               <Button>
                 <span className="hidden md:block">
-                  {t("paymentList.button")}
+                  {t("paymentForm.button")}
                 </span>
                 <span className="block md:hidden">
-                  {t("paymentList.buttonMobile")}
+                  {t("paymentForm.buttonMobile")}
                 </span>
-              </Button>
-              <Button variant="link">
-                {t("paymentList.link")} <ArrowRight className="-rotate-45" />
               </Button>
             </div>
           </>
@@ -110,27 +110,30 @@ export default function Page() {
           <>
             <Image
               className="sm:hidden rounded-xl drop-shadow-parallax"
-              src="/images/adamo-pay/payment-list-mobile.png"
-              alt="Payment list interface on mobile device"
+              src="/images/adamo-pay/payment-form-mobile.png"
+              alt="Payment form interface on mobile device"
               width={345}
-              height={428}
+              height={418}
               priority
+              quality={100}
             />
             <Image
               className="hidden sm:block lg:hidden drop-shadow-parallax"
-              src="/images/adamo-pay/payment-list-tablet.png"
-              alt="Payment list interface on tablet device"
+              src="/images/adamo-pay/payment-form-tablet.png"
+              alt="Payment form interface on tablet device"
               width={896}
-              height={684}
+              height={664}
               priority
+              quality={100}
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-pay/payment-list.png"
-              alt="Payment list interface on desktop"
+              src="/images/adamo-pay/payment-form.png"
+              alt="Payment form interface on desktop"
               width={552}
-              height={684}
+              height={664}
               priority
+              quality={100}
             />
           </>
         }

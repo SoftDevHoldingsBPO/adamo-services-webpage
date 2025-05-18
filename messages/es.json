@@ -112,6 +112,12 @@
       "button": "Saber más sobre pagos en lote",
       "buttonMobile": "Saber más",
       "link": "Ir al blog"
+    },
+    "paymentForm": {
+      "title": "Gestión de beneficiarios y pagos individualizados",
+      "description": "Busca entre tus contactos guardados o ingresa la información manualmente. Completa los datos bancarios y fiscales con facilidad y guarda el beneficiario para futuras transacciones.",
+      "button": "Hablar con ventas ahora",
+      "buttonMobile": "Hablar con ventas"
     }
   }
 }
