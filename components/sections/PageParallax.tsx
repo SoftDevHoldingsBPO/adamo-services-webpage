@@ -34,7 +34,7 @@ const PageParallax = ({
         trigger: overlayRef.current,
         // markers: true,
         scrub: true,
-        start: "top 55%",
+        start: "top 45%",
         end: "+=80%",
       },
     });

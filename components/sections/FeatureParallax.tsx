@@ -45,7 +45,7 @@ const FeatureParallax = ({
           scrollTrigger: {
             trigger: container,
             start: "top center",
-            end: "+=80%",
+            end: "+=85%",
             scrub: true,
             // markers: true,
           },
