@@ -116,6 +116,13 @@
       "description": "Busca entre tus contactos guardados o ingresa la información manualmente. Completa los datos bancarios y fiscales con facilidad y guarda el beneficiario para futuras transacciones.",
       "button": "Hablar con ventas ahora",
       "buttonMobile": "Hablar con ventas"
+    },
+    "metrics": {
+      "title": "Métricas en tiempo real para decisiones más inteligentes. <br /> Con Adamo Pay, obtén una visión completa de tus operaciones.",
+      "button": "Hablar con ventas ahora",
+      "ctaTitle": "¿Listo para transformar la gestión de pagos en tu empresa?",
+      "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
+      "ctaButton": "Hablar con ventas"
     }
   }
 }

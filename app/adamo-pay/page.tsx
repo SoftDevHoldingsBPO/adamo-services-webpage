@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { ArrowRight } from "@/components/icon";
 import AdamoPayHero from "@/components/sections/AdamoPayHero";
+import AdamoPayMetrics from "@/components/sections/AdamoPayMetrics";
 import ExchangeBanner from "@/components/sections/ExchangeBanner";
 import FeatureParallax from "@/components/sections/FeatureParallax";
 import PageParallax from "@/components/sections/PageParallax";
@@ -134,6 +135,7 @@ export default function Page() {
           </>
         }
       />
+      <AdamoPayMetrics className="md:mt-24" />
     </>
   );
 }
