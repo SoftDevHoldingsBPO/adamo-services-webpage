@@ -6,6 +6,7 @@ import AdamoPayHero from "@/components/sections/AdamoPayHero";
 import ExchangeBanner from "@/components/sections/ExchangeBanner";
 import FeatureBlock from "@/components/sections/FeatureBlock";
 import FeatureParallax from "@/components/sections/FeatureParallax";
+import PageParallax from "@/components/sections/PageParallax";
 import { Button } from "@/components/ui/button";
 
 export default function Page() {
@@ -79,10 +80,11 @@ export default function Page() {
       />
 
       <FeatureBlock
-        className="my-10"
         title={t("feature2.title")}
         description={t("feature2.description")}
       />
+
+      <PageParallax pageImage="/images/adamo-pay/page-parallax.png" />
 
       <FeatureParallax
         className="md:mt-[104px]"
