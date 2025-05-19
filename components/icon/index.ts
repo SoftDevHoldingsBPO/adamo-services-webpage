@@ -47,3 +47,4 @@ export * from "./Instagram";
 export * from "./LinkedIn";
 export * from "./Threads";
 export * from "./ArrowRightCircle";
+export * from "./SwapHorizIcon";
