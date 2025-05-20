@@ -29,7 +29,7 @@ const PageParallax = ({
   useGSAP(() => {
     gsap.to(overlayRef.current, {
       y: "24%",
-      ease: "power1.inOut",
+      ease: "power2.inOut",
       scrollTrigger: {
         trigger: overlayRef.current,
         // markers: true,
