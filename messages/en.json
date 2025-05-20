@@ -87,6 +87,7 @@
   },
   "adamoPay": {
     "hero": {
+      "cursor-text": "DISCOVER",
       "title": "Adamo Pay",
       "description": "Optimize your payments with a platform that combines speed, efficient costs, and strict compliance with local regulations."
     },

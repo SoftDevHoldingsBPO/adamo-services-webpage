@@ -14,7 +14,7 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
   const t = useTranslations("adamoPay.exchangeBanner");
 
   return (
-    <div className={cn(className)}>
+    <div id="exchange-banner" className={cn(className)}>
       <IntroSection
         title={t("introTitle")}
         description={t("introDescription")}

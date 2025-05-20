@@ -3,11 +3,12 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
+  cursorText?: string;
   bgColor?: string;
 }
 
 const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
-  ({ children, bgColor = "bg-adamo-pay-700", ...rest }, ref) => {
+  ({ children, bgColor = "bg-adamo-pay-700", cursorText, ...rest }, ref) => {
     return (
       <section
         ref={ref}
@@ -17,6 +18,7 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
         {...rest}
       >
         <div
+          data-cursor-text={cursorText}
           className={cn(
             "h-full px-4 md:rounded-4xl overflow-hidden relative pt-32 lg:pt-48",
             bgColor,
