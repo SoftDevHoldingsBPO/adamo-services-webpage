@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useLenis } from "lenis/react";
 import { useMediaQuery } from "usehooks-ts";
 
 import { useRef } from "react";
@@ -19,6 +20,7 @@ const AdamoPayHero = () => {
   const heroContentRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const lenis = useLenis();
 
   useGSAP(
     () => {
@@ -62,8 +64,23 @@ const AdamoPayHero = () => {
     { scope: heroRef, dependencies: [isMobile] },
   );
 
+  const handleScroll = (e: React.MouseEvent) => {
+    e.preventDefault();
+    lenis?.scrollTo("#exchange-banner", {
+      easing: function easeInOutCubic(x: number): number {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      },
+      duration: 1.5,
+      force: true,
+    });
+  };
+
   return (
-    <Hero ref={heroRef}>
+    <Hero
+      cursorText={t("hero.cursor-text")}
+      ref={heroRef}
+      onClick={handleScroll}
+    >
       <div className="space-y-12" ref={heroContentRef}>
         <h1 data-animation="1" className="heading-1" id="hero-title">
           {t("hero.title")}
