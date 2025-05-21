@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
+import VideoPlayer from "@/components/VideoPlayer";
 import { ArrowRight } from "@/components/icon";
 import AdamoPayHero from "@/components/sections/AdamoPayHero";
 import AdamoPayMetrics from "@/components/sections/AdamoPayMetrics";
@@ -16,6 +17,9 @@ export default function Page() {
     <>
       <AdamoPayHero />
       <ExchangeBanner className="pt-20 md:pt-16 lg:pt-24" />
+
+      <VideoPlayer className="mt-[112px] lg:mt-[130px] hidden md:block" />
+
       <FeatureParallax
         className="md:mt-[104px]"
         textContent={
