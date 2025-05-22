@@ -22,9 +22,9 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
       />
       <ScrollAnimation>
         <section
+          data-scroll-animation="fade-up"
           aria-labelledby="exchange-banner-title"
           className={"max-w-[1264px] mx-auto md:px-4 mt-10 md:mt-24"}
-          data-scroll-animation="fade-up"
         >
           <div className="p-6 pb-12 bg-adamo-pay-600 grid grid-cols-1 md:grid-cols-[312px_1fr] gap-[52px] md:items-center md:gap-6 lg:gap-12 lg:grid-cols-[464px_1fr]  md:rounded-4xl">
             <div className="relative w-full h-[280px] ">
@@ -45,7 +45,10 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
 
-              <div className="absolute inset-x-0 -bottom-3 md:-bottom-4 bg-white rounded-2xl p-4 max-w-[415px] mx-auto">
+              <div
+                data-scroll-animation="fade-up"
+                className="absolute inset-x-0 -bottom-3 md:-bottom-4 bg-white rounded-2xl p-4 max-w-[415px] mx-auto"
+              >
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <div className="p-2 rounded-lg bg-adamo-pay-100">
@@ -72,6 +75,7 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
 
             <div className="space-y-12">
               <h2
+                data-scroll-animation="fade-up"
                 id="exchange-banner-title"
                 className="heading-2 text-white max-w-xl"
               >
@@ -80,15 +84,18 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
 
               <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 md:gap-6 lg:gap-12">
                 <Image
+                  data-scroll-animation="fade-up"
                   src="/images/adamo-pay/flags.svg"
                   alt="Exchange Banner"
                   width={136}
                   height={56}
                 />
 
-                <Button variant="ghost">
-                  {t("button")} <ArrowRight />
-                </Button>
+                <div data-scroll-animation="fade-up">
+                  <Button variant="ghost">
+                    {t("button")} <ArrowRight />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

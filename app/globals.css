@@ -352,7 +352,11 @@ body[data-preloader-complete="true"] [data-animation-down="5"] {
 }
 
 .mf-cursor-text {
-  @apply !text-[10px];
+  @apply !text-[8px];
+}
+
+.mf-cursor.-text:before {
+  transform: scale(1.2) !important;
 }
 
 /* Blog Slider */

@@ -19,7 +19,7 @@ const defaultOptions: ScrollAnimationOptions = {
   type: "fade-up",
   delay: 0,
   duration: 1,
-  stagger: 0.2,
+  stagger: 0.15,
   start: "top 80%",
   end: "bottom 20%",
   markers: false,
