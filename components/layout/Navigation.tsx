@@ -10,6 +10,7 @@ import { memo, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useLockScroll } from "@/hooks/useLockScroll";
 
@@ -50,11 +51,16 @@ const socialLinks = [
   { href: "#", icon: LinkedIn },
 ];
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const Navigation = () => {
   const navigation = useRef<HTMLDivElement>(null);
 
-  const { isOpen, timeline, setIsOpen } = useNavigation();
+  const { isOpen, timeline, setIsOpen, toggleMenu } = useNavigation();
   const t = useTranslations("nav");
+  const router = useRouter();
 
   useLockScroll({ isOpen });
 
@@ -151,6 +157,12 @@ const Navigation = () => {
     { dependencies: [], scope: navigation },
   );
 
+  const handleClick = async (link: string) => {
+    toggleMenu();
+    await sleep(300);
+    router.push(link);
+  };
+
   return (
     <div
       ref={navigation}
@@ -173,7 +185,11 @@ const Navigation = () => {
                 key={service.id}
                 className="w-[280px] md:w-auto snap-start shrink-0"
               >
-                <ServiceCard size="compact" {...service} />
+                <ServiceCard
+                  onClick={handleClick}
+                  size="compact"
+                  {...service}
+                />
               </div>
             ))}
           </div>

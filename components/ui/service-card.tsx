@@ -15,6 +15,7 @@ import { Button } from "./button";
 interface ServiceCardProps extends Service {
   className?: string;
   size?: "compact" | "default";
+  onClick?: (link: string) => void;
 }
 
 const cardHeroVariants = cva(
@@ -49,6 +50,7 @@ const ServiceCard = ({
   className,
   size = "default",
   variant = "disabled",
+  onClick,
 }: ServiceCardProps) => {
   const t = useTranslations("services");
   const title = t(`${id}.title`);
@@ -145,7 +147,17 @@ const ServiceCard = ({
           <CardContent />
         </div>
       ) : (
-        <Link href={href} className="flex flex-col h-full" aria-label={title}>
+        <Link
+          href={href}
+          className="flex flex-col h-full"
+          aria-label={title}
+          onClick={(e) => {
+            if (onClick) {
+              e.preventDefault();
+              onClick(href);
+            }
+          }}
+        >
           <CardContent />
         </Link>
       )}
