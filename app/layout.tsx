@@ -11,6 +11,7 @@ import Navbar from "@/components/layout/Navbar";
 import Navigation from "@/components/layout/Navigation";
 import Preloader from "@/components/layout/Preloader";
 import MouseFollowerCursor from "@/components/ui/MouseFollowerCursor";
+import WaButton from "@/components/ui/WaButton";
 
 import { inter, sora } from "./fonts";
 import "./globals.css";
@@ -55,6 +56,7 @@ export default async function RootLayout({
               <Navigation />
               <main className="flex-auto">{children}</main>
               <Footer />
+              <WaButton />
             </NavigationProvider>
           </NextIntlClientProvider>
         </LenisProvider>
