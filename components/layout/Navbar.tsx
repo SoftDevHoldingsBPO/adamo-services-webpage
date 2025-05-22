@@ -40,7 +40,7 @@ const Navbar = () => {
       data-open={isOpen}
       className="flex items-center justify-between px-4 py-6 lg:px-6 fixed top-0 inset-x-0 z-40 group bg-transparent md:bg-white data-[at-top=false]:bg-white data-[at-top=false]:shadow-sm data-[at-top=false]:py-3 data-[open=true]:bg-primary data-[open=true]:shadow-none data-[open=true]:py-6"
       style={{
-        transition: "all 350ms ease-out, background-color 100ms ease-out",
+        transition: "padding 350ms ease-out, background-color 100ms ease-out",
       }}
     >
       <Link href="/">
