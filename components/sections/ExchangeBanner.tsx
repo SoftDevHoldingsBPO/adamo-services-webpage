@@ -83,13 +83,29 @@ const ExchangeBanner = ({ className }: ExchangeBannerProps) => {
               </h2>
 
               <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 md:gap-6 lg:gap-12">
-                <Image
-                  data-scroll-animation="fade-up"
-                  src="/images/adamo-pay/flags.svg"
-                  alt="Exchange Banner"
-                  width={136}
-                  height={56}
-                />
+                <div className="flex -space-x-4">
+                  <Image
+                    data-scroll-animation="fade-left"
+                    src="/images/adamo-pay/EUR.svg"
+                    alt=""
+                    width={56}
+                    height={56}
+                  />
+                  <Image
+                    data-scroll-animation="fade-left"
+                    src="/images/adamo-pay/USD.svg"
+                    alt=""
+                    width={56}
+                    height={56}
+                  />
+                  <Image
+                    data-scroll-animation="fade-left"
+                    src="/images/adamo-pay/COP.svg"
+                    alt=""
+                    width={56}
+                    height={56}
+                  />
+                </div>
 
                 <div data-scroll-animation="fade-up">
                   <Button variant="ghost">

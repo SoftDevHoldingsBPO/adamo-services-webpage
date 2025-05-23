@@ -49,27 +49,26 @@ export const initScrollAnimation = (
   const elements = element.querySelectorAll("[data-scroll-animation]");
   if (!elements.length) return;
 
-  const type = (element as HTMLElement).dataset
-    .scrollAnimation as AnimationType;
-  const animationVars = getAnimationVars(type || mergeOptions.type!);
+  for (const [index, element] of elements.entries()) {
+    const type = (element as HTMLElement).dataset
+      .scrollAnimation as AnimationType;
+    const animationVars = getAnimationVars(type || mergeOptions.type!);
 
-  const animation = gsap.fromTo(elements, animationVars, {
-    ...animationVars,
-    opacity: 1,
-    x: 0,
-    y: 0,
-    duration: mergeOptions.duration,
-    ease: "power2.out",
-    stagger: mergeOptions.stagger,
-    scrollTrigger: {
-      trigger: element,
-      start: mergeOptions.start,
-      end: mergeOptions.end,
-      markers: mergeOptions.markers,
-    },
-  });
-
-  return () => {
-    animation.kill();
-  };
+    gsap.fromTo(element, animationVars, {
+      ...animationVars,
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: mergeOptions.duration,
+      ease: "power2.out",
+      stagger: mergeOptions.stagger,
+      scrollTrigger: {
+        trigger: element,
+        start: mergeOptions.start,
+        end: mergeOptions.end,
+        markers: mergeOptions.markers,
+      },
+      delay: mergeOptions.delay! + index * mergeOptions.stagger!,
+    });
+  }
 };
