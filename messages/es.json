@@ -125,5 +125,9 @@
       "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
       "ctaButton": "Hablar con ventas"
     }
+  },
+  "contact": {
+    "title": "Habla ahora con nuestros expertos",
+    "description": "Con Adamo Services, puedes tenerlo todo en una sola plataforma. Completa el siguiente formulario para hablar con nuestro equipo de ventas y descubrir cómo optimizar tu negocio hoy mismo."
   }
 }

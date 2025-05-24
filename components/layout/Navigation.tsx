@@ -204,6 +204,10 @@ const Navigation = () => {
                   <Link
                     key={link.key}
                     href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleClick(link.href);
+                    }}
                     className="text-sm font-medium hover:text-neutral-300 transition-colors"
                   >
                     {t(link.key)}
