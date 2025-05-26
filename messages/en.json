@@ -125,5 +125,31 @@
       "ctaDescription": "With AdamoPay, your payments and beneficiary management become faster, safer, and more efficient than ever.",
       "ctaButton": "Talk to sales"
     }
+  },
+  "contact": {
+    "title": "Talk to our experts now",
+    "description": "With Adamo Services, you can have everything in one platform. Complete the following form to talk to our sales team and discover how to optimize your business today."
+  },
+  "contactForm": {
+    "required": "The fields marked with (*) are required.",
+    "send": "Send form",
+    "success": "Sent",
+    "successDescription": "Soon, one of our experts will contact you!",
+    "errors": {
+      "name": "Name and last name are required",
+      "email": "Please enter a valid email address.",
+      "country": "Please select a country"
+    },
+    "placeholders": {
+      "name": "Name and last name (*)",
+      "email": "Corporate email (*)",
+      "company": "Company name",
+      "website": "Company website",
+      "country": "Country (*)",
+      "phone": "Phone",
+      "message": "Message or comments...",
+      "countrySearch": "Search country...",
+      "services": "Solutions of interest"
+    }
   }
 }

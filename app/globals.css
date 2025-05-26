@@ -163,6 +163,8 @@
   --color-adamo-pay-700: var(--adamo-pay-700);
   --color-adamo-pay-900: var(--adamo-pay-900);
 
+  --color-success-600: var(--success-600);
+
   --drop-shadow-parallax: -48px 32px 56px rgba(77, 87, 97, 0.08);
 }
 
