@@ -151,5 +151,17 @@
       "countrySearch": "Search country...",
       "services": "Solutions of interest"
     }
+  },
+  "about": {
+    "hero": {
+      "title": "About us",
+      "description": "At Adamo Services, we believe that technology can transform the way businesses operate and connect with their customers."
+    },
+    "section1": {
+      "title": "Not just a technology provider",
+      "subtitle": "We are your strategic partner to build more secure, agile, and efficient operations.",
+      "description": "We help teams, companies, and organizations of all types, to operate with confidence, adapting to the most demanding market demands and regulations.",
+      "button": "Learn more"
+    }
   }
 }
