@@ -138,7 +138,10 @@
     "errors": {
       "name": "Name and last name are required",
       "email": "Please enter a valid email address.",
-      "country": "Please select a country"
+      "country": "Please select a country",
+      "company": "Company name is required",
+      "website": "Company website is required",
+      "services": "Please select at least one solution"
     },
     "placeholders": {
       "name": "Name and last name (*)",

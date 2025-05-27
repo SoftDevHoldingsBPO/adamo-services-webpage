@@ -138,7 +138,10 @@
     "errors": {
       "name": "Nombre y apellido son requeridos",
       "email": "Por favor, ingresa un mail válido.",
-      "country": "Por favor, selecciona un país"
+      "country": "Por favor, selecciona un país",
+      "company": "Nombre de la empresa es requerido",
+      "website": "Página web de la empresa es requerida",
+      "services": "Debes seleccionar al menos una solución"
     },
     "placeholders": {
       "name": "Nombre y apellido (*)",
