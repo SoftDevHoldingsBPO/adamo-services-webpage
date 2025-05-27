@@ -146,13 +146,13 @@
     "placeholders": {
       "name": "Name and last name (*)",
       "email": "Corporate email (*)",
-      "company": "Company name",
-      "website": "Company website",
+      "company": "Company name (*)",
+      "website": "Company website (*)",
       "country": "Country (*)",
       "phone": "Phone",
       "message": "Message or comments...",
       "countrySearch": "Search country...",
-      "services": "Solutions of interest"
+      "services": "Solutions of interest (*)"
     }
   },
   "about": {
