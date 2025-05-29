@@ -1,9 +1,5 @@
-import BlogNavbar from "@/components/layout/BlogNavbar";
+import BlogFilter from "@/components/sections/Blog/BlogFilter";
 
 export default function Page() {
-  return (
-    <div className="pt-[88px] container">
-      <BlogNavbar />
-    </div>
-  );
+  return <BlogFilter />;
 }

@@ -1,3 +1,5 @@
+import { Facebook, Instagram, LinkedIn, Threads } from "../components/icon";
+
 export const mainLinks = [
   { key: "solutions", href: "/solutions" },
   { key: "faqs", href: "/faqs" },
@@ -5,3 +7,12 @@ export const mainLinks = [
   { key: "about", href: "/about" },
   { key: "contact", href: "/contact" },
 ];
+
+export const socialLinks = [
+  { href: "#", icon: Facebook },
+  { href: "#", icon: Instagram },
+  { href: "#", icon: Threads },
+  { href: "#", icon: LinkedIn },
+];
+
+export const categories = ["inspirational", "tips", "ai", "novedades"];

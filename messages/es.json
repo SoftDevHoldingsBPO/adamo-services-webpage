@@ -166,5 +166,16 @@
       "description": "Ayudamos a equipos, empresas y organizaciones de todo tipo, a operar con confianza, adaptándose a las demandas y regulaciones más exigentes del mercado.",
       "button": "Conocer soluciones"
     }
+  },
+  "blogNavbar": {
+    "logoDesktop": "Adamo serrvices blog",
+    "logoMobile": "Adamo blog",
+    "goToAdamo": "Llévame a admoservices.co"
+  },
+  "blogCategories": {
+    "inspirational": "Inspiracional",
+    "tips": "Consejos y tendencias",
+    "ai": "IA",
+    "novedades": "Novedades"
   }
 }

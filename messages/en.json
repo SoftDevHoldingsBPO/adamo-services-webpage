@@ -166,5 +166,16 @@
       "description": "We help teams, companies, and organizations of all types, to operate with confidence, adapting to the most demanding market demands and regulations.",
       "button": "Learn more"
     }
+  },
+  "blogNavbar": {
+    "logoDesktop": "Adamo services blog",
+    "logoMobile": "Adamo blog",
+    "goToAdamo": "Take me to admoservices.co"
+  },
+  "blogCategories": {
+    "inspirational": "Inspirational",
+    "tips": "Tips",
+    "ai": "AI",
+    "novedades": "Novedades"
   }
 }
