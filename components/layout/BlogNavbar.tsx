@@ -75,15 +75,6 @@ const BlogNavbar = () => {
       },
       "-=0.4",
     );
-
-    timeline.to(
-      "[data-navigation-socials]",
-      {
-        opacity: 1,
-        y: 0,
-      },
-      "-=0.2",
-    );
   });
 
   const toggle = async () => {

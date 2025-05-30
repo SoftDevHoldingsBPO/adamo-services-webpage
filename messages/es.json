@@ -174,8 +174,8 @@
   },
   "blogCategories": {
     "inspirational": "Inspiracional",
-    "tips": "Consejos y tendencias",
+    "tips-and-trends": "Consejos y tendencias",
     "ai": "IA",
-    "novedades": "Novedades"
+    "news": "Novedades"
   }
 }

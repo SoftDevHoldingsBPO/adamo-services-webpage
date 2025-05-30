@@ -15,4 +15,4 @@ export const socialLinks = [
   { href: "#", icon: LinkedIn },
 ];
 
-export const categories = ["inspirational", "tips", "ai", "novedades"];
+export const categories = ["inspirational", "tips-and-trends", "ai", "news"];
