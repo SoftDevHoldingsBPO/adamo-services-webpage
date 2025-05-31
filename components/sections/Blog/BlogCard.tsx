@@ -1,19 +1,22 @@
 "use client";
 
+import { BlogPost } from "@/services/blog";
+
 import React from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
-import { BlogPost } from "./BlogGrid";
+import BlogAuthor from "./BlogAuthor";
 
 const BlogCard = React.memo(
-  ({ category, author, date, coverImage, locales }: BlogPost) => {
+  ({ id, category, author, date, coverImage, locales }: BlogPost) => {
     const tCategory = useTranslations("blogCategories");
     const locale = useLocale();
 
     return (
-      <article className="bg-neutral-100 rounded-2xl overflow-hidden flex flex-col">
+      <article className="bg-neutral-100 rounded-2xl overflow-hidden flex flex-col relative">
         <div className="relative h-36 w-full">
           <Image
             src={coverImage}
@@ -30,29 +33,15 @@ const BlogCard = React.memo(
           </h2>
 
           {/* Author */}
-          <div className="mt-6 flex items-center gap-3 ">
-            <Image
-              width={40}
-              height={40}
-              src={author.image}
-              alt=""
-              className="rounded-full shrink-0"
-            />
-            <div className="flex flex-col">
-              <span className="text-xs font-bold text-primary !leading-[20px]">
-                {author.name}
-              </span>
-              <span className="text-xs text-neutral-400 !leading-[20px]">
-                {author.role}
-              </span>
-            </div>
-          </div>
+          <BlogAuthor author={author} className="mt-6" />
 
           {/* Date */}
           <p className="mt-6 text-xs text-neutral-400 !leading-[20px]">
             {date}
           </p>
         </div>
+
+        <Link href={`/blog/${id}`} className="absolute inset-0" />
       </article>
     );
   },

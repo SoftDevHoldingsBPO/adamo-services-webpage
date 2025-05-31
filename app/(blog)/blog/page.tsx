@@ -1,16 +1,21 @@
+"use client";
+
+import { BlogPost, BlogPostsResponse, getBlogPosts } from "@/services/blog";
+import { useQuery } from "@tanstack/react-query";
+
 import BlogFilter from "@/components/sections/Blog/BlogFilter";
 import BlogGrid from "@/components/sections/Blog/BlogGrid";
 
-export default async function Page() {
-  const data = await fetch(
-    "https://excel-document-reader-dev.adamoservices.co/documents/blog-posts",
-  );
-  const { blogPosts } = await data.json();
+export default function Page() {
+  const { data } = useQuery<BlogPostsResponse>({
+    queryKey: ["blogPosts"],
+    queryFn: getBlogPosts,
+  });
 
   return (
-    <div className="pb-24">
+    <>
       <BlogFilter />
-      <BlogGrid posts={blogPosts} />
-    </div>
+      <BlogGrid posts={data?.blogPosts ?? []} />
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import LenisProvider from "@/providers/LenisProvider";
+import Providers from "@/providers/providers";
 
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -44,13 +44,13 @@ export default async function RootLayout({
         className={`${inter.variable} ${sora.variable} antialiased flex flex-col min-h-dvh`}
       >
         <MouseFollowerCursor />
-        <LenisProvider>
+        <Providers>
           <NextIntlClientProvider>
             <Preloader />
             {children}
             <WaButton />
           </NextIntlClientProvider>
-        </LenisProvider>
+        </Providers>
       </body>
     </html>
   );

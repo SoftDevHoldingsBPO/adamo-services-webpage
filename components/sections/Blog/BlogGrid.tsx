@@ -1,6 +1,7 @@
 "use client";
 
 import { useBlog } from "@/providers/BlogProvider";
+import { BlogPost } from "@/services/blog";
 
 import { useMemo } from "react";
 
@@ -10,25 +11,6 @@ import BlogCard from "./BlogCard";
 import BlogEmpty from "./BlogEmptyCategory";
 import BlogEmptySearch from "./BlogEmptySearch";
 import BlogHero from "./BlogHero";
-
-export type BlogPost = {
-  id: string;
-  category: string;
-  author: {
-    name: string;
-    role: string;
-    image: string;
-  };
-  date: string;
-  coverImage: string;
-  locales: {
-    [locale: string]: {
-      title: string;
-      excerpt: string;
-      content: string[];
-    };
-  };
-};
 
 const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   const { searchQuery, selectedCategory } = useBlog();

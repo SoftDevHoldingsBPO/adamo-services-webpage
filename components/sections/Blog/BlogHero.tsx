@@ -1,6 +1,7 @@
 "use client";
 
 // Import Swiper styles
+import { BlogPost } from "@/services/blog";
 import "swiper/css";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
@@ -12,7 +13,7 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
-import { BlogPost } from "./BlogGrid";
+import BlogAuthor from "./BlogAuthor";
 
 const BlogHeroPagination = ({
   activeIndex,
@@ -84,27 +85,11 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
                     {post.locales[locale].title}
                   </h3>
 
-                  <div className="mt-10 flex items-end justify-between">
-                    <div className="flex items-center gap-3 ">
-                      <Image
-                        width={40}
-                        height={40}
-                        src={post.author.image}
-                        alt=""
-                        className="rounded-full shrink-0"
-                      />
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-white !leading-[20px]">
-                          {post.author.name}
-                        </span>
-                        <span className="text-xs text-neutral-400 !leading-[20px]">
-                          {post.author.role}
-                        </span>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-neutral-400">{post.date}</p>
-                  </div>
+                  <BlogAuthor
+                    author={post.author}
+                    variant="light"
+                    className="mt-10"
+                  />
 
                   <div className="mt-8 md:mt-16">
                     <BlogHeroPagination
