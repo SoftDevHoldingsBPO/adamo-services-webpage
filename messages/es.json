@@ -180,9 +180,14 @@
     "news": "Novedades",
     "empty": "empty"
   },
-  "empty": {
+  "emptyCategory": {
     "noMatches": "Sin coincidencias",
     "noMatchesDescription": "No se han encontrado coincidencias para la categoría “{category}”.",
     "tryAnotherCategory": "Prueba con otro categoría."
+  },
+  "emptySearch": {
+    "noMatches": "Sin coincidencias",
+    "noMatchesDescription": "No se han encontrado coincidencias para la búsqueda “{query}”.",
+    "tryAnotherSearch": "Prueba con otra búsqueda."
   }
 }

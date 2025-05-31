@@ -180,9 +180,14 @@
     "news": "News",
     "empty": "empty"
   },
-  "empty": {
+  "emptyCategory": {
     "noMatches": "No matches",
     "noMatchesDescription": "No matches found for the category “{category}”.",
     "tryAnotherCategory": "Try another category."
+  },
+  "emptySearch": {
+    "noMatches": "No matches",
+    "noMatchesDescription": "No matches found for the search “{query}”.",
+    "tryAnotherSearch": "Try another search."
   }
 }

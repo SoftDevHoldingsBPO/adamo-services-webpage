@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const BlogEmpty = ({ category }: { category: string | null }) => {
-  const t = useTranslations("empty");
+const BlogEmptySearch = ({ query }: { query: string }) => {
+  const t = useTranslations("emptySearch");
 
   return (
     <div className="rounded-4xl overflow-hidden relative py-[135px] px-4 md:pt-48 md:pb-[106px] bg-primary">
@@ -17,13 +17,13 @@ const BlogEmpty = ({ category }: { category: string | null }) => {
       <div className="relative flex flex-col items-center gap-12 text-white text-center">
         <h2 className="heading-2">{t("noMatches")}</h2>
         <p className="text-lg">
-          {t("noMatchesDescription", { category: category || "" })}
+          {t("noMatchesDescription", { query })}
           <br />
-          {t("tryAnotherCategory")}
+          {t("tryAnotherSearch")}
         </p>
       </div>
     </div>
   );
 };
 
-export default BlogEmpty;
+export default BlogEmptySearch;
