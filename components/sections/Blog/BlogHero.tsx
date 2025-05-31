@@ -10,6 +10,7 @@ import { useState } from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -66,7 +67,7 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
         >
           {posts.map((post) => (
             <SwiperSlide key={post.id}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-14">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-14 relative">
                 <div className="relative h-[250px] rounded-3xl overflow-hidden md:h-full">
                   <Image
                     src={post.coverImage}
@@ -98,6 +99,8 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
                     />
                   </div>
                 </div>
+
+                <Link href={`/blog/${post.id}`} className="absolute inset-0" />
               </div>
             </SwiperSlide>
           ))}

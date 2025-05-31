@@ -170,7 +170,8 @@
   "blogNavbar": {
     "logoDesktop": "Adamo serrvices blog",
     "logoMobile": "Adamo blog",
-    "goToAdamo": "Llévame a admoservices.co"
+    "goToAdamo": "Llévame a admoservices.co",
+    "back": "Regresar"
   },
   "blogCategories": {
     "all": "Todos",

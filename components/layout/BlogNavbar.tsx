@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,9 @@ const BlogNavbar = () => {
   const tl = useRef<gsap.core.Timeline | null>(null);
   const navigation = useRef<HTMLDivElement | null>(null);
   const { setSelectedCategory } = useBlog();
+
+  const pathname = usePathname();
+  const isBlogPostPage = pathname.startsWith("/blog/") && pathname !== "/blog";
 
   const t = useTranslations("blogNavbar");
   const tCategories = useTranslations("blogCategories");
@@ -93,6 +97,13 @@ const BlogNavbar = () => {
     }
   };
 
+  const close = () => {
+    if (!tl.current) return;
+
+    const timeline = tl.current;
+    timeline.timeScale(1.2).reverse();
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (!isOpen) return;
@@ -130,21 +141,29 @@ const BlogNavbar = () => {
         </AnimatePresence>
 
         <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-x-6 md:gap-x-12"
-          >
-            <Logo />
-            <span className="text-sm font-medium hidden md:block">
-              {t("logoDesktop")}
-            </span>
-            <span className="text-sm font-medium block md:hidden">
-              {t("logoMobile")}
-            </span>
-          </Link>
+          {!isBlogPostPage && (
+            <Link
+              href="/"
+              className="inline-flex items-center gap-x-6 md:gap-x-12"
+            >
+              <Logo />
+            </Link>
+          )}
+
+          {isBlogPostPage && (
+            <Link
+              href="/blog"
+              onClick={close}
+              className="inline-flex items-center gap-x-6 md:gap-x-12"
+            >
+              <ArrowRight className="rotate-[180deg]" />
+
+              <span className="text-sm font-medium">{t("back")}</span>
+            </Link>
+          )}
 
           <div className="flex items-center gap-x-4 md:hidden">
-            {!isOpen && (
+            {!isOpen && !isBlogPostPage && (
               <Button size="md" onClick={() => setShowSearch(true)}>
                 <SearchIcon />
               </Button>
