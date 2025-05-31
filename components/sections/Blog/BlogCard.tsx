@@ -1,9 +1,9 @@
 "use client";
 
-import { BlogPost } from "@/app/(blog)/blog/page";
-
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+
+import { BlogPost } from "./BlogGrid";
 
 const BlogCard = ({
   category,
@@ -18,7 +18,13 @@ const BlogCard = ({
   return (
     <article className="bg-neutral-100 rounded-2xl overflow-hidden">
       <div className="relative h-36 w-full">
-        <Image src={coverImage} alt="" fill className="object-cover" />
+        <Image
+          src={coverImage}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
       <div className="px-4 pt-6 pb-8">
         <span className="text-neutral-400">{tCategory(category)}</span>

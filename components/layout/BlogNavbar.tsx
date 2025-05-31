@@ -107,7 +107,7 @@ const BlogNavbar = () => {
     <>
       <div
         className={cn(
-          "group px-4 lg:px-8 sticky top-0 bg-white transition-all duration-300 ease-out z-10",
+          "group px-4 lg:px-8 sticky top-0 bg-white transition-all duration-300 ease-out z-20",
           isOpen ? "text-white bg-primary" : "text-primary bg-white",
           isScrolled && !isOpen ? "py-3" : "py-6",
         )}
@@ -159,7 +159,7 @@ const BlogNavbar = () => {
       <div
         ref={navigation}
         data-lenis-prevent
-        className="fixed inset-0 h-dvh w-full bg-primary -translate-y-full pt-[88px]"
+        className="fixed inset-0 h-dvh w-full bg-primary -translate-y-full pt-[88px] z-10"
       >
         <div className="h-full overflow-y-auto p-4 pb-16 flex flex-col justify-between gap-8">
           <div className="flex flex-col text-center space-y-6">
