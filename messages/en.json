@@ -173,9 +173,16 @@
     "goToAdamo": "Take me to admoservices.co"
   },
   "blogCategories": {
+    "all": "All",
     "inspirational": "Inspirational",
     "tips-and-trends": "Tips",
     "ai": "AI",
-    "news": "Novedades"
+    "news": "News",
+    "empty": "empty"
+  },
+  "empty": {
+    "noMatches": "No matches",
+    "noMatchesDescription": "No matches found for the category “{category}”.",
+    "tryAnotherCategory": "Try another category."
   }
 }

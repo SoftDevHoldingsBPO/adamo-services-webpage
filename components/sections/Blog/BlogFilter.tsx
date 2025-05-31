@@ -26,6 +26,9 @@ const BlogFilter = () => {
               selectedCategory === category
                 ? "text-primary"
                 : "text-neutral-500",
+              selectedCategory !== null &&
+                category !== selectedCategory &&
+                "text-neutral-300",
             )}
             onClick={() => {
               setSelectedCategory(category);

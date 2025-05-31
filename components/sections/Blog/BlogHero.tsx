@@ -48,7 +48,7 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="rounded-4xl p-6 relative overflow-hidden md:p-8 lg:p-14">
+    <div className="rounded-4xl p-6 relative overflow-hidden md:p-8 lg:p-14 mb-6 md:mb-12">
       <Image
         src="/images/blog/blog-hero.png"
         alt="Blog Hero"

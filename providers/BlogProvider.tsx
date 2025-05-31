@@ -3,14 +3,16 @@
 import { createContext, useContext, useState } from "react";
 
 interface BlogContextType {
-  selectedCategory: string;
+  selectedCategory: string | null;
   setSelectedCategory: (category: string) => void;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
 export const BlogProvider = ({ children }: { children: React.ReactNode }) => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    "all",
+  );
 
   const contextValue = {
     selectedCategory,
