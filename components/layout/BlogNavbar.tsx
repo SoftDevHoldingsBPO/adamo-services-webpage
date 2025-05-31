@@ -122,7 +122,7 @@ const BlogNavbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="fixed top-0 inset-x-0 z-20 bg-white py-2 px-4 shadow"
+              className="fixed top-0 inset-x-0 z-20 bg-white py-2 px-4 shadow md:hidden"
             >
               <BlogSearch onClose={() => setShowSearch(false)} />
             </motion.div>

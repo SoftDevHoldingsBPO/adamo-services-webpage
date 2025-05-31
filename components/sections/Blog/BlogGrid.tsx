@@ -71,7 +71,7 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   }
 
   return (
-    <div className="container pb-24">
+    <div className="container">
       {showHero && <BlogHero posts={posts.slice(0, 4)} />}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 xl:gap-y-12">
         {postsToRender.map((post) => (

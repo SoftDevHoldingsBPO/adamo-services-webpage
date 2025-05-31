@@ -14,7 +14,7 @@ const BlogEmptySearch = ({ query }: { query: string }) => {
         priority
       />
 
-      <div className="relative flex flex-col items-center gap-12 text-white text-center">
+      <div className="relative flex flex-col items-center gap-12 text-white text-center max-w-[809px] mx-auto">
         <h2 className="heading-2">{t("noMatches")}</h2>
         <p className="text-lg">
           {t("noMatchesDescription", { query })}

@@ -8,9 +8,9 @@ export default async function Page() {
   const { blogPosts } = await data.json();
 
   return (
-    <>
+    <div className="pb-24">
       <BlogFilter />
       <BlogGrid posts={blogPosts} />
-    </>
+    </div>
   );
 }

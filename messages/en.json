@@ -188,6 +188,6 @@
   "emptySearch": {
     "noMatches": "No matches",
     "noMatchesDescription": "No matches found for the search “{query}”.",
-    "tryAnotherSearch": "Try another search."
+    "tryAnotherSearch": "Try another search or explore our most popular categories for relevant content."
   }
 }

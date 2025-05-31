@@ -187,7 +187,7 @@
   },
   "emptySearch": {
     "noMatches": "Sin coincidencias",
-    "noMatchesDescription": "No se han encontrado coincidencias para la búsqueda “{query}”.",
-    "tryAnotherSearch": "Prueba con otra búsqueda."
+    "noMatchesDescription": "No se han encontrados coincidencias para el término “{query}”.",
+    "tryAnotherSearch": "Prueba con otros términos o explora nuestras categorías más populares para encontrar contenido relevante."
   }
 }
