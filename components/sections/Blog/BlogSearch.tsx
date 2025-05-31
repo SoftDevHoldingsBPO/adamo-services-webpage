@@ -34,7 +34,7 @@ const BlogSearch = ({ onClose }: BlogSearchProps) => {
     <div
       role="search"
       aria-label="Blog search"
-      className="bg-neutral-100 relative w-full rounded-2xl py-6 px-4 flex"
+      className="bg-neutral-100 relative w-full rounded-2xl py-4 md:py-6 px-4 flex"
     >
       <input
         ref={inputRef}

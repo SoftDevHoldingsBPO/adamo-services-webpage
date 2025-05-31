@@ -5,6 +5,7 @@ import { useBlog } from "@/providers/BlogProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useLenis } from "lenis/react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -22,6 +23,7 @@ import {
   Logo,
   SearchIcon,
 } from "../icon";
+import BlogSearch from "../sections/Blog/BlogSearch";
 import { Button } from "../ui/button";
 import LocaleSelect from "../ui/locale-select";
 import { SocialLink } from "./Navigation";
@@ -29,6 +31,7 @@ import { SocialLink } from "./Navigation";
 const BlogNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const navigation = useRef<HTMLDivElement | null>(null);
   const { setSelectedCategory } = useBlog();
@@ -109,9 +112,23 @@ const BlogNavbar = () => {
         className={cn(
           "group px-4 lg:px-8 sticky top-0 bg-white transition-all duration-300 ease-out z-20",
           isOpen ? "text-white bg-primary" : "text-primary bg-white",
-          isScrolled && !isOpen ? "py-3" : "py-6",
+          isScrolled && !isOpen ? "py-3 shadow-sm" : "py-6",
         )}
       >
+        <AnimatePresence>
+          {showSearch && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-0 inset-x-0 z-20 bg-white py-2 px-4 shadow"
+            >
+              <BlogSearch onClose={() => setShowSearch(false)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="flex items-center justify-between">
           <Link
             href="/"
@@ -128,7 +145,7 @@ const BlogNavbar = () => {
 
           <div className="flex items-center gap-x-4 md:hidden">
             {!isOpen && (
-              <Button size="md">
+              <Button size="md" onClick={() => setShowSearch(true)}>
                 <SearchIcon />
               </Button>
             )}
