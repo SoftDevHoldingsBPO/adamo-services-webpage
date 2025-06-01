@@ -1,37 +1,33 @@
-import { getLocale } from "next-intl/server";
+"use client";
+
+import { BlogPostsResponse } from "@/services/blog";
+import { getBlogPosts } from "@/services/blog";
+import { useQuery } from "@tanstack/react-query";
 
 import SliderCTA from "./SliderCTA";
 import SliderDesktop from "./SliderDesktop";
 import SliderMobile from "./SliderMobile";
 
-export type Post = {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  link: string;
-  date: string;
-};
+const BlogSlider = () => {
+  const { data, isLoading } = useQuery<BlogPostsResponse>({
+    queryKey: ["blogPosts"],
+    queryFn: getBlogPosts,
+  });
 
-const BlogSlider = async () => {
-  const locale = await getLocale();
-  const res = await fetch(`http://localhost:3000/api/posts?locale=${locale}`);
-  const data: Post[] = await res.json();
+  if (isLoading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
-  const sortedPosts = data.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
-
-  const latestThree = sortedPosts.slice(0, 3);
+  const latestThree = data?.blogPosts.slice(0, 3);
 
   return (
     <section className="pb-10 md:py-10">
       <div className="hidden lg:block">
-        <SliderDesktop posts={latestThree} />
+        <SliderDesktop posts={latestThree ?? []} />
       </div>
 
       <div className="block lg:hidden">
-        <SliderMobile posts={latestThree} />
+        <SliderMobile posts={latestThree ?? []} />
       </div>
       <SliderCTA />
     </section>

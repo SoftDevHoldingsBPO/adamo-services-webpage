@@ -1,8 +1,9 @@
-import { Post } from ".";
+import { BlogPost } from "@/services/blog";
+
 import SlideBlogCard from "./SlideBlogCard";
 
 interface SliderMobileProps {
-  posts: Post[];
+  posts: BlogPost[];
 }
 
 const SliderMobile = ({ posts }: SliderMobileProps) => {
@@ -13,7 +14,7 @@ const SliderMobile = ({ posts }: SliderMobileProps) => {
           <SlideBlogCard
             className="snap-start shrink-0"
             key={post.id}
-            {...post}
+            post={post}
           />
         ))}
       </div>

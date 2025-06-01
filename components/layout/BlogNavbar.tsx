@@ -147,6 +147,13 @@ const BlogNavbar = () => {
               className="inline-flex items-center gap-x-6 md:gap-x-12"
             >
               <Logo />
+
+              <p className="text-sm font-medium hidden md:block">
+                {t("logoDesktop")}
+              </p>
+              <p className="text-sm font-medium block md:hidden">
+                {t("logoMobile")}
+              </p>
             </Link>
           )}
 
