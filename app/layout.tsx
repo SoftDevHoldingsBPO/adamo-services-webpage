@@ -1,14 +1,10 @@
-import LenisProvider from "@/providers/LenisProvider";
-import { NavigationProvider } from "@/providers/NavigationProvider";
+import Providers from "@/providers/providers";
 
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import Navigation from "@/components/layout/Navigation";
 import Preloader from "@/components/layout/Preloader";
 import MouseFollowerCursor from "@/components/ui/MouseFollowerCursor";
 import WaButton from "@/components/ui/WaButton";
@@ -48,18 +44,13 @@ export default async function RootLayout({
         className={`${inter.variable} ${sora.variable} antialiased flex flex-col min-h-dvh`}
       >
         <MouseFollowerCursor />
-        <LenisProvider>
+        <Providers>
           <NextIntlClientProvider>
-            <NavigationProvider>
-              <Preloader />
-              <Navbar />
-              <Navigation />
-              <main className="flex-auto">{children}</main>
-              <Footer />
-              <WaButton />
-            </NavigationProvider>
+            <Preloader />
+            {children}
+            <WaButton />
           </NextIntlClientProvider>
-        </LenisProvider>
+        </Providers>
       </body>
     </html>
   );

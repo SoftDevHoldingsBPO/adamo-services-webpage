@@ -138,18 +138,57 @@
     "errors": {
       "name": "Name and last name are required",
       "email": "Please enter a valid email address.",
-      "country": "Please select a country"
+      "country": "Please select a country",
+      "company": "Company name is required",
+      "website": "Company website is required",
+      "services": "Please select at least one solution"
     },
     "placeholders": {
       "name": "Name and last name (*)",
       "email": "Corporate email (*)",
-      "company": "Company name",
-      "website": "Company website",
+      "company": "Company name (*)",
+      "website": "Company website (*)",
       "country": "Country (*)",
       "phone": "Phone",
       "message": "Message or comments...",
       "countrySearch": "Search country...",
-      "services": "Solutions of interest"
+      "services": "Solutions of interest (*)"
     }
+  },
+  "about": {
+    "hero": {
+      "title": "About us",
+      "description": "At Adamo Services, we believe that technology can transform the way businesses operate and connect with their customers."
+    },
+    "section1": {
+      "title": "Not just a technology provider",
+      "subtitle": "We are your strategic partner to build more secure, agile, and efficient operations.",
+      "description": "We help teams, companies, and organizations of all types, to operate with confidence, adapting to the most demanding market demands and regulations.",
+      "button": "Learn more"
+    }
+  },
+  "blogNavbar": {
+    "logoDesktop": "Adamo services blog",
+    "logoMobile": "Adamo blog",
+    "goToAdamo": "Take me to admoservices.co",
+    "back": "Return"
+  },
+  "blogCategories": {
+    "all": "All",
+    "inspirational": "Inspirational",
+    "tips-and-trends": "Tips",
+    "ai": "AI",
+    "news": "News",
+    "empty": "empty"
+  },
+  "emptyCategory": {
+    "noMatches": "No matches",
+    "noMatchesDescription": "No matches found for the category “{category}”.",
+    "tryAnotherCategory": "Try another category."
+  },
+  "emptySearch": {
+    "noMatches": "No matches",
+    "noMatchesDescription": "No matches found for the search “{query}”.",
+    "tryAnotherSearch": "Try another search or explore our most popular categories for relevant content."
   }
 }

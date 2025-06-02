@@ -1,6 +1,6 @@
 "use client";
 
-import { mainLinks } from "@/constants/navigation";
+import { mainLinks, socialLinks } from "@/constants/navigation";
 import { services } from "@/constants/services";
 import { useNavigation } from "@/providers/NavigationProvider";
 import { useGSAP } from "@gsap/react";
@@ -34,7 +34,7 @@ interface SocialLinkProps {
   icon: React.ComponentType<{ size: number }>;
 }
 
-const SocialLink = memo(({ href, icon: Icon }: SocialLinkProps) => (
+export const SocialLink = memo(({ href, icon: Icon }: SocialLinkProps) => (
   <Link
     href={href}
     className="text-white hover:text-neutral-300 transition-colors"
@@ -43,13 +43,6 @@ const SocialLink = memo(({ href, icon: Icon }: SocialLinkProps) => (
   </Link>
 ));
 SocialLink.displayName = "SocialLink";
-
-const socialLinks = [
-  { href: "#", icon: Facebook },
-  { href: "#", icon: Instagram },
-  { href: "#", icon: Threads },
-  { href: "#", icon: LinkedIn },
-];
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));

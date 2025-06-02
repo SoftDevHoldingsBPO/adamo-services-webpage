@@ -138,18 +138,57 @@
     "errors": {
       "name": "Nombre y apellido son requeridos",
       "email": "Por favor, ingresa un mail válido.",
-      "country": "Por favor, selecciona un país"
+      "country": "Por favor, selecciona un país",
+      "company": "Nombre de la empresa es requerido",
+      "website": "Página web de la empresa es requerida",
+      "services": "Debes seleccionar al menos una solución"
     },
     "placeholders": {
       "name": "Nombre y apellido (*)",
       "email": "Email corporativo (*)",
-      "company": "Nombre de la empresa",
-      "website": "Página web de la empresa",
+      "company": "Nombre de la empresa (*)",
+      "website": "Página web de la empresa (*)",
       "country": "País (*)",
       "phone": "Teléfono",
       "message": "Mensaje o comentarios...",
       "countrySearch": "Buscar país...",
-      "services": "Soluciones de interés"
+      "services": "Soluciones de interés (*)"
     }
+  },
+  "about": {
+    "hero": {
+      "title": "Sobre nosotros",
+      "description": "En Adamo Services, creemos que la tecnología puede transformar la forma en que las empresas operan y se conectan con sus clientes."
+    },
+    "section1": {
+      "title": "No solo un proveedor de tecnología",
+      "subtitle": "Somos tu aliado estratégico para construir operaciones más seguras, ágiles y eficientes.",
+      "description": "Ayudamos a equipos, empresas y organizaciones de todo tipo, a operar con confianza, adaptándose a las demandas y regulaciones más exigentes del mercado.",
+      "button": "Conocer soluciones"
+    }
+  },
+  "blogNavbar": {
+    "logoDesktop": "Adamo serrvices blog",
+    "logoMobile": "Adamo blog",
+    "goToAdamo": "Llévame a admoservices.co",
+    "back": "Regresar"
+  },
+  "blogCategories": {
+    "all": "Todos",
+    "inspirational": "Inspiracional",
+    "tips-and-trends": "Consejos y tendencias",
+    "ai": "IA",
+    "news": "Novedades",
+    "empty": "empty"
+  },
+  "emptyCategory": {
+    "noMatches": "Sin coincidencias",
+    "noMatchesDescription": "No se han encontrado coincidencias para la categoría “{category}”.",
+    "tryAnotherCategory": "Prueba con otro categoría."
+  },
+  "emptySearch": {
+    "noMatches": "Sin coincidencias",
+    "noMatchesDescription": "No se han encontrados coincidencias para el término “{query}”.",
+    "tryAnotherSearch": "Prueba con otros términos o explora nuestras categorías más populares para encontrar contenido relevante."
   }
 }

@@ -14,9 +14,11 @@ export type Post = {
 };
 
 const BlogSlider = async () => {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   const locale = await getLocale();
-  const res = await fetch(`https://localhost:3000/api/posts?locale=${locale}`);
+  const res = await fetch(
+    `https://adamoservices.co/api/posts?locale=${locale}`,
+  );
   const data: Post[] = await res.json();
 
   const sortedPosts = data.sort(

@@ -89,11 +89,15 @@ const ContactForm = () => {
               {...register("email")}
             />
             <Input
+              isError={!!errors.company}
               placeholder={t("placeholders.company")}
+              errorMessage={t("errors.company")}
               {...register("company")}
             />
             <Input
+              isError={!!errors.website}
               placeholder={t("placeholders.website")}
+              errorMessage={t("errors.website")}
               {...register("website")}
             />
 
@@ -110,7 +114,7 @@ const ContactForm = () => {
                       options={Country.getAllCountries()}
                     />
                     {errors.country && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-destructive text-sm">
                         {t("errors.country")}
                       </p>
                     )}
@@ -133,12 +137,16 @@ const ContactForm = () => {
 
             <div className="flex flex-wrap gap-8 lg:gap-12">
               {services.map((service) => (
-                <div key={service.id} className="flex items-center gap-x-3">
+                <label
+                  key={service.id}
+                  className="flex items-center gap-x-3 cursor-pointer"
+                >
                   <Controller
                     control={control}
                     name="services"
                     render={({ field }) => (
                       <Checkbox
+                        id={service.id}
                         checked={field.value?.includes(service.id)}
                         onCheckedChange={(checked) => {
                           return checked
@@ -150,10 +158,17 @@ const ContactForm = () => {
                       />
                     )}
                   />
-                  <p className="text-sm text-neutral-600">{service.label}</p>
-                </div>
+
+                  <span className="text-sm text-neutral-600">
+                    {service.label}
+                  </span>
+                </label>
               ))}
             </div>
+
+            {errors.services && (
+              <p className="text-destructive text-sm">{t("errors.services")}</p>
+            )}
           </div>
 
           <Textarea
