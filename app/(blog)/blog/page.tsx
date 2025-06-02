@@ -17,7 +17,7 @@ export default function Page() {
   }
 
   return (
-    <div data-cursor-text="">
+    <div>
       <BlogFilter />
       <BlogGrid posts={data?.blogPosts ?? []} />
     </div>

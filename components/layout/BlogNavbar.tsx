@@ -182,7 +182,7 @@ const BlogNavbar = () => {
             <LocaleSelect />
 
             <Button asChild size="md" variant="link">
-              <Link href="https://admoservices.co">
+              <Link href="https://adamoservices.co">
                 {t("goToAdamo")}
                 <ArrowRight className="rotate-[-45deg]" />
               </Link>
@@ -222,7 +222,7 @@ const BlogNavbar = () => {
 
             <div data-navigation-item>
               <Button asChild size="md" variant="ghost">
-                <Link href="https://admoservices.co">
+                <Link href="https://adamoservices.co">
                   {t("goToAdamo")}
                   <ArrowRight className="rotate-[-45deg]" />
                 </Link>
