@@ -5,7 +5,6 @@ import { useBlog } from "@/providers/BlogProvider";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useLenis } from "lenis/react";
-import { AnimatePresence, motion } from "motion/react";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -127,21 +126,7 @@ const BlogNavbar = () => {
           isScrolled && !isOpen ? "py-3 shadow-sm" : "py-6",
         )}
       >
-        <AnimatePresence>
-          {showSearch && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="fixed top-0 inset-x-0 z-20 bg-white py-2 px-4 shadow md:hidden"
-            >
-              <BlogSearch onClose={() => setShowSearch(false)} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           {!isBlogPostPage && (
             <Link
               href="/"
@@ -170,12 +155,19 @@ const BlogNavbar = () => {
             </Link>
           )}
 
-          <div className="flex items-center gap-x-4 md:hidden">
+          <div className="flex items-center gap-x-4 md:hidden ">
             {!isOpen && !isBlogPostPage && (
-              <Button size="md" onClick={() => setShowSearch(true)}>
-                <SearchIcon />
-              </Button>
+              <div className="flex items-center gap-x-2">
+                <BlogSearch
+                  isOpen={showSearch}
+                  onClose={() => setShowSearch(false)}
+                />
+                <Button size="md" onClick={() => setShowSearch(true)}>
+                  <SearchIcon />
+                </Button>
+              </div>
             )}
+
             <Button
               size="md"
               variant={isOpen ? "secondary" : "primary"}

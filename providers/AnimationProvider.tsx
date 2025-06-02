@@ -29,7 +29,6 @@ export const AnimationProvider = ({
   // Inview animation
   useEffect(() => {
     if (!isPreloaderDone) return;
-
     const elements = document.querySelectorAll("[data-animation-inview]");
 
     const observer = new IntersectionObserver(
@@ -38,7 +37,6 @@ export const AnimationProvider = ({
           if (entry.isIntersecting) {
             const el = entry.target as HTMLElement;
             const delay = el.getAttribute("data-animation-inview-delay");
-
             gsap.to(el, {
               opacity: 1,
               y: 0,
