@@ -119,7 +119,8 @@ const BlogNavbar = () => {
   return (
     <>
       <div
-        data-animation="1"
+        data-animation-inview
+        data-animation-inview-delay={0.1}
         className={cn(
           "group px-4 lg:px-8 sticky top-0 bg-white transition-all duration-300 ease-out z-20",
           isOpen ? "text-white bg-primary" : "text-primary bg-white",
