@@ -1,5 +1,6 @@
 "use client";
 
+import { useAnimation } from "@/providers/AnimationProvider";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
@@ -17,9 +18,12 @@ const Preloader = () => {
   const bgOverlayRef = useRef<HTMLDivElement>(null);
   const opacityRef = useRef<HTMLDivElement>(null);
 
+  const { setIsPreloaderDone } = useAnimation();
+
   useEffect(() => {
     if (isHidden) {
       document.body.setAttribute("data-preloader-complete", "true");
+      setIsPreloaderDone(true);
     }
   }, []);
 
@@ -55,8 +59,11 @@ const Preloader = () => {
             height: "0%",
             duration: 0.7,
             ease: "power3.inOut",
-            onStart: () => {
-              document.body.setAttribute("data-preloader-complete", "true");
+            onUpdate() {
+              if (tl.progress() > 0.83) {
+                setIsPreloaderDone(true);
+                document.body.setAttribute("data-preloader-complete", "true");
+              }
             },
           },
           "-=0.8",

@@ -16,7 +16,7 @@ const BlogCard = React.memo(
     const locale = useLocale();
 
     return (
-      <article className="bg-neutral-100 rounded-2xl overflow-hidden flex flex-col relative">
+      <article className="bg-neutral-100 rounded-2xl overflow-hidden flex flex-col relative h-full">
         <div className="relative h-36 w-full">
           <Image
             src={coverImage}

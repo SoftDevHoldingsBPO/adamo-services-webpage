@@ -1,13 +1,13 @@
 "use client";
 
+import type { BlogPost } from "@/services/blog";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useMediaQuery } from "usehooks-ts";
 
 import { useState } from "react";
 
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -15,11 +15,10 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 
-import type { Post } from ".";
 import SlideTag from "./SlideTag";
 
 interface SliderDesktopProps {
-  posts: Post[];
+  posts: BlogPost[];
 }
 
 const DURATION = 0.6;
@@ -32,6 +31,7 @@ const getWrappedIndex = (index: number, length: number) =>
 
 const SliderDesktop = ({ posts }: SliderDesktopProps) => {
   const t = useTranslations("blogSlider");
+  const locale = useLocale();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [previousIndex, setPreviousIndex] = useState(0);
@@ -213,7 +213,6 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
     },
     { dependencies: [activeIndex, direction] },
   );
-
   return (
     <div className="container">
       <div className="relative p-[88px] bg-neutral-100 rounded-4xl overflow-hidden">
@@ -240,13 +239,12 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
                   data-blog-image={index}
                   className="slide-image"
                 >
-                  <Image
-                    src={post.img}
-                    alt={post.title}
+                  <img
+                    src={post.coverImage}
+                    alt={post.locales[locale].title}
                     width={240}
                     height={300}
                     className="object-cover w-full h-full pointer-events-none"
-                    quality={100}
                   />
                 </div>
               );
@@ -270,8 +268,10 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
                     className="absolute left-0 top-0 w-full"
                   >
                     <div data-slot-blog-slider-content>
-                      <h4 className="heading-2 mb-8">{post.title}</h4>
-                      <p>{post.desc}</p>
+                      <h4 className="heading-2 mb-8">
+                        {post.locales[locale].title}
+                      </h4>
+                      <p>{post.locales[locale].excerpt}</p>
                     </div>
 
                     <div
@@ -282,11 +282,11 @@ const SliderDesktop = ({ posts }: SliderDesktopProps) => {
                       )}
                     >
                       <Button asChild>
-                        <Link href={`/posts/${post.id}`}>{t("readPost")}</Link>
+                        <Link href={`/blog/${post.id}`}>{t("readPost")}</Link>
                       </Button>
 
                       <Button asChild variant="link">
-                        <Link href={`/posts`}>
+                        <Link href={`/blog`}>
                           {t("goToBlog")} <ArrowRight />
                         </Link>
                       </Button>

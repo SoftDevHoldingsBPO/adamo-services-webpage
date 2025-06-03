@@ -3,6 +3,7 @@
 // Import Swiper styles
 import { BlogPost } from "@/services/blog";
 import "swiper/css";
+import { Autoplay } from "swiper/modules";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
@@ -61,6 +62,11 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
 
       <div className="relative">
         <Swiper
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
           spaceBetween={32}
           slidesPerView={1}
           onSlideChange={(e) => setActiveIndex(e.activeIndex)}

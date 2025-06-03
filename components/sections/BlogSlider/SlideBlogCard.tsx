@@ -1,5 +1,6 @@
-import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { BlogPost } from "@/services/blog";
+
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -7,20 +8,15 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 
-import { Post } from ".";
 import SlideTag from "./SlideTag";
 
-interface SlideBlogCardProps extends Post {
+interface SlideBlogCardProps {
+  post: BlogPost;
   className?: string;
 }
 
-const SlideBlogCard = ({
-  id,
-  img,
-  title,
-  desc,
-  className,
-}: SlideBlogCardProps) => {
+const SlideBlogCard = ({ post, className }: SlideBlogCardProps) => {
+  const locale = useLocale();
   const t = useTranslations("blogSlider");
 
   return (
@@ -30,30 +26,31 @@ const SlideBlogCard = ({
         className,
       )}
     >
-      <Image
-        src={img}
-        alt={title}
+      <img
+        src={post.coverImage}
+        alt=""
         width={277}
         height={215}
         loading="lazy"
-        quality={100}
         className="w-[277px] h-[215px] object-cover rounded-2xl"
       />
 
       <SlideTag className="mt-6">Blog</SlideTag>
 
       <div className="mt-6">
-        <h4 className="heading-2 line-clamp-2">{title}</h4>
-        <p className="mt-4 text-sm line-clamp-3">{desc}</p>
+        <h4 className="heading-2 line-clamp-2">{post.locales[locale].title}</h4>
+        <p className="mt-4 text-sm line-clamp-3">
+          {post.locales[locale].excerpt}
+        </p>
       </div>
 
       <div className="flex gap-x-8 mt-14">
         <Button asChild>
-          <Link href={`/posts/${id}`}>{t("readPost")}</Link>
+          <Link href={`/blog/${post.id}`}>{t("readPost")}</Link>
         </Button>
 
         <Button asChild variant="link">
-          <Link href={`/posts`}>
+          <Link href={`/blog`}>
             {t("goToBlog")} <ArrowRight />
           </Link>
         </Button>

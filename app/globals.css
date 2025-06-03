@@ -365,3 +365,9 @@ body[data-preloader-complete="true"] [data-animation-down="5"] {
 .slide-image {
   @apply absolute top-0 left-0 h-[var(--slide-image-size)] w-[var(--slide-image-size)] overflow-hidden rounded-3xl opacity-0;
 }
+
+/* Animation In View */
+[data-animation-inview] {
+  opacity: 0;
+  transform: translateY(64px);
+}

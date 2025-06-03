@@ -54,11 +54,27 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
 
   return (
     <div className="container">
-      {showHero && <BlogHero posts={posts.slice(0, 4)} />}
+      {showHero && (
+        <div data-animation-inview>
+          <BlogHero posts={posts.slice(0, 4)} />
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 xl:gap-y-12">
-        {postsToRender.map((post) => (
-          <BlogCard key={post.id} {...post} />
-        ))}
+        {postsToRender.map((post, index) => {
+          let delay = 0;
+          if (index < 3) delay = 0.1 * index + 0.1;
+          else delay = (index % 3) * 0.1;
+
+          return (
+            <div
+              key={post.id}
+              data-animation-inview
+              data-animation-inview-delay={delay}
+            >
+              <BlogCard key={post.id} {...post} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
