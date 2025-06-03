@@ -3,7 +3,7 @@
 import { categories } from "@/constants/navigation";
 import { useBlog } from "@/providers/BlogProvider";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { useTranslations } from "next-intl";
 
@@ -20,7 +20,11 @@ const BlogFilter = () => {
   const tCategories = useTranslations("blogCategories");
 
   return (
-    <div className="container pt-3 pb-6 hidden md:block relative">
+    <div
+      data-animation-inview
+      data-animation-inview-delay={0.1}
+      className="container pt-3 pb-6 hidden md:block relative"
+    >
       <div className="flex justify-center items-center gap-x-12 py-6 relative">
         {categories.map((category) => (
           <button
