@@ -33,7 +33,11 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   }, [pathname]);
 
   return (
-    <ReactLenis options={{ autoRaf: false, lerp: 0.06 }} root ref={lenisRef}>
+    <ReactLenis
+      options={{ autoRaf: false, lerp: 0.06, allowNestedScroll: true }}
+      root
+      ref={lenisRef}
+    >
       {children}
     </ReactLenis>
   );

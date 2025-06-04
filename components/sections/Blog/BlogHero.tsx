@@ -3,7 +3,8 @@
 // Import Swiper styles
 import { BlogPost } from "@/services/blog";
 import "swiper/css";
-import { Autoplay } from "swiper/modules";
+import "swiper/css/effect-creative";
+import { Autoplay, EffectCreative } from "swiper/modules";
 // Import Swiper React components
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
@@ -62,10 +63,22 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
 
       <div className="relative">
         <Swiper
-          modules={[Autoplay]}
+          className="!overflow-visible"
+          modules={[Autoplay, EffectCreative]}
+          effect="creative"
           autoplay={{
-            delay: 5000,
+            delay: 50000,
             disableOnInteraction: false,
+          }}
+          creativeEffect={{
+            prev: {
+              translate: ["-48px", 0, 0],
+              opacity: 0,
+            },
+            next: {
+              translate: ["48px", 0, 0],
+              opacity: 0,
+            },
           }}
           spaceBetween={32}
           slidesPerView={1}
@@ -98,7 +111,7 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
                     className="mt-10"
                   />
 
-                  <div className="mt-8 md:mt-16">
+                  <div className="mt-8 md:mt-16 relative z-20">
                     <BlogHeroPagination
                       activeIndex={activeIndex}
                       length={posts.length}

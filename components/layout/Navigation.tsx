@@ -5,6 +5,7 @@ import { services } from "@/constants/services";
 import { useNavigation } from "@/providers/NavigationProvider";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { useLenis } from "lenis/react";
 
 import { memo, useRef } from "react";
 
@@ -14,7 +15,6 @@ import { useRouter } from "next/navigation";
 
 import { useLockScroll } from "@/hooks/useLockScroll";
 
-import { Facebook, Instagram, LinkedIn, Threads } from "../icon";
 import ServiceCard from "../ui/service-card";
 
 const ANIMATION_CONFIG = {
@@ -54,7 +54,7 @@ const Navigation = () => {
   const { isOpen, timeline, setIsOpen, toggleMenu } = useNavigation();
   const t = useTranslations("nav");
   const router = useRouter();
-
+  const lenis = useLenis();
   useLockScroll({ isOpen });
 
   useGSAP(
@@ -152,71 +152,90 @@ const Navigation = () => {
 
   const handleClick = async (link: string) => {
     toggleMenu();
-    await sleep(300);
-    router.push(link);
+
+    if (link.startsWith("/#")) {
+      await sleep(1000);
+      lenis?.scrollTo(link.slice(1), {
+        easing: function easeInOutCubic(x: number): number {
+          return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        },
+        duration: 1,
+        force: true,
+        offset: -40,
+      });
+    } else {
+      await sleep(300);
+      router.push(link);
+    }
   };
 
   return (
     <div
       ref={navigation}
       data-lenis-prevent
-      className="fixed z-[35] inset-0 h-dvh bg-primary text-white pt-[104px] px-4 overflow-y-auto overlay-scrollbar pb-10 translate-y-full"
+      className="fixed inset-0 z-30 -translate-y-full bg-primary pt-[88px]"
     >
-      <div className="max-w-[1232px] mx-auto h-full flex flex-col min-h-[600px]">
-        <h3
-          data-navigation-heading
-          className="heading-2 mb-6 md:mb-10 max-w-[600px]"
-        >
-          {t("servicesTitle")}
-        </h3>
+      <div className="h-full pt-4 pb-16 md:py-12 overflow-y-auto overlay-scrollbar">
+        <div className="container h-full md:h-auto">
+          <div className="flex flex-col gap-6 md:gap-10 h-full">
+            <h3 data-navigation-heading className="heading-2 text-white">
+              {t("servicesTitle")}
+            </h3>
 
-        <div className="grid grid-rows-[295px_1fr] md:grid-rows-[1fr] grid-cols-1 md:grid-cols-[1fr_218px] h-full gap-14 md:gap-16 xl:grid-cols-[1fr_380px] xl:gap-[138px] md:h-auto">
-          <div className="md:grid md:grid-cols-2 gap-8 flex flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar">
-            {services.map((service) => (
-              <div
-                data-navigation-service
-                key={service.id}
-                className="w-[280px] md:w-auto snap-start shrink-0"
-              >
-                <ServiceCard
-                  onClick={handleClick}
-                  size="compact"
-                  {...service}
-                />
+            <div className="flex flex-col gap-10 md:grid md:grid-cols-8 md:gap-8 lg:grid-cols-12 flex-auto">
+              <div className="md:col-span-6 lg:col-span-7">
+                <div className="-mx-4 px-4 scroll-pl-4 flex flex-nowrap gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-2">
+                  {services.map((service) => (
+                    <div
+                      data-navigation-service
+                      key={service.id}
+                      className="w-[280px] md:w-auto snap-start shrink-0"
+                    >
+                      <ServiceCard
+                        onClick={handleClick}
+                        size="compact"
+                        {...service}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
 
-          <div className="flex flex-col flex-auto gap-y-6 md:gap-y-[90px]">
-            <div data-navigation-links className="flex-auto md:flex-[initial]">
-              <h3 className="text-sm text-neutral-500 mb-8 hidden md:block">
-                {t("navigation")}
-              </h3>
-              <div className="flex flex-wrap gap-8 md:flex-col">
-                {mainLinks.map((link) => (
-                  <Link
-                    key={link.key}
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleClick(link.href);
-                    }}
-                    className="text-sm font-medium hover:text-neutral-300 transition-colors"
-                  >
-                    {t(link.key)}
-                  </Link>
-                ))}
-              </div>
-            </div>
+              <div className="md:col-span-2 lg:col-span-4 lg:col-start-9 flex-auto flex flex-col gap-10 h-full md:gap-y-[90px]">
+                <div
+                  data-navigation-links
+                  className="space-y-8 flex-auto md:flex-none"
+                >
+                  <h3 className="text-sm text-neutral-500 hidden md:block">
+                    {t("navigation")}
+                  </h3>
+                  <div className="flex flex-wrap gap-8 md:flex-col">
+                    {mainLinks.map((link) => (
+                      <Link
+                        key={link.key}
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleClick(link.href);
+                        }}
+                        className="text-sm text-white font-medium hover:text-neutral-300 transition-colors"
+                      >
+                        {t(link.key)}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-            <div data-navigation-socials className="space-y-8">
-              <h4 className="text-sm text-neutral-500 hidden md:block">
-                {t("socialsTitle")}
-              </h4>
-              <div className="flex justify-center md:justify-start md:flex-col items-start gap-6">
-                {socialLinks.map((link, index) => (
-                  <SocialLink key={index} {...link} />
-                ))}
+                <div data-navigation-socials className="space-y-8 ">
+                  <h4 className="text-sm text-neutral-500 hidden md:block">
+                    {t("socialsTitle")}
+                  </h4>
+                  <div className="flex justify-center md:justify-start md:flex-col items-start gap-6">
+                    {socialLinks.map((link, index) => (
+                      <SocialLink key={index} {...link} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

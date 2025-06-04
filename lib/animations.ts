@@ -73,7 +73,7 @@ export const initScrollAnimation = (
   }
 };
 
-export const initInViewAnimation = () => {
+export const inViewAnimation = () => {
   const elements = document.querySelectorAll("[data-animation-inview]");
 
   const observer = new IntersectionObserver(
@@ -88,6 +88,34 @@ export const initInViewAnimation = () => {
             duration: 0.5,
             ease: "power3.out",
             delay: delay ? parseFloat(delay) : 0,
+          });
+
+          obs.unobserve(el);
+        }
+      });
+    },
+    {
+      threshold: 0,
+    },
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  return () => observer.disconnect();
+};
+
+export const setInViewAnimation = () => {
+  const elements = document.querySelectorAll("[data-animation-inview]");
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+
+          gsap.set(el, {
+            opacity: 1,
+            y: 0,
           });
 
           obs.unobserve(el);

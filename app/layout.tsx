@@ -1,3 +1,5 @@
+import { BlogProvider } from "@/providers/BlogProvider";
+import { NavigationProvider } from "@/providers/NavigationProvider";
 import Providers from "@/providers/providers";
 
 import type { Metadata } from "next";
@@ -5,6 +7,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import Preloader from "@/components/layout/Preloader";
 import MouseFollowerCursor from "@/components/ui/MouseFollowerCursor";
 import WaButton from "@/components/ui/WaButton";
@@ -46,9 +50,15 @@ export default async function RootLayout({
         <MouseFollowerCursor />
         <Providers>
           <NextIntlClientProvider>
-            <Preloader />
-            {children}
-            <WaButton />
+            <BlogProvider>
+              <NavigationProvider>
+                <Navbar />
+                <Preloader />
+                {children}
+                <Footer />
+                <WaButton />
+              </NavigationProvider>
+            </BlogProvider>
           </NextIntlClientProvider>
         </Providers>
       </body>
