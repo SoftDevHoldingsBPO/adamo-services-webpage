@@ -67,7 +67,7 @@ const BlogHero = ({ posts }: { posts: BlogPost[] }) => {
           modules={[Autoplay, EffectCreative]}
           effect="creative"
           autoplay={{
-            delay: 50000,
+            delay: 15000,
             disableOnInteraction: false,
           }}
           creativeEffect={{

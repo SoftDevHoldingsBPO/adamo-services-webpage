@@ -63,6 +63,12 @@ const BlogSearch = ({ isOpen, onClose }: BlogSearchProps) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    return () => {
+      setSearchQuery("");
+    };
+  }, []);
+
   return (
     <AnimatePresence>
       {isOpen && (

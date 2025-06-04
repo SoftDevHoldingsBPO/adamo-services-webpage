@@ -9,7 +9,7 @@ import { useEffect, useMemo } from "react";
 
 import { useLocale } from "next-intl";
 
-import { setInViewAnimation } from "@/lib/animations";
+import { inViewAnimation } from "@/lib/animations";
 
 import BlogCard from "./BlogCard";
 import BlogEmpty from "./BlogEmptyCategory";
@@ -44,7 +44,7 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
 
   useEffect(() => {
     if (isPreloaderDone && !isOpen) {
-      setInViewAnimation();
+      inViewAnimation();
     }
   }, [isPreloaderDone, isOpen, selectedCategory, searchQuery]);
 
