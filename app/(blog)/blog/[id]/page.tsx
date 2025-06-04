@@ -3,9 +3,13 @@
 import { BlogPostsResponse, getBlogPosts } from "@/services/blog";
 import { useQuery } from "@tanstack/react-query";
 
+import { useEffect } from "react";
+
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+
+import { initInViewAnimation } from "@/lib/animations";
 
 import BlogAuthor from "@/components/sections/Blog/BlogAuthor";
 
@@ -26,10 +30,18 @@ export default function Page() {
   const author = post?.author;
   const content = post?.locales[locale].content;
 
+  useEffect(() => {
+    initInViewAnimation();
+  }, []);
+
   if (!post) return null;
 
   return (
-    <div className="container py-4 md:py-14 lg:py-28 space-y-16">
+    <div
+      data-animation-inview
+      data-animation-inview-delay={0.3}
+      className="container py-4 md:py-14 lg:py-28 space-y-16"
+    >
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-2">
           <span className="text-xs font-semibold">{post.date}</span>

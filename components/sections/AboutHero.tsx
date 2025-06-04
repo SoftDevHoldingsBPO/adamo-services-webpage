@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import Player from "next-video/player";
 
 const AboutHero = () => {
   const t = useTranslations("about");
@@ -19,16 +19,6 @@ const AboutHero = () => {
           </p>
         </div>
 
-        {/* Optimized background image */}
-        <Image
-          src="/images/about/about-hero.png"
-          alt="About Hero"
-          fill
-          priority
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          aria-hidden="true"
-        />
-
         {/* Gradient overlay */}
         <div
           className="absolute inset-0 z-10 pointer-events-none"
@@ -36,6 +26,16 @@ const AboutHero = () => {
             background:
               "linear-gradient(0deg, rgba(17, 25, 39, 0.9) 43.47%, rgba(17, 25, 39, 0.00) 100%)",
           }}
+        />
+
+        <Player
+          src="/video/contact-hero.mp4"
+          autoPlay
+          muted
+          loop
+          controls={false}
+          className="absolute inset-0 w-full h-full object-cover -z-10"
+          aria-hidden="true"
         />
       </div>
     </div>

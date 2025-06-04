@@ -39,6 +39,18 @@ const services = [
     label: "Adamo Sign",
   },
 ];
+
+const defaultValues: ContactFormSchema = {
+  name: "",
+  email: "",
+  company: "",
+  website: "",
+  country: "",
+  phone: "",
+  services: [],
+  message: "",
+};
+
 const ContactForm = () => {
   const t = useTranslations("contactForm");
   const [sending, setSending] = useState(false);
@@ -49,16 +61,10 @@ const ContactForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ContactFormSchema>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      website: "",
-      country: "",
-      services: [],
-    },
+    defaultValues,
   });
 
   const onSubmit = async (data: ContactFormSchema) => {
@@ -66,6 +72,7 @@ const ContactForm = () => {
     await sleep(2000);
     setSending(false);
     setSuccess(true);
+    reset(defaultValues);
   };
 
   return (
