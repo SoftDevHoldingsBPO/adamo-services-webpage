@@ -1,11 +1,15 @@
 "use client";
 
+import { useAnimation } from "@/providers/AnimationProvider";
 import { useBlog } from "@/providers/BlogProvider";
+import { useNavigation } from "@/providers/NavigationProvider";
 import { BlogPost } from "@/services/blog";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useLocale } from "next-intl";
+
+import { setInViewAnimation } from "@/lib/animations";
 
 import BlogCard from "./BlogCard";
 import BlogEmpty from "./BlogEmptyCategory";
@@ -14,6 +18,8 @@ import BlogHero from "./BlogHero";
 
 const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   const { searchQuery, selectedCategory } = useBlog();
+  const { isOpen } = useNavigation();
+  const { isPreloaderDone } = useAnimation();
   const locale = useLocale();
 
   const filteredPosts = useMemo(() => {
@@ -35,6 +41,12 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   const postsToRender = filteredPosts;
   const showHero =
     selectedCategory === "all" && !searchQuery && posts.length > 0;
+
+  useEffect(() => {
+    if (isPreloaderDone && !isOpen) {
+      setInViewAnimation();
+    }
+  }, [isPreloaderDone, isOpen, selectedCategory, searchQuery]);
 
   if (filteredPosts.length === 0 && searchQuery) {
     return (

@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useEffect } from "react";
 
-import { initInViewAnimation } from "@/lib/animations";
+import { inViewAnimation } from "@/lib/animations";
 
 import BlogFilter from "@/components/sections/Blog/BlogFilter";
 import BlogGrid from "@/components/sections/Blog/BlogGrid";
@@ -23,7 +23,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!isLoading && isPreloaderDone && !isOpen) {
-      initInViewAnimation();
+      inViewAnimation();
     }
   }, [isLoading, isPreloaderDone, isOpen]);
 

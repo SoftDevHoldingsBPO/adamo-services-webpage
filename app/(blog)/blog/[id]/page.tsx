@@ -9,7 +9,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
-import { initInViewAnimation } from "@/lib/animations";
+import { inViewAnimation } from "@/lib/animations";
 
 import BlogAuthor from "@/components/sections/Blog/BlogAuthor";
 
@@ -31,7 +31,7 @@ export default function Page() {
   const content = post?.locales[locale].content;
 
   useEffect(() => {
-    initInViewAnimation();
+    inViewAnimation();
   }, []);
 
   if (!post) return null;

@@ -21,5 +21,4 @@ export const categories = [
   "tips-and-trends",
   "ai",
   "news",
-  "empty",
 ];
