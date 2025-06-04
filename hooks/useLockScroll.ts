@@ -1,7 +1,5 @@
 "use client";
 
-import { useLenis } from "lenis/react";
-
 import { useEffect } from "react";
 
 type Options = {
@@ -9,8 +7,6 @@ type Options = {
 };
 
 export const useLockScroll = ({ isOpen }: Options) => {
-  const lenis = useLenis();
-
   useEffect(() => {
     const fixedElements =
       document.querySelectorAll<HTMLElement>("[data-fixed]");
@@ -19,6 +15,7 @@ export const useLockScroll = ({ isOpen }: Options) => {
     const shouldCompensate = scrollbarWidth > 0;
 
     const applyScrollbarCompensation = () => {
+      document.body.style.overflow = "hidden";
       if (shouldCompensate) {
         document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -29,6 +26,7 @@ export const useLockScroll = ({ isOpen }: Options) => {
     };
 
     const resetScrollbarCompensation = () => {
+      document.body.style.overflow = "auto";
       if (shouldCompensate) {
         document.body.style.paddingRight = "";
 
@@ -40,15 +38,12 @@ export const useLockScroll = ({ isOpen }: Options) => {
 
     if (isOpen) {
       applyScrollbarCompensation();
-      lenis?.stop();
     } else {
       resetScrollbarCompensation();
-      lenis?.start();
     }
 
     return () => {
       resetScrollbarCompensation();
-      lenis?.start();
     };
-  }, [isOpen, lenis]);
+  }, [isOpen]);
 };

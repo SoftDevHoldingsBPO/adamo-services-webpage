@@ -5,6 +5,7 @@ import { services } from "@/constants/services";
 import { useNavigation } from "@/providers/NavigationProvider";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { useLenis } from "lenis/react";
 
 import { memo, useRef } from "react";
 
@@ -53,7 +54,7 @@ const Navigation = () => {
   const { isOpen, timeline, setIsOpen, toggleMenu } = useNavigation();
   const t = useTranslations("nav");
   const router = useRouter();
-
+  const lenis = useLenis();
   useLockScroll({ isOpen });
 
   useGSAP(
@@ -151,8 +152,21 @@ const Navigation = () => {
 
   const handleClick = async (link: string) => {
     toggleMenu();
-    await sleep(300);
-    router.push(link);
+
+    if (link.startsWith("/#")) {
+      await sleep(1000);
+      lenis?.scrollTo(link.slice(1), {
+        easing: function easeInOutCubic(x: number): number {
+          return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        },
+        duration: 1,
+        force: true,
+        offset: -40,
+      });
+    } else {
+      await sleep(300);
+      router.push(link);
+    }
   };
 
   return (

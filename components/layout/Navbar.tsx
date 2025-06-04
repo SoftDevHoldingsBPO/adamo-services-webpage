@@ -85,7 +85,7 @@ const Navbar = () => {
               size="md"
               variant={isOpen ? "secondary" : "primary"}
             >
-              <Link href="/adamo-pay">{t("contact")}</Link>
+              <Link href="/contact">{t("contact")}</Link>
             </Button>
           </div>
 

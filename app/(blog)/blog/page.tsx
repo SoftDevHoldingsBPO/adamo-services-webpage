@@ -1,6 +1,7 @@
 "use client";
 
 import { useAnimation } from "@/providers/AnimationProvider";
+import { useNavigation } from "@/providers/NavigationProvider";
 import { BlogPostsResponse, getBlogPosts } from "@/services/blog";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,6 +14,7 @@ import BlogGrid from "@/components/sections/Blog/BlogGrid";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Page() {
+  const { isOpen } = useNavigation();
   const { isPreloaderDone } = useAnimation();
   const { data, isLoading } = useQuery<BlogPostsResponse>({
     queryKey: ["blogPosts"],
@@ -20,10 +22,10 @@ export default function Page() {
   });
 
   useEffect(() => {
-    if (!isLoading && isPreloaderDone) {
+    if (!isLoading && isPreloaderDone && !isOpen) {
       initInViewAnimation();
     }
-  }, [isLoading, isPreloaderDone]);
+  }, [isLoading, isPreloaderDone, isOpen]);
 
   if (isLoading) {
     return (

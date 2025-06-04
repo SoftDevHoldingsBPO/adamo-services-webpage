@@ -183,7 +183,7 @@ const BlogNavbar = () => {
             <LocaleSelect />
 
             <Button asChild size="md" variant="link">
-              <Link href="https://adamoservices.co">
+              <Link href="/">
                 {t("goToAdamo")}
                 <ArrowRight className="rotate-[-45deg]" />
               </Link>
