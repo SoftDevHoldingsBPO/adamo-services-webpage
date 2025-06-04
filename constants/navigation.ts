@@ -1,7 +1,7 @@
 import { Facebook, Instagram, LinkedIn, Threads } from "../components/icon";
 
 export const mainLinks = [
-  { key: "solutions", href: "/solutions" },
+  { key: "solutions", href: "/#services" },
   { key: "faqs", href: "/#faqs" },
   { key: "blog", href: "/blog" },
   { key: "about", href: "/about" },

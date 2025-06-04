@@ -155,14 +155,7 @@ const Navigation = () => {
 
     if (link.startsWith("/#")) {
       await sleep(1000);
-      lenis?.scrollTo(link.slice(1), {
-        easing: function easeInOutCubic(x: number): number {
-          return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        },
-        duration: 1,
-        force: true,
-        offset: -40,
-      });
+      router.push(link);
     } else {
       await sleep(300);
       router.push(link);

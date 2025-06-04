@@ -371,3 +371,8 @@ body[data-preloader-complete="true"] [data-animation-down="5"] {
   opacity: 0;
   transform: translateY(64px);
 }
+
+html,
+body {
+  scroll-behavior: smooth;
+}
