@@ -1,5 +1,6 @@
 "use client";
 
+import { useAnimation } from "@/providers/AnimationProvider";
 import { BlogPostsResponse, getBlogPosts } from "@/services/blog";
 import { useQuery } from "@tanstack/react-query";
 
@@ -22,6 +23,7 @@ export default function Page() {
   });
 
   const locale = useLocale();
+  const { isPreloaderDone } = useAnimation();
 
   const tCategory = useTranslations("blogCategories");
 
@@ -31,8 +33,10 @@ export default function Page() {
   const content = post?.locales[locale].content;
 
   useEffect(() => {
-    inViewAnimation();
-  }, []);
+    if (isPreloaderDone) {
+      inViewAnimation();
+    }
+  }, [isPreloaderDone]);
 
   if (!post) return null;
 
