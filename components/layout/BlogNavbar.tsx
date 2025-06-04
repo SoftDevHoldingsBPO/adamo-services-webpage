@@ -223,7 +223,7 @@ const BlogNavbar = () => {
 
             <div data-navigation-item>
               <Button asChild size="md" variant="ghost">
-                <Link href="https://adamoservices.co">
+                <Link href="/">
                   {t("goToAdamo")}
                   <ArrowRight className="rotate-[-45deg]" />
                 </Link>
