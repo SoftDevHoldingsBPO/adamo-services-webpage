@@ -85,47 +85,7 @@
   "footer": {
     "copyright": "Adamo Services All rights reserved"
   },
-  "adamoPay": {
-    "hero": {
-      "cursor-text": "DISCOVER",
-      "title": "Adamo Pay",
-      "description": "Optimize your payments with a platform that combines speed, efficient costs, and strict compliance with local regulations."
-    },
-    "pageParallax": {
-      "title": "Control, analysis, and reports",
-      "description": "Avoid fraud and errors with detailed reports and intelligent alerts. Monitor risks, correct data, and easily take control of each operation."
-    },
-    "exchangeBanner": {
-      "introTitle": "Payment and currency management",
-      "introDescription": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement.",
-      "exchangeTitle": "Successful exchange",
-      "exchangeDescription": "USD to COP",
-      "exchangeDate": "January 29",
-      "exchangeAmount": "+ 250 USD",
-      "title": "Exchange currencies at the best rate and without delays.",
-      "button": "Talk to sales now"
-    },
-    "paymentList": {
-      "title": "Process large payment batches",
-      "description": "Upload your file, review payments with updates, and decide whether to disperse or archive them. Adamo Pay gives you the power to manage each transaction, avoiding errors and keeping your payments organized.",
-      "button": "Learn more about batch payments",
-      "buttonMobile": "Learn more",
-      "link": "Go to blog"
-    },
-    "paymentForm": {
-      "title": "Beneficiary management and individual payments",
-      "description": "Search among your saved contacts or enter the information manually. Complete the bank and fiscal data easily and save the beneficiary for future transactions.",
-      "button": "Talk to sales now",
-      "buttonMobile": "Talk to sales"
-    },
-    "metrics": {
-      "title": "Real-time metrics for smarter decisions. <br></br> With Adamo Pay, get a complete view of your operations.",
-      "button": "Talk to sales now",
-      "ctaTitle": "Ready to transform payment management in your company?",
-      "ctaDescription": "With AdamoPay, your payments and beneficiary management become faster, safer, and more efficient than ever.",
-      "ctaButton": "Talk to sales"
-    }
-  },
+
   "contact": {
     "title": "Talk to our experts now",
     "description": "With Adamo Services, you can have everything in one platform. Complete the following form to talk to our sales team and discover how to optimize your business today."
@@ -190,5 +150,53 @@
     "noMatches": "No matches",
     "noMatchesDescription": "No matches found for the search “{query}”.",
     "tryAnotherSearch": "Try another search or explore our most popular categories for relevant content."
+  },
+  "adamoPay": {
+    "hero": {
+      "cursor-text": "DISCOVER",
+      "title": "Adamo Pay",
+      "description": "Optimize your payments with a platform that combines speed, efficient costs, and strict compliance with local regulations."
+    },
+    "pageParallax": {
+      "title": "Control, analysis, and reports",
+      "description": "Avoid fraud and errors with detailed reports and intelligent alerts. Monitor risks, correct data, and easily take control of each operation."
+    },
+    "exchangeBanner": {
+      "introTitle": "Payment and currency management",
+      "introDescription": "With Adamo Pay, perform transactions complying with international regulations, reducing risks and ensuring transparency in each movement.",
+      "exchangeTitle": "Successful exchange",
+      "exchangeDescription": "USD to COP",
+      "exchangeDate": "January 29",
+      "exchangeAmount": "+ 250 USD",
+      "title": "Exchange currencies at the best rate and without delays.",
+      "button": "Talk to sales now"
+    },
+    "paymentList": {
+      "title": "Process large payment batches",
+      "description": "Upload your file, review payments with updates, and decide whether to disperse or archive them. Adamo Pay gives you the power to manage each transaction, avoiding errors and keeping your payments organized.",
+      "button": "Learn more about batch payments",
+      "buttonMobile": "Learn more",
+      "link": "Go to blog"
+    },
+    "paymentForm": {
+      "title": "Beneficiary management and individual payments",
+      "description": "Search among your saved contacts or enter the information manually. Complete the bank and fiscal data easily and save the beneficiary for future transactions.",
+      "button": "Talk to sales now",
+      "buttonMobile": "Talk to sales"
+    },
+    "metrics": {
+      "title": "Real-time metrics for smarter decisions. <br></br> With Adamo Pay, get a complete view of your operations.",
+      "button": "Talk to sales now",
+      "ctaTitle": "Ready to transform payment management in your company?",
+      "ctaDescription": "With AdamoPay, your payments and beneficiary management become faster, safer, and more efficient than ever.",
+      "ctaButton": "Talk to sales"
+    }
+  },
+  "adamoId": {
+    "hero": {
+      "cursor-text": "DISCOVER",
+      "title": "Adamo ID",
+      "description": "Use advanced biometric technology. Reduce risks and streamline authentication processes in real-time."
+    }
   }
 }

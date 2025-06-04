@@ -85,47 +85,7 @@
   "footer": {
     "copyright": "Adamo Services Todos los derechos reservados"
   },
-  "adamoPay": {
-    "hero": {
-      "cursor-text": "DESCUBRIR",
-      "title": "Adamo Pay",
-      "description": "Optimiza tus pagos con una plataforma que combina velocidad, costos eficientes y cumplimiento riguroso de las normativas locales."
-    },
-    "pageParallax": {
-      "title": "Control, análisis y reportes",
-      "description": "Evita fraudes y errores con reportes detallados y alertas inteligentes. Supervisa riesgos, corrige datos y toma el control de cada operación fácilmente."
-    },
-    "exchangeBanner": {
-      "introTitle": "Gestión de pagos y divisas",
-      "introDescription": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento. ",
-      "exchangeTitle": "Intercambio exitoso",
-      "exchangeDescription": "USD a COP",
-      "exchangeDate": "29 Enero",
-      "exchangeAmount": "+ 250 USD",
-      "title": "Intercambio de divisas a la mejor cotización y sin demoras.",
-      "button": "Hablar con ventas ahora"
-    },
-    "paymentList": {
-      "title": "Procesa grandes lotes de pagos",
-      "description": "Carga tu archivo, revisa los pagos con novedades y decide si dispersarlos o archivarlos. Adamo Pay te da el poder de gestionar cada transacción, evitando errores y manteniendo tus pagos organizados.",
-      "button": "Saber más sobre pagos en lote",
-      "buttonMobile": "Saber más",
-      "link": "Ir al blog"
-    },
-    "paymentForm": {
-      "title": "Gestión de beneficiarios y pagos individualizados",
-      "description": "Busca entre tus contactos guardados o ingresa la información manualmente. Completa los datos bancarios y fiscales con facilidad y guarda el beneficiario para futuras transacciones.",
-      "button": "Hablar con ventas ahora",
-      "buttonMobile": "Hablar con ventas"
-    },
-    "metrics": {
-      "title": "Métricas en tiempo real para decisiones más inteligentes. <br></br> Con Adamo Pay, obtén una visión completa de tus operaciones.",
-      "button": "Hablar con ventas ahora",
-      "ctaTitle": "¿Listo para transformar la gestión de pagos en tu empresa?",
-      "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
-      "ctaButton": "Hablar con ventas"
-    }
-  },
+
   "contact": {
     "title": "Habla ahora con nuestros expertos",
     "description": "Con Adamo Services, puedes tenerlo todo en una sola plataforma. Completa el siguiente formulario para hablar con nuestro equipo de ventas y descubrir cómo optimizar tu negocio hoy mismo."
@@ -190,5 +150,53 @@
     "noMatches": "Sin coincidencias",
     "noMatchesDescription": "No se han encontrados coincidencias para el término “{query}”.",
     "tryAnotherSearch": "Prueba con otros términos o explora nuestras categorías más populares para encontrar contenido relevante."
+  },
+  "adamoPay": {
+    "hero": {
+      "cursor-text": "DESCUBRIR",
+      "title": "Adamo Pay",
+      "description": "Optimiza tus pagos con una plataforma que combina velocidad, costos eficientes y cumplimiento riguroso de las normativas locales."
+    },
+    "pageParallax": {
+      "title": "Control, análisis y reportes",
+      "description": "Evita fraudes y errores con reportes detallados y alertas inteligentes. Supervisa riesgos, corrige datos y toma el control de cada operación fácilmente."
+    },
+    "exchangeBanner": {
+      "introTitle": "Gestión de pagos y divisas",
+      "introDescription": "Con Adamo Pay, realiza transacciones cumpliendo regulaciones internacionales, reduciendo riesgos y asegurando transparencia en cada movimiento. ",
+      "exchangeTitle": "Intercambio exitoso",
+      "exchangeDescription": "USD a COP",
+      "exchangeDate": "29 Enero",
+      "exchangeAmount": "+ 250 USD",
+      "title": "Intercambio de divisas a la mejor cotización y sin demoras.",
+      "button": "Hablar con ventas ahora"
+    },
+    "paymentList": {
+      "title": "Procesa grandes lotes de pagos",
+      "description": "Carga tu archivo, revisa los pagos con novedades y decide si dispersarlos o archivarlos. Adamo Pay te da el poder de gestionar cada transacción, evitando errores y manteniendo tus pagos organizados.",
+      "button": "Saber más sobre pagos en lote",
+      "buttonMobile": "Saber más",
+      "link": "Ir al blog"
+    },
+    "paymentForm": {
+      "title": "Gestión de beneficiarios y pagos individualizados",
+      "description": "Busca entre tus contactos guardados o ingresa la información manualmente. Completa los datos bancarios y fiscales con facilidad y guarda el beneficiario para futuras transacciones.",
+      "button": "Hablar con ventas ahora",
+      "buttonMobile": "Hablar con ventas"
+    },
+    "metrics": {
+      "title": "Métricas en tiempo real para decisiones más inteligentes. <br></br> Con Adamo Pay, obtén una visión completa de tus operaciones.",
+      "button": "Hablar con ventas ahora",
+      "ctaTitle": "¿Listo para transformar la gestión de pagos en tu empresa?",
+      "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
+      "ctaButton": "Hablar con ventas"
+    }
+  },
+  "adamoId": {
+    "hero": {
+      "cursor-text": "DESCUBRIR",
+      "title": "Adamo ID",
+      "description": "Utiliza tecnología biométrica avanzada. Reduce riesgos y agiliza procesos de autenticación en tiempo real."
+    }
   }
 }
