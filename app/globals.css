@@ -155,6 +155,8 @@
   --color-preloader-primary: var(--neutral-900);
   --color-preloader-secondary: var(--neutral-800);
 
+  --color-adamo-id-100: var(--adamo-id-100);
+  --color-adamo-id-600: var(--adamo-id-600);
   --color-adamo-id-700: var(--adamo-id-700);
   --color-adamo-id-900: var(--adamo-id-900);
 
