@@ -193,10 +193,36 @@
     }
   },
   "adamoId": {
+    "ctaTitle": "¿Listo para transformar la gestión de pagos en tu empresa?",
+    "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
+    "ctaButton": "Hablar con ventas",
     "hero": {
       "cursor-text": "DESCUBRIR",
       "title": "Adamo ID",
       "description": "Utiliza tecnología biométrica avanzada. Reduce riesgos y agiliza procesos de autenticación en tiempo real."
+    },
+    "banner": {
+      "introTitle": "Verificación de identidad ágil y segura",
+      "introDescription": "Con AdamoID, autentica usuarios de forma rápida, cumpliendo con las regulaciones más exigentes y reduciendo el riesgo de fraudes, sin sacrificar la experiencia del cliente.",
+      "title": "Protege tu negocio con validaciones biométricas y documentales en segundos.",
+      "button": "Hablar con ventas ahora"
+    },
+    "idFlow": {
+      "title": "Crea flujos de verificación a tu medida",
+      "description": "Selecciona los tipos de verificación que mejor se adapten a tu proceso y genera un flujo personalizado. Envía las verificaciones por el canal que prefieras —a una persona o a varios clientes al mismo tiempo— y agiliza tu control de identidad de forma segura y eficiente.",
+      "button": "Saber más sobre flujos de verificación",
+      "buttonMobile": "Saber más",
+      "link": "Ir al blog"
+    },
+    "pageParallax": {
+      "title": "Control total de verificaciones",
+      "description": "Monitorea y gestiona fácilmente el estado de cada verificación. Visualiza resultados exitosos, fallidos o pendientes y toma decisiones rápidas para mantener operaciones seguras y eficientes."
+    },
+    "idPanel": {
+      "title": "Toda la información que necesitas, en un solo vistazo.",
+      "description": "Accede al estado detallado de cada verificación — identidad, facial, domicilio, teléfono, email e IP — y detecta rápidamente cualquier novedad que requiera revisión. Simplifica el proceso de validación y asegura decisiones más rápidas y seguras.",
+      "button": "Hablar con ventas ahora",
+      "buttonMobile": "Hablar con ventas"
     }
   }
 }

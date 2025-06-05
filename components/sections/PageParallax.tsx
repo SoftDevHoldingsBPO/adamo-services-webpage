@@ -16,6 +16,7 @@ interface PageParallaxProps {
   description: string;
   pageImage: string;
   className?: string;
+  bgColor?: string;
 }
 
 const PageParallax = ({
@@ -23,6 +24,7 @@ const PageParallax = ({
   description,
   pageImage,
   className,
+  bgColor = "bg-adamo-pay-700",
 }: PageParallaxProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +48,10 @@ const PageParallax = ({
       <div className={cn("container relative mt-4 md:mt-20")}>
         <div
           ref={overlayRef}
-          className="bg-adamo-pay-700 h-[85%] absolute inset-0 md:inset-x-8 top-0 -translate-y-6 md:-translate-y-10  mx-auto md:rounded-4xl"
+          className={cn(
+            "h-[85%] absolute inset-0 md:inset-x-8 top-0 -translate-y-6 md:-translate-y-10  mx-auto md:rounded-4xl",
+            bgColor,
+          )}
         />
         <div className="px-4 md:px-10 relative z-10">
           <Image
