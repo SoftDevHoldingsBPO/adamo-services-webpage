@@ -35,7 +35,8 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   }, [isPreloaderDone]);
 
   useEffect(() => {
-    if (lenis && isPreloaderDone) lenis.scrollTo(0, { immediate: true });
+    if (lenis && isPreloaderDone && window.location.hash === "")
+      lenis.scrollTo(0, { immediate: true });
   }, [pathname, isPreloaderDone]);
 
   return (
