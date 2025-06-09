@@ -67,7 +67,7 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
   return (
     <div className="container">
       {showHero && (
-        <div data-animation-inview>
+        <div data-inview>
           <BlogHero posts={posts.slice(0, 4)} />
         </div>
       )}
@@ -78,11 +78,7 @@ const BlogGrid = ({ posts }: { posts: BlogPost[] }) => {
           else delay = (index % 3) * 0.1;
 
           return (
-            <div
-              key={post.id}
-              data-animation-inview
-              data-animation-inview-delay={delay}
-            >
+            <div key={post.id} data-inview data-inview-delay={delay}>
               <BlogCard key={post.id} {...post} />
             </div>
           );

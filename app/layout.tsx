@@ -48,19 +48,19 @@ export default async function RootLayout({
         className={`${inter.variable} ${sora.variable} antialiased flex flex-col min-h-dvh`}
       >
         <MouseFollowerCursor />
-        <Providers>
-          <NextIntlClientProvider>
-            <BlogProvider>
-              <NavigationProvider>
+        <NavigationProvider>
+          <Providers>
+            <NextIntlClientProvider>
+              <BlogProvider>
                 <Navbar />
                 <Preloader />
-                {children}
+                <main className="flex-auto">{children}</main>
                 <Footer />
                 <WaButton />
-              </NavigationProvider>
-            </BlogProvider>
-          </NextIntlClientProvider>
-        </Providers>
+              </BlogProvider>
+            </NextIntlClientProvider>
+          </Providers>
+        </NavigationProvider>
       </body>
     </html>
   );

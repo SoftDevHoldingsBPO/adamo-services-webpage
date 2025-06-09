@@ -10,18 +10,18 @@ import Player from "next-video/player";
 
 import { cn } from "@/lib/utils";
 
-import ScrollAnimation from "./ScrollAnimation";
-
 interface VideoPlayerProps {
+  srcES: string;
+  srcEN: string;
   className?: string;
 }
 
-const VideoPlayer = ({ className }: VideoPlayerProps) => {
+const VideoPlayer = ({ srcES, srcEN, className }: VideoPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
 
-  const src = locale === "es" ? "/video/Promo-ES.mp4" : "/video/Promo-EN.mp4";
+  const src = locale === "es" ? srcES : srcEN;
 
   useGSAP(() => {
     ScrollTrigger.create({
@@ -35,17 +35,11 @@ const VideoPlayer = ({ className }: VideoPlayerProps) => {
     });
   });
   return (
-    <ScrollAnimation>
-      <div
-        data-scroll-animation="fade-up"
-        className={cn("px-4", className)}
-        ref={containerRef}
-      >
-        <div className="rounded-4xl overflow-hidden">
-          <Player muted loop playsInline ref={playerRef} src={src} />
-        </div>
+    <div data-inview className={cn("px-4", className)} ref={containerRef}>
+      <div className="rounded-4xl overflow-hidden">
+        <Player muted loop playsInline ref={playerRef} src={src} />
       </div>
-    </ScrollAnimation>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ const ContactHero = () => {
 
   return (
     <div
-      data-animation-opacity
+      data-inview
       className="h-screen min-h-[890px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 md:h-[calc(100vh-88px)] relative"
     >
       <div
@@ -17,10 +17,10 @@ const ContactHero = () => {
         }}
       >
         <div className="max-w-3xl mx-auto md:text-center text-white space-y-12">
-          <h1 data-animation="1" className="heading-2">
+          <h1 data-inview className="heading-2">
             {t("title")}
           </h1>
-          <p data-animation="2" className="md:text-lg">
+          <p data-inview data-inview-delay={0.15} className="md:text-lg">
             {t("description")}
           </p>
         </div>

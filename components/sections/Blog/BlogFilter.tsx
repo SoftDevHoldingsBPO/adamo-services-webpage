@@ -21,8 +21,8 @@ const BlogFilter = () => {
 
   return (
     <div
-      data-animation-inview
-      data-animation-inview-delay={0.1}
+      data-inview
+      data-inview-delay={0.1}
       className="container pt-3 pb-6 hidden md:block relative"
     >
       <div className="flex justify-center items-center gap-x-12 py-6 relative">

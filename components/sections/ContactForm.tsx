@@ -77,7 +77,8 @@ const ContactForm = () => {
 
   return (
     <div
-      data-animation="3"
+      data-inview
+      data-inview-delay={0.3}
       className="px-4 -mt-[474px] relative z-10 lg:-mt-[420px] max-w-[714px] xl:max-w-[1022px] mx-auto md:p-0 mb-5"
     >
       <div className="bg-white p-6 lg:p-10 rounded-3xl drop-shadow-parallax">

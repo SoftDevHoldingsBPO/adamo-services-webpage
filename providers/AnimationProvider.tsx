@@ -1,4 +1,10 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+
+import { usePathname } from "next/navigation";
+
+import { inViewAnimation } from "@/lib/animations";
+
+import { useNavigation } from "./NavigationProvider";
 
 type AnimationContextType = {
   isPreloaderDone: boolean;
@@ -15,6 +21,15 @@ export const AnimationProvider = ({
   children: React.ReactNode;
 }) => {
   const [isPreloaderDone, setIsPreloaderDone] = useState(false);
+  const { isOpen } = useNavigation();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (isPreloaderDone && !isOpen) {
+      const cleanup = inViewAnimation();
+      return cleanup;
+    }
+  }, [isPreloaderDone, pathname, isOpen]);
 
   const contextValue = useMemo(
     () => ({ isPreloaderDone, setIsPreloaderDone }),

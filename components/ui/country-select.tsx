@@ -51,7 +51,6 @@ const CountryDropdown: React.FC<CountryDropdownProps> = ({
   );
 
   const handleSelect = (option: ICountry) => {
-    console.log(option);
     setIsOpen(false);
     onChange(option.name);
   };
