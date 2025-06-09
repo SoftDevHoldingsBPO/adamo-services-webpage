@@ -54,7 +54,7 @@ export default async function RootLayout({
               <BlogProvider>
                 <Navbar />
                 <Preloader />
-                {children}
+                <main className="flex-auto">{children}</main>
                 <Footer />
                 <WaButton />
               </BlogProvider>
