@@ -1,6 +1,5 @@
 "use client";
 
-import { useAnimation } from "@/providers/AnimationProvider";
 import { BlogPostsResponse, getBlogPosts } from "@/services/blog";
 import { useQuery } from "@tanstack/react-query";
 
@@ -23,7 +22,6 @@ export default function Page() {
   });
 
   const locale = useLocale();
-  const { isPreloaderDone } = useAnimation();
 
   const tCategory = useTranslations("blogCategories");
 
@@ -33,17 +31,17 @@ export default function Page() {
   const content = post?.locales[locale].content;
 
   useEffect(() => {
-    if (isPreloaderDone) {
-      inViewAnimation();
+    if (post) {
+      const disconnect = inViewAnimation();
+      return disconnect;
     }
-  }, [isPreloaderDone]);
-
+  }, [post]);
   if (!post) return null;
 
   return (
     <div
-      data-animation-inview
-      data-animation-inview-delay={0.3}
+      data-inview
+      data-inview-delay={0.15}
       className="container py-4 md:py-14 lg:py-28 space-y-16"
     >
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">

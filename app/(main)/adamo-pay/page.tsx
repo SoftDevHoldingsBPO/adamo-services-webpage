@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 import VideoPlayer from "@/components/VideoPlayer";
 import { ArrowRight } from "@/components/icon";
@@ -31,16 +32,22 @@ export default function Page() {
               {t("paymentList.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
-              <Button>
-                <span className="hidden md:block">
-                  {t("paymentList.button")}
-                </span>
-                <span className="block md:hidden">
-                  {t("paymentList.buttonMobile")}
-                </span>
+              <Button asChild>
+                <Link href="/blog/ai-and-ethics-in-financial-decision-making">
+                  <span className="hidden md:block">
+                    {t("paymentList.button")}
+                  </span>
+                  <span className="block md:hidden">
+                    {t("paymentList.buttonMobile")}
+                  </span>
+                </Link>
               </Button>
-              <Button variant="link">
-                {t("paymentList.link")} <ArrowRight className="-rotate-45" />
+
+              {/* http://192.168.0.102:3000/blog/empowering-unbanked-communities-with-fintech */}
+              <Button asChild variant="link">
+                <Link href="/blog">
+                  {t("paymentList.link")} <ArrowRight className="-rotate-45" />
+                </Link>
               </Button>
             </div>
           </>
@@ -96,13 +103,15 @@ export default function Page() {
               {t("paymentForm.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
-              <Button>
-                <span className="hidden md:block">
-                  {t("paymentForm.button")}
-                </span>
-                <span className="block md:hidden">
-                  {t("paymentForm.buttonMobile")}
-                </span>
+              <Button asChild>
+                <Link href="/contact">
+                  <span className="hidden md:block">
+                    {t("paymentForm.button")}
+                  </span>
+                  <span className="block md:hidden">
+                    {t("paymentForm.buttonMobile")}
+                  </span>
+                </Link>
               </Button>
             </div>
           </>

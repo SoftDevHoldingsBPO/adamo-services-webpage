@@ -12,12 +12,12 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
     return (
       <section
         ref={ref}
-        data-animation-opacity
         aria-labelledby="hero-title"
         className="h-screen min-h-[780px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 lg:min-h-[820px] md:h-[calc(100vh-88px)]"
         {...rest}
       >
         <div
+          data-inview
           data-cursor-text={cursorText}
           className={cn(
             "h-full px-4 md:rounded-4xl overflow-hidden relative pt-32 lg:pt-48",

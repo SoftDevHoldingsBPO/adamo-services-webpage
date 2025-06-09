@@ -11,7 +11,11 @@ export default function Page() {
     <>
       <AboutHero />
 
-      <div data-animation="5" className="container pt-12 pb-14 md:py-24">
+      <div
+        data-inview
+        data-inview-delay={0.3}
+        className="container pt-12 pb-14 md:py-24"
+      >
         <div className="grid grid-cols-1 gap-x-8 lg:grid-cols-2">
           <h2 className="heading-2 lg:py-10">{t("section1.title")}</h2>
 

@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        data-animation-down="4"
+        data-inview="fade-down"
         data-fixed
         data-at-top={isAtTop}
         data-open={isOpen}

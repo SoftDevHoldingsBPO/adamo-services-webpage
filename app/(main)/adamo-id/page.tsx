@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
-import ScrollAnimation from "@/components/ScrollAnimation";
 import { ArrowRight } from "@/components/icon";
 import AdamoIdHero from "@/components/sections/AdamoIdHero";
 import FeatureParallax from "@/components/sections/FeatureParallax";
@@ -26,14 +26,18 @@ export default function Page() {
               {t("idFlow.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
-              <Button>
-                <span className="hidden md:block">{t("idFlow.button")}</span>
-                <span className="block md:hidden">
-                  {t("idFlow.buttonMobile")}
-                </span>
+              <Button asChild>
+                <Link href="/blog/the-revolution-of-biometric-identification-in-secure-payments">
+                  <span className="hidden md:block">{t("idFlow.button")}</span>
+                  <span className="block md:hidden">
+                    {t("idFlow.buttonMobile")}
+                  </span>
+                </Link>
               </Button>
-              <Button variant="link">
-                {t("idFlow.link")} <ArrowRight className="-rotate-45" />
+              <Button asChild variant="link">
+                <Link href="/blog">
+                  {t("idFlow.link")} <ArrowRight className="-rotate-45" />
+                </Link>
               </Button>
             </div>
           </>
@@ -88,11 +92,13 @@ export default function Page() {
               {t("idPanel.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
-              <Button>
-                <span className="hidden md:block">{t("idPanel.button")}</span>
-                <span className="block md:hidden">
-                  {t("idPanel.buttonMobile")}
-                </span>
+              <Button asChild>
+                <Link href="/contact">
+                  <span className="hidden md:block">{t("idPanel.button")}</span>
+                  <span className="block md:hidden">
+                    {t("idPanel.buttonMobile")}
+                  </span>
+                </Link>
               </Button>
             </div>
           </>
@@ -132,22 +138,17 @@ export default function Page() {
 
       <div className="bg-adamo-id-700 py-14 px-4 md:pt-[264px] md:pb-[120px] lg:pt-[376px] lg:pb-20 md:-mt-20 lg:-mt-[344px] md:rounded-bl-[48px] md:rounded-br-[48px]">
         <div className="max-w-[1232px] mx-auto">
-          <ScrollAnimation>
-            <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-              <h2
-                data-scroll-animation="fade-up"
-                className="heading-2 text-white lg:py-10"
-              >
-                {t("ctaTitle")}
-              </h2>
-              <div data-scroll-animation="fade-up" className="py-6 lg:py-10">
-                <p className="text-white md:text-lg">{t("ctaDescription")}</p>
-                <Button variant="secondary" className="mt-14 md:mt-8">
-                  {t("ctaButton")} <ArrowRight />
-                </Button>
-              </div>
+          <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+            <h2 data-inview className="heading-2 text-white lg:py-10">
+              {t("ctaTitle")}
+            </h2>
+            <div data-inview data-inview-delay={0.2} className="py-6 lg:py-10">
+              <p className="text-white md:text-lg">{t("ctaDescription")}</p>
+              <Button variant="secondary" className="mt-14 md:mt-8">
+                {t("ctaButton")} <ArrowRight />
+              </Button>
             </div>
-          </ScrollAnimation>
+          </div>
         </div>
       </div>
     </>

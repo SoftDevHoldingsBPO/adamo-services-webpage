@@ -27,11 +27,13 @@ const HomeHero = () => {
 
   return (
     <section
-      data-animation-opacity
       className="h-screen min-h-[720px] max-h-[960px] mx-auto md:px-4 lg:px-6 md:pt-[88px] md:pb-6 relative"
       aria-labelledby="hero-title"
     >
-      <div className="h-full px-4 md:rounded-4xl overflow-hidden relative">
+      <div
+        data-inview
+        className="h-full px-4 md:rounded-4xl overflow-hidden relative"
+      >
         {/* Cursor */}
         <div
           onClick={handleScrollToServices}
@@ -70,7 +72,7 @@ const HomeHero = () => {
           className="h-full max-w-[809px] mx-auto pt-32 md:text-center md:pt-48"
         >
           <h1
-            data-animation="2"
+            data-inview
             id="hero-title"
             className="heading-1 text-white relative z-20"
           >
@@ -81,7 +83,8 @@ const HomeHero = () => {
             })}
           </h1>
           <p
-            data-animation="3"
+            data-inview
+            data-inview-delay={0.15}
             className="text-white text-lg mt-12 relative z-20"
           >
             {t("subtitle")}
@@ -91,28 +94,28 @@ const HomeHero = () => {
             aria-label="Hero actions"
             className="mt-28 flex flex-col items-start gap-8 md:flex-row md:justify-center"
           >
-            <Button
-              variant="secondary"
-              aria-label={t("button1")}
-              data-animation="4"
-              className="relative z-30"
-              onClick={handleScrollToServices}
-            >
-              {t("button1")}
-            </Button>
-            <Button
-              variant="ghost"
-              aria-label={t("button2")}
-              data-animation="5"
-              asChild
-              onClick={handleStopPropagation}
-              data-cursor-text=""
-              className="relative z-30"
-            >
-              <Link href="/contact">
-                {t("button2")} <ArrowRight aria-hidden="true" />
-              </Link>
-            </Button>
+            <div data-inview data-inview-delay={0.3} className="relative z-30">
+              <Button
+                variant="secondary"
+                aria-label={t("button1")}
+                onClick={handleScrollToServices}
+              >
+                {t("button1")}
+              </Button>
+            </div>
+            <div data-inview data-inview-delay={0.45} className="relative z-30">
+              <Button
+                variant="ghost"
+                aria-label={t("button2")}
+                asChild
+                onClick={handleStopPropagation}
+                data-cursor-text=""
+              >
+                <Link href="/contact">
+                  {t("button2")} <ArrowRight aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

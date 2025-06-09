@@ -10,8 +10,6 @@ import Player from "next-video/player";
 
 import { cn } from "@/lib/utils";
 
-import ScrollAnimation from "./ScrollAnimation";
-
 interface VideoPlayerProps {
   className?: string;
 }
@@ -35,17 +33,11 @@ const VideoPlayer = ({ className }: VideoPlayerProps) => {
     });
   });
   return (
-    <ScrollAnimation>
-      <div
-        data-scroll-animation="fade-up"
-        className={cn("px-4", className)}
-        ref={containerRef}
-      >
-        <div className="rounded-4xl overflow-hidden">
-          <Player muted loop playsInline ref={playerRef} src={src} />
-        </div>
+    <div data-inview className={cn("px-4", className)} ref={containerRef}>
+      <div className="rounded-4xl overflow-hidden">
+        <Player muted loop playsInline ref={playerRef} src={src} />
       </div>
-    </ScrollAnimation>
+    </div>
   );
 };
 

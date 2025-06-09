@@ -66,7 +66,7 @@ const AdamoIdHero = () => {
 
   const handleScroll = (e: React.MouseEvent) => {
     e.preventDefault();
-    lenis?.scrollTo("#exchange-banner", {
+    lenis?.scrollTo("#id-banner", {
       easing: function easeInOutCubic(x: number): number {
         return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
       },
@@ -83,16 +83,17 @@ const AdamoIdHero = () => {
       onClick={handleScroll}
     >
       <div className="space-y-12" ref={heroContentRef}>
-        <h1 data-animation="1" className="heading-1" id="hero-title">
+        <h1 data-inview className="heading-1" id="hero-title">
           {t("hero.title")}
         </h1>
-        <p data-animation="2" className="text-lg">
+        <p data-inview data-inview-delay={0.2} className="text-lg">
           {t("hero.description")}
         </p>
       </div>
 
       <div
-        data-animation="3"
+        data-inview
+        data-inview-delay={0.4}
         className="absolute inset-x-0 flex justify-center bottom-[-210px] lg:bottom-[-206px] w-full"
       >
         <Image

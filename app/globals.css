@@ -246,106 +246,6 @@
   }
 }
 
-/* Initial state  */
-[data-animation] {
-  opacity: 0;
-  transform: translateY(32px);
-}
-
-[data-animation-down] {
-  opacity: 0;
-  transform: translateY(-32px);
-}
-
-[data-animation-opacity] {
-  opacity: 0;
-}
-
-/* Animation  when preloader is complete */
-body[data-preloader-complete="true"] [data-animation] {
-  animation: slideUp 0.6s ease-out forwards;
-}
-
-body[data-preloader-complete="true"] [data-animation-down] {
-  animation: slideDown 0.6s ease-out forwards;
-}
-
-body[data-preloader-complete="true"] [data-animation-opacity] {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-/* Different delays for different elements */
-body[data-preloader-complete="true"] [data-animation="1"] {
-  animation-delay: 0.2s;
-}
-
-body[data-preloader-complete="true"] [data-animation="2"] {
-  animation-delay: 0.4s;
-}
-
-body[data-preloader-complete="true"] [data-animation="3"] {
-  animation-delay: 0.6s;
-}
-
-body[data-preloader-complete="true"] [data-animation="4"] {
-  animation-delay: 0.8s;
-}
-
-body[data-preloader-complete="true"] [data-animation="5"] {
-  animation-delay: 1s;
-}
-
-body[data-preloader-complete="true"] [data-animation-down="1"] {
-  animation-delay: 0.2s;
-}
-
-body[data-preloader-complete="true"] [data-animation-down="2"] {
-  animation-delay: 0.4s;
-}
-
-body[data-preloader-complete="true"] [data-animation-down="3"] {
-  animation-delay: 0.6s;
-}
-
-body[data-preloader-complete="true"] [data-animation-down="4"] {
-  animation-delay: 0.8s;
-}
-
-body[data-preloader-complete="true"] [data-animation-down="5"] {
-  animation-delay: 1s;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* Mouse Follower */
 .mf-cursor:before {
   @apply text-tertiary;
@@ -369,9 +269,19 @@ body[data-preloader-complete="true"] [data-animation-down="5"] {
 }
 
 /* Animation In View */
-[data-animation-inview] {
+[data-inview] {
   opacity: 0;
-  transform: translateY(64px);
+  transform: translate3d(0, 64px, 0);
+}
+
+[data-inview="fade-left"] {
+  opacity: 0;
+  transform: translate3d(64px, 0, 0);
+}
+
+[data-inview="fade-down"] {
+  opacity: 0;
+  transform: translate3d(0, -64px, 0);
 }
 
 html,
