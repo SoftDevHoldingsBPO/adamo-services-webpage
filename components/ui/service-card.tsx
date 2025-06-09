@@ -19,7 +19,7 @@ interface ServiceCardProps extends Service {
 }
 
 const cardHeroVariants = cva(
-  "relative w-full overflow-hidden transition-colors",
+  "relative w-full overflow-hidden transition-all duration-300 ease-in-out",
   {
     variants: {
       variant: {
@@ -28,18 +28,23 @@ const cardHeroVariants = cva(
         disabled: "bg-neutral-200 text-neutral-400",
       },
       size: {
-        compact: "h-[132px]",
-        default: "h-[132px] lg:h-[200px]",
+        compact: "h-[132px] group-hover:h-[80px]",
+        default: "h-[132px] lg:h-[200px] lg:group-hover:h-[120px]",
       },
     },
     compoundVariants: [
       {
         variant: "disabled",
         size: "default",
-        className: "!h-[132px]",
+        className: "!h-[132px] group-hover:!h-[132px]",
+      },
+      {
+        variant: "disabled",
+        size: "compact",
+        className: "group-hover:!h-[132px]",
       },
     ],
-  },
+  }
 );
 
 const ServiceCard = ({
@@ -54,7 +59,7 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   const t = useTranslations("services");
   const title = t(`${id}.title`);
-
+  const description = t(`${id}.description`);
   const isDisabled = variant === "disabled";
 
   const CardContent = () => (
@@ -68,7 +73,7 @@ const ServiceCard = ({
               : "shadow-2xl lg:top-24 lg:group-hover:top-12",
             size === "default" &&
               "lg:w-[386px] lg:h-[274px] lg:group-hover:w-[420px] lg:group-hover:h-[298px]",
-            size === "compact" && "!top-7 lg:group-hover:!top-6",
+            size === "compact" && "!top-7 lg:group-hover:!top-6"
           )}
         >
           <Image
@@ -87,44 +92,74 @@ const ServiceCard = ({
 
       <div
         className={cn(
-          "bg-neutral-100 pb-8 transition-all relative flex-auto flex flex-col",
-          size === "default" &&
-            "lg:group-hover:pl-24 duration-300 ease-in-out p-6 lg:px-10",
-          size === "compact" && "px-4 pt-6",
+          "bg-neutral-100 transition-all relative flex-auto flex flex-col",
+          size === "default"
+            ? "lg:group-hover:pl-10 duration-300 ease-in-out p-6 lg:px-10 pb-8 lg:group-hover:pt-12"
+            : "px-4 pt-6 pb-8 group-hover:pt-12"
         )}
       >
-        {size === "default" && (
-          <Image
-            src={iconPath}
-            alt={title}
-            width="40"
-            height="40"
-            className="transition-all duration-300 ease-in-out lg:opacity-0 group-hover:opacity-100 mb-3 lg:mb-0 lg:absolute left-6 top-6"
-          />
-        )}
-        <h4
-          className={cn(
-            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 flex-auto",
-            isDisabled && "text-neutral-400",
+        <div className="relative flex-auto flex items-start">
+          {/* Icono - aparece al lado del texto en hover */}
+          {size === "default" && (
+            <div className={cn(
+              "transition-all duration-300 ease-in-out mr-4 flex-shrink-0",
+              !isDisabled ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+            )}>
+              <Image
+                src={iconPath}
+                alt={title}
+                width="40"
+                height="40"
+              />
+            </div>
           )}
-        >
-          {title}
-        </h4>
 
-        <Button
-          variant="primary"
-          size="md"
-          className="w-fit"
-          disabled={isDisabled}
-          aria-label={
-            isDisabled
-              ? `${title} - Coming soon`
-              : `${title} - ${t(`${id}.button`)}`
-          }
-        >
-          {t(`${id}.button`)}
-          {!isDisabled && <ArrowRight aria-hidden="true" />}
-        </Button>
+          <div className="relative w-full">
+            {/* Título - visible por defecto, se desvanece hacia arriba */}
+            <h4
+              className={cn(
+                "text-[17px] font-semibold text-neutral-900 leading-[1.25] transition-all duration-300",
+                isDisabled && "text-neutral-400",
+                !isDisabled && "group-hover:opacity-0 group-hover:-translate-y-6 group-hover:scale-95"
+              )}
+            >
+              {title}
+            </h4>
+            
+            {/* Descripción - oculta por defecto, aparece en la misma posición del título */}
+            {!isDisabled && (
+              <div
+                className={cn(
+                  "text-neutral-900 text-[15px] leading-[1.4] transition-all duration-300 absolute top-0 left-0 right-0 opacity-0 transform scale-95",
+                  "group-hover:opacity-100 group-hover:scale-100"
+                )}
+              >
+                {description}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Botón - abajo por defecto, se mueve arriba en hover */}
+        <div className={cn(
+          "transition-all duration-300",
+          !isDisabled && "group-hover:order-first group-hover:mb-4"
+        )}>
+          <Button
+            variant="primary"
+            size="md"
+            className="w-fit"
+            disabled={isDisabled}
+            aria-label={
+              isDisabled
+                ? `${title} - Coming soon`
+                : `${title} - ${t(`${id}.button`)}`
+            }
+          >
+            {t(`${id}.button`)}
+            {!isDisabled && <ArrowRight aria-hidden="true" />}
+          </Button>
+        </div>
       </div>
     </>
   );
@@ -134,7 +169,7 @@ const ServiceCard = ({
       className={cn(
         "relative rounded-2xl lg:rounded-3xl overflow-hidden group",
         isDisabled && "cursor-not-allowed",
-        className,
+        className
       )}
       aria-labelledby={`service-${id}-title`}
     >

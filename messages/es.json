@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": ".: ADAMO :. | Automatización y optimización sin complicaciones"
+    "title": ".: ADAMO :. | Tus retos son distintos. Nuestras soluciones también."
   },
   "nav": {
-    "servicesTitle": "Soluciones que se ajustan a tus necesidades",
+    "servicesTitle": "¿Qué necesitas resolver hoy?",
     "socialsTitle": "Estemos en contacto",
     "navigation": "Más información",
     "solutions": "Soluciones",
@@ -13,34 +13,34 @@
     "contact": "Hablar con ventas"
   },
   "services": {
-    "servicesTitle": "Soluciones que se ajustan a tus necesidades",
+    "servicesTitle": "¿Qué necesitas resolver hoy?",
     "servicesDescription": "Ya sea para proteger tus operaciones, agilizar pagos o verificar documentos, tenemos la solución que se adapta a ti.",
     "soon": "Próximamente",
     "viewService": "Ver solución",
     "adamoId": {
-      "title": "Verifica la identidad de tus clientes con AdamoID",
-      "description": "Utiliza tecnología biométrica avanzada. Reduce riesgos y agiliza procesos de autenticación en tiempo real.",
+      "title": "Validar que tus usuarios son quienes dicen ser",
+      "description": "Con ADAMO ID valida la identidad de tus usuarios mediante biometría, análisis documental y autenticación multicanal. Asegura procesos críticos y previene fraudes desde el primer contacto.",
       "button": "Conocer más"
     },
     "adamoPay": {
-      "title": "Optimiza tu gestión de pagos con AdamoPay",
-      "description": "Una solución ágil y segura. Cumple con la regulación colombiana sin complicaciones a costos competitivos.",
+      "title": "Monetizar, y dispersar pagos en tiempo real",
+      "description": "Con ADAMO PAY Convierte divisas y dispersa pagos locales o cross-border en tiempo real, con trazabilidad y cumplimiento embebido.",
       "button": "Conocer más"
     },
     "adamoRisk": {
-      "title": "Mitiga riesgos en tu empresa con AdamoRisk",
-      "description": "Una plataforma avanzada que te brinda mapas de calor, calificación de riesgos y planes de control.",
+      "title": "Tomar decisiones con seguridad y cumplir sin complicaciones",
+      "description": "ADAMO RISK  Detecta riesgos, guía tus decisiones y te mantiene protegido en tiempo real para que operes con confianza, todos los días.",
       "button": "Próximamente"
     },
     "adamoSign": {
-      "title": "Automatiza documentos con AdamoSign",
-      "description": "Con inteligencia de datos y metadatos, garantiza autenticidad y evita fraudes con tecnología avanzada.",
+      "title": "Firma electrónicamente con validez jurídica, cero fricciones y máxima seguridad",
+      "description": "Con ADAMOSIGN  olvídate del papeleo, los procesos lentos y los riesgos. Firma desde cualquier lugar, en segundos y con total respaldo legal.",
       "button": "Próximamente"
     }
   },
   "hero": {
-    "title": "Automatización y <accent>optimización sin complicaciones</accent>",
-    "subtitle": "En Adamo te ofrecemos una solución impulsada por IA, creada para hacer tus procesos más eficientes, seguros y sin fricciones.",
+    "title": "Tus retos son distintos. <accent>Nuestras soluciones también</accent>",
+    "subtitle": "Diseñamos tecnologías para empresas que necesitan avanzar con confianza: valida identidades, automatiza pagos, gestiona riesgos o firma documentos… cada producto es independiente, pero todos comparten algo: resolverte la vida.",
     "button1": "Conocer soluciones",
     "button2": "Hablar con ventas",
     "cursor-text": "DESCUBRIR"
@@ -50,25 +50,25 @@
     "items": [
       {
         "question": "¿Qué soluciones ofrece la plataforma?",
-        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+        "answer": "ADAMO es un ecosistema RegTech modular que te permite operar con confianza, gracias a capas de cumplimiento embebido en cada proceso. \n \n- ADAMO ID: Verificación de identidad multibiométrica y documental. \n- ADAMO PAY: Dispersión de pagos inmediatos locales y cross-border. \n- ADAMO SIGN: Firma electrónica segura con respaldo biométrico y jurídico. \n- ADAMO RISK: Herramientas para gestión de riesgo, cumplimiento AML y automatización de reportes regulatorios. \n \nCada solución es modular y puede integrarse de forma independiente o como parte de una arquitectura completa de cumplimiento y automatización operativa."
       },
       {
         "question": "¿Cómo garantiza la plataforma la seguridad de los datos?",
-        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+        "answer": "ADAMO aplica estándares de seguridad de nivel empresarial, incluyendo:\n\n- Encriptación de extremo a extremo en la transmisión y almacenamiento de datos.\n- Control de acceso por roles y autenticación robusta para usuarios internos.\n- Cumplimiento con normativas locales e internacionales, como la Ley 1581 de protección de datos en Colombia y buenas prácticas alineadas con GDPR.\n- Tecnología biométrica, trazabilidad en blockchain y monitoreo activo para asegurar la integridad de la información.\n\nNuestro enfoque es “Security by Design”: la seguridad es parte de cada proceso desde el origen."
       },
       {
         "question": "¿Puedo personalizar las soluciones según mis necesidades?",
-        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+        "answer": "Sí. Las soluciones de ADAMO son 100% modulares y adaptables a tus flujos, políticas y objetivos operativos. Puedes elegir las funcionalidades que realmente necesitas, definir niveles de riesgo, configurar validaciones, adaptar los procesos de firma, dispersión o verificación, e incluso integrarlas vía API a tus sistemas actuales.\n\nAdemás, ofrecemos modelos SaaS, API o Marca Blanca, según el nivel de control y experiencia que desees brindar…"
       },
       {
         "question": "¿Cuál es el soporte que ofrecen?",
-        "answer": "Nuestra plataforma integra soluciones de identificación biométrica, gestión de pagos, gestión de riesgos y verificación documental, diseñadas para proteger, optimizar y automatizar procesos clave en tu negocio."
+        "answer": "Contamos con un equipo de soporte técnico y funcional altamente capacitado que acompaña a tu empresa en cada etapa del proceso:\n\n- Soporte personalizado 24/7 vía correo y canales digitales.\n- Atención especializada en cumplimiento, riesgos y pagos.\n- Chat en vivo y línea directa con el equipo de producto y tecnología.\n- Material de onboarding, documentación técnica y recursos para desarrolladores.\n\nNuestro compromiso es ofrecer una experiencia ágil, segura y acompañada, desde la integración hasta la operación diaria."
       }
     ]
   },
   "quickStart": {
-    "title": "Conecta nuestra tecnología con tus sistemas en minutos",
-    "description": "Automatiza procesos, optimiza la gestión de datos y lleva la seguridad a otro nivel, sin complicaciones.",
+    "title": "Conecta nuestra tecnología a tus sistemas en minutos",
+    "description": "Automatiza procesos, sincroniza datos y fortalece tu operación con una arquitectura segura y escalable.",
     "button": "Ver documentación"
   },
   "blogSlider": {
@@ -79,7 +79,7 @@
     "ctaButton": "Realizar cuestionario"
   },
   "featureCard": {
-    "title": "Evita fraudes, automatiza procesos y mantén el control de tu negocio en todo momento.",
+    "title": "Anticípate al fraude, automatiza procesos y mantén el control de tu negocio en todo momento.",
     "button": "Hablar con ventas"
   },
   "footer": {
@@ -155,11 +155,11 @@
     "hero": {
       "cursor-text": "DESCUBRIR",
       "title": "Adamo Pay",
-      "description": "Optimiza tus pagos con una plataforma que combina velocidad, costos eficientes y cumplimiento riguroso de las normativas locales."
+      "description": "Pagos internacionales en tiempo real, cumplimiento inteligente y costos optimizados. \nReal-time payments. Real-time compliance. \n \nPaga a tus usuarios en Colombia, Brasil o México sin fricciones, sin \ndemoras y con total tranquilidad regulatoria."
     },
     "pageParallax": {
-      "title": "Control, análisis y reportes",
-      "description": "Evita fraudes y errores con reportes detallados y alertas inteligentes. Supervisa riesgos, corrige datos y toma el control de cada operación fácilmente."
+      "title": "Reportes y control inteligente",
+      "description": "Evita fraudes y errores con reportes detallados y alertas automáticas. \nCada coincidencia en listas AML, PEP o sanciones es analizada y reportada para que tomes decisiones informadas antes de liberar un solo pago. \nCorrige datos críticos, gestiona excepciones y mantén el control total de tus operaciones."
     },
     "exchangeBanner": {
       "introTitle": "Gestión de pagos y divisas",
@@ -168,27 +168,27 @@
       "exchangeDescription": "USD a COP",
       "exchangeDate": "29 Enero",
       "exchangeAmount": "+ 250 USD",
-      "title": "Intercambio de divisas a la mejor cotización y sin demoras.",
-      "button": "Hablar con ventas ahora"
+      "title": "Intercambio de divisas sin esperas, al mejor tipo de cambio.",
+      "button": "Hablar con ventas"
     },
     "paymentList": {
-      "title": "Procesa grandes lotes de pagos",
-      "description": "Carga tu archivo, revisa los pagos con novedades y decide si dispersarlos o archivarlos. Adamo Pay te da el poder de gestionar cada transacción, evitando errores y manteniendo tus pagos organizados.",
+      "title": "Carga tu archivo, nosotros nos encargamos del riesgo",
+      "description": "Adamo Pay analiza cada pago, detecta beneficiarios con alertas (listas restrictivas, PEP, AML) y te permite decidir si dispersar o no. \nTe blindamos ante usuarios con antecedentes negativos que podrían afectar tu operación o reputación.",
       "button": "Saber más sobre pagos en lote",
       "buttonMobile": "Saber más",
       "link": "Ir al blog"
     },
     "paymentForm": {
-      "title": "Gestión de beneficiarios y pagos individualizados",
-      "description": "Busca entre tus contactos guardados o ingresa la información manualmente. Completa los datos bancarios y fiscales con facilidad y guarda el beneficiario para futuras transacciones.",
-      "button": "Hablar con ventas ahora",
+      "title": "Tu directorio de pagos, siempre listo.",
+      "description": "Accede fácilmente a tus beneficiarios guardados, edita datos \nbancarios o fiscales, y realiza pagos individuales en segundos.\n \n Sin fricciones, sin repetir información, sin errores.",
+      "button": "Hablar con ventas",
       "buttonMobile": "Hablar con ventas"
     },
     "metrics": {
-      "title": "Métricas en tiempo real para decisiones más inteligentes. <br></br> Con Adamo Pay, obtén una visión completa de tus operaciones.",
+      "title": "Toma decisiones inteligentes con datos confiables. <br></br>  Adamo Pay te ofrece visibilidad total de tus operaciones, alertas, conversiones y comportamiento de pagos. Monitorea riesgos, eficiencia y volumen de operaciones desde un solo lugar.",
       "button": "Hablar con ventas ahora",
-      "ctaTitle": "¿Listo para transformar la gestión de pagos en tu empresa?",
-      "ctaDescription": "Con AdamoPay, tus pagos y la gestión de beneficiarios se vuelven más rápidos, seguros y eficientes que nunca.",
+      "ctaTitle": "¿Listo para transformar tu gestión de pagos?",
+      "ctaDescription": "Con Adamo Pay, tus pagos y la gestión de beneficiarios son más rápidos, seguros y eficientes que nunca.",
       "ctaButton": "Hablar con ventas"
     }
   },

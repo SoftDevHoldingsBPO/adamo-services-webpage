@@ -72,7 +72,7 @@ export default function Page() {
       />
 
       <PageParallax
-        className="py-20 md:pt-16 lg:pt-24 md:pb-0"
+        className="py-20 md:pt-16 lg:pt-24 md:pb-0 whitespace-pre-line"
         title={t("pageParallax.title")}
         description={t("pageParallax.description")}
         pageImage="/images/adamo-id/page-parallax.png"

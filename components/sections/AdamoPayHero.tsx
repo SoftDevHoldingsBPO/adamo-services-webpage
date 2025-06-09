@@ -85,7 +85,7 @@ const AdamoPayHero = () => {
         <h1 data-animation="1" className="heading-1" id="hero-title">
           {t("hero.title")}
         </h1>
-        <p data-animation="2" className="text-lg">
+        <p data-animation="2" className="text-lg whitespace-pre-line" >
           {t("hero.description")}
         </p>
       </div>

@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import React from "react";
 
 // Define a type for FAQ items
 interface FaqItem {
@@ -31,7 +32,7 @@ const FaqAccordionItem = ({ item }: { item: FaqItem }) => (
       id={`faq-answer-${item.question}`}
       role="region"
       aria-labelledby={`faq-question-${item.question}`}
-      className="text-base"
+      className="text-base whitespace-pre-line"
     >
       {item.answer}
     </AccordionContent>
@@ -45,6 +46,15 @@ const FaqSection = () => {
     : [];
 
   if (!faqItems.length) return null;
+
+    const renderAnswer = (answer: string) => {
+    return answer.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        {index !== answer.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
 
   useGSAP(() => {
     const items = document.querySelectorAll("[data-faq-item]");

@@ -45,11 +45,11 @@ const PageParallax = ({
   return (
     <div className={cn(className)}>
       <IntroSection title={title} description={description} />
-      <div className={cn("container relative mt-4 md:mt-20")}>
+      <div className={cn("container relative mt-4 md:mt-20 whitespace-pre-line")}>
         <div
           ref={overlayRef}
           className={cn(
-            "h-[85%] absolute inset-0 md:inset-x-8 top-0 -translate-y-6 md:-translate-y-10  mx-auto md:rounded-4xl",
+            "h-[85%] absolute inset-0 md:inset-x-8 top-0 -translate-y-6 md:-translate-y-10  mx-auto md:rounded-4xl whitespace-pre-line",
             bgColor,
           )}
         />

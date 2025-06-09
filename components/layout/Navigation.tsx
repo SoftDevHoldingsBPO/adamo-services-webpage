@@ -186,7 +186,7 @@ const Navigation = () => {
                     >
                       <ServiceCard
                         onClick={handleClick}
-                        size="compact"
+                        size="default"
                         {...service}
                       />
                     </div>
