@@ -8,6 +8,8 @@ import { useEffect, useRef } from "react";
 
 import { usePathname } from "next/navigation";
 
+import { useAnimation } from "./AnimationProvider";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const LenisProvider = ({ children }: { children: React.ReactNode }) => {
@@ -15,7 +17,11 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   const lenis = useLenis();
   const pathname = usePathname();
 
+  const { isPreloaderDone } = useAnimation();
+
   useEffect(() => {
+    if (!isPreloaderDone) return;
+
     const update = (time: number) => {
       lenisRef.current?.lenis?.raf(time * 1000);
     };
@@ -26,11 +32,11 @@ const LenisProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       gsap.ticker.remove(update);
     };
-  }, []);
+  }, [isPreloaderDone]);
 
   useEffect(() => {
-    if (lenis) lenis.scrollTo(0, { immediate: true });
-  }, [pathname]);
+    if (lenis && isPreloaderDone) lenis.scrollTo(0, { immediate: true });
+  }, [pathname, isPreloaderDone]);
 
   return (
     <ReactLenis
