@@ -62,7 +62,7 @@ const LocaleSelect = ({
 
   useLenis(
     (lenis) => {
-      if (isOpen && Math.abs(lenis.velocity) > 0.1) {
+      if (isOpen && Math.abs(lenis.velocity) > 5) {
         setIsOpen(false);
       }
     },
