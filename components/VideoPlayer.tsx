@@ -11,15 +11,17 @@ import Player from "next-video/player";
 import { cn } from "@/lib/utils";
 
 interface VideoPlayerProps {
+  srcES: string;
+  srcEN: string;
   className?: string;
 }
 
-const VideoPlayer = ({ className }: VideoPlayerProps) => {
+const VideoPlayer = ({ srcES, srcEN, className }: VideoPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
 
-  const src = locale === "es" ? "/video/Promo-ES.mp4" : "/video/Promo-EN.mp4";
+  const src = locale === "es" ? srcES : srcEN;
 
   useGSAP(() => {
     ScrollTrigger.create({

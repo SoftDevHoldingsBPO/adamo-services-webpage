@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
+import VideoPlayer from "@/components/VideoPlayer";
 import { ArrowRight } from "@/components/icon";
 import AdamoIdHero from "@/components/sections/AdamoIdHero";
 import FeatureParallax from "@/components/sections/FeatureParallax";
@@ -16,6 +17,12 @@ export default function Page() {
     <>
       <AdamoIdHero />
       <IDBanner className="pt-20 md:pt-16 lg:pt-24" />
+
+      <VideoPlayer
+        srcES="/video/AdamoId-ES.mp4"
+        srcEN="/video/AdamoId-EN.mp4"
+        className="mt-[112px] lg:mt-[130px] hidden md:block"
+      />
 
       <FeatureParallax
         className="md:mt-[104px]"

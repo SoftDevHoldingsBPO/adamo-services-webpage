@@ -19,7 +19,11 @@ export default function Page() {
       <AdamoPayHero />
       <ExchangeBanner className="pt-20 md:pt-16 lg:pt-24" />
 
-      <VideoPlayer className="mt-[112px] lg:mt-[130px] hidden md:block" />
+      <VideoPlayer
+        srcES="/video/Promo-ES.mp4"
+        srcEN="/video/Promo-EN.mp4"
+        className="mt-[112px] lg:mt-[130px] hidden md:block"
+      />
 
       <FeatureParallax
         className="md:mt-[104px]"
