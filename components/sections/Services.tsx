@@ -1,7 +1,6 @@
 "use client";
 
 import { services } from "@/constants/services";
-import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,30 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Services = () => {
   const t = useTranslations("services");
 
-  useGSAP(() => {
-    const items = document.querySelectorAll("[data-service-item]");
-    if (!items.length) return;
-    items.forEach((item, i) => {
-      gsap.fromTo(
-        item,
-        { autoAlpha: 0, y: 40 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 80%",
-            toggleActions: "play none none none",
-            // markers: true, // Uncomment for debugging
-          },
-          delay: i * 0.1,
-        },
-      );
-    });
-  });
-
   return (
     <section
       id="services"
@@ -46,25 +21,29 @@ const Services = () => {
       role="region"
     >
       <div className="container">
-        <div
-          data-service-item
-          className="grid grid-cols-1 gap-6 py-6 xl:grid-cols-2 xl:gap-8 xl:py-10"
-        >
-          <h2 id="services-title" className="heading-2">
+        <div className="grid grid-cols-1 gap-6 py-6 xl:grid-cols-2 xl:gap-8 xl:py-10">
+          <h2 data-inview id="services-title" className="heading-2">
             {t("servicesTitle")}
           </h2>
-          <p className="text-lg font-medium">{t("servicesDescription")}</p>
+          <p
+            data-inview
+            data-inview-delay={0.2}
+            className="text-lg font-medium"
+          >
+            {t("servicesDescription")}
+          </p>
         </div>
 
         <div className="mt-6 lg:mt-8 -mx-4 lg:mx-0" role="list">
-          <div className="flex px-4 gap-6 flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-pl-4 lg:grid lg:grid-cols-2 lg:gap-8">
-            {services.map((service) => (
+          <div className="flex px-4 gap-8 flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-pl-4 lg:grid lg:grid-cols-2">
+            {services.map((service, index) => (
               <div
-                data-service-item
+                data-inview
+                data-inview-delay={index % 2 === 1 ? 0.2 : 0}
                 key={service.id}
-                className="snap-start shrink-0 w-[278px] md:w-auto"
+                className="snap-start shrink-0 w-[278px] lg:w-auto"
               >
-                <ServiceCard className="h-full" {...service} />
+                <ServiceCard variant={service.variant} service={service} />
               </div>
             ))}
           </div>

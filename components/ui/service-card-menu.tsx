@@ -40,7 +40,6 @@ const ServiceCardMenu = ({
       className={cn(
         "relative rounded-2xl lg:rounded-3xl overflow-hidden group h-full flex flex-col",
         isDisabled && "cursor-not-allowed",
-
         className,
       )}
     >

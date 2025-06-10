@@ -19,22 +19,22 @@
     "viewService": "Ver solución",
     "adamoId": {
       "title": "Verifica la identidad de tus clientes con AdamoID",
-      "description": "Utiliza tecnología biométrica avanzada. Reduce riesgos y agiliza procesos de autenticación en tiempo real.",
+      "description": "Con ADAMO ID valida la identidad de tus usuarios mediante biometría, análisis documental y autenticación multicanal. Asegura procesos críticos y previene fraudes desde el primer contacto.",
       "button": "Conocer más"
     },
     "adamoPay": {
       "title": "Optimiza tu gestión de pagos con AdamoPay",
-      "description": "Una solución ágil y segura. Cumple con la regulación colombiana sin complicaciones a costos competitivos.",
+      "description": "Con ADAMO PAY convierte divisas y dispersa pagos locales o cross-border en tiempo real, con trazabilidad y cumplimiento embebido.",
       "button": "Conocer más"
     },
     "adamoRisk": {
       "title": "Mitiga riesgos en tu empresa con AdamoRisk",
-      "description": "Una plataforma avanzada que te brinda mapas de calor, calificación de riesgos y planes de control.",
+      "description": "Con ADAMO RISK  detecta riesgos, guía tus decisiones y te mantiene protegido en tiempo real para que operes con confianza, todos los días.",
       "button": "Próximamente"
     },
     "adamoSign": {
       "title": "Automatiza documentos con AdamoSign",
-      "description": "Con inteligencia de datos y metadatos, garantiza autenticidad y evita fraudes con tecnología avanzada.",
+      "description": "Con ADAMOSIGN  olvídate del papeleo, los procesos lentos y los riesgos.  Firma desde cualquier lugar, en segundos y con total respaldo legal.",
       "button": "Próximamente"
     }
   },
