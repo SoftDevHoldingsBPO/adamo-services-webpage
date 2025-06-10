@@ -38,7 +38,7 @@ const ServiceCardMenu = ({
   return (
     <article
       className={cn(
-        "relative rounded-2xl lg:rounded-3xl overflow-hidden group",
+        "relative rounded-2xl lg:rounded-3xl overflow-hidden group h-full flex flex-col",
         isDisabled && "cursor-not-allowed",
 
         className,
@@ -60,10 +60,10 @@ const ServiceCardMenu = ({
           />
         </div>
       </div>
-      <div className="px-4 pt-6 pb-8 bg-neutral-100">
+      <div className="px-4 pt-6 pb-8 bg-neutral-100 flex-auto flex flex-col">
         <h4
           className={cn(
-            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6",
+            "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 flex-auto",
             isDisabled && "text-neutral-400",
           )}
         >
