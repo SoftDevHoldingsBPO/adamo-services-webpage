@@ -59,6 +59,10 @@ const ServiceCardMenu = ({
             fill
           />
         </div>
+
+        {!isDisabled && (
+          <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out" />
+        )}
       </div>
       <div className="px-4 pt-6 pb-8 bg-neutral-100 flex-auto flex flex-col">
         <h4
