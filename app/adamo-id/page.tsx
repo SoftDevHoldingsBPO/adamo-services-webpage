@@ -151,8 +151,10 @@ export default function Page() {
             </h2>
             <div data-inview data-inview-delay={0.2} className="py-6 lg:py-10">
               <p className="text-white md:text-lg">{t("ctaDescription")}</p>
-              <Button variant="secondary" className="mt-14 md:mt-8">
-                {t("ctaButton")} <ArrowRight />
+              <Button asChild variant="secondary" className="mt-14 md:mt-8">
+                <Link href="/contact">
+                  {t("ctaButton")} <ArrowRight />
+                </Link>
               </Button>
             </div>
           </div>

@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -38,6 +38,8 @@ const BlogNavbar = () => {
 
   const pathname = usePathname();
   const isBlogPostPage = pathname.startsWith("/blog/") && pathname !== "/blog";
+
+  const router = useRouter();
 
   const t = useTranslations("blogNavbar");
   const tCategories = useTranslations("blogCategories");
@@ -145,15 +147,17 @@ const BlogNavbar = () => {
           )}
 
           {isBlogPostPage && (
-            <Link
-              href="/blog"
-              onClick={close}
+            <button
+              onClick={() => {
+                router.back();
+                close();
+              }}
               className="inline-flex items-center gap-x-6 md:gap-x-12"
             >
               <ArrowRight className="rotate-[180deg]" />
 
               <span className="text-sm font-medium">{t("back")}</span>
-            </Link>
+            </button>
           )}
 
           <div className="flex items-center gap-x-4 md:hidden ">

@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 import { useLockScroll } from "@/hooks/useLockScroll";
 
-import ServiceCard from "../ui/service-card";
+import ServiceCardMenu from "../ui/service-card-menu";
 
 const ANIMATION_CONFIG = {
   INITIAL: {
@@ -184,10 +184,10 @@ const Navigation = () => {
                       key={service.id}
                       className="w-[280px] md:w-auto snap-start shrink-0"
                     >
-                      <ServiceCard
+                      <ServiceCardMenu
+                        service={service}
+                        variant={service.variant}
                         onClick={handleClick}
-                        size="compact"
-                        {...service}
                       />
                     </div>
                   ))}
