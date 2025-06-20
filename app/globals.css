@@ -256,11 +256,12 @@
 }
 
 .mf-cursor-text {
-  @apply !text-[8px];
+  @apply !text-[7px];
+ ;
 }
 
 .mf-cursor.-text:before {
-  transform: scale(1.2) !important;
+  transform: scale(1.0) !important;
 }
 
 /* Blog Slider */

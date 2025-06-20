@@ -10,7 +10,9 @@
     "lint": "next lint",
     "sst:dev": "cross-env AWS_PROFILE=adamo-pay npx sst dev",
     "sst:prod:deploy": "cross-env AWS_PROFILE=adamo-pay npx sst deploy --stage production",
-    "sst:dev:deploy": "cross-env AWS_PROFILE=adamo-pay npx sst deploy --stage development"
+    "sst:dev:deploy": "cross-env AWS_PROFILE=adamo-pay npx sst deploy --stage development",
+    "sst:dev:remove": "cross-env AWS_PROFILE=adamo-pay npx sst remove --stage development",
+    "sst:dev:unlock": "cross-env AWS_PROFILE=adamo-pay npx sst unlock --stage development"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

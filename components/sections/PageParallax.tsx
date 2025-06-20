@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import Image from "next/image";
 
@@ -25,51 +26,30 @@ const PageParallax = ({
   className,
   bgColor = "bg-adamo-pay-700",
 }: PageParallaxProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const [height, setHeight] = useState(0);
-  const [overlayHeight, setOverlayHeight] = useState(0);
-
-  useEffect(() => {
-    function updateHeights() {
-      if (!containerRef.current) return;
-      setHeight(containerRef.current.offsetHeight);
-
-      if (overlayRef.current) {
-        setOverlayHeight(overlayRef.current.offsetHeight);
-      }
-    }
-
-    updateHeights();
-    window.addEventListener("resize", updateHeights);
-    return () => window.removeEventListener("resize", updateHeights);
+  useGSAP(() => {
+    gsap.to(overlayRef.current, {
+      y: "24%",
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: overlayRef.current,
+        // markers: true,
+        scrub: true,
+        start: "top 45%",
+        end: "+=80%",
+      },
+    });
   }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [-32, height - overlayHeight + 32],
-  );
 
   return (
     <div className={cn(className)}>
       <IntroSection title={title} description={description} />
-      <div
-        ref={containerRef}
-        data-inview
-        className={cn("container relative mt-4 md:mt-20")}
-      >
-        <motion.div
+      <div className={cn("container relative mt-4 md:mt-20")}>
+        <div
           ref={overlayRef}
-          style={{ y }}
           className={cn(
-            "h-[85%] absolute inset-0 md:inset-x-8 top-0  mx-auto md:rounded-4xl",
+            "h-[85%] absolute inset-0 md:inset-x-8 top-0 -translate-y-6 md:-translate-y-10  mx-auto md:rounded-4xl",
             bgColor,
           )}
         />

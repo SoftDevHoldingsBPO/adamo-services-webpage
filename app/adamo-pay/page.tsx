@@ -32,7 +32,7 @@ export default function Page() {
             <h2 className="text-[17px] font-semibold">
               {t("paymentList.title")}
             </h2>
-            <p className="mt-4 md:mt-8 text-sm md:text-base">
+            <p className="mt-4 md:mt-8 text-sm md:text-base whitespace-pre-line">
               {t("paymentList.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
@@ -103,7 +103,7 @@ export default function Page() {
             <h2 className="text-[17px] font-semibold">
               {t("paymentForm.title")}
             </h2>
-            <p className="mt-4 md:mt-8 text-sm md:text-base">
+            <p className="mt-4 md:mt-8 text-sm md:text-base whitespace-pre-line">
               {t("paymentForm.description")}
             </p>
             <div className="flex items-center gap-6 mt-14">
