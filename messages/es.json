@@ -224,5 +224,12 @@
       "button": "Hablar con ventas ahora",
       "buttonMobile": "Hablar con ventas"
     }
+  },
+  "adamoSign": {
+    "hero": {
+      "cursor-text": "DESCUBRIR",
+      "title": "Adamo Sign",
+      "description": "Olvídate del papeleo, los procesos lentos y los riesgos.  Firma desde cualquier lugar, en segundos y con total respaldo legal."
+    }
   }
 }
