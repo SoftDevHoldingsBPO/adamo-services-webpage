@@ -68,7 +68,7 @@ export function AdamoSignHero() {
 
   const handleScroll = (e: React.MouseEvent) => {
     e.preventDefault();
-    lenis?.scrollTo("#id-banner", {
+    lenis?.scrollTo("#tools-banner", {
       easing: function easeInOutCubic(x: number): number {
         return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
       },

@@ -230,6 +230,12 @@
       "cursor-text": "DESCUBRIR",
       "title": "Adamo Sign",
       "description": "Olvídate del papeleo, los procesos lentos y los riesgos.  Firma desde cualquier lugar, en segundos y con total respaldo legal."
+    },
+    "banner": {
+      "introTitle": "Gestión documental con seguridad y eficiencia",
+      "introDescription": "Adamo Sign es la solución digital para empresas que buscan centralizar, firmar y controlar sus documentos de forma simple, pero con altos estándares de seguridad y cumplimiento.",
+      "title": "Nuestra herramienta está diseñada para ser tan flexible como lo necesites.",
+      "button": "Hablar con ventas ahora"
     }
   }
 }
