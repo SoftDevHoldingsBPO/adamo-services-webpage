@@ -3,7 +3,7 @@ export interface Service {
   href: string;
   imagePath: string;
   iconPath: string;
-  variant: "adamoId" | "adamoPay" | "disabled";
+  variant: "adamoId" | "adamoPay" | "adamoSign" | "disabled";
 }
 
 export const services: Service[] = [
@@ -22,17 +22,17 @@ export const services: Service[] = [
     variant: "adamoPay",
   },
   {
+    id: "adamoSign",
+    href: "/adamo-sign",
+    imagePath: "/images/services/adamo-sign.png",
+    iconPath: "/images/services/adamo-sign-icon.svg",
+    variant: "adamoSign",
+  },
+  {
     id: "adamoRisk",
     href: "/adamo-risk",
     imagePath: "/images/services/adamo-soon.png",
     iconPath: "/images/services/adamo-risk-icon.svg",
-    variant: "disabled",
-  },
-  {
-    id: "adamoSign",
-    href: "/adamo-sign",
-    imagePath: "/images/services/adamo-soon.png",
-    iconPath: "/images/services/adamo-sign-icon.svg",
     variant: "disabled",
   },
 ];
