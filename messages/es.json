@@ -254,6 +254,12 @@
         "description": "Incluye almacenaje en blockchain para documentos que exigen máxima integridad, inmutabilidad  y confianza jurídica.",
         "type": "Smart-Contract"
       }
+    },
+    "archive": {
+      "title": "Tu gestión documental en un solo lugar",
+      "description": "Accede al módulo “Mis Archivos” para consultar y organizar de forma sencilla todos tus documentos firmados. <br></br> <br></br> Crea carpetas personalizadas para mantener tu información ordenada según tus necesidades y arrastra archivos desde tu historial de firmados para una gestión más ágil. <br></br> <br></br> Consulta los detalles de cada documento cuando lo necesites y descárgalos en cualquier momento para tener siempre a mano la información que respalda tus gestiones.",
+      "button": "Saber más",
+      "link": "Ir al blog"
     }
   }
 }

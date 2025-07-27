@@ -254,6 +254,12 @@
         "description": "Includes blockchain storage for documents that demand maximum integrity, immutability, and legal trust.",
         "type": "Smart-Contract"
       }
+    },
+    "archive": {
+      "title": "Your document management in one place",
+      "description": "Access the “My Files” module to easily review and organize all your signed documents. <br></br><br></br> Create custom folders to keep your information sorted according to your needs, and drag files from your signed history for faster management. <br></br><br></br> View the details of each document whenever you need and download them at any time to always have the information that supports your actions at hand.",
+      "button": "Learn more",
+      "link": "Go to blog"
     }
   }
 }
