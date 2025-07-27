@@ -260,6 +260,13 @@
       "description": "Accede al módulo “Mis Archivos” para consultar y organizar de forma sencilla todos tus documentos firmados. <br></br> <br></br> Crea carpetas personalizadas para mantener tu información ordenada según tus necesidades y arrastra archivos desde tu historial de firmados para una gestión más ágil. <br></br> <br></br> Consulta los detalles de cada documento cuando lo necesites y descárgalos en cualquier momento para tener siempre a mano la información que respalda tus gestiones.",
       "button": "Saber más",
       "link": "Ir al blog"
+    },
+    "cta": {
+      "title": "Trazabilidad en tiempo real",
+      "description": "Monitorea el estado de cada documento: Completado, Pendiente o Rechazado. Recibe notificaciones en tiempo real y toma decisiones rápidas desde cualquier dispositivo.",
+      "footerTitle": "¿Listo para firmar con control y confianza?",
+      "footerDescription": "Hablemos y descubre cómo Adamo Sign puede transformar tu gestión documental digital.",
+      "footerButton": "Hablar con ventas"
     }
   }
 }
