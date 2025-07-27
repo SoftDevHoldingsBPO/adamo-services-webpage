@@ -12,6 +12,7 @@ import { AdamoSignHero } from "./components/AdamoSignHero";
 import { CTA } from "./components/CTA";
 import { ContactsSection } from "./components/ContactsSection";
 import { FirmaLevels } from "./components/FirmaLevels";
+import { LegalSection } from "./components/LegalSection";
 import { ToolsBanner } from "./components/ToolsBanner";
 
 export default function Page() {
@@ -94,6 +95,8 @@ export default function Page() {
       />
 
       <CTA className="mt-20 md:mt-16 lg:mt-36" />
+
+      <LegalSection />
     </>
   );
 }
