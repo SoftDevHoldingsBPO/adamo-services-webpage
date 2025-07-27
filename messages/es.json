@@ -236,6 +236,24 @@
       "introDescription": "Adamo Sign es la solución digital para empresas que buscan centralizar, firmar y controlar sus documentos de forma simple, pero con altos estándares de seguridad y cumplimiento.",
       "title": "Nuestra herramienta está diseñada para ser tan flexible como lo necesites.",
       "button": "Hablar con ventas ahora"
+    },
+    "firma": {
+      "title": "Firma electrónica que se adapta a tu nivel de seguridad",
+      "simple": {
+        "title": "Firma simple",
+        "description": "Ideal para aprobaciones internas, procesos rutinarios o aquellos documentos de uso operativo diario.",
+        "type": "E-Contract"
+      },
+      "robust": {
+        "title": "Firma robusta",
+        "description": "Contratos legales, acuerdos con terceros o documentación que requiere asegurar la identidad del firmante.",
+        "type": "E-Contract"
+      },
+      "integrity": {
+        "title": "Trazabilidad e integridad total",
+        "description": "Incluye almacenaje en blockchain para documentos que exigen máxima integridad, inmutabilidad  y confianza jurídica.",
+        "type": "Smart-Contract"
+      }
     }
   }
 }

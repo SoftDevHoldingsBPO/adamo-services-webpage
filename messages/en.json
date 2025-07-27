@@ -224,5 +224,36 @@
       "button": "Talk to sales now",
       "buttonMobile": "Talk to sales"
     }
+  },
+  "adamoSign": {
+    "hero": {
+      "cursor-text": "DISCOVER",
+      "title": "Adamo Sign",
+      "description": "Forget paperwork, slow processes, and risks. Sign from anywhere, in seconds, with full legal backing."
+    },
+    "banner": {
+      "introTitle": "Document management with security and efficiency",
+      "introDescription": "Adamo Sign is the digital solution for companies seeking to centralize, sign, and manage their documents easily, while meeting high standards of security and compliance.",
+      "title": "Our tool is designed to be as flexible as you need it to be.",
+      "button": "Talk to sales now"
+    },
+    "firma": {
+      "title": "Electronic signatures tailored to your security level",
+      "simple": {
+        "title": "Simple signature",
+        "description": "Ideal for internal approvals, routine processes, or everyday operational documents.",
+        "type": "E-Contract"
+      },
+      "robust": {
+        "title": "Robust signature",
+        "description": "Legal contracts, third-party agreements, or documents that require signatory identity verification.",
+        "type": "E-Contract"
+      },
+      "integrity": {
+        "title": "Full traceability and integrity",
+        "description": "Includes blockchain storage for documents that demand maximum integrity, immutability, and legal trust.",
+        "type": "Smart-Contract"
+      }
+    }
   }
 }
