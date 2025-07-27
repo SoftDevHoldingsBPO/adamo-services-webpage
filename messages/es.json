@@ -267,6 +267,13 @@
       "footerTitle": "¿Listo para firmar con control y confianza?",
       "footerDescription": "Hablemos y descubre cómo Adamo Sign puede transformar tu gestión documental digital.",
       "footerButton": "Hablar con ventas"
+    },
+    "contactsSection": {
+      "introTitle": "Flujos de firma personalizables",
+      "introDescription": "Crea flujos de firma paso a paso según tus procesos internos. Define quién firma y qué validaciones necesita cada documento. Todo desde una interfaz intuitiva, sin necesidad de integraciones técnicas.",
+      "title": "Firmantes organizados",
+      "description": "Accede al módulo de contactos donde podrás guardar firmantes frecuentes, organizarlos y seleccionar rápidamente a quién enviar documentos, ahorrando tiempo y errores.",
+      "button": "Hablar con ventas ahora"
     }
   }
 }

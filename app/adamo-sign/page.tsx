@@ -5,10 +5,12 @@ import Link from "next/link";
 import VideoPlayer from "@/components/VideoPlayer";
 import { ArrowRight } from "@/components/icon";
 import FeatureParallax from "@/components/sections/FeatureParallax";
+import PageParallax from "@/components/sections/PageParallax";
 import { Button } from "@/components/ui/button";
 
 import { AdamoSignHero } from "./components/AdamoSignHero";
 import { CTA } from "./components/CTA";
+import { ContactsSection } from "./components/ContactsSection";
 import { FirmaLevels } from "./components/FirmaLevels";
 import { ToolsBanner } from "./components/ToolsBanner";
 
@@ -26,7 +28,16 @@ export default function Page() {
       />
       <FirmaLevels />
 
+      <PageParallax
+        className="pb-20 md:pb-[160px]"
+        pageImage="/images/adamo-id/page-parallax.png"
+        bgColor="bg-adamo-id-700"
+      />
+
+      <ContactsSection />
+
       <FeatureParallax
+        className="mt-[120px]"
         textContent={
           <>
             <h2 className="text-[17px] font-semibold">{t("archive.title")}</h2>

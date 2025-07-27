@@ -267,6 +267,13 @@
       "footerTitle": "Ready to sign with control and confidence?",
       "footerDescription": "Let’s talk and discover how Adamo Sign can transform your digital document management.",
       "footerButton": "Talk to sales"
+    },
+    "contactsSection": {
+      "introTitle": "Customizable signing workflows",
+      "introDescription": "Create step-by-step signing flows based on your internal processes. Define who signs and what validations each document requires — all from an intuitive interface, with no technical integrations needed.",
+      "title": "Organized signers",
+      "description": "Access the contacts module where you can save frequent signers, organize them, and quickly select who to send documents to — saving time and avoiding mistakes.",
+      "button": "Talk to sales now"
     }
   }
 }

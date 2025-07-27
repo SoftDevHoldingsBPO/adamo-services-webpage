@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 import IntroSection from "./IntroSection";
 
 interface PageParallaxProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   pageImage: string;
   className?: string;
   bgColor?: string;
@@ -59,7 +59,9 @@ const PageParallax = ({
 
   return (
     <div className={cn(className)}>
-      <IntroSection title={title} description={description} />
+      {title && description && (
+        <IntroSection title={title} description={description} />
+      )}
       <div
         ref={containerRef}
         data-inview
