@@ -48,3 +48,4 @@ export * from "./LinkedIn";
 export * from "./Threads";
 export * from "./ArrowRightCircle";
 export * from "./SwapHorizIcon";
+export { InfoIcon } from "./InfoIcon";

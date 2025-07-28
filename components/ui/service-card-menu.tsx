@@ -11,7 +11,7 @@ import { Button } from "./button";
 
 interface ServiceCardMenuProps {
   service: Service;
-  variant: "adamoId" | "adamoPay" | "disabled";
+  variant: "adamoId" | "adamoPay" | "adamoSign" | "disabled";
   className?: string;
   onClick?: (link: string) => void;
 }
@@ -19,6 +19,7 @@ interface ServiceCardMenuProps {
 const variantClasses = {
   adamoId: "bg-adamo-id-700 text-adamo-id-900",
   adamoPay: "bg-adamo-pay-700 text-adamo-pay-900",
+  adamoSign: "bg-adamo-sign-700 text-adamo-sign-800",
   disabled: "bg-neutral-200 text-neutral-400",
 };
 

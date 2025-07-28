@@ -224,5 +224,57 @@
       "button": "Talk to sales now",
       "buttonMobile": "Talk to sales"
     }
+  },
+  "adamoSign": {
+    "hero": {
+      "cursor-text": "DISCOVER",
+      "title": "Adamo Sign",
+      "description": "Forget paperwork, slow processes, and risks. Sign from anywhere, in seconds, with full legal backing."
+    },
+    "banner": {
+      "introTitle": "Document management with security and efficiency",
+      "introDescription": "Adamo Sign is the digital solution for companies seeking to centralize, sign, and manage their documents easily, while meeting high standards of security and compliance.",
+      "title": "Our tool is designed to be as flexible as you need it to be.",
+      "button": "Talk to sales now"
+    },
+    "firma": {
+      "title": "Electronic signatures tailored to your security level",
+      "simple": {
+        "title": "Simple signature",
+        "description": "Ideal for internal approvals, routine processes, or everyday operational documents.",
+        "type": "E-Contract"
+      },
+      "robust": {
+        "title": "Robust signature",
+        "description": "Legal contracts, third-party agreements, or documents that require signatory identity verification.",
+        "type": "E-Contract"
+      },
+      "integrity": {
+        "title": "Full traceability and integrity",
+        "description": "Includes blockchain storage for documents that demand maximum integrity, immutability, and legal trust.",
+        "type": "Smart-Contract"
+      }
+    },
+    "archive": {
+      "title": "Your document management in one place",
+      "description": "Access the “My Files” module to easily review and organize all your signed documents. <br></br><br></br> Create custom folders to keep your information sorted according to your needs, and drag files from your signed history for faster management. <br></br><br></br> View the details of each document whenever you need and download them at any time to always have the information that supports your actions at hand.",
+      "button": "Learn more",
+      "link": "Go to blog"
+    },
+    "cta": {
+      "title": "Real-time traceability",
+      "description": "Monitor the status of each document: Completed, Pending, or Rejected. Receive real-time notifications and make quick decisions from any device.",
+      "footerTitle": "Ready to sign with control and confidence?",
+      "footerDescription": "Let’s talk and discover how Adamo Sign can transform your digital document management.",
+      "footerButton": "Talk to sales"
+    },
+    "contactsSection": {
+      "introTitle": "Customizable signing workflows",
+      "introDescription": "Create step-by-step signing flows based on your internal processes. Define who signs and what validations each document requires — all from an intuitive interface, with no technical integrations needed.",
+      "title": "Organized signers",
+      "description": "Access the contacts module where you can save frequent signers, organize them, and quickly select who to send documents to — saving time and avoiding mistakes.",
+      "button": "Talk to sales now"
+    },
+    "legal": "Legal Backing and Global Compatibility"
   }
 }

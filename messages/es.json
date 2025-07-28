@@ -224,5 +224,57 @@
       "button": "Hablar con ventas ahora",
       "buttonMobile": "Hablar con ventas"
     }
+  },
+  "adamoSign": {
+    "hero": {
+      "cursor-text": "DESCUBRIR",
+      "title": "Adamo Sign",
+      "description": "Olvídate del papeleo, los procesos lentos y los riesgos.  Firma desde cualquier lugar, en segundos y con total respaldo legal."
+    },
+    "banner": {
+      "introTitle": "Gestión documental con seguridad y eficiencia",
+      "introDescription": "Adamo Sign es la solución digital para empresas que buscan centralizar, firmar y controlar sus documentos de forma simple, pero con altos estándares de seguridad y cumplimiento.",
+      "title": "Nuestra herramienta está diseñada para ser tan flexible como lo necesites.",
+      "button": "Hablar con ventas ahora"
+    },
+    "firma": {
+      "title": "Firma electrónica que se adapta a tu nivel de seguridad",
+      "simple": {
+        "title": "Firma simple",
+        "description": "Ideal para aprobaciones internas, procesos rutinarios o aquellos documentos de uso operativo diario.",
+        "type": "E-Contract"
+      },
+      "robust": {
+        "title": "Firma robusta",
+        "description": "Contratos legales, acuerdos con terceros o documentación que requiere asegurar la identidad del firmante.",
+        "type": "E-Contract"
+      },
+      "integrity": {
+        "title": "Trazabilidad e integridad total",
+        "description": "Incluye almacenaje en blockchain para documentos que exigen máxima integridad, inmutabilidad  y confianza jurídica.",
+        "type": "Smart-Contract"
+      }
+    },
+    "archive": {
+      "title": "Tu gestión documental en un solo lugar",
+      "description": "Accede al módulo “Mis Archivos” para consultar y organizar de forma sencilla todos tus documentos firmados. <br></br> <br></br> Crea carpetas personalizadas para mantener tu información ordenada según tus necesidades y arrastra archivos desde tu historial de firmados para una gestión más ágil. <br></br> <br></br> Consulta los detalles de cada documento cuando lo necesites y descárgalos en cualquier momento para tener siempre a mano la información que respalda tus gestiones.",
+      "button": "Saber más",
+      "link": "Ir al blog"
+    },
+    "cta": {
+      "title": "Trazabilidad en tiempo real",
+      "description": "Monitorea el estado de cada documento: Completado, Pendiente o Rechazado. Recibe notificaciones en tiempo real y toma decisiones rápidas desde cualquier dispositivo.",
+      "footerTitle": "¿Listo para firmar con control y confianza?",
+      "footerDescription": "Hablemos y descubre cómo Adamo Sign puede transformar tu gestión documental digital.",
+      "footerButton": "Hablar con ventas"
+    },
+    "contactsSection": {
+      "introTitle": "Flujos de firma personalizables",
+      "introDescription": "Crea flujos de firma paso a paso según tus procesos internos. Define quién firma y qué validaciones necesita cada documento. Todo desde una interfaz intuitiva, sin necesidad de integraciones técnicas.",
+      "title": "Firmantes organizados",
+      "description": "Accede al módulo de contactos donde podrás guardar firmantes frecuentes, organizarlos y seleccionar rápidamente a quién enviar documentos, ahorrando tiempo y errores.",
+      "button": "Hablar con ventas ahora"
+    },
+    "legal": "Respaldo Legal y Compatibilidad Global"
   }
 }
