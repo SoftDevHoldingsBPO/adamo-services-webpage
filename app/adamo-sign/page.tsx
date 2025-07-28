@@ -31,8 +31,8 @@ export default function Page() {
 
       <PageParallax
         className="pb-20 md:pb-[160px]"
-        pageImage="/images/adamo-id/page-parallax.png"
-        bgColor="bg-adamo-id-700"
+        pageImage="/images/adamo-sign/document.png"
+        bgColor="bg-adamo-sign-700"
       />
 
       <ContactsSection />

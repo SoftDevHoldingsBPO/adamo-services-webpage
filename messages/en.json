@@ -33,9 +33,9 @@
       "button": "Coming soon"
     },
     "adamoSign": {
-      "title": "Sign electronically with legal validity, zero friction, and maximum security",
-      "description": "With ADAMOSIGN, forget paperwork, slow processes, and risks. Sign from anywhere, in seconds, with full legal backing.",
-      "button": "Coming soon"
+      "title": "Automate documents with AdamoSign",
+      "description": "With ADAMOSIGN, forget about paperwork, slow processes, and risks. Sign from anywhere, in seconds, with full legal support.",
+      "button": "Learn more"
     }
   },
   "hero": {
@@ -275,6 +275,7 @@
       "description": "Access the contacts module where you can save frequent signers, organize them, and quickly select who to send documents to — saving time and avoiding mistakes.",
       "button": "Talk to sales now"
     },
-    "legal": "Legal Backing and Global Compatibility"
+    "legal": "Legal Backing and Global Compatibility",
+    "legalTooltip": "Adamo SIGN complies with Colombian regulations on electronic signatures, including Law 527 of 1999 and Decree 2364 of 2012, ensuring authenticity, integrity, and traceability through mechanisms such as two-factor authentication, trusted timestamps, and blockchain backing. <br></br><br></br>Our solution is designed according to international principles of legal security, data protection, and cross-border validity, allowing interoperability with regulatory frameworks across various jurisdictions, including Latin America, the United States, and Europe. <br></br><br></br>Although specific requirements may vary by country, Adamo SIGN is equipped to operate in environments that demand high standards of compliance, privacy, and digital governance."
   }
 }

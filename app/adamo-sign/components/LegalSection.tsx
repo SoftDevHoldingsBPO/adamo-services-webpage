@@ -1,6 +1,11 @@
 import { useTranslations } from "next-intl";
 
 import { InfoIcon } from "@/components/icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function LegalSection() {
   const t = useTranslations("adamoSign");
@@ -12,7 +17,14 @@ export function LegalSection() {
           {t("legal")}
         </h2>
 
-        <InfoIcon className="text-neutral-400" />
+        <Tooltip>
+          <TooltipTrigger>
+            <InfoIcon className="text-neutral-400" />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{t.rich("legalTooltip", { br: () => <br /> })}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   );

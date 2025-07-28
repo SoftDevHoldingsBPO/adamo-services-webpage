@@ -33,9 +33,9 @@
       "button": "Próximamente"
     },
     "adamoSign": {
-      "title": "Firma electrónicamente con validez jurídica, cero fricciones y máxima seguridad",
-      "description": "Con ADAMOSIGN  olvídate del papeleo, los procesos lentos y los riesgos. Firma desde cualquier lugar, en segundos y con total respaldo legal.",
-      "button": "Próximamente"
+      "title": "Automatiza documentos con AdamoSign",
+      "description": "Con ADAMOSIGN  olvídate del papeleo, los procesos lentos y los riesgos.  Firma desde cualquier lugar, en segundos y con total respaldo legal.",
+      "button": "Conocer más"
     }
   },
   "hero": {
@@ -275,6 +275,7 @@
       "description": "Accede al módulo de contactos donde podrás guardar firmantes frecuentes, organizarlos y seleccionar rápidamente a quién enviar documentos, ahorrando tiempo y errores.",
       "button": "Hablar con ventas ahora"
     },
-    "legal": "Respaldo Legal y Compatibilidad Global"
+    "legal": "Respaldo Legal y Compatibilidad Global",
+    "legalTooltip": "  Adamo SIGN cumple con la normativa colombiana en materia de firma electrónica, incluyendo la Ley 527 de 1999 y el Decreto 2364 de 2012, garantizando autenticidad, integridad y trazabilidad a través de mecanismos como doble autenticación, sellos de tiempo confiables y respaldo en blockchain. <br></br><br></br>Nuestra solución ha sido diseñada bajo principios internacionales de seguridad jurídica, protección de datos y validez transfronteriza, lo que permite su interoperabilidad con marcos regulatorios de distintas jurisdicciones, incluyendo América Latina, Estados Unidos y Europa. <br></br><br></br>Aunque los requisitos específicos pueden variar según el país, Adamo SIGN está preparada para operar en entornos que exigen altos estándares de cumplimiento, privacidad y gobernanza digital."
   }
 }
