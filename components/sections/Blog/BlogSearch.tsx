@@ -1,7 +1,7 @@
 "use client";
 
 import { useBlog } from "@/providers/BlogProvider";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, easeOut, motion } from "motion/react";
 
 import { useCallback, useEffect, useRef } from "react";
 
@@ -20,11 +20,11 @@ const variants = {
     left: "initial",
     right: "initial",
     transition: {
-      x: { duration: 0.3, ease: "easeOut" },
-      width: { duration: 0.3, ease: "easeOut" },
-      left: { duration: 0.3, ease: "easeOut" },
-      right: { duration: 0.3, ease: "easeOut" },
-      opacity: { duration: 0.2, ease: "easeOut", delay: 0.1 },
+      x: { duration: 0.3, ease: easeOut },
+      width: { duration: 0.3, ease: easeOut },
+      left: { duration: 0.3, ease: easeOut },
+      right: { duration: 0.3, ease: easeOut },
+      opacity: { duration: 0.2, ease: easeOut, delay: 0.1 },
     },
   },
   open: {
@@ -34,11 +34,11 @@ const variants = {
     left: 0,
     right: 0,
     transition: {
-      x: { duration: 0.3, ease: "easeOut" },
-      width: { duration: 0.3, ease: "easeOut" },
-      left: { duration: 0.3, ease: "easeOut" },
-      right: { duration: 0.3, ease: "easeOut" },
-      opacity: { duration: 0.3, ease: "easeOut" },
+      x: { duration: 0.3, ease: easeOut },
+      width: { duration: 0.3, ease: easeOut },
+      left: { duration: 0.3, ease: easeOut },
+      right: { duration: 0.3, ease: easeOut },
+      opacity: { duration: 0.3, ease: easeOut },
     },
   },
 };
