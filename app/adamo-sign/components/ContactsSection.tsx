@@ -64,7 +64,7 @@ export function ContactsSection({ className }: { className?: string }) {
     [0, height - overlayHeight],
   );
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 16]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 32]);
 
   return (
     <>
