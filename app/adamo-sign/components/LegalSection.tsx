@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import { useTranslations } from "next-intl";
 
 import { InfoIcon } from "@/components/icon";
@@ -9,6 +13,7 @@ import {
 
 export function LegalSection() {
   const t = useTranslations("adamoSign");
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="py-20 max-w-[1232px] mx-auto px-4">
@@ -17,8 +22,8 @@ export function LegalSection() {
           {t("legal")}
         </h2>
 
-        <Tooltip>
-          <TooltipTrigger>
+        <Tooltip open={open} onOpenChange={setOpen}>
+          <TooltipTrigger onClick={() => setOpen(true)}>
             <InfoIcon className="text-neutral-400" />
           </TooltipTrigger>
           <TooltipContent>
