@@ -17,13 +17,14 @@ import { Button } from "./button";
 
 interface ServiceCardProps {
   service: Service;
-  variant: "adamoId" | "adamoPay" | "disabled";
+  variant: "adamoId" | "adamoPay" | "adamoSign" | "adamoRisk" | "disabled";
 }
 
 const variantClasses = {
-  adamoId: "bg-adamo-id-700 text-adamo-id-900",
-  adamoPay: "bg-adamo-pay-700 text-adamo-pay-900",
-  adamoSign: "bg-adamo-sign-700 text-adamo-sign-900",
+  adamoId: "bg-adamo-id-600 text-adamo-id-900",
+  adamoPay: "bg-adamo-pay-600 text-adamo-pay-900",
+  adamoSign: "bg-adamo-sign-600 text-adamo-sign-900",
+  adamoRisk: "bg-adamo-risk-600 text-adamo-risk-900",
   disabled: "bg-neutral-200 text-neutral-400",
 };
 
@@ -41,7 +42,7 @@ const ServiceCard = ({ service, variant = "disabled" }: ServiceCardProps) => {
   const title = t(`${id}.title`);
   const description = t(`${id}.description`);
 
-  const isDisabled = variant === "disabled";
+  const isDisabled = service.variant === "disabled";
 
   useGSAP(() => {
     let mm = gsap.matchMedia();
@@ -107,20 +108,29 @@ const ServiceCard = ({ service, variant = "disabled" }: ServiceCardProps) => {
       ref={cardRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="rounded-3xl overflow-hidden relative h-[340px] xl:h-[310px]"
+      className="rounded-3xl overflow-hidden relative h-[340px] xl:h-[340px] group"
     >
       <div
         className={cn(
-          "relative w-full h-[200px] overflow-hidden",
+          "relative w-full h-[150px] lg:h-[200px] overflow-hidden",
           variantClasses[variant],
         )}
       >
-        <div
-          ref={imageRef}
-          className="absolute w-[250px] h-[178px] lg:w-[386px] lg:h-[274px] left-1/2 -translate-x-1/2 top-8 lg:translate-y-6"
-        >
-          <Image src={imagePath} alt={title} fill />
+        <div ref={imageRef} className="absolute inset-0">
+          <video
+            src={imagePath}
+            className="w-full h-full object-cover rounded-lg"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
         </div>
+
+        <div
+          className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out opacity-50"
+          aria-hidden
+        />
       </div>
 
       <div
@@ -138,7 +148,6 @@ const ServiceCard = ({ service, variant = "disabled" }: ServiceCardProps) => {
           <h4
             className={cn(
               "text-[17px] font-semibold text-neutral-900 leading-[1.25] ",
-              isDisabled && "text-neutral-400",
             )}
           >
             {title}
@@ -163,7 +172,7 @@ const ServiceCard = ({ service, variant = "disabled" }: ServiceCardProps) => {
         </div>
       </div>
 
-      <Link href={href} className="absolute inset-0" />
+      {!isDisabled && <Link href={href} className="absolute inset-0" />}
     </article>
   );
 };

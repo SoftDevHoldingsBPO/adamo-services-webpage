@@ -186,7 +186,7 @@ const Navigation = () => {
                     >
                       <ServiceCardMenu
                         service={service}
-                        variant={service.variant}
+                        variant={service.id}
                         onClick={handleClick}
                       />
                     </div>

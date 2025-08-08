@@ -11,15 +11,16 @@ import { Button } from "./button";
 
 interface ServiceCardMenuProps {
   service: Service;
-  variant: "adamoId" | "adamoPay" | "disabled";
+  variant: "adamoId" | "adamoPay" | "adamoSign" | "adamoRisk" | "disabled";
   className?: string;
   onClick?: (link: string) => void;
 }
 
 const variantClasses = {
-  adamoId: "bg-adamo-id-700 text-adamo-id-900",
-  adamoPay: "bg-adamo-pay-700 text-adamo-pay-900",
-  adamoSign: "bg-adamo-sign-700 text-adamo-sign-800",
+  adamoId: "bg-adamo-id-600 text-adamo-id-900",
+  adamoPay: "bg-adamo-pay-600 text-adamo-pay-900",
+  adamoSign: "bg-adamo-sign-600 text-adamo-sign-800",
+  adamoRisk: "bg-adamo-risk-600 text-adamo-risk-800",
   disabled: "bg-neutral-200 text-neutral-400",
 };
 
@@ -34,7 +35,7 @@ const ServiceCardMenu = ({
   const t = useTranslations("services");
   const title = t(`${id}.title`);
 
-  const isDisabled = variant === "disabled";
+  const isDisabled = service.variant === "disabled";
 
   return (
     <article
@@ -50,25 +51,26 @@ const ServiceCardMenu = ({
           variantClasses[variant],
         )}
       >
-        <div className="absolute z-10 left-1/2 top-7 -translate-x-1/2 w-[250px] h-[178px] transition-all duration-300 ease-in-out group-hover:rotate-2 lg:group-hover:top-5">
-          <Image
+        <div className="absolute inset-0">
+          <video
             src={imagePath}
-            alt={title}
-            priority={false}
-            quality={100}
-            fill
+            className="w-full h-full object-cover rounded-lg"
+            autoPlay
+            loop
+            muted
+            playsInline
           />
         </div>
 
-        {!isDisabled && (
-          <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out" />
-        )}
+        <div
+          className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-current transition-all duration-300 ease-in-out opacity-50"
+          aria-hidden
+        />
       </div>
       <div className="px-4 pt-6 pb-8 bg-neutral-100 flex-auto flex flex-col">
         <h4
           className={cn(
             "text-[17px] font-semibold text-neutral-900 leading-[1.25] mb-6 flex-auto",
-            isDisabled && "text-neutral-400",
           )}
         >
           {title}
