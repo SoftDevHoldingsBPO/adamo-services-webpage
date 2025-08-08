@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +11,7 @@ interface AdamoPayMetricsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const AdamoPayMetrics = ({ className }: AdamoPayMetricsProps) => {
   const t = useTranslations("adamoPay.metrics");
+  const locale = useLocale();
 
   return (
     <div className="mb-12">
@@ -37,7 +38,11 @@ const AdamoPayMetrics = ({ className }: AdamoPayMetricsProps) => {
           <Image
             data-inview
             data-inview-delay={0.3}
-            src="/images/adamo-pay/metrics.svg"
+            src={
+              locale === "es"
+                ? "/images/adamo-pay/metrics.svg"
+                : "/images/adamo-pay/metrics-en.svg"
+            }
             alt="Adamo Pay Metrics"
             width={780}
             height={320}

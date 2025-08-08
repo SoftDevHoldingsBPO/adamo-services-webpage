@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Page() {
   const t = useTranslations("adamoId");
+  const locale = useLocale();
 
   return (
     <>
@@ -71,7 +72,11 @@ export default function Page() {
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-id/flow-desktop.png"
+              src={
+                locale === "es"
+                  ? "/images/adamo-id/flow-desktop.png"
+                  : "/images/adamo-id/flow-desktop-en.png"
+              }
               alt=""
               width={552}
               height={684}
@@ -86,7 +91,11 @@ export default function Page() {
         className="py-20 md:pt-16 lg:pt-24 md:pb-0 whitespace-pre-line"
         title={t("pageParallax.title")}
         description={t("pageParallax.description")}
-        pageImage="/images/adamo-id/page-parallax.png"
+        pageImage={
+          locale === "es"
+            ? "/images/adamo-id/page-parallax.png"
+            : "/images/adamo-id/page-parallax-en.png"
+        }
         bgColor="bg-adamo-id-700"
       />
 
@@ -132,7 +141,11 @@ export default function Page() {
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-id/panel-desktop.png"
+              src={
+                locale === "es"
+                  ? "/images/adamo-id/panel-desktop.png"
+                  : "/images/adamo-id/panel-desktop-en.png"
+              }
               alt=""
               width={552}
               height={664}
