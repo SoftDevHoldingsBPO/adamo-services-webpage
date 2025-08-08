@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,6 +17,7 @@ import { ToolsBanner } from "./components/ToolsBanner";
 
 export default function Page() {
   const t = useTranslations("adamoSign");
+  const locale = useLocale();
 
   return (
     <>
@@ -31,7 +32,11 @@ export default function Page() {
 
       <PageParallax
         className="pb-20 md:pb-[160px]"
-        pageImage="/images/adamo-sign/document.png"
+        pageImage={
+          locale === "es"
+            ? "/images/adamo-sign/document.png"
+            : "/images/adamo-sign/document-en.png"
+        }
         bgColor="bg-adamo-sign-700"
       />
 
@@ -83,7 +88,11 @@ export default function Page() {
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-sign/archive.png"
+              src={
+                locale === "es"
+                  ? "/images/adamo-sign/archive.png"
+                  : "/images/adamo-sign/archive-en.png"
+              }
               alt=""
               width={552}
               height={684}

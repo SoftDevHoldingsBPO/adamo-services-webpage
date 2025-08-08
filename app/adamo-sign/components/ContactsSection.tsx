@@ -5,7 +5,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { useEffect, useRef, useState } from "react";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,6 +18,7 @@ const OFFSET_Y = 240;
 
 export function ContactsSection({ className }: { className?: string }) {
   const t = useTranslations("adamoSign.contactsSection");
+  const locale = useLocale();
 
   const parallaxContainerRef = useRef<HTMLDivElement>(null);
   const parallaxTextRef = useRef<HTMLDivElement>(null);
@@ -114,7 +115,11 @@ export function ContactsSection({ className }: { className?: string }) {
                 />
                 <Image
                   className="hidden lg:block drop-shadow-parallax"
-                  src="/images/adamo-sign/contacts.png"
+                  src={
+                    locale === "es"
+                      ? "/images/adamo-sign/contacts.png"
+                      : "/images/adamo-sign/contacts-en.png"
+                  }
                   alt=""
                   width={552}
                   height={684}

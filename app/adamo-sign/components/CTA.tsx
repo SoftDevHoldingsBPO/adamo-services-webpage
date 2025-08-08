@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export function CTA({ className }: { className?: string }) {
   const t = useTranslations("adamoSign.cta");
+  const locale = useLocale();
 
   return (
     <div className={cn("relative", className)}>
@@ -26,7 +27,11 @@ export function CTA({ className }: { className?: string }) {
         <Image
           data-inview
           className="drop-shadow-parallax mx-auto mt-10 md:mt-14"
-          src="/images/adamo-sign/traceability.png"
+          src={
+            locale === "es"
+              ? "/images/adamo-sign/traceability.png"
+              : "/images/adamo-sign/traceability-en.png"
+          }
           alt=""
           width={755}
           height={345}
