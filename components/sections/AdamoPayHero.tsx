@@ -7,7 +7,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { useRef } from "react";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 import Hero from "./Hero";
@@ -21,6 +21,7 @@ const AdamoPayHero = () => {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   const lenis = useLenis();
+  const locale = useLocale();
 
   useGSAP(
     () => {
@@ -109,7 +110,11 @@ const AdamoPayHero = () => {
           quality={100}
           width={864}
           height={614}
-          src="/images/adamo-pay/adamo-pay-hero.png"
+          src={
+            locale === "es"
+              ? "/images/adamo-pay/adamo-pay-hero.png"
+              : "/images/adamo-pay/adamo-pay-hero-en.png"
+          }
           alt="Adamo Pay"
           className="hidden lg:block shadow-2xl rounded-4xl"
         />

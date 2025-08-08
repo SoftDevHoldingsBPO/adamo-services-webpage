@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Page() {
   const t = useTranslations("adamoPay");
+  const locale = useLocale();
 
   return (
     <>
@@ -47,7 +48,6 @@ export default function Page() {
                 </Link>
               </Button>
 
-              {/* http://192.168.0.102:3000/blog/empowering-unbanked-communities-with-fintech */}
               <Button asChild variant="link">
                 <Link href="/blog">
                   {t("paymentList.link")} <ArrowRight className="-rotate-45" />
@@ -78,7 +78,11 @@ export default function Page() {
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-pay/payment-list.png"
+              src={
+                locale === "es"
+                  ? "/images/adamo-pay/payment-list.png"
+                  : "/images/adamo-pay/payment-list-en.png"
+              }
               alt="Payment list interface on desktop"
               width={552}
               height={684}
@@ -93,7 +97,11 @@ export default function Page() {
         className="py-20 md:pt-16 lg:pt-24 md:pb-0"
         title={t("pageParallax.title")}
         description={t("pageParallax.description")}
-        pageImage="/images/adamo-pay/page-parallax.png"
+        pageImage={
+          locale === "es"
+            ? "/images/adamo-pay/page-parallax.png"
+            : "/images/adamo-pay/page-parallax-en.png"
+        }
       />
 
       <FeatureParallax
@@ -142,7 +150,11 @@ export default function Page() {
             />
             <Image
               className="hidden lg:block drop-shadow-parallax"
-              src="/images/adamo-pay/payment-form.png"
+              src={
+                locale === "es"
+                  ? "/images/adamo-pay/payment-form.png"
+                  : "/images/adamo-pay/payment-form-en.png"
+              }
               alt="Payment form interface on desktop"
               width={552}
               height={664}
