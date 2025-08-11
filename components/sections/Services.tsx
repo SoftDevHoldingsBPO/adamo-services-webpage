@@ -35,7 +35,7 @@ const Services = () => {
         </div>
 
         <div className="mt-6 lg:mt-8 -mx-4 lg:mx-0" role="list">
-          <div className="flex px-4 gap-8 flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-pl-4 lg:grid lg:grid-cols-2 lg:px-0">
+          <div className="flex px-4 gap-8 flex-nowrap overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-pl-4 lg:grid lg:grid-cols-2 lg:px-0 overflow-y-hidden">
             {services.map((service, index) => (
               <div
                 data-inview
