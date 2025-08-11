@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useMediaQuery } from "usehooks-ts";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -35,23 +35,41 @@ export function ContactsSection({ className }: { className?: string }) {
   const [overlayHeight, setOverlayHeight] = useState(0);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  useEffect(() => {
-    function updateHeights() {
-      if (!parallaxContainerRef.current) return;
-      setHeight(parallaxContainerRef.current.offsetHeight);
+  useLayoutEffect(() => {
+    const els = [
+      parallaxContainerRef.current,
+      parallaxTextRef.current,
+      parallaxOverlayRef.current,
+    ].filter(Boolean) as HTMLElement[];
 
+    if (!els.length) return;
+
+    const measure = () => {
+      if (parallaxContainerRef.current) {
+        setHeight(parallaxContainerRef.current.getBoundingClientRect().height);
+      }
       if (parallaxTextRef.current) {
-        setTextHeight(parallaxTextRef.current.offsetHeight);
+        setTextHeight(parallaxTextRef.current.getBoundingClientRect().height);
       }
       if (parallaxOverlayRef.current) {
-        setOverlayHeight(parallaxOverlayRef.current.offsetHeight);
+        setOverlayHeight(
+          parallaxOverlayRef.current.getBoundingClientRect().height,
+        );
       }
-    }
+    };
 
-    updateHeights();
-    window.addEventListener("resize", updateHeights);
-    return () => window.removeEventListener("resize", updateHeights);
-  }, []);
+    measure();
+    requestAnimationFrame(measure);
+
+    const ro = new ResizeObserver(measure);
+    els.forEach((el) => ro.observe(el));
+    window.addEventListener("load", measure);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("load", measure);
+    };
+  }, [isDesktop, locale]);
 
   const textY = useTransform(
     scrollYProgress,
@@ -67,12 +85,20 @@ export function ContactsSection({ className }: { className?: string }) {
 
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 64]);
 
+  const onImageLoaded = () => {
+    if (parallaxContainerRef.current) {
+      const h = parallaxContainerRef.current.getBoundingClientRect().height;
+      setHeight(h);
+    }
+  };
+
   return (
     <>
       <IntroSection
         title={t("introTitle")}
         description={t("introDescription")}
       />
+      {/*  */}
 
       <section
         ref={parallaxContainerRef}
@@ -103,6 +129,7 @@ export function ContactsSection({ className }: { className?: string }) {
                   height={428}
                   priority
                   quality={100}
+                  onLoadingComplete={onImageLoaded}
                 />
                 <Image
                   className="hidden sm:block lg:hidden drop-shadow-parallax"
@@ -112,6 +139,7 @@ export function ContactsSection({ className }: { className?: string }) {
                   height={684}
                   priority
                   quality={100}
+                  onLoadingComplete={onImageLoaded}
                 />
                 <Image
                   className="hidden lg:block drop-shadow-parallax"
@@ -125,6 +153,7 @@ export function ContactsSection({ className }: { className?: string }) {
                   height={684}
                   priority
                   quality={100}
+                  onLoadingComplete={onImageLoaded}
                 />
               </motion.div>
             </motion.div>
