@@ -10,7 +10,9 @@
     "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
-    "contact": "Contact Sales"
+    "contact": "Contact Sales",
+    "sign-in": "Sign in",
+    "login": "Login"
   },
   "services": {
     "servicesTitle": "What do you need to solve today?",
@@ -113,6 +115,21 @@
       "message": "Message or comments...",
       "countrySearch": "Search country...",
       "services": "Solutions of interest (*)"
+    }
+  },
+  "sign-in-dialog": {
+    "header-text": "Sign In",
+    "title": "Sign in to your Adamo account",
+    "description": "Enter your credentials below to continue:",
+    "cancel": "Cancel",
+    "sign-in":"Sign In",
+    "forgot-password": "Forgot your password?",
+    "forgot-password-action": "Click here.",
+    "do-not-have-account": "Don't have an account?",
+    "do-not-have-account-action": "Click here to register.",
+    "placeholders": {
+      "email": "Email",
+      "password": "Password"
     }
   },
   "about": {

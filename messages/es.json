@@ -10,7 +10,9 @@
     "faqs": "FAQ's",
     "blog": "Blog",
     "about": "Nosotros",
-    "contact": "Hablar con ventas"
+    "contact": "Hablar con ventas",
+    "sign-in": "Iniciar sesión",
+    "login": "Ingresar"
   },
   "services": {
     "servicesTitle": "¿Qué necesitas resolver hoy?",
@@ -113,6 +115,21 @@
       "message": "Mensaje o comentarios...",
       "countrySearch": "Buscar país...",
       "services": "Soluciones de interés (*)"
+    }
+  },
+  "sign-in-dialog": {
+    "header-text": "Inicia sesión",
+    "title": "Inicia sesión en tu cuenta de Adamo",
+    "description": "Ingresa tus credenciales a continuación para continuar:",
+    "cancel": "Cancelar",
+    "sign-in":"Iniciar sesión",
+    "forgot-password": "¿Olvidaste tu contraseña?",
+    "forgot-password-action": "Haz click aquí.",
+    "do-not-have-account": "¿No tienes cuenta?",
+    "do-not-have-account-action": "Haz click aquí para registrarte.",
+    "placeholders": {
+      "email": "Correo electrónico",
+      "password": "Contraseña"
     }
   },
   "about": {

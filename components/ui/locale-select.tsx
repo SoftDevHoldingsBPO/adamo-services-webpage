@@ -70,7 +70,7 @@ const LocaleSelect = ({
   );
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <Popover open={isOpen} onOpenChange={setIsOpen} modal>
       <PopoverTrigger asChild className={className}>
         <Button
           size="md"

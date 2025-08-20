@@ -10,6 +10,8 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { SignInDialog } from "@/components/SignInDialog";
+
 import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";
 import LocaleSelect from "../ui/locale-select";
@@ -26,6 +28,8 @@ const Navbar = () => {
   const [isAtTop, setIsAtTop] = useState(true);
 
   const { isOpen, toggleMenu } = useNavigation();
+
+  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
 
   useLenis(({ scroll }) => {
     if (scroll <= SCROLL_TOP_THRESHOLD) {
@@ -68,7 +72,23 @@ const Navbar = () => {
           />
 
           {/* Mobile */}
-          <div className="md:hidden">
+          <div className="md:hidden flex gap-4 items-center">
+            <SignInDialog
+              isAtTop={isAtTop}
+              open={isSignInDialogOpen}
+              onOpenChange={setIsSignInDialogOpen}
+              renderTrigger={() => (
+                <Button
+                  size="md"
+                  onClick={() => setIsSignInDialogOpen(true)}
+                  variant={
+                    isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
+                  }
+                >
+                  {t("login")}
+                </Button>
+              )}
+            />
             <Button
               size="md"
               onClick={toggleMenu}
@@ -79,7 +99,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop */}
-          <div className="hidden md:block">
+          <div className="hidden md:block space-x-4">
             <Button
               asChild
               size="md"
@@ -87,6 +107,20 @@ const Navbar = () => {
             >
               <Link href="/contact">{t("contact")}</Link>
             </Button>
+            <SignInDialog
+              isAtTop={isAtTop}
+              open={isSignInDialogOpen}
+              onOpenChange={setIsSignInDialogOpen}
+              renderTrigger={() => (
+                <Button
+                  size="md"
+                  onClick={() => setIsSignInDialogOpen(true)}
+                  variant={isOpen ? "secondary" : "primary"}
+                >
+                  {t("sign-in")}
+                </Button>
+              )}
+            />
           </div>
 
           {/* Desktop */}

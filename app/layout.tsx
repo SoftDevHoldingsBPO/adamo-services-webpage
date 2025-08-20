@@ -1,5 +1,6 @@
 import { BlogProvider } from "@/providers/BlogProvider";
 import { NavigationProvider } from "@/providers/NavigationProvider";
+import { ZodI18nProvider } from "@/providers/ZodI18nProvider";
 import Providers from "@/providers/providers";
 
 import type { Metadata } from "next";
@@ -51,13 +52,15 @@ export default async function RootLayout({
         <NavigationProvider>
           <Providers>
             <NextIntlClientProvider>
-              <BlogProvider>
-                <Navbar />
-                <Preloader />
-                <main className="flex-auto">{children}</main>
-                <Footer />
-                <WaButton />
-              </BlogProvider>
+              <ZodI18nProvider>
+                <BlogProvider>
+                  <Navbar />
+                  <Preloader />
+                  <main className="flex-auto">{children}</main>
+                  <Footer />
+                  <WaButton />
+                </BlogProvider>
+              </ZodI18nProvider>
             </NextIntlClientProvider>
           </Providers>
         </NavigationProvider>
