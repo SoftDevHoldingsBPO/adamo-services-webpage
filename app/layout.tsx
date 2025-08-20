@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
 import { BlogProvider } from "@/providers/BlogProvider";
 import { NavigationProvider } from "@/providers/NavigationProvider";
+import { SessionProvider } from "@/providers/SessionProvider";
 import { ZodI18nProvider } from "@/providers/ZodI18nProvider";
 import Providers from "@/providers/providers";
 
@@ -8,6 +10,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
+import { SessionExpirationHandler } from "@/components/SessionExpirationHandler";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Preloader from "@/components/layout/Preloader";
@@ -35,6 +38,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   const locale = await getLocale();
 
   return (
@@ -51,17 +56,20 @@ export default async function RootLayout({
         <MouseFollowerCursor />
         <NavigationProvider>
           <Providers>
-            <NextIntlClientProvider>
-              <ZodI18nProvider>
-                <BlogProvider>
-                  <Navbar />
-                  <Preloader />
-                  <main className="flex-auto">{children}</main>
-                  <Footer />
-                  <WaButton />
-                </BlogProvider>
-              </ZodI18nProvider>
-            </NextIntlClientProvider>
+            <SessionProvider session={session}>
+              <SessionExpirationHandler />
+              <NextIntlClientProvider>
+                <ZodI18nProvider>
+                  <BlogProvider>
+                    <Navbar user={session?.user} />
+                    <Preloader />
+                    <main className="flex-auto">{children}</main>
+                    <Footer />
+                    <WaButton />
+                  </BlogProvider>
+                </ZodI18nProvider>
+              </NextIntlClientProvider>
+            </SessionProvider>
           </Providers>
         </NavigationProvider>
       </body>

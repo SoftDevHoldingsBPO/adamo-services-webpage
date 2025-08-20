@@ -8,6 +8,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { ComponentProps, ReactNode } from "react";
 import { useForm } from "react-hook-form";
 
+import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -73,7 +74,22 @@ export function SignInDialog({
           <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
-        <SignInForm onSubmit={console.log} />
+        <SignInForm
+          onSubmit={async (values) => {
+            const result = await signIn("credentials", {
+              email: values.email,
+              password: values.password,
+              redirect: false,
+            });
+
+            if (result?.error) {
+              alert("Sign in error: " + result.error);
+            } else if (result?.ok) {
+              // Sign in successful, you can redirect or close dialog
+              onOpenChange?.(false);
+            }
+          }}
+        />
         <DialogFooter>
           <p className="text-sm text-neutral-500">
             {t("do-not-have-account")}{" "}

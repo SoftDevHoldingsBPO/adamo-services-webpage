@@ -6,10 +6,13 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { useState } from "react";
 
+import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { ProfileDropdown } from "@/components/ProfileDropdown";
 import { SignInDialog } from "@/components/SignInDialog";
 
 import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
@@ -20,8 +23,16 @@ import Navigation from "./Navigation";
 
 const SCROLL_TOP_THRESHOLD = 64;
 
-const Navbar = () => {
+type NavbarProps = {
+  user?: User;
+};
+
+const Navbar = ({ user }: NavbarProps) => {
   const t = useTranslations("nav");
+  const { data: session } = useSession();
+
+  // Use session user if available, fallback to prop user
+  const currentUser = session?.user || user;
 
   const desktop = useMediaQuery("(min-width: 768px)");
 
@@ -73,22 +84,26 @@ const Navbar = () => {
 
           {/* Mobile */}
           <div className="md:hidden flex gap-4 items-center">
-            <SignInDialog
-              isAtTop={isAtTop}
-              open={isSignInDialogOpen}
-              onOpenChange={setIsSignInDialogOpen}
-              renderTrigger={() => (
-                <Button
-                  size="md"
-                  onClick={() => setIsSignInDialogOpen(true)}
-                  variant={
-                    isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
-                  }
-                >
-                  {t("login")}
-                </Button>
-              )}
-            />
+            {currentUser ? (
+              <ProfileDropdown user={currentUser} />
+            ) : (
+              <SignInDialog
+                isAtTop={isAtTop}
+                open={isSignInDialogOpen}
+                onOpenChange={setIsSignInDialogOpen}
+                renderTrigger={() => (
+                  <Button
+                    size="md"
+                    onClick={() => setIsSignInDialogOpen(true)}
+                    variant={
+                      isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
+                    }
+                  >
+                    {t("login")}
+                  </Button>
+                )}
+              />
+            )}
             <Button
               size="md"
               onClick={toggleMenu}
@@ -99,7 +114,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop */}
-          <div className="hidden md:block space-x-4">
+          <div className="hidden md:flex items-center gap-4">
             <Button
               asChild
               size="md"
@@ -107,20 +122,24 @@ const Navbar = () => {
             >
               <Link href="/contact">{t("contact")}</Link>
             </Button>
-            <SignInDialog
-              isAtTop={isAtTop}
-              open={isSignInDialogOpen}
-              onOpenChange={setIsSignInDialogOpen}
-              renderTrigger={() => (
-                <Button
-                  size="md"
-                  onClick={() => setIsSignInDialogOpen(true)}
-                  variant={isOpen ? "secondary" : "primary"}
-                >
-                  {t("sign-in")}
-                </Button>
-              )}
-            />
+            {currentUser ? (
+              <ProfileDropdown user={currentUser} />
+            ) : (
+              <SignInDialog
+                isAtTop={isAtTop}
+                open={isSignInDialogOpen}
+                onOpenChange={setIsSignInDialogOpen}
+                renderTrigger={() => (
+                  <Button
+                    size="md"
+                    onClick={() => setIsSignInDialogOpen(true)}
+                    variant={isOpen ? "secondary" : "primary"}
+                  >
+                    {t("sign-in")}
+                  </Button>
+                )}
+              />
+            )}
           </div>
 
           {/* Desktop */}
