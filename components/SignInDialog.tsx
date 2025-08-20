@@ -139,7 +139,7 @@ function SignInForm({ onSubmit }: SignInFormProps) {
           )}
         />
 
-        <p className="mb-14 md:mb-8 text-sm text-neutral-500">
+        <p className="mb-14 text-sm text-neutral-500">
           {t("forgot-password")}{" "}
           <Link href="" className="font-semibold text-neutral-700">
             {t("forgot-password-action")}
