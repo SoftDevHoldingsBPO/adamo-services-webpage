@@ -17,6 +17,7 @@ const buttonVariants = cva(
         link: "bg-transparent text-neutral-600 hover:text-neutral-700 active:text-neutral-800 !px-0",
         ghost:
           "bg-transparent text-white hover:text-neutral-100 active:text-neutral-200 !px-0",
+          muted: "bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:bg-neutral-300 disabled:bg-neutral-50 disabled:text-neutral-400",
       },
       size: {
         lg: "h-12 px-5 py-2 text-base",

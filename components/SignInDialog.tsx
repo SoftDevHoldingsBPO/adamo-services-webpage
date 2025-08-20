@@ -146,10 +146,14 @@ function SignInForm({ onSubmit }: SignInFormProps) {
           </Link>
         </p>
         <div className="flex gap-6">
-          <Button type="button" variant="secondary">
-            {t("cancel")}
+          <DialogClose asChild>
+            <Button type="button" variant="muted">
+              {t("cancel")}
+            </Button>
+          </DialogClose>
+          <Button type="submit" disabled={!form.formState.isValid}>
+            {t("sign-in")}
           </Button>
-          <Button type="submit">{t("sign-in")}</Button>
         </div>
       </form>
     </Form>
