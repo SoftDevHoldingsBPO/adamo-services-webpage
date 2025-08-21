@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import CountdownText from "@/components/CountdownText";
-import { PasswordRecoveryStep } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContent";
+import { usePasswordRecovery } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContext";
 import { Button } from "@/components/ui/button";
 import {
   DialogBack,
@@ -41,14 +41,10 @@ export type PasswordRecoveryCodeFormValues = z.infer<
   typeof PasswordRecoveryCodeFormSchema
 >;
 
-export type PasswordRecoveryCodeStepProps = {
-  setStep: (step: PasswordRecoveryStep) => void;
-};
-
-export function PasswordRecoveryCodeStep({
-  setStep,
-}: PasswordRecoveryCodeStepProps) {
+export function PasswordRecoveryCodeStep() {
   const t = useTranslations("password-recovery-dialog.code-step");
+
+  const { setPasswordRecoveryStep } = usePasswordRecovery();
 
   const form = useForm<PasswordRecoveryCodeFormValues>({
     resolver: zodResolver(PasswordRecoveryCodeFormSchema),
@@ -77,7 +73,7 @@ export function PasswordRecoveryCodeStep({
         <form
           id="password-recovery-email-step-form"
           onSubmit={form.handleSubmit((values) => {
-            setStep("new-password");
+            setPasswordRecoveryStep("new-password");
           })}
         >
           <p className="text-neutral-700 mb-8">eatteer@gmail.com</p>

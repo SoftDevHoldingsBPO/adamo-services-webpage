@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
 
-import { PasswordRecoveryStep } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContent";
+import { usePasswordRecovery } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContext";
 import { Button } from "@/components/ui/button";
 import {
   DialogClose,
@@ -34,14 +34,11 @@ export type PasswordRecoveryNewPasswordFormValues = z.infer<
   typeof PasswordRecoveryNewPasswordFormSchema
 >;
 
-export type PasswordRecoveryNewPasswordStepProps = {
-  setStep: (step: PasswordRecoveryStep) => void;
-};
-
-export function PasswordRecoveryNewPasswordStep({
-  setStep,
-}: PasswordRecoveryNewPasswordStepProps) {
+export function PasswordRecoveryNewPasswordStep() {
   const t = useTranslations("password-recovery-dialog.new-password-step");
+
+  const { setPasswordRecoveryStep, setIsPasswordRecoveryDialogOpen } =
+    usePasswordRecovery();
 
   const form = useForm<PasswordRecoveryNewPasswordFormValues>({
     resolver: zodResolver(PasswordRecoveryNewPasswordFormSchema),
@@ -66,7 +63,9 @@ export function PasswordRecoveryNewPasswordStep({
       <Form {...form}>
         <form
           id="password-recovery-email-step-form"
-          onSubmit={form.handleSubmit((values) => {})}
+          onSubmit={form.handleSubmit((values) => {
+            setIsPasswordRecoveryDialogOpen(false);
+          })}
         >
           <FormField
             control={form.control}

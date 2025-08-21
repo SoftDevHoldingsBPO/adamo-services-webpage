@@ -69,7 +69,6 @@ export function SignUpCodeStep() {
         <form
           id="sign-up-code-step-form"
           onSubmit={form.handleSubmit((values) => {
-            console.log("Verification code:", values);
             setSignUpStep("2fa");
           })}
         >

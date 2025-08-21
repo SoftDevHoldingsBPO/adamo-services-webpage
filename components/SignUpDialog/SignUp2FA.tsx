@@ -65,7 +65,6 @@ export function SignUp2FA() {
         <form
           id="sign-up-2fa-step-form"
           onSubmit={form.handleSubmit((values) => {
-            console.log("2FA Code:", values);
             setSignUpStep("information");
             setIs2FADialogActivatedOpen(true);
             setIsSignUpDialogOpen(false);

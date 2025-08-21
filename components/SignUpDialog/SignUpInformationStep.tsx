@@ -74,7 +74,6 @@ export function SignUpInformationStep() {
         <form
           id="sign-up-information-step-form"
           onSubmit={form.handleSubmit((values) => {
-            console.log("Sign up information:", values);
             setSignUpStep("code");
           })}
           className="space-y-4"
