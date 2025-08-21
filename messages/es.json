@@ -122,7 +122,7 @@
     "title": "Inicia sesión en tu cuenta de Adamo",
     "description": "Ingresa tus credenciales a continuación para continuar:",
     "cancel": "Cancelar",
-    "sign-in":"Iniciar sesión",
+    "sign-in": "Iniciar sesión",
     "forgot-password": "¿Olvidaste tu contraseña?",
     "forgot-password-action": "Haz click aquí.",
     "do-not-have-account": "¿No tienes cuenta?",
@@ -130,6 +130,42 @@
     "placeholders": {
       "email": "Correo electrónico",
       "password": "Contraseña"
+    }
+  },
+  "password-recovery-dialog": {
+    "email-step": {
+      "title": "Recuperar contraseña",
+      "description": "Por favor, ingresa a continuación tu correo electrónico donde te enviaremos un código de recuperación:",
+      "cancel": "Cancelar",
+      "recover-password": "Recuperar contraseña",
+      "placeholders": {
+        "email": "Correo electrónico"
+      }
+    },
+    "code-step": {
+      "title": "Recuperar contraseña",
+      "description": "Ingresa el código de recuperación que te hemos enviado a:",
+      "cancel": "Cancelar",
+      "continue": "Continuar",
+      "code-not-received": "¿No recibiste el código?",
+      "code-not-received-cooldown": "Reenviar código en",
+      "code-not-received-action": "Reenviar código",
+      "placeholders": {
+        "code": "Código de recuperación"
+      }
+    },
+    "new-password-step": {
+      "title": "Nueva contraseña",
+      "description": "Ingresa la nueva contraseña a continuación:",
+      "cancel": "Cancelar",
+      "change-password": "Cambiar contraseña",
+      "descriptions": {
+        "password": "Al menos 8 caracteres, una mayúscula y un número."
+      },
+      "placeholders": {
+        "password": "Nueva contraseña",
+        "confirm-password": "Repetir contraseña nueva"
+      }
     }
   },
   "about": {

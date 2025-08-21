@@ -63,6 +63,11 @@ const Navbar = ({ user }: NavbarProps) => {
 
   return (
     <>
+      <SignInDialog
+        isAtTop={isAtTop}
+        open={isSignInDialogOpen}
+        onOpenChange={setIsSignInDialogOpen}
+      />
       <div
         data-inview="fade-down"
         data-fixed
@@ -87,22 +92,15 @@ const Navbar = ({ user }: NavbarProps) => {
             {currentUser ? (
               <ProfileDropdown user={currentUser} />
             ) : (
-              <SignInDialog
-                isAtTop={isAtTop}
-                open={isSignInDialogOpen}
-                onOpenChange={setIsSignInDialogOpen}
-                renderTrigger={() => (
-                  <Button
-                    size="md"
-                    onClick={() => setIsSignInDialogOpen(true)}
-                    variant={
-                      isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
-                    }
-                  >
-                    {t("login")}
-                  </Button>
-                )}
-              />
+              <Button
+                size="md"
+                onClick={() => setIsSignInDialogOpen(true)}
+                variant={
+                  isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
+                }
+              >
+                {t("login")}
+              </Button>
             )}
             <Button
               size="md"
@@ -125,20 +123,13 @@ const Navbar = ({ user }: NavbarProps) => {
             {currentUser ? (
               <ProfileDropdown user={currentUser} />
             ) : (
-              <SignInDialog
-                isAtTop={isAtTop}
-                open={isSignInDialogOpen}
-                onOpenChange={setIsSignInDialogOpen}
-                renderTrigger={() => (
-                  <Button
-                    size="md"
-                    onClick={() => setIsSignInDialogOpen(true)}
-                    variant={isOpen ? "secondary" : "primary"}
-                  >
-                    {t("sign-in")}
-                  </Button>
-                )}
-              />
+              <Button
+                size="md"
+                onClick={() => setIsSignInDialogOpen(true)}
+                variant={isOpen ? "secondary" : "primary"}
+              >
+                {t("sign-in")}
+              </Button>
             )}
           </div>
 

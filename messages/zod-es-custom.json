@@ -1,0 +1,7 @@
+{
+  "errors": {
+    "password": "La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un número",
+    "confirm_password": "Las contraseñas no coinciden. Por favor verifica",
+    "code": "El código ingresado es inválido. Por favor verifica"
+  }
+}

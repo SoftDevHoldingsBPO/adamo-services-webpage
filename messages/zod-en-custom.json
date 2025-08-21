@@ -1,0 +1,7 @@
+{
+  "errors": {
+    "password": "Password must have at least 8 characters, one uppercase letter and one number",
+    "confirm_password": "Passwords do not match. Please verify",
+    "code": "The entered code is invalid. Please verify"
+  }
+}

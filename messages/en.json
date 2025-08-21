@@ -10,7 +10,7 @@
     "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
-    "contact": "Contact Sales",
+    "contact": "Contact sales",
     "sign-in": "Sign in",
     "login": "Login"
   },
@@ -122,7 +122,7 @@
     "title": "Sign in to your Adamo account",
     "description": "Enter your credentials below to continue:",
     "cancel": "Cancel",
-    "sign-in":"Sign In",
+    "sign-in": "Sign In",
     "forgot-password": "Forgot your password?",
     "forgot-password-action": "Click here.",
     "do-not-have-account": "Don't have an account?",
@@ -130,6 +130,42 @@
     "placeholders": {
       "email": "Email",
       "password": "Password"
+    }
+  },
+  "password-recovery-dialog": {
+    "email-step": {
+      "title": "Password recovery",
+      "description": "Please enter your email address below where we will send you a recovery code:",
+      "cancel": "Cancel",
+      "recover-password": "Recover password",
+      "placeholders": {
+        "email": "Email address"
+      }
+    },
+    "code-step": {
+      "title": "Password recovery",
+      "description": "Enter the recovery code we have sent to:",
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "code-not-received": "Didn't receive the code?",
+      "code-not-received-cooldown": "Resend code in",
+      "code-not-received-action": "Resend code",
+      "placeholders": {
+        "code": "Recovery code"
+      }
+    },
+    "new-password-step": {
+      "title": "New password",
+      "description": "Enter your new password below:",
+      "cancel": "Cancel",
+      "change-password": "Change password",
+      "descriptions": {
+        "password": "At least 8 characters, one uppercase letter and one number."
+      },
+      "placeholders": {
+        "password": "New password",
+        "confirm-password": "Confirm new password"
+      }
     }
   },
   "about": {

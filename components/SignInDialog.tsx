@@ -12,6 +12,7 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
+import { PasswordRecoveryDialog } from "@/components/PasswordRecoveryDialog/PasswordRecoveryDialog";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -35,79 +36,82 @@ import LocaleSelect from "@/components/ui/locale-select";
 
 const SignInFormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z
+    .string()
+    .min(8)
+    .refine((value) => /^(?=.*[A-Z])(?=.*\d).*$/.test(value), {
+      params: {
+        i18n: {
+          key: "errors.password",
+        },
+      },
+    }),
 });
 
 export type SignInFormValues = z.infer<typeof SignInFormSchema>;
 
 export type SignInDialogProps = {
   isAtTop: boolean;
-  renderTrigger: () => ReactNode;
 } & ComponentProps<typeof Dialog>;
 
 export function SignInDialog({
   isAtTop,
-  renderTrigger,
   open,
   onOpenChange,
   ...props
 }: SignInDialogProps) {
-  const t = useTranslations("sign-in-dialog");
+  const [isPasswordRecoveryDialogOpen, setIsPasswordRecoveryDialogOpen] =
+    useState(false);
 
   const isAtLeastTablet = useMediaQuery("(min-width: 768px)");
 
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange} {...props}>
-      <DialogTrigger asChild>{renderTrigger()}</DialogTrigger>
-      <DialogContent
-        showCloseButton={isAtLeastTablet}
-        isFullscreen={!isAtLeastTablet}
-      >
-        <DialogHeader>
-          <div className="md:hidden flex items-center justify-between mb-6">
-            <DialogClose className="flex items-center gap-2">
-              <ArrowLeft />
-              <span>{t("header-text")}</span>
-            </DialogClose>
-            <LocaleSelect />
-          </div>
-          <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
-          <DialogDescription>{t("description")}</DialogDescription>
-        </DialogHeader>
-        <SignInForm
-          onSubmit={async (values) => {
-            const result = await signIn("credentials", {
-              email: values.email,
-              password: values.password,
-              redirect: false,
-            });
+  const handleOpenPasswordRecoveryDialog = () => {
+    setIsPasswordRecoveryDialogOpen(true);
+  };
 
-            if (result.error) {
-              alert("Sign in error: " + result.error);
-            } else if (result.ok) {
-              // Sign in successful, you can redirect or close dialog
-              if (onOpenChange) onOpenChange(false);
-            }
-          }}
-        />
-        <DialogFooter>
-          <p className="text-sm text-neutral-500">
-            {t("do-not-have-account")}{" "}
-            <Link href="" className="font-semibold text-neutral-700">
-              {t("do-not-have-account-action")}
-            </Link>
-          </p>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+  return (
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange} {...props}>
+        <DialogContent
+          showCloseButton={isAtLeastTablet}
+          isFullscreen={!isAtLeastTablet}
+        >
+          <SignInContent
+            onSubmit={async (values) => {
+              const result = await signIn("credentials", {
+                email: values.email,
+                password: values.password,
+                redirect: false,
+              });
+
+              if (result?.error) {
+                alert("Sign in error: " + result.error);
+              } else if (result?.ok) {
+                // Sign in successful, close dialog
+                if (onOpenChange) onOpenChange(false);
+              }
+            }}
+            onClickForgotPassword={handleOpenPasswordRecoveryDialog}
+          />
+        </DialogContent>
+      </Dialog>
+      <PasswordRecoveryDialog
+        open={isPasswordRecoveryDialogOpen}
+        onOpenChange={setIsPasswordRecoveryDialogOpen}
+      />
+    </>
   );
 }
 
-type SignInFormProps = {
+type SignInContentProps = {
   onSubmit: (values: SignInFormValues) => Promise<void>;
+  onClickForgotPassword: () => void;
 };
 
-function SignInForm({ onSubmit }: SignInFormProps) {
+function SignInContent({
+  onSubmit,
+  onClickForgotPassword,
+}: SignInContentProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const t = useTranslations("sign-in-dialog");
@@ -121,69 +125,90 @@ function SignInForm({ onSubmit }: SignInFormProps) {
   });
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col"
-        onSubmit={form.handleSubmit(async (values) => {
-          setIsLoading(true);
+    <>
+      <DialogHeader>
+        <div className="md:hidden flex items-center justify-between mb-6">
+          <DialogClose className="flex items-center gap-2">
+            <ArrowLeft />
+            <span>{t("header-text")}</span>
+          </DialogClose>
+          <LocaleSelect />
+        </div>
+        <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
+        <DialogDescription>{t("description")}</DialogDescription>
+      </DialogHeader>
+      <Form {...form}>
+        <form
+          id="sign-in-form"
+          className="flex flex-col"
+          onSubmit={form.handleSubmit(async (values) => {
+            setIsLoading(true);
 
-          try {
-            await onSubmit(values);
-          } finally {
-            setIsLoading(false);
-          }
-        })}
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem className="mb-6">
-              <FormControl>
-                <Input {...field} placeholder={t("placeholders.email")} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem className="mb-6">
-              <FormControl>
-                <Input
-                  {...field}
-                  type="password"
-                  placeholder={t("placeholders.password")}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <p className="mb-14 text-sm text-neutral-500">
-          {t("forgot-password")}{" "}
-          <Link href="" className="font-semibold text-neutral-700">
-            {t("forgot-password-action")}
-          </Link>
-        </p>
+            try {
+              await onSubmit(values);
+            } finally {
+              setIsLoading(false);
+            }
+          })}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="mb-6">
+                <FormControl>
+                  <Input {...field} placeholder={t("placeholders.email")} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="mb-6">
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="password"
+                    placeholder={t("placeholders.password")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <p className="text-sm text-neutral-500">
+            {t("forgot-password")}{" "}
+            <button
+              type="button"
+              className="font-semibold text-neutral-700"
+              onClick={onClickForgotPassword}
+            >
+              {t("forgot-password-action")}
+            </button>
+          </p>
+        </form>
+      </Form>
+      <DialogFooter className="flex-col gap-14">
         <div className="flex gap-6">
           <DialogClose asChild>
             <Button type="button" variant="muted">
               {t("cancel")}
             </Button>
           </DialogClose>
-          <Button
-            loading={isLoading}
-            type="submit"
-            disabled={!form.formState.isValid || isLoading}
-          >
+          <Button form="sign-in-form" type="submit" loading={isLoading}>
             {t("sign-in")}
           </Button>
         </div>
-      </form>
-    </Form>
+        <p className="text-sm text-neutral-500">
+          {t("do-not-have-account")}{" "}
+          <Link href="" className="font-semibold text-neutral-700">
+            {t("do-not-have-account-action")}
+          </Link>
+        </p>
+      </DialogFooter>
+    </>
   );
 }

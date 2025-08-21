@@ -1,7 +1,7 @@
 "use client";
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { XIcon } from "lucide-react";
+import { ArrowLeft, XIcon } from "lucide-react";
 
 import * as React from "react";
 
@@ -101,10 +101,17 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn("flex gap-2", className)}
+      className={cn("flex gap-6 mt-6", className)}
       {...props}
     />
   );
+}
+
+function DialogBack({
+  className,
+  ...props
+}: React.ComponentProps<typeof ArrowLeft>) {
+  return <ArrowLeft className={cn("mb-6", className)} {...props} />;
 }
 
 function DialogTitle({
@@ -145,6 +152,7 @@ export {
   DialogHeader,
   DialogOverlay,
   DialogPortal,
+  DialogBack,
   DialogTitle,
   DialogTrigger,
 };
