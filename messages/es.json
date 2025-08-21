@@ -149,10 +149,7 @@
       "continue": "Continuar",
       "code-not-received": "¿No recibiste el código?",
       "code-not-received-cooldown": "Reenviar código en",
-      "code-not-received-action": "Reenviar código",
-      "placeholders": {
-        "code": "Código de recuperación"
-      }
+      "code-not-received-action": "Reenviar código"
     },
     "new-password-step": {
       "title": "Nueva contraseña",
@@ -167,6 +164,50 @@
         "confirm-password": "Repetir contraseña nueva"
       }
     }
+  },
+  "sign-up-dialog": {
+    "information-step": {
+      "title": "Registrarse en Adamo Services",
+      "description": "Ingresa a continuación tu información personal para continuar:",
+      "cancel": "Cancelar",
+      "confirm": "Crear cuenta",
+      "placeholders": {
+        "names": "Nombres",
+        "last-names": "Apellidos",
+        "email": "Correo electrónico",
+        "password": "Crear contraseña",
+        "confirm-password": "Repetir contraseña"
+      },
+      "descriptions": {
+        "password": "Debe contener al menos 8 caracteres, una mayúscula y un número."
+      }
+    },
+    "code-step": {
+      "title": "Revisa tu correo",
+      "description": "Hemos enviado un código de confirmación al mail:",
+      "cancel": "Cancelar",
+      "confirm": "Crear cuenta",
+      "code-not-received": "¿No recibiste el código?",
+      "code-not-received-cooldown": "Reenviar código en",
+      "code-not-received-action": "Reenviar código"
+    },
+    "2fa-step": {
+      "title": "Activar doble factor de autenticación",
+      "description": "Antes de continuar es necesario activar el 2FA para dar mayor seguridad a tu cuenta:",
+      "cancel": "Cancelar",
+      "confirm": "Activar 2FA",
+      "instructions": {
+        "one": "Descarga en tu móvil una aplicación de autenticación como por ejemplo Google Authenticator",
+        "two": "Abre la aplicación y escanea el siguiente QR, o ingresa manualmente el código: {code}",
+        "three": "Ingresa el código de 6 dígitos brindado por la aplicación de autenticación:"
+      }
+    }
+  },
+  "2fa-activated": {
+    "title": "¡Doble factor de autenticación (2FA) activado!",
+    "description": "El doble factor de autenticación ha sido activado exitosamente:",
+    "content": "La seguridad de tu cuenta es ahora más fuerte y puedes estar seguro contra ingresos no autorizados.",
+    "confirm": "Aceptar"
   },
   "about": {
     "hero": {

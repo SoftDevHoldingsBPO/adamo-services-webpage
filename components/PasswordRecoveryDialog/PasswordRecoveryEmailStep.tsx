@@ -1,5 +1,7 @@
-import { z } from "@/i18n/zod-i18n";
+import { EmailSchema } from "@/schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft } from "lucide-react";
+import z from "zod";
 
 import { useForm } from "react-hook-form";
 
@@ -23,9 +25,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LocaleSelect from "@/components/ui/locale-select";
 
 export const PasswordRecoveryFormSchema = z.object({
-  email: z.string().email(),
+  email: EmailSchema,
 });
 
 export type PasswordRecoveryFormValues = z.infer<
@@ -51,10 +54,17 @@ export function PasswordRecoveryEmailStep({
   return (
     <>
       <DialogHeader>
-        <DialogClose>
-          <DialogBack />
-        </DialogClose>
-        <DialogTitle>{t("title")}</DialogTitle>
+        <div className="md:hidden flex gap-2 items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <DialogClose asChild>
+              <ArrowLeft />
+            </DialogClose>
+            <DialogTitle>{t("title")}</DialogTitle>
+          </div>
+          <LocaleSelect />
+        </div>
+        <DialogBack className="hidden md:block" />
+        <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <Form {...form}>

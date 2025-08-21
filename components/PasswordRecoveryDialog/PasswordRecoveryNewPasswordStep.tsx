@@ -1,5 +1,7 @@
-import { z } from "@/i18n/zod-i18n";
+import { PasswordWithConfirmationSchema } from "@/schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft } from "lucide-react";
+import z from "zod";
 
 import { useForm } from "react-hook-form";
 
@@ -8,7 +10,6 @@ import { useTranslations } from "next-intl";
 import { PasswordRecoveryStep } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContent";
 import { Button } from "@/components/ui/button";
 import {
-  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -24,29 +25,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LocaleSelect from "@/components/ui/locale-select";
 
-export const PasswordRecoveryNewPasswordFormSchema = z
-  .object({
-    password: z
-      .string()
-      .min(8)
-      .refine((value) => /^(?=.*[A-Z])(?=.*\d).*$/.test(value), {
-        params: {
-          i18n: {
-            key: "errors.password",
-          },
-        },
-      }),
-    confirmPassword: z.string().min(1),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    params: {
-      i18n: {
-        key: "errors.confirm_password",
-      },
-    },
-    path: ["confirmPassword"],
-  });
+export const PasswordRecoveryNewPasswordFormSchema =
+  PasswordWithConfirmationSchema;
 
 export type PasswordRecoveryNewPasswordFormValues = z.infer<
   typeof PasswordRecoveryNewPasswordFormSchema
@@ -72,10 +54,13 @@ export function PasswordRecoveryNewPasswordStep({
   return (
     <>
       <DialogHeader>
-        <DialogClose>
-          <DialogBack />
-        </DialogClose>
-        <DialogTitle>{t("title")}</DialogTitle>
+        <div className="md:hidden flex gap-2 items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <DialogTitle>{t("title")}</DialogTitle>
+          </div>
+          <LocaleSelect />
+        </div>
+        <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <Form {...form}>
@@ -83,7 +68,6 @@ export function PasswordRecoveryNewPasswordStep({
           id="password-recovery-email-step-form"
           onSubmit={form.handleSubmit((values) => {})}
         >
-          <p className="text-neutral-700 mb-8">eatteer@gmail.com</p>
           <FormField
             control={form.control}
             name="password"

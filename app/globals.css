@@ -177,6 +177,8 @@
   --color-adamo-risk-800: var(--adamo-risk-800);
   --color-adamo-risk-900: var(--adamo-risk-900);
 
+  --color-success-50: var(--success-50);
+  --color-success-200: var(--success-200);
   --color-success-600: var(--success-600);
 
   --drop-shadow-parallax: -48px 32px 56px rgba(77, 87, 97, 0.08);

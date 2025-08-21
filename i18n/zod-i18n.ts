@@ -24,6 +24,3 @@ z.setErrorMap(makeZodI18nMap({ ns: ["zod", "custom"] }));
 export const setZodLanguage = (locale: "es" | "en") => {
   i18next.changeLanguage(locale);
 };
-
-// Export configured zod instance
-export { z };

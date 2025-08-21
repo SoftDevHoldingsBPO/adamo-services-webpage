@@ -37,6 +37,22 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+function CustomInputOTPGroup({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="input-otp-group"
+      className={cn(
+        "flex items-center w-full justify-between gap-2 md:gap-6",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 function InputOTPSlot({
   index,
   className,
@@ -67,6 +83,21 @@ function InputOTPSlot({
   );
 }
 
+function CustomInputOTPSlot({
+  className,
+  ...props
+}: React.ComponentProps<typeof InputOTPSlot>) {
+  return (
+    <InputOTPSlot
+      {...props}
+      className={cn(
+        "w-full shadow-none border border-neutral-200 rounded-lg h-auto aspect-square md:aspect-[16/11]",
+        className,
+      )}
+    />
+  );
+}
+
 function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
   return (
     <div data-slot="input-otp-separator" role="separator" {...props}>
@@ -75,4 +106,11 @@ function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
   );
 }
 
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+  CustomInputOTPSlot,
+  CustomInputOTPGroup,
+};

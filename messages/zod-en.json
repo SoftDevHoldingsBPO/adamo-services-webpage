@@ -34,7 +34,7 @@
       "string": {
         "exact": "String must contain exactly {{minimum}} character(s)",
         "inclusive": "String must contain at least {{minimum}} character(s)",
-        "not_inclusive": "String must contain more than {{minimum}} character(s)"
+        "not_inclusive": "String must contain over {{minimum}} character(s)"
       },
       "number": {
         "exact": "Number must be exactly {{minimum}}",
@@ -56,12 +56,12 @@
       "array": {
         "exact": "Array must contain exactly {{maximum}} element(s)",
         "inclusive": "Array must contain at most {{maximum}} element(s)",
-        "not_inclusive": "Array must contain fewer than {{maximum}} element(s)"
+        "not_inclusive": "Array must contain less than {{maximum}} element(s)"
       },
       "string": {
         "exact": "String must contain exactly {{maximum}} character(s)",
         "inclusive": "String must contain at most {{maximum}} character(s)",
-        "not_inclusive": "String must contain fewer than {{maximum}} character(s)"
+        "not_inclusive": "String must contain under {{maximum}} character(s)"
       },
       "number": {
         "exact": "Number must be exactly {{maximum}}",
@@ -75,39 +75,39 @@
       },
       "date": {
         "exact": "Date must be exactly {{- maximum, datetime}}",
-        "inclusive": "Date must be less than or equal to {{- maximum, datetime}}",
-        "not_inclusive": "Date must be less than {{- maximum, datetime}}"
+        "inclusive": "Date must be smaller than or equal to {{- maximum, datetime}}",
+        "not_inclusive": "Date must be smaller than {{- maximum, datetime}}"
       }
     }
   },
   "validations": {
-    "email": "Email",
-    "url": "URL",
-    "uuid": "UUID",
-    "cuid": "CUID",
-    "regex": "Regular expression",
-    "datetime": "Datetime"
+    "email": "email",
+    "url": "url",
+    "uuid": "uuid",
+    "cuid": "cuid",
+    "regex": "regex",
+    "datetime": "datetime"
   },
   "types": {
-    "function": "Function",
-    "number": "Number",
-    "string": "String",
-    "nan": "Not a number",
-    "integer": "Integer",
-    "float": "Float",
-    "boolean": "Boolean",
-    "date": "Date",
-    "bigint": "BigInt",
-    "undefined": "Undefined",
-    "symbol": "Symbol",
-    "null": "Null",
-    "array": "Array",
-    "object": "Object",
-    "unknown": "Unknown",
-    "promise": "Promise",
-    "void": "Void",
-    "never": "Never",
-    "map": "Map",
-    "set": "Set"
+    "function": "function",
+    "number": "number",
+    "string": "string",
+    "nan": "nan",
+    "integer": "integer",
+    "float": "float",
+    "boolean": "boolean",
+    "date": "date",
+    "bigint": "bigint",
+    "undefined": "undefined",
+    "symbol": "symbol",
+    "null": "null",
+    "array": "array",
+    "object": "object",
+    "unknown": "unknown",
+    "promise": "promise",
+    "void": "void",
+    "never": "never",
+    "map": "map",
+    "set": "set"
   }
 }

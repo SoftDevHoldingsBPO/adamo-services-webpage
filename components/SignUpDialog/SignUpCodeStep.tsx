@@ -9,10 +9,9 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import CountdownText from "@/components/CountdownText";
-import { PasswordRecoveryStep } from "@/components/PasswordRecoveryDialog/PasswordRecoveryContent";
+import { useSignUp } from "@/components/SignUpDialog/SignUpContext";
 import { Button } from "@/components/ui/button";
 import {
-  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -33,25 +32,19 @@ import {
 } from "@/components/ui/input-otp";
 import LocaleSelect from "@/components/ui/locale-select";
 
-export const PasswordRecoveryCodeFormSchema = z.object({
+export const SignUpCodeFormSchema = z.object({
   code: SixCodeSchema,
 });
 
-export type PasswordRecoveryCodeFormValues = z.infer<
-  typeof PasswordRecoveryCodeFormSchema
->;
+export type SignUpCodeFormValues = z.infer<typeof SignUpCodeFormSchema>;
 
-export type PasswordRecoveryCodeStepProps = {
-  setStep: (step: PasswordRecoveryStep) => void;
-};
+export function SignUpCodeStep() {
+  const t = useTranslations("sign-up-dialog.code-step");
 
-export function PasswordRecoveryCodeStep({
-  setStep,
-}: PasswordRecoveryCodeStepProps) {
-  const t = useTranslations("password-recovery-dialog.code-step");
+  const { setSignUpStep } = useSignUp();
 
-  const form = useForm<PasswordRecoveryCodeFormValues>({
-    resolver: zodResolver(PasswordRecoveryCodeFormSchema),
+  const form = useForm<SignUpCodeFormValues>({
+    resolver: zodResolver(SignUpCodeFormSchema),
     defaultValues: {
       code: "",
     },
@@ -69,18 +62,18 @@ export function PasswordRecoveryCodeStep({
           </div>
           <LocaleSelect />
         </div>
-        <DialogBack className="hidden md:block" />
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <Form {...form}>
         <form
-          id="password-recovery-email-step-form"
+          id="sign-up-code-step-form"
           onSubmit={form.handleSubmit((values) => {
-            setStep("new-password");
+            console.log("Verification code:", values);
+            setSignUpStep("2fa");
           })}
         >
-          <p className="text-neutral-700 mb-8">eatteer@gmail.com</p>
+          <p className="text-neutral-700 mb-8">user@example.com</p>
           <FormField
             control={form.control}
             name="code"
@@ -122,8 +115,8 @@ export function PasswordRecoveryCodeStep({
         <DialogClose asChild>
           <Button variant="muted">{t("cancel")}</Button>
         </DialogClose>
-        <Button type="submit" form="password-recovery-email-step-form">
-          {t("continue")}
+        <Button type="submit" form="sign-up-code-step-form">
+          {t("confirm")}
         </Button>
       </DialogFooter>
     </>

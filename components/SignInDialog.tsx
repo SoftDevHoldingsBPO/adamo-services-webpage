@@ -1,18 +1,19 @@
 "use client";
 
-import { z } from "@/i18n/zod-i18n";
+import { EmailSchema, PasswordSchema } from "@/schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
+import z from "zod";
 
-import { ComponentProps, ReactNode, useState } from "react";
+import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 import { PasswordRecoveryDialog } from "@/components/PasswordRecoveryDialog/PasswordRecoveryDialog";
+import { SignUpDialog } from "@/components/SignUpDialog/SignUpDialog";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,7 +23,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -35,17 +35,8 @@ import { Input } from "@/components/ui/input";
 import LocaleSelect from "@/components/ui/locale-select";
 
 const SignInFormSchema = z.object({
-  email: z.string().email(),
-  password: z
-    .string()
-    .min(8)
-    .refine((value) => /^(?=.*[A-Z])(?=.*\d).*$/.test(value), {
-      params: {
-        i18n: {
-          key: "errors.password",
-        },
-      },
-    }),
+  email: EmailSchema,
+  password: PasswordSchema,
 });
 
 export type SignInFormValues = z.infer<typeof SignInFormSchema>;
@@ -60,10 +51,16 @@ export function SignInDialog({
   onOpenChange,
   ...props
 }: SignInDialogProps) {
+  const [isSignUpDialogOpen, setIsSignUpDialogOpen] = useState(false);
+
   const [isPasswordRecoveryDialogOpen, setIsPasswordRecoveryDialogOpen] =
     useState(false);
 
   const isAtLeastTablet = useMediaQuery("(min-width: 768px)");
+
+  const handleOpenSignUpDialog = () => {
+    setIsSignUpDialogOpen(true);
+  };
 
   const handleOpenPasswordRecoveryDialog = () => {
     setIsPasswordRecoveryDialogOpen(true);
@@ -84,17 +81,22 @@ export function SignInDialog({
                 redirect: false,
               });
 
-              if (result?.error) {
+              if (result.error) {
                 alert("Sign in error: " + result.error);
-              } else if (result?.ok) {
+              } else if (result.ok) {
                 // Sign in successful, close dialog
                 if (onOpenChange) onOpenChange(false);
               }
             }}
+            onClickSignUp={handleOpenSignUpDialog}
             onClickForgotPassword={handleOpenPasswordRecoveryDialog}
           />
         </DialogContent>
       </Dialog>
+      <SignUpDialog
+        open={isSignUpDialogOpen}
+        onOpenChange={setIsSignUpDialogOpen}
+      />
       <PasswordRecoveryDialog
         open={isPasswordRecoveryDialogOpen}
         onOpenChange={setIsPasswordRecoveryDialogOpen}
@@ -105,11 +107,13 @@ export function SignInDialog({
 
 type SignInContentProps = {
   onSubmit: (values: SignInFormValues) => Promise<void>;
+  onClickSignUp: () => void;
   onClickForgotPassword: () => void;
 };
 
 function SignInContent({
   onSubmit,
+  onClickSignUp,
   onClickForgotPassword,
 }: SignInContentProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -127,11 +131,13 @@ function SignInContent({
   return (
     <>
       <DialogHeader>
-        <div className="md:hidden flex items-center justify-between mb-6">
-          <DialogClose className="flex items-center gap-2">
-            <ArrowLeft />
-            <span>{t("header-text")}</span>
-          </DialogClose>
+        <div className="md:hidden flex gap-2 items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <DialogClose>
+              <ArrowLeft />
+            </DialogClose>
+            <DialogTitle>{t("header-text")}</DialogTitle>
+          </div>
           <LocaleSelect />
         </div>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
@@ -204,9 +210,13 @@ function SignInContent({
         </div>
         <p className="text-sm text-neutral-500">
           {t("do-not-have-account")}{" "}
-          <Link href="" className="font-semibold text-neutral-700">
+          <button
+            type="button"
+            className="font-semibold text-neutral-700"
+            onClick={onClickSignUp}
+          >
             {t("do-not-have-account-action")}
-          </Link>
+          </button>
         </p>
       </DialogFooter>
     </>

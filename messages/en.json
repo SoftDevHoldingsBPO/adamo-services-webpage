@@ -12,7 +12,7 @@
     "about": "About Us",
     "contact": "Contact sales",
     "sign-in": "Sign in",
-    "login": "Login"
+    "login": "Sign in"
   },
   "services": {
     "servicesTitle": "What do you need to solve today?",
@@ -118,11 +118,11 @@
     }
   },
   "sign-in-dialog": {
-    "header-text": "Sign In",
+    "header-text": "Sign in",
     "title": "Sign in to your Adamo account",
     "description": "Enter your credentials below to continue:",
     "cancel": "Cancel",
-    "sign-in": "Sign In",
+    "sign-in": "Sign in",
     "forgot-password": "Forgot your password?",
     "forgot-password-action": "Click here.",
     "do-not-have-account": "Don't have an account?",
@@ -167,6 +167,50 @@
         "confirm-password": "Confirm new password"
       }
     }
+  },
+  "sign-up-dialog": {
+    "information-step": {
+      "title": "Sign up for Adamo Services",
+      "description": "Enter your personal information below to continue:",
+      "cancel": "Cancel",
+      "confirm": "Create account",
+      "placeholders": {
+        "names": "First names",
+        "last-names": "Last names",
+        "email": "Email address",
+        "password": "Create password",
+        "confirm-password": "Repeat password"
+      },
+      "descriptions": {
+        "password": "Must contain at least 8 characters, one uppercase letter and one number."
+      }
+    },
+    "code-step": {
+      "title": "Check your email",
+      "description": "We have sent a confirmation code to the email:",
+      "cancel": "Cancel",
+      "confirm": "Create account",
+      "code-not-received": "Didn't receive the code?",
+      "code-not-received-cooldown": "Resend code in",
+      "code-not-received-action": "Resend code"
+    },
+    "2fa-step": {
+      "title": "Enable two-factor authentication",
+      "description": "Before continuing, it is necessary to enable 2FA to provide greater security to your account:",
+      "cancel": "Cancel",
+      "confirm": "Enable 2FA",
+      "instructions": {
+        "one": "Download an authentication app on your mobile device such as Google Authenticator",
+        "two": "Open the app and scan the following QR code, or manually enter the code: {code}",
+        "three": "Enter the 6-digit code provided by the authentication app:"
+      }
+    }
+  },
+  "2fa-activated": {
+    "title": "Two-factor authentication (2FA) activated!",
+    "description": "Two-factor authentication has been successfully activated:",
+    "content": "Your account security is now stronger and you can be safe against unauthorized access.",
+    "confirm": "Accept"
   },
   "about": {
     "hero": {

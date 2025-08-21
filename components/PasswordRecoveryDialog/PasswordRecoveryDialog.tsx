@@ -16,7 +16,10 @@ export function PasswordRecoveryDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange} {...props}>
-      <DialogContent isFullscreen={!isAtLeastTablet}>
+      <DialogContent
+        showCloseButton={isAtLeastTablet}
+        isFullscreen={!isAtLeastTablet}
+      >
         <PasswordRecoveryContent />
       </DialogContent>
     </Dialog>
