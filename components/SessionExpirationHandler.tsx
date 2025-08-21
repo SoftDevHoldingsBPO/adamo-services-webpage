@@ -12,7 +12,7 @@ export function SessionExpirationHandler() {
   const hasRedirected = useRef(false);
 
   useEffect(() => {
-    // Only check for expiration if we're not loading and haven't already redirected
+    // Only check for expiration if not loading and haven't already redirected
     if (status === "loading" || hasRedirected.current) {
       return;
     }
@@ -20,16 +20,15 @@ export function SessionExpirationHandler() {
     // Check if session has TokenExpiredError
     if (session?.error === "TokenExpiredError") {
       hasRedirected.current = true;
-      signOut({ callbackUrl: "/" }); // Sign out and redirect to home
+      signOut({ callbackUrl: "/" });
       return;
     }
 
     // If session is null and we were previously authenticated, it means the session expired
     if (status === "unauthenticated" && !hasRedirected.current) {
-      // Check if we're not already on the home page
+      // Check if user is not already on the home page
       if (window.location.pathname !== "/") {
         hasRedirected.current = true;
-        console.log("Session unauthenticated, redirecting to home...");
         router.push("/");
       }
     }

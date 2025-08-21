@@ -3,6 +3,7 @@ import { ComponentProps } from "react";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 
+import { getInitials } from "@/lib/get-initials";
 import { cn } from "@/lib/utils";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -31,7 +32,7 @@ export function ProfileDropdown({
           {...props}
         >
           <AvatarImage src={user.image ?? "https://github.com/shadcn.png"} />
-          <AvatarFallback>{user.name}</AvatarFallback>
+          <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

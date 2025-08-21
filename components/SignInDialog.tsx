@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
 
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { signIn } from "next-auth/react";
@@ -82,11 +82,11 @@ export function SignInDialog({
               redirect: false,
             });
 
-            if (result?.error) {
+            if (result.error) {
               alert("Sign in error: " + result.error);
-            } else if (result?.ok) {
+            } else if (result.ok) {
               // Sign in successful, you can redirect or close dialog
-              onOpenChange?.(false);
+              if (onOpenChange) onOpenChange(false);
             }
           }}
         />
@@ -104,10 +104,12 @@ export function SignInDialog({
 }
 
 type SignInFormProps = {
-  onSubmit: (values: SignInFormValues) => void;
+  onSubmit: (values: SignInFormValues) => Promise<void>;
 };
 
 function SignInForm({ onSubmit }: SignInFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const t = useTranslations("sign-in-dialog");
 
   const form = useForm<SignInFormValues>({
@@ -122,8 +124,14 @@ function SignInForm({ onSubmit }: SignInFormProps) {
     <Form {...form}>
       <form
         className="flex flex-col"
-        onSubmit={form.handleSubmit((values) => {
-          onSubmit(values);
+        onSubmit={form.handleSubmit(async (values) => {
+          setIsLoading(true);
+
+          try {
+            await onSubmit(values);
+          } finally {
+            setIsLoading(false);
+          }
         })}
       >
         <FormField
@@ -167,7 +175,11 @@ function SignInForm({ onSubmit }: SignInFormProps) {
               {t("cancel")}
             </Button>
           </DialogClose>
-          <Button type="submit" disabled={!form.formState.isValid}>
+          <Button
+            loading={isLoading}
+            type="submit"
+            disabled={!form.formState.isValid || isLoading}
+          >
             {t("sign-in")}
           </Button>
         </div>
