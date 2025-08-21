@@ -25,7 +25,7 @@ export function TwoFactorAuthDialogActivated({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange} {...props}>
-      <DialogContent>
+      <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
