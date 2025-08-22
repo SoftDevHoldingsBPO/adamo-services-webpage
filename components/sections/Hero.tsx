@@ -5,15 +5,34 @@ import { cn } from "@/lib/utils";
 interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
   cursorText?: string;
   bgColor?: string;
+  sectionClassName?: string;
+  containerClassName?: string;
+  contentClassName?: string;
+  containerStartChildren?: React.ReactNode;
 }
 
 const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
-  ({ children, bgColor = "bg-adamo-pay-700", cursorText, ...rest }, ref) => {
+  (
+    {
+      children,
+      bgColor = "bg-adamo-pay-700",
+      cursorText,
+      sectionClassName,
+      containerClassName,
+      contentClassName,
+      containerStartChildren,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
         aria-labelledby="hero-title"
-        className="h-screen min-h-[780px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 lg:min-h-[820px] md:h-[calc(100vh-88px)]"
+        className={cn(
+          "h-screen min-h-[780px] max-h-[960px] md:px-4 lg:px-6 md:mt-[88px] md:pb-6 lg:min-h-[820px] md:h-[calc(100vh-88px)]",
+          sectionClassName,
+        )}
         {...rest}
       >
         <div
@@ -22,9 +41,16 @@ const Hero = React.forwardRef<HTMLDivElement, HeroProps>(
           className={cn(
             "h-full px-4 md:rounded-4xl overflow-hidden relative pt-32 lg:pt-48",
             bgColor,
+            containerClassName,
           )}
         >
-          <div className="max-w-3xl mx-auto md:text-center text-white">
+          {containerStartChildren}
+          <div
+            className={cn(
+              "max-w-3xl mx-auto md:text-center text-white",
+              contentClassName,
+            )}
+          >
             {children}
           </div>
         </div>

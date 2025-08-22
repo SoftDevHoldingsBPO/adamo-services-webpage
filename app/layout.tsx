@@ -57,7 +57,7 @@ export default async function RootLayout({
         <NavigationProvider>
           <Providers>
             <SessionProvider session={session}>
-              <SessionExpirationHandler />
+              {/* <SessionExpirationHandler /> */}
               <NextIntlClientProvider>
                 <ZodI18nProvider>
                   <BlogProvider>
