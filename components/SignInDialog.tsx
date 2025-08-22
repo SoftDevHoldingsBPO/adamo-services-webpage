@@ -163,7 +163,11 @@ function SignInContent({
             render={({ field }) => (
               <FormItem className="mb-6">
                 <FormControl>
-                  <Input {...field} placeholder={t("placeholders.email")} />
+                  <Input
+                    {...field}
+                    isError={!!form.formState.errors.email}
+                    placeholder={t("placeholders.email")}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -178,6 +182,7 @@ function SignInContent({
                   <Input
                     {...field}
                     type="password"
+                    isError={!!form.formState.errors.password}
                     placeholder={t("placeholders.password")}
                   />
                 </FormControl>

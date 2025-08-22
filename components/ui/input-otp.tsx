@@ -7,35 +7,36 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function InputOTP({
-  className,
-  containerClassName,
-  ...props
-}: React.ComponentProps<typeof OTPInput> & {
+export interface InputOTPProps {
   containerClassName?: string;
-}) {
-  return (
-    <OTPInput
-      data-slot="input-otp"
-      containerClassName={cn(
-        "flex items-center gap-2 has-disabled:opacity-50",
-        containerClassName,
-      )}
-      className={cn("disabled:cursor-not-allowed", className)}
-      {...props}
-    />
-  );
+  /** Optional error state to render error styling on slots */
+  isError?: boolean;
 }
 
-function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="input-otp-group"
-      className={cn("flex items-center", className)}
-      {...props}
-    />
-  );
-}
+const InputOTP = React.forwardRef<
+  React.ElementRef<typeof OTPInput>,
+  React.ComponentProps<typeof OTPInput> & InputOTPProps
+>(({ className, containerClassName, isError, ...props }, ref) => (
+  <OTPInput
+    ref={ref}
+    containerClassName={cn(
+      "flex items-center gap-2 has-[:disabled]:opacity-50",
+      containerClassName,
+    )}
+    className={cn("disabled:cursor-not-allowed", className)}
+    data-slot="input-otp"
+    {...props}
+  />
+));
+InputOTP.displayName = "InputOTP";
+
+const InputOTPGroup = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentProps<"div">
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("flex items-center", className)} {...props} />
+));
+InputOTPGroup.displayName = "InputOTPGroup";
 
 function CustomInputOTPGroup({
   className,
@@ -56,9 +57,11 @@ function CustomInputOTPGroup({
 function InputOTPSlot({
   index,
   className,
+  isError,
   ...props
 }: React.ComponentProps<"div"> & {
   index: number;
+  isError?: boolean;
 }) {
   const inputOTPContext = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {};
@@ -68,7 +71,8 @@ function InputOTPSlot({
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        "data-[active=true]:border-ring data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:ring-destructive/20 dark:data-[active=true]:aria-invalid:ring-destructive/40 aria-invalid:border-destructive data-[active=true]:aria-invalid:border-destructive dark:bg-input/30 border-input relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]",
+        "data-[active=true]:border-ring data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:ring-destructive/20 dark:data-[active=true]:aria-invalid:ring-destructive/40 aria-invalid:border-destructive data-[active=true]:aria-invalid:border-destructive dark:bg-input/30 border-input relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-xs transition-all outline outline-transparent first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]",
+        isError && "outline-destructive focus-visible:outline-destructive focus-visible:ring-destructive/20",
         className,
       )}
       {...props}
@@ -85,11 +89,13 @@ function InputOTPSlot({
 
 function CustomInputOTPSlot({
   className,
+  isError,
   ...props
 }: React.ComponentProps<typeof InputOTPSlot>) {
   return (
     <InputOTPSlot
       {...props}
+      isError={isError}
       className={cn(
         "w-full shadow-none border border-neutral-200 rounded-lg h-auto aspect-square md:aspect-[16/11]",
         className,
@@ -98,13 +104,15 @@ function CustomInputOTPSlot({
   );
 }
 
-function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
-  return (
-    <div data-slot="input-otp-separator" role="separator" {...props}>
-      <MinusIcon />
-    </div>
-  );
-}
+const InputOTPSeparator = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentProps<"div">
+>(({ ...props }, ref) => (
+  <div ref={ref} role="separator" {...props}>
+    <MinusIcon />
+  </div>
+));
+InputOTPSeparator.displayName = "InputOTPSeparator";
 
 export {
   InputOTP,

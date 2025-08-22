@@ -85,12 +85,30 @@ export function SignUpCodeStep() {
                     {...field}
                   >
                     <CustomInputOTPGroup>
-                      <CustomInputOTPSlot index={0} />
-                      <CustomInputOTPSlot index={1} />
-                      <CustomInputOTPSlot index={2} />
-                      <CustomInputOTPSlot index={3} />
-                      <CustomInputOTPSlot index={4} />
-                      <CustomInputOTPSlot index={5} />
+                      <CustomInputOTPSlot
+                        index={0}
+                        isError={!!form.formState.errors.code}
+                      />
+                      <CustomInputOTPSlot
+                        index={1}
+                        isError={!!form.formState.errors.code}
+                      />
+                      <CustomInputOTPSlot
+                        index={2}
+                        isError={!!form.formState.errors.code}
+                      />
+                      <CustomInputOTPSlot
+                        index={3}
+                        isError={!!form.formState.errors.code}
+                      />
+                      <CustomInputOTPSlot
+                        index={4}
+                        isError={!!form.formState.errors.code}
+                      />
+                      <CustomInputOTPSlot
+                        index={5}
+                        isError={!!form.formState.errors.code}
+                      />
                     </CustomInputOTPGroup>
                   </InputOTP>
                 </FormControl>

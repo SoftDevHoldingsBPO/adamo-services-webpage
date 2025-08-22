@@ -76,6 +76,7 @@ export function PasswordRecoveryNewPasswordStep() {
                   <Input
                     type="password"
                     placeholder={t("placeholders.password")}
+                    isError={!!form.formState.errors.password}
                     {...field}
                   />
                 </FormControl>
@@ -92,6 +93,7 @@ export function PasswordRecoveryNewPasswordStep() {
                 <FormControl>
                   <Input
                     type="password"
+                    isError={!!form.formState.errors.confirmPassword}
                     placeholder={t("placeholders.confirm-password")}
                     {...field}
                   />

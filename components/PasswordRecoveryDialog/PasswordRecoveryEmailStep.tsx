@@ -76,7 +76,11 @@ export function PasswordRecoveryEmailStep() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder={t("placeholders.email")} />
+                  <Input
+                    {...field}
+                    isError={!!form.formState.errors.email}
+                    placeholder={t("placeholders.email")}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

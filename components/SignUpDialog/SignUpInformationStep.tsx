@@ -84,7 +84,11 @@ export function SignUpInformationStep() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder={t("placeholders.names")} />
+                  <Input
+                    {...field}
+                    isError={!!form.formState.errors.names}
+                    placeholder={t("placeholders.names")}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -98,6 +102,7 @@ export function SignUpInformationStep() {
                 <FormControl>
                   <Input
                     {...field}
+                    isError={!!form.formState.errors.lastNames}
                     placeholder={t("placeholders.last-names")}
                   />
                 </FormControl>
@@ -113,6 +118,7 @@ export function SignUpInformationStep() {
                 <FormControl>
                   <Input
                     {...field}
+                    isError={!!form.formState.errors.email}
                     placeholder={t("placeholders.email")}
                     type="email"
                   />
@@ -129,6 +135,7 @@ export function SignUpInformationStep() {
                 <FormControl>
                   <Input
                     {...field}
+                    isError={!!form.formState.errors.password}
                     placeholder={t("placeholders.password")}
                     type="password"
                   />
@@ -146,6 +153,7 @@ export function SignUpInformationStep() {
                 <FormControl>
                   <Input
                     {...field}
+                    isError={!!form.formState.errors.confirmPassword}
                     placeholder={t("placeholders.confirm-password")}
                     type="password"
                   />
