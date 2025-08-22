@@ -65,7 +65,9 @@ export function PasswordRecoveryCodeStep() {
           </div>
           <LocaleSelect />
         </div>
-        <DialogBack className="hidden md:block" />
+        <DialogClose>
+          <DialogBack className="hidden md:block" />
+        </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>

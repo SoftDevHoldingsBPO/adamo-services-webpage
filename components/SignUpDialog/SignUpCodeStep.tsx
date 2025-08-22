@@ -12,6 +12,7 @@ import CountdownText from "@/components/CountdownText";
 import { useSignUp } from "@/components/SignUpDialog/SignUpContext";
 import { Button } from "@/components/ui/button";
 import {
+  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -62,6 +63,9 @@ export function SignUpCodeStep() {
           </div>
           <LocaleSelect />
         </div>
+        <DialogClose>
+          <DialogBack className="hidden md:block" />
+        </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>

@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useSignUp } from "@/components/SignUpDialog/SignUpContext";
 import { Button } from "@/components/ui/button";
 import {
+  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -67,6 +68,9 @@ export function SignUpInformationStep() {
           </div>
           <LocaleSelect />
         </div>
+        <DialogClose>
+          <DialogBack className="hidden md:block" />
+        </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>

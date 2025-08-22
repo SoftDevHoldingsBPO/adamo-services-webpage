@@ -37,7 +37,7 @@ export type PasswordRecoveryFormValues = z.infer<
 
 export function PasswordRecoveryEmailStep() {
   const t = useTranslations("password-recovery-dialog.email-step");
-  
+
   const { setPasswordRecoveryStep } = usePasswordRecovery();
 
   const form = useForm<PasswordRecoveryFormValues>({
@@ -52,14 +52,16 @@ export function PasswordRecoveryEmailStep() {
       <DialogHeader>
         <div className="md:hidden flex gap-2 items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <DialogClose asChild>
+            <DialogClose>
               <ArrowLeft />
             </DialogClose>
             <DialogTitle>{t("title")}</DialogTitle>
           </div>
           <LocaleSelect />
         </div>
-        <DialogBack className="hidden md:block" />
+        <DialogClose>
+          <DialogBack className="hidden md:block" />
+        </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
