@@ -61,8 +61,8 @@ const HomeHero = () => {
           playsInline
           title="Background video"
         >
-          <source src="/video/hero.webm" type="video/webm" />
-          <source src="/video/hero.mp4" type="video/mp4" />
+          <source src="/video/new-video-hero.webm" type="video/webm" />
+          <source src="/video/new-video-hero.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 

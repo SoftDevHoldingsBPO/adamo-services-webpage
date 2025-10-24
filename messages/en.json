@@ -10,7 +10,8 @@
     "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
-    "contact": "Contact Sales"
+    "contact": "Contact Sales",
+    "dataProcessingPolicy": "Data processing policy"
   },
   "services": {
     "servicesTitle": "What do you need to solve today?",

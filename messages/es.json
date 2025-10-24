@@ -10,7 +10,8 @@
     "faqs": "FAQ's",
     "blog": "Blog",
     "about": "Nosotros",
-    "contact": "Hablar con ventas"
+    "contact": "Hablar con ventas",
+    "dataProcessingPolicy": "Política de tratamiento de datos"
   },
   "services": {
     "servicesTitle": "¿Qué necesitas resolver hoy?",
