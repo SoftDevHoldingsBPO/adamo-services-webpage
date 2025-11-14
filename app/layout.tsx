@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { BlogProvider } from "@/providers/BlogProvider";
 import { NavigationProvider } from "@/providers/NavigationProvider";
 import { SessionProvider } from "@/providers/SessionProvider";
@@ -38,8 +37,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
   const locale = await getLocale();
 
   return (
@@ -56,12 +53,12 @@ export default async function RootLayout({
         <MouseFollowerCursor />
         <NavigationProvider>
           <Providers>
-            <SessionProvider session={session}>
-              {/* <SessionExpirationHandler /> */}
+            <SessionProvider>
+              <SessionExpirationHandler />
               <NextIntlClientProvider>
                 <ZodI18nProvider>
                   <BlogProvider>
-                    <Navbar user={session?.user} />
+                    <Navbar />
                     <Preloader />
                     <main className="flex-auto">{children}</main>
                     <Footer locale={locale} />
@@ -70,15 +67,6 @@ export default async function RootLayout({
                 </ZodI18nProvider>
               </NextIntlClientProvider>
             </SessionProvider>
-            {/* <NextIntlClientProvider>
-              <BlogProvider>
-                <Navbar />
-                <Preloader />
-                <main className="flex-auto">{children}</main>
-                <Footer locale={locale} />
-                <WaButton />
-              </BlogProvider>
-            </NextIntlClientProvider> */}
           </Providers>
         </NavigationProvider>
       </body>

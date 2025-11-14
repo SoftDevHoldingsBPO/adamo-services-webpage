@@ -40,7 +40,6 @@
     "motion": "^12.15.0",
     "mouse-follower": "^1.1.2",
     "next": "15.3.1",
-    "next-auth": "^5.0.0-beta.29",
     "next-intl": "^4.0.3",
     "next-video": "^2.2.0",
     "react": "^19.0.0",

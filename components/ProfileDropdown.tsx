@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 
-import { User } from "next-auth";
-import { signOut } from "next-auth/react";
+import { User } from "@/types/user";
+import { useAuth } from "@/providers/AuthProvider";
 
 import { getInitials } from "@/lib/get-initials";
 import { cn } from "@/lib/utils";
@@ -24,6 +24,8 @@ export function ProfileDropdown({
   className,
   ...props
 }: ProfileDropdownProps) {
+  const { signOut } = useAuth();
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

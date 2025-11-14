@@ -1,11 +1,14 @@
+"use client";
+
 import { Header } from "@/app/my-services/components/header";
 import { Services } from "@/app/my-services/components/services";
 
 import Hero from "@/components/sections/Hero";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function MyServices() {
   return (
-    <>
+    <ProtectedRoute>
       <Hero
         bgColor="bg-primary"
         sectionClassName="min-h-screen max-h-none h-auto md:h-auto"
@@ -30,6 +33,6 @@ export default function MyServices() {
         <Header />
         <Services />
       </Hero>
-    </>
+    </ProtectedRoute>
   );
 }

@@ -2,11 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-import { signOut, useSession } from "next-auth/react";
+import { useAuth } from "@/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 
 export function SessionExpirationHandler() {
-  const { data: session, status } = useSession();
+  const { status, isSessionExpired, signOut } = useAuth();
 
   const router = useRouter();
   const hasRedirected = useRef(false);
@@ -17,10 +17,11 @@ export function SessionExpirationHandler() {
       return;
     }
 
-    // Check if session has TokenExpiredError
-    if (session?.error === "TokenExpiredError") {
+    // Check if session has expired
+    if (isSessionExpired) {
       hasRedirected.current = true;
-      signOut({ callbackUrl: "/" });
+      signOut();
+      router.push("/");
       return;
     }
 
@@ -32,7 +33,7 @@ export function SessionExpirationHandler() {
         router.push("/");
       }
     }
-  }, [session, status, router]);
+  }, [status, isSessionExpired, router, signOut]);
 
   // This component doesn't render anything
   return null;

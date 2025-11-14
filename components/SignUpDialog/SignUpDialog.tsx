@@ -14,35 +14,36 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 export type SignUpDialogProps = ComponentProps<typeof Dialog>;
 
-export function SignUpDialog(props: SignUpDialogProps) {
+export function SignUpDialog({ open, onOpenChange, ...props }: SignUpDialogProps) {
+  const isAtLeastTablet = useMediaQuery("(min-width: 768px)");
+
   return (
-    <SignUpProvider
-      isSignUpDialogOpen={props.open ?? false}
-      setIsSignUpDialogOpen={props.onOpenChange ?? (() => {})}
-    >
-      <SignUpContent {...props} />
-    </SignUpProvider>
+    <Dialog open={open} onOpenChange={onOpenChange} {...props}>
+      <DialogContent
+        showCloseButton={isAtLeastTablet}
+        isFullscreen={!isAtLeastTablet}
+      >
+          <SignUpProvider
+            isSignUpDialogOpen={open}
+            setIsSignUpDialogOpen={onOpenChange ?? (() => {})}
+          >
+            <SignUpContent />
+          </SignUpProvider>
+      </DialogContent>
+    </Dialog>
   );
 }
 
-function SignUpContent({ open, onOpenChange, ...props }: SignUpDialogProps) {
-  const isAtLeastTablet = useMediaQuery("(min-width: 768px)");
-
+function SignUpContent() {
   const { signUpStep, is2FADialogActivatedOpen, setIs2FADialogActivatedOpen } =
     useSignUp();
 
   return (
     <>
-      <Dialog open={open} onOpenChange={onOpenChange} {...props}>
-        <DialogContent
-          isFullscreen={!isAtLeastTablet}
-          showCloseButton={isAtLeastTablet}
-        >
-          {signUpStep === "information" && <SignUpInformationStep />}
-          {signUpStep === "code" && <SignUpCodeStep />}
-          {signUpStep === "2fa" && <SignUp2FA />}
-        </DialogContent>
-      </Dialog>
+      {signUpStep === "information" && <SignUpInformationStep />}
+      {signUpStep === "code" && <SignUpCodeStep />}
+      {signUpStep === "2fa" && <SignUp2FA />}
+      
       <TwoFactorAuthDialogActivated
         open={is2FADialogActivatedOpen}
         onOpenChange={setIs2FADialogActivatedOpen}

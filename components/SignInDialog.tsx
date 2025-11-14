@@ -9,7 +9,7 @@ import z from "zod";
 import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { signIn } from "next-auth/react";
+import { useAuth } from "@/providers/AuthProvider";
 import { useTranslations } from "next-intl";
 
 import { PasswordRecoveryDialog } from "@/components/PasswordRecoveryDialog/PasswordRecoveryDialog";
@@ -57,6 +57,7 @@ export function SignInDialog({
     useState(false);
 
   const isAtLeastTablet = useMediaQuery("(min-width: 768px)");
+  const { signIn } = useAuth();
 
   const handleOpenSignUpDialog = () => {
     setIsSignUpDialogOpen(true);
@@ -75,11 +76,7 @@ export function SignInDialog({
         >
           <SignInContent
             onSubmit={async (values) => {
-              const result = await signIn("credentials", {
-                email: values.email,
-                password: values.password,
-                redirect: false,
-              });
+              const result = await signIn(values.email, values.password);
 
               if (result.error) {
                 alert("Sign in error: " + result.error);

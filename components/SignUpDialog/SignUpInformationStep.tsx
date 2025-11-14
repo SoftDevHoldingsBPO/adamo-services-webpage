@@ -56,6 +56,14 @@ export function SignUpInformationStep() {
     },
   });
 
+  const handleSignUpInformationSubmit = (
+    values: SignUpInformationFormValues,
+  ) => {
+    // You can handle the form submission here, e.g., save the data to context or state
+    console.log("Sign Up Information:", values);
+    setSignUpStep("code");
+  };
+
   return (
     <>
       <DialogHeader>
@@ -77,9 +85,7 @@ export function SignUpInformationStep() {
       <Form {...form}>
         <form
           id="sign-up-information-step-form"
-          onSubmit={form.handleSubmit((values) => {
-            setSignUpStep("code");
-          })}
+          onSubmit={form.handleSubmit(handleSignUpInformationSubmit)}
           className="space-y-4"
         >
           <FormField

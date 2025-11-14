@@ -6,8 +6,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { useState } from "react";
 
-import { User } from "next-auth";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/providers/AuthProvider";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,16 +22,9 @@ import Navigation from "./Navigation";
 
 const SCROLL_TOP_THRESHOLD = 64;
 
-type NavbarProps = {
-  user?: User;
-};
-
-const Navbar = ({ user }: NavbarProps) => {
+const Navbar = () => {
   const t = useTranslations("nav");
-  const { data: session } = useSession();
-
-  // Use session user if available, fallback to prop user
-  const currentUser = session?.user || user;
+  const { user: currentUser } = useAuth();
 
   const desktop = useMediaQuery("(min-width: 768px)");
 
