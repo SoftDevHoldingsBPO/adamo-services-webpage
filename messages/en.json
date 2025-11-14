@@ -12,7 +12,8 @@
     "about": "About Us",
     "contact": "Contact sales",
     "sign-in": "Sign in",
-    "login": "Sign in"
+    "login": "Sign in",
+    "dataProcessingPolicy": "Data processing policy"
   },
   "services": {
     "servicesTitle": "What do you need to solve today?",
@@ -85,9 +86,14 @@
     "button": "Contact sales"
   },
   "footer": {
-    "copyright": "Adamo Services All rights reserved"
+    "adamoIdTermsNConditions": "Terms and conditions Adamo ID",
+    "adamoPayTermsNConditions": "Terms and conditions Adamo PAY",
+    "adamoSignTermsNConditions": "Terms and conditions Adamo SIGN",
+    "adamoRiskTermsNConditions": "Terms and conditions Adamo RISK",
+    "copyright": "Adamo Services All rights reserved",
+    "dataProcessingPolicy": "Data processing policy",
+    "authorizationDataProcessingPolicy": "Authorization for the processing of personal data"
   },
-
   "contact": {
     "title": "Talk to our experts now",
     "description": "With Adamo Services, you can have everything in one platform. Complete the following form to talk to our sales team and discover how to optimize your business today."

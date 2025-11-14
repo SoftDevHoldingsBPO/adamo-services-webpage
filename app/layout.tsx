@@ -64,12 +64,21 @@ export default async function RootLayout({
                     <Navbar user={session?.user} />
                     <Preloader />
                     <main className="flex-auto">{children}</main>
-                    <Footer />
+                    <Footer locale={locale} />
                     <WaButton />
                   </BlogProvider>
                 </ZodI18nProvider>
               </NextIntlClientProvider>
             </SessionProvider>
+            {/* <NextIntlClientProvider>
+              <BlogProvider>
+                <Navbar />
+                <Preloader />
+                <main className="flex-auto">{children}</main>
+                <Footer locale={locale} />
+                <WaButton />
+              </BlogProvider>
+            </NextIntlClientProvider> */}
           </Providers>
         </NavigationProvider>
       </body>

@@ -12,7 +12,8 @@
     "about": "Nosotros",
     "contact": "Hablar con ventas",
     "sign-in": "Iniciar sesión",
-    "login": "Ingresar"
+    "login": "Ingresar",
+    "dataProcessingPolicy": "Política de tratamiento de datos"
   },
   "services": {
     "servicesTitle": "¿Qué necesitas resolver hoy?",
@@ -85,9 +86,14 @@
     "button": "Hablar con ventas"
   },
   "footer": {
-    "copyright": "Adamo Services Todos los derechos reservados"
+    "adamoIdTermsNConditions": "Términos y condiciones Adamo ID",
+    "adamoPayTermsNConditions": "Términos y condiciones Adamo PAY",
+    "adamoSignTermsNConditions": "Términos y condiciones Adamo SIGN",
+    "adamoRiskTermsNConditions": "Términos y condiciones Adamo RISK",
+    "dataProcessingPolicy": "Política de tratamiento de datos",
+    "copyright": "Adamo Services Todos los derechos reservados",
+    "authorizationDataProcessingPolicy": "Autorizacion de tratamiento de datos"
   },
-
   "contact": {
     "title": "Habla ahora con nuestros expertos",
     "description": "Con Adamo Services, puedes tenerlo todo en una sola plataforma. Completa el siguiente formulario para hablar con nuestro equipo de ventas y descubrir cómo optimizar tu negocio hoy mismo."
