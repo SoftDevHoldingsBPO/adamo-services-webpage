@@ -71,14 +71,15 @@ jobs:
         if: ${{ contains(github.event.head_commit.message, '[reset-prod]') && env.SST_STAGE == 'production' && github.ref_name == 'main' }}
         run: yes | npx sst remove --stage ${{ env.SST_STAGE }} --print-logs
 
-      - name: 🧹 Force clean corrupted state (DEV only)
+      - name: 🧹 Force refresh Pulumi state (DEV only - temporary fix)
         if: ${{ env.SST_STAGE == 'development' }}
         run: |
-          echo "Attempting to remove existing stack..."
-          npx sst remove --stage ${{ env.SST_STAGE }} --print-logs || true
-          echo "Removing Pulumi stack state..."
-          npx pulumi stack rm adamo-services-development --force -C .sst/platform --yes || true
-          echo "State cleaned successfully"
+          echo "Refreshing Pulumi state to detect orphaned resources..."
+          cd .sst/platform 2>/dev/null || echo "Platform dir not found yet"
+          npx pulumi login || true
+          npx pulumi stack select adamo-services-development 2>/dev/null || echo "Stack not selected"
+          npx pulumi state delete 'urn:pulumi:development::adamo-services::sst:aws:Nextjs$aws:cloudfront/distribution:Distribution::adamo-services-appCdnDistribution' --yes 2>/dev/null || echo "Resource not found in state"
+          cd ../..
         continue-on-error: true
 
       - name: 🚀 Deploy with SST (stage from branch)
