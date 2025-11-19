@@ -11,8 +11,6 @@ export default $config({
     };
   },
   async run() {
-    const cloudfront = await import("aws-cdk-lib/aws-cloudfront");
-
     const bucket = new sst.aws.Bucket("adamo-services-bucket", {
       access: "public",
     });
@@ -31,14 +29,6 @@ export default $config({
         : {}),
       environment: {
         NEXT_PUBLIC_CLOUD_ENV: isProd ? "prod" : "dev",
-      },
-      cdk: {
-        distribution: {
-          defaultBehavior: {
-            cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-            originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
-          },
-        },
       },
     });
   },
