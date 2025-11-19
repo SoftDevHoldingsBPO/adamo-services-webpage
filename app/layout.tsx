@@ -1,15 +1,15 @@
+import { AuthProvider } from "@/features/auth/contexts/auth.context";
 import { BlogProvider } from "@/providers/BlogProvider";
 import { NavigationProvider } from "@/providers/NavigationProvider";
-import { SessionProvider } from "@/providers/SessionProvider";
 import { ZodI18nProvider } from "@/providers/ZodI18nProvider";
 import Providers from "@/providers/providers";
+import { Toaster } from "@adamosuiteservices/ui/toaster";
 
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
-import { SessionExpirationHandler } from "@/components/SessionExpirationHandler";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Preloader from "@/components/layout/Preloader";
@@ -40,7 +40,7 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-theme="default">
       <head>
         <link
           rel="stylesheet"
@@ -53,8 +53,7 @@ export default async function RootLayout({
         <MouseFollowerCursor />
         <NavigationProvider>
           <Providers>
-            <SessionProvider>
-              <SessionExpirationHandler />
+            <AuthProvider>
               <NextIntlClientProvider>
                 <ZodI18nProvider>
                   <BlogProvider>
@@ -66,9 +65,10 @@ export default async function RootLayout({
                   </BlogProvider>
                 </ZodI18nProvider>
               </NextIntlClientProvider>
-            </SessionProvider>
+            </AuthProvider>
           </Providers>
         </NavigationProvider>
+        <Toaster />
       </body>
     </html>
   );

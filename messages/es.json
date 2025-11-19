@@ -1,4 +1,8 @@
 {
+  "common": {
+    "loading": "Cargando...",
+    "session-expired": "Tu sesión ha expirado. Por favor, inicia sesión nuevamente."
+  },
   "metadata": {
     "title": ".: ADAMO :. | Tus retos son distintos. Nuestras soluciones también."
   },
@@ -133,6 +137,7 @@
     "forgot-password-action": "Haz click aquí.",
     "do-not-have-account": "¿No tienes cuenta?",
     "do-not-have-account-action": "Haz click aquí para registrarte.",
+    "success": "¡Inicio de sesión exitoso! Bienvenido de nuevo.",
     "placeholders": {
       "email": "Correo electrónico",
       "password": "Contraseña"
@@ -142,6 +147,7 @@
     "email-step": {
       "title": "Recuperar contraseña",
       "description": "Por favor, ingresa a continuación tu correo electrónico donde te enviaremos un código de recuperación:",
+      "success": "Código de recuperación enviado exitosamente",
       "cancel": "Cancelar",
       "recover-password": "Recuperar contraseña",
       "placeholders": {
@@ -151,6 +157,7 @@
     "code-step": {
       "title": "Recuperar contraseña",
       "description": "Ingresa el código de recuperación que te hemos enviado a:",
+      "success": "Código verificado exitosamente",
       "cancel": "Cancelar",
       "continue": "Continuar",
       "code-not-received": "¿No recibiste el código?",
@@ -160,6 +167,7 @@
     "new-password-step": {
       "title": "Nueva contraseña",
       "description": "Ingresa la nueva contraseña a continuación:",
+      "success": "Contraseña cambiada exitosamente",
       "cancel": "Cancelar",
       "change-password": "Cambiar contraseña",
       "descriptions": {
@@ -195,7 +203,8 @@
       "confirm": "Crear cuenta",
       "code-not-received": "¿No recibiste el código?",
       "code-not-received-cooldown": "Reenviar código en",
-      "code-not-received-action": "Reenviar código"
+      "code-not-received-action": "Reenviar código",
+      "success": "¡Cuenta creada exitosamente! Bienvenido a Adamo Services."
     },
     "2fa-step": {
       "title": "Activar doble factor de autenticación",
@@ -208,6 +217,34 @@
         "three": "Ingresa el código de 6 dígitos brindado por la aplicación de autenticación:"
       }
     }
+  },
+  "setup-2fa-dialog": {
+    "title": "Activar doble factor de autenticación",
+    "description": "Antes de continuar es necesario activar el 2FA para dar mayor seguridad a tu cuenta:",
+    "confirm": "Activar 2FA",
+    "success": "¡Doble factor de autenticación activado exitosamente!",
+    "instructions": {
+      "one": "Descarga en tu móvil una aplicación de autenticación como por ejemplo Google Authenticator",
+      "two": "Abre la aplicación y escanea el siguiente QR, o ingresa manualmente el código: {code}",
+      "three": "Ingresa el código de 6 dígitos brindado por la aplicación de autenticación:"
+    }
+  },
+  "enter-2fa-dialog": {
+    "title": "Doble factor de autenticación",
+    "description": "Ingresa el código de 6 dígitos de tu aplicación de autenticación:",
+    "cancel": "Cancelar",
+    "confirm": "Verificar",
+    "success": "¡Autenticado exitosamente!"
+  },
+  "verify-email-dialog": {
+    "title": "Verifica tu correo electrónico",
+    "description": "Hemos enviado un código de verificación a:",
+    "cancel": "Cancelar",
+    "confirm": "Verificar",
+    "success": "¡Correo electrónico verificado exitosamente!",
+    "code-not-received": "¿No recibiste el código?",
+    "code-not-received-cooldown": "Reenviar código en",
+    "code-not-received-action": "Reenviar código"
   },
   "2fa-activated": {
     "title": "¡Doble factor de autenticación (2FA) activado!",

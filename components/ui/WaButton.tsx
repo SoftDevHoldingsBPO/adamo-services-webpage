@@ -4,7 +4,7 @@ const WaButton = () => {
   return (
     <Link
       className="fixed bottom-6 right-6 md:bottom-8 md:right-8 xl:bottom-10 xl:right-10 z-20 shadow-lg rounded-full"
-      href="https://wa.me/5547999999999"
+      href={process.env.NEXT_PUBLIC_WHATSAPP_URL || "#"}
       target="_blank"
     >
       <svg

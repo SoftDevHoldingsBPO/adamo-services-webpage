@@ -5,5 +5,16 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "cSpell.words": [
+        "adamo",
+        "adamosuiteservices",
+        "cooldown",
+        "dtos",
+        "FADTO",
+        "inview",
+        "otpauth",
+        "totp",
+        "usehooks"
+    ]
 }

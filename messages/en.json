@@ -1,4 +1,8 @@
 {
+  "common": {
+    "loading": "Loading...",
+    "session-expired": "Your session has expired. Please sign in again."
+  },
   "metadata": {
     "title": ".: ADAMO :. | Your challenges are unique. Our solutions are too."
   },

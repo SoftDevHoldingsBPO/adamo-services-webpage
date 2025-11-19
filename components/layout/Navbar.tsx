@@ -6,13 +6,13 @@ import { useMediaQuery } from "usehooks-ts";
 
 import { useState } from "react";
 
-import { useAuth } from "@/providers/AuthProvider";
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { ProfileDropdown } from "@/components/ProfileDropdown";
-import { SignInDialog } from "@/components/SignInDialog";
+import { ProfileDropdown } from "@/features/auth/components/profile/profile-dropdown";
+import { SignInDialog } from "@/features/auth/components/sign-in/sign-in-dialog";
 
 import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";

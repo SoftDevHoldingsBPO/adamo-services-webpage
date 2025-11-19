@@ -2,9 +2,9 @@
 
 import { Header } from "@/app/my-services/components/header";
 import { Services } from "@/app/my-services/components/services";
+import { ProtectedRoute } from "@/features/auth/components/routing/protected-route";
 
 import Hero from "@/components/sections/Hero";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function MyServices() {
   return (
