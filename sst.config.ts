@@ -29,10 +29,8 @@ export default $config({
             },
           }
         : {}),
-      server: {
-        environment: {
-          NEXT_PUBLIC_CLOUD_ENV: isProd ? "prod" : "dev",
-        },
+      environment: {
+        NEXT_PUBLIC_CLOUD_ENV: isProd ? "prod" : "dev",
       },
       cdk: {
         distribution: {
