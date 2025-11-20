@@ -111,7 +111,7 @@ function DialogBack({
   className,
   ...props
 }: React.ComponentProps<typeof ArrowLeft>) {
-  return <ArrowLeft className={cn("mb-6", className)} {...props} />;
+  return <ArrowLeft className={cn("mb-6 cursor-pointer", className)} {...props} />;
 }
 
 function DialogTitle({

@@ -99,8 +99,8 @@ export function SignUpVerifyEmailStep() {
           </div>
           <LocaleSelect />
         </div>
-        <DialogClose>
-          <DialogBack className="hidden md:block" />
+        <DialogClose asChild className="hidden md:flex">
+          <DialogBack />
         </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
