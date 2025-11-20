@@ -105,8 +105,8 @@
   "contactForm": {
     "required": "Los campos con (*) son obligatorios.",
     "send": "Enviar formulario",
-    "success": "Enviado",
-    "successDescription": "¡Muy pronto, uno de nuestros especialistas se comunicará contigo!",
+    "success": "¡Gracias por contactarnos!",
+    "successDescription": "Hemos recibido tu mensaje correctamente. Nuestro equipo de ventas revisará tu solicitud y se pondrá en contacto contigo lo antes posible para ayudarte con la solución que necesitas.",
     "errors": {
       "name": "Nombre y apellido son requeridos",
       "email": "Por favor, ingresa un mail válido.",

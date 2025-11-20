@@ -1,17 +1,17 @@
 import { api } from "@/api/api";
 
 class ContactService {
-  public static async submit(args: {
-    name: string;
-    email: string;
-    company: string;
-    website: string;
+  public static async contact(args: {
+    fullName: string;
+    corporateEmail: string;
+    companyName: string;
+    companyWebsite: string;
     country: string;
     phone: string;
-    services: string[];
+    solutionsOfInterest: string[];
     message: string;
   }) {
-    const response = await api.post<void>("/api/v1/contact", args);
+    const response = await api.post<void>("/api/v1/commercial/inquiry", args);
     return response.data;
   }
 }

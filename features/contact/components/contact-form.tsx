@@ -57,7 +57,7 @@ const ContactForm = () => {
   });
 
   const { mutateAsync: contact, isPending: isPendingContact } = useMutation({
-    mutationFn: ContactService.submit,
+    mutationFn: ContactService.contact,
     onSuccess: () => {
       form.reset(DEFAULT_VALUES);
 
@@ -76,13 +76,13 @@ const ContactForm = () => {
 
   const onSubmit = async (data: ContactFormSchema) => {
     await contact({
-      name: data.name,
-      email: data.email,
-      company: data.company,
-      website: data.website,
+      fullName: data.name,
+      corporateEmail: data.email,
+      companyName: data.company,
+      companyWebsite: data.website,
       country: data.country,
       phone: data.phone,
-      services: data.services,
+      solutionsOfInterest: data.services,
       message: data.message,
     });
   };

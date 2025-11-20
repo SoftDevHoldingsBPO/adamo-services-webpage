@@ -105,8 +105,8 @@
   "contactForm": {
     "required": "The fields marked with (*) are required.",
     "send": "Send form",
-    "success": "Sent",
-    "successDescription": "Soon, one of our experts will contact you!",
+    "success": "Thank you for reaching out!",
+    "successDescription": "We have successfully received your message. Our sales team will review your request and get in touch with you as soon as possible to help you with the solution you need.",
     "errors": {
       "name": "Name and last name are required",
       "email": "Please enter a valid email address.",
