@@ -42,13 +42,11 @@ jobs:
       - name: 🛠️ Create .env file
         run: |
           echo "NEXT_PUBLIC_CLOUD_ENV=${{ github.ref_name == 'main' && 'prod' || 'dev' }}" >> .env
-          echo "NEXT_PUBLIC_CONVERTAPI_SECRET=${{ secrets.NEXT_PUBLIC_CONVERTAPI_SECRET }}" >> .env
-          echo "NEXT_PUBLIC_ACCESSKEYID=${{ secrets.NEXT_PUBLIC_ACCESSKEYID }}" >> .env
-          echo "NEXT_PUBLIC_SECRETACCESSKEY=${{ secrets.NEXT_PUBLIC_SECRETACCESSKEY }}" >> .env
-          echo "NEXT_PUBLIC_REGION=${{ secrets.NEXT_PUBLIC_REGION }}" >> .env
-          echo "NEXT_PUBLIC_BUCKETNAME=${{ secrets.NEXT_PUBLIC_BUCKETNAME }}" >> .env
-          echo "NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}" >> .env
-          echo "NEXT_PUBLIC_S3_BUCKETURL=${{ secrets.NEXT_PUBLIC_S3_BUCKETURL }}" >> .env
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_DEV }}" >> .env
+          echo "NEXT_PUBLIC_WHATSAPP_URL=${{ secrets.NEXT_PUBLIC_WHATSAPP_URL }}" >> .env
 
       - name: 🔎 Echo chosen env
         run: grep NEXT_PUBLIC_CLOUD_ENV .env || true
