@@ -56,6 +56,9 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: 🧩 Ensure SST CLI for linux-x64
+        run: npm install --no-save sst-linux-x64
+
       - name: 🔐 Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
