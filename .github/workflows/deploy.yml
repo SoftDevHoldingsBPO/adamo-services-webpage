@@ -41,11 +41,13 @@ jobs:
 
       - name: 🛠️ Create .env file
         run: |
+          echo "NEXT_PUBLIC_CLOUD_ENV=${{ github.ref_name == 'main' && 'prod' || 'dev' }}" >> .env
           if [ "${{ github.ref_name }}" = "main" ]; then
             echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_PROD }}" >> .env
           else
             echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_DEV }}" >> .env
           echo "NEXT_PUBLIC_WHATSAPP_URL=${{ secrets.NEXT_PUBLIC_WHATSAPP_URL }}" >> .env
+          echo "NEXT_PUBLIC_REGION=${{ secrets.NEXT_PUBLIC_REGION }}" >> .env
 
       - name: 🔎 Echo chosen env
         run: grep NEXT_PUBLIC_CLOUD_ENV .env || true
