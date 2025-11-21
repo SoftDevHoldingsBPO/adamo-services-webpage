@@ -7,28 +7,39 @@ export default $config({
       name: "adamo-services",
       removal: input?.stage === "production" ? "retain" : "remove",
       home: "aws",
-      region: "us-east-2",
+      region: "us-east-1",
     };
   },
   async run() {
+    const cloudfront = await import("aws-cdk-lib/aws-cloudfront");
+
     const bucket = new sst.aws.Bucket("adamo-services-bucket", {
       access: "public",
     });
 
     const isProd = $app.stage === "production";
+    const domainName = isProd
+      ? "adamoservices.co"
+      : "9997648bd26c4c0f.adamoservices.co";
 
     new sst.aws.Nextjs("adamo-services-app", {
       link: [bucket],
-      ...(isProd
-        ? {
-            customDomain: {
-              domainName: "adamoservices.co",
-              hostedZone: "adamoservices.co",
-            },
-          }
-        : {}),
-      environment: {
-        NEXT_PUBLIC_CLOUD_ENV: isProd ? "prod" : "dev",
+      customDomain: {
+        domainName,
+        hostedZone: "adamoservices.co",
+      },
+      server: {
+        environment: {
+          NEXT_PUBLIC_CLOUD_ENV: $app.stage === "production" ? "prod" : "dev",
+        },
+      },
+      cdk: {
+        distribution: {
+          defaultBehavior: {
+            cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+            originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
+          },
+        },
       },
     });
   },

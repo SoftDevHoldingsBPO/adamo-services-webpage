@@ -66,11 +66,13 @@ jobs:
       - name: 🧹 Delete corrupted Pulumi state (DEV only - EMERGENCY FIX)
         if: ${{ env.SST_STAGE == 'development' }}
         run: |
-          echo "Deleting corrupted Pulumi state from S3..."
-          aws s3 rm s3://sst-state-ktbxufmsoxem/adamo-services/development.json --region us-east-1 || echo "State file not found"
-          aws s3 rm s3://sst-state-ktbxufmsoxem/adamo-services/.pulumi/stacks/adamo-services/development.json --region us-east-1 || echo "Pulumi state not found"
-          aws s3 rm s3://sst-state-ktbxufmsoxem/adamo-services/.pulumi/stacks/adamo-services/development.json.bak --region us-east-1 || echo "Backup not found"
-          echo "State cleaned from S3"
+          echo "Deleting ALL corrupted Pulumi state from S3..."
+          aws s3 rm s3://sst-state-ktbxufmsoxem/ --recursive --exclude "*" --include "adamo-services/development*" --region us-east-1 || echo "No state files found"
+          aws s3 rm s3://sst-state-ktbxufmsoxem/ --recursive --exclude "*" --include "*development.json*" --region us-east-1 || echo "No json files found"
+          aws s3 rm s3://sst-state-ktbxufmsoxem/ --recursive --exclude "*" --include ".pulumi/stacks/*/development*" --region us-east-1 || echo "No pulumi stacks found"
+          echo "Listing remaining files in bucket..."
+          aws s3 ls s3://sst-state-ktbxufmsoxem/ --recursive --region us-east-1 | grep development || echo "No development files remaining"
+          echo "State cleaning complete"
         continue-on-error: true
 
       - name: 🧹 SST Remove (DEV on demand)
