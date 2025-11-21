@@ -46,6 +46,7 @@ jobs:
             echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_PROD }}" >> .env
           else
             echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_DEV }}" >> .env
+          fi
           echo "NEXT_PUBLIC_WHATSAPP_URL=${{ secrets.NEXT_PUBLIC_WHATSAPP_URL }}" >> .env
           echo "NEXT_PUBLIC_REGION=${{ secrets.NEXT_PUBLIC_REGION }}" >> .env
 
