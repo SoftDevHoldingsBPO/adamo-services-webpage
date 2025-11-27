@@ -8,9 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Country } from "country-state-city";
 
+import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -51,9 +53,14 @@ const DEFAULT_VALUES: ContactFormSchema = {
 const ContactForm = () => {
   const t = useTranslations("contactForm");
 
+  const preselectedServices = useGetPreselectedServicesFromSearchParams();
+
   const form = useForm<ContactFormSchema>({
     resolver: zodResolver(ContactFormSchema),
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: {
+      ...DEFAULT_VALUES,
+      services: preselectedServices,
+    },
   });
 
   const { mutateAsync: contact, isPending: isPendingContact } = useMutation({
@@ -207,3 +214,14 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+function useGetPreselectedServicesFromSearchParams() {
+  const searchParams = useSearchParams();
+
+  const product = searchParams.get("product");
+
+  const services =
+    product && SERVICES.some((s) => s.id === product) ? [product] : [];
+
+  return services;
+}

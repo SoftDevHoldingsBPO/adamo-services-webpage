@@ -222,6 +222,10 @@
     "content": "Your account security is now stronger and you can be safe against unauthorized access.",
     "confirm": "Accept"
   },
+  "profile-dropdown": {
+    "goToAccount": "Go to my account",
+    "signOut": "Sign out"
+  },
   "about": {
     "hero": {
       "title": "About us",
@@ -384,5 +388,43 @@
     },
     "legal": "Legal Backing and Global Compatibility",
     "legalTooltip": "Adamo SIGN complies with Colombian regulations on electronic signatures, including Law 527 of 1999 and Decree 2364 of 2012, ensuring authenticity, integrity, and traceability through mechanisms such as two-factor authentication, trusted timestamps, and blockchain backing. <br></br><br></br>Our solution is designed according to international principles of legal security, data protection, and cross-border validity, allowing interoperability with regulatory frameworks across various jurisdictions, including Latin America, the United States, and Europe. <br></br><br></br>Although specific requirements may vary by country, Adamo SIGN is equipped to operate in environments that demand high standards of compliance, privacy, and digital governance."
+  },
+  "my-services": {
+    "header": {
+      "greeting": "Hello Juan! Which service would you like to use today?"
+    },
+    "services": {
+      "adamo-id": {
+        "description": "Identity service"
+      },
+      "adamo-pay": {
+        "description": "Payment service"
+      },
+      "adamo-risk": {
+        "description": "Risk service"
+      },
+      "adamo-sign": {
+        "description": "Signature service"
+      }
+    },
+    "links": {
+      "title": "Links of interest",
+      "about": "About Us",
+      "privacy": "Privacy Policies",
+      "profile": "My Profile"
+    },
+    "card": {
+      "notSubscribed": "Not subscribed",
+      "subscriptionUntil": "Subscription until:",
+      "enter": "Enter",
+      "hireService": "Hire service"
+    },
+    "videoDemo": {
+      "button": "Watch demo",
+      "title": "Service demo",
+      "description": "Here you can watch a demonstration of the service.",
+      "footer": "Have questions or want to hire the product?",
+      "contactLink": "Talk to sales now"
+    }
   }
 }
