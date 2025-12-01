@@ -4,6 +4,7 @@ import { User } from "@/features/auth/entities/user.entity";
 import { ComponentProps } from "react";
 
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { getInitials } from "@/lib/get-initials";
 import { cn } from "@/lib/utils";
@@ -44,7 +45,9 @@ export function ProfileDropdown({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>{t("goToAccount")}</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/profile">{t("goToAccount")}</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>
           {t("signOut")}

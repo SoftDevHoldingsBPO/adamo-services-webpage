@@ -37,7 +37,13 @@ export type PasswordRecoveryNewPasswordFormValues = z.infer<
   typeof PasswordRecoveryNewPasswordFormSchema
 >;
 
-export function PasswordRecoveryNewPasswordStep() {
+export type PasswordRecoveryNewPasswordStepProps = Readonly<{
+  onPasswordChanged?: () => void;
+}>;
+
+export function PasswordRecoveryNewPasswordStep({
+  onPasswordChanged,
+}: PasswordRecoveryNewPasswordStepProps) {
   const t = useTranslations("password-recovery-dialog.new-password-step");
 
   const { email, tempPassword, setIsPasswordRecoveryDialogOpen } =
@@ -60,6 +66,8 @@ export function PasswordRecoveryNewPasswordStep() {
       });
 
       setIsPasswordRecoveryDialogOpen(false);
+
+      if (onPasswordChanged) onPasswordChanged();
     },
     onError: (error) => {
       ToastManager.show({

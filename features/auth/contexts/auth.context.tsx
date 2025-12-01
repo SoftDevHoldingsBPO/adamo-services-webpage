@@ -1,7 +1,9 @@
 "use client";
 
-import { Auth } from "@/features/auth/entities/auth.entity";
 import { User } from "@/features/auth/entities/user.entity";
+import AuthService from "@/features/auth/services/auth.service";
+import { ProfileService } from "@/features/profile/services/profile.service";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   ReactNode,
@@ -14,66 +16,54 @@ import {
 type AuthContextType = {
   user: User | null;
   status: "loading" | "authenticated" | "unauthenticated";
-  setAuth: (auth: Auth, user: User) => void;
-  signOut: () => void;
+  fetchUserProfile: () => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AUTH_STORAGE_KEY = "auth_data";
-
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-
   const [status, setStatus] = useState<
     "loading" | "authenticated" | "unauthenticated"
-  >("loading");
+  >("unauthenticated"); // Default to unauthenticated - ProtectedRoute will verify if needed
 
-  // Load user from localStorage on mount (auth tokens stay in localStorage)
-  useEffect(() => {
-    const storedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
+  const { data: user, refetch: getUserProfile } = useQuery({
+    queryKey: [ProfileService.GET_PROFILE_QUERY_KEY],
+    queryFn: ProfileService.get,
+    enabled: status === "authenticated",
+    staleTime: Infinity,
+  });
 
-    if (storedAuth) {
-      try {
-        const parsed = JSON.parse(storedAuth) as {
-          auth: Auth;
-          user: User;
-        };
+  const fetchUserProfile = async () => {
+    setStatus("loading"); // Set loading when actually checking auth
 
-        // Only restore user to React state, auth tokens stay in localStorage
-        setUser(parsed.user);
-        setStatus("authenticated");
-      } catch (error) {
-        console.error("Failed to parse stored auth data:", error);
+    const result = await getUserProfile();
 
-        localStorage.removeItem(AUTH_STORAGE_KEY);
-
-        setStatus("unauthenticated");
-      }
-    } else {
+    if (result.error) {
       setStatus("unauthenticated");
+      return;
     }
-  }, []);
 
-  const setAuth = (auth: Auth, user: User) => {
-    // Store both auth and user to localStorage
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ auth, user }));
-
-    // Only update React state with user data
-    setUser(user);
     setStatus("authenticated");
   };
 
-  const signOut = () => {
-    localStorage.removeItem(AUTH_STORAGE_KEY);
-
-    setUser(null);
-    setStatus("unauthenticated");
+  const signOut = async () => {
+    try {
+      await AuthService.signOut();
+    } catch (error) {
+    } finally {
+      window.location.href = "/";
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, status, setAuth, signOut }}
+      value={{
+        user: user ?? null,
+        status,
+        fetchUserProfile,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

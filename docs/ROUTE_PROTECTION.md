@@ -8,14 +8,16 @@ Simple **client-side authentication** system with public and private pages.
 - **Public pages** - Accessible by everyone (home, about, contact, etc.)
 - **Private pages** - Only for authenticated users (my-services, dashboard, etc.)
 - **Full-page loader** - Smooth loading state while checking auth
-- **localStorage** - Session persistence across page refreshes
-- **Auto-logout** - Token expiration checking (every 5 seconds)
+- **HTTP-only cookies** - Secure session management (adamo_access_token, adamo_refresh_token)
+- **Auto-refresh** - Automatic token refresh when expired
+- **Session verification** - Server-side validation on load and reload
 
-### � Key Files
-- `providers/AuthProvider.tsx` - Authentication state management
-- `services/auth.ts` - API authentication logic
-- `components/ProtectedRoute.tsx` - Route protection wrapper
-- `types/user.ts` - User type definitions
+### 📂 Key Files
+- `features/auth/contexts/auth.context.tsx` - Authentication state management
+- `features/auth/services/auth.service.ts` - API authentication logic
+- `features/auth/components/routing/protected-route.tsx` - Route protection wrapper
+- `features/auth/entities/user.entity.ts` - User type definitions
+- `api/api.ts` - Axios interceptors for cookie-based auth
 - `app/my-services/page.tsx` - Example protected page
 
 ---
@@ -45,7 +47,7 @@ export default function MyPrivatePage() {
 
 **What happens:**
 1. Full-page loader appears instantly
-2. Checks localStorage for authentication
+2. Calls `/auth/authorize` endpoint to verify session
 3. **If authenticated** → Shows page content
 4. **If not** → Redirects to home (`/`)
 
@@ -170,17 +172,9 @@ export function MyComponent() {
 
 Default: Redirects to `/` (home page)
 
-### Change Token Expiration
-
-Edit `services/auth.ts` (around line 40):
-
-```typescript
-accessTokenExpires: Date.now() + 3600000, // 1 hour instead of 30 seconds
-```
-
 ### Customize Loading UI
 
-Edit `components/ProtectedRoute.tsx` to change the full-page loader appearance.
+Edit `features/auth/components/routing/protected-route.tsx` to change the full-page loader appearance.
 
 ### Role-Based Routes
 
@@ -217,62 +211,71 @@ export function AdminRoute({ children }: { children: React.ReactNode }) {
 
 ## 🔌 Connect to Your Backend
 
-Currently using **mock authentication**. To connect to your real API:
+Currently using **cookie-based authentication**. Tokens are automatically managed via HTTP-only cookies:
 
-**Edit `services/auth.ts`:**
+**Authentication Flow:**
 
-```typescript
-public static async signIn({ email, password }) {
-  const response = await fetch('/api/auth/signin', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
-  
-  const data = await response.json();
-  
-  if (!response.ok) {
-    return { ok: false, error: data.message };
-  }
-  
-  return { ok: true, user: data.user };
-}
+1. **Sign In**: Call `AuthService.signIn()` - API sets cookies automatically
+2. **Authorization Check**: Call `AuthService.authorize()` - validates session via cookies
+3. **Token Refresh**: Automatic via axios interceptor when tokens expire
+4. **Sign Out**: Call `AuthService.signOut()` - API clears cookies
+
+**Cookies Set by Backend:**
+- `adamo_access_token` - Short-lived access token (HTTP-only)
+- `adamo_refresh_token` - Long-lived refresh token (HTTP-only)
+
+**Security Features:**
+- HTTP-only cookies prevent XSS attacks
+- Automatic credential sending with `withCredentials: true`
+- Token refresh handled transparently by API interceptor
 ```
 
 ---
 
 ## ⚠️ Security Notes
 
-**This is client-side only authentication!**
+**This uses HTTP-only cookie authentication!**
 
 ✅ **Good for:**
-- Controlling UI based on auth state
-- Preventing accidental page access
-- Simple apps without sensitive data
+- Preventing XSS attacks (tokens not accessible via JavaScript)
+- Automatic credential management
+- Secure token storage
+- Production-ready authentication
 
-❌ **NOT secure for:**
-- Protecting sensitive data
-- Securing API endpoints
-- Preventing determined bypass
+✅ **Security features:**
+1. **HTTP-only cookies** - Cannot be accessed by JavaScript
+2. **Server-side validation** - `/auth/authorize` endpoint validates tokens
+3. **Automatic token refresh** - Seamless session extension
+4. **Secure by default** - Cookies sent only to same origin
 
 **For production:**
-1. **Always validate tokens on your backend**
-2. **Use HTTPS in production**
-3. **Secure API routes with proper auth middleware**
-4. **Never trust client-side data**
+1. **Use HTTPS** - Required for secure cookies
+2. **Set SameSite attribute** - Prevent CSRF attacks
+3. **Validate on backend** - Never trust client state alone
+4. **Use secure cookie flags** - HttpOnly, Secure, SameSite
 
 ---
 
 ## 🐛 Troubleshooting
 
 **Issue: Brief flash before redirect**  
-Normal behavior. The loader appears, checks auth, then redirects.
+Normal behavior. The loader appears, checks auth via `/auth/authorize`, then redirects.
 
 **Issue: Redirect loop**  
 Don't protect the redirect destination. If redirecting to `/`, don't wrap home page in `ProtectedRoute`.
 
 **Issue: Session not persisting**  
-Check browser localStorage. Clear it if corrupted: `localStorage.clear()`
+Cookies are managed by the server. Check:
+- Backend is setting cookies correctly
+- CORS is configured to allow credentials
+- `withCredentials: true` is set in API calls
+- Browser is not blocking third-party cookies
+
+**Issue: 401 errors after page refresh**  
+Check that:
+- `/auth/authorize` endpoint is working
+- Cookies are being sent with requests
+- Refresh token is valid and not expired
 
 ---
 

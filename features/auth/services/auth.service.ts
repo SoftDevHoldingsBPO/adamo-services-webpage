@@ -78,12 +78,22 @@ class AuthService {
     await api.post<void>("/api/v1/auth/resend-otp", args);
   }
 
-  public static async refreshToken(args: { refreshToken: string }) {
+  public static async refreshToken() {
     const response = await api.post<RefreshTokenResponse>(
       "/api/v1/auth/refresh",
-      args,
+      {},
     );
 
+    return response.data;
+  }
+
+  public static async authorize() {
+    const response = await api.get<void>("/api/v1/auth/authorize");
+    return response.data;
+  }
+
+  public static async signOut() {
+    const response = await api.post<void>("/api/v1/auth/logout");
     return response.data;
   }
 }

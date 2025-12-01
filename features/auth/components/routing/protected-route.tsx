@@ -2,12 +2,10 @@
 
 import { useAuth } from "@/features/auth/contexts/auth.context";
 
-import { useEffect } from "react";
-
-import { useRouter } from "next/navigation";
+import { ReactNode, useEffect } from "react";
 
 interface ProtectedRouteProps {
-  children: React.ReactNode;
+  children: ReactNode;
   redirectTo?: string;
 }
 
@@ -33,16 +31,26 @@ export function ProtectedRoute({
   children,
   redirectTo = "/",
 }: ProtectedRouteProps) {
-  const { status } = useAuth();
-  const router = useRouter();
+  const { status, fetchUserProfile } = useAuth();
+
+  // Verify authentication when protected route is accessed
+  useEffect(() => {
+    const verifyAuth = async () => {
+      if (status === "authenticated") return;
+
+      await fetchUserProfile();
+    };
+
+    verifyAuth();
+  }, []); // Run once on mount
 
   useEffect(() => {
     if (status === "loading") return;
 
     if (status === "unauthenticated") {
-      router.push(redirectTo);
+      window.location.href = redirectTo;
     }
-  }, [status, router, redirectTo]);
+  }, [status]);
 
   // Show full-page loading state while checking authentication
   if (status === "loading") {
