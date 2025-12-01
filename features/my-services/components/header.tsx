@@ -1,5 +1,7 @@
 import { ComponentProps } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/utils";
 
 import { WavingHandIcon } from "@/components/icon/WavingHandIcon";
@@ -7,6 +9,8 @@ import { WavingHandIcon } from "@/components/icon/WavingHandIcon";
 export type HeaderProps = ComponentProps<"div">;
 
 export function Header({ className, ...props }: HeaderProps) {
+  const t = useTranslations("my-services");
+
   return (
     <div
       className={cn("flex items-center gap-6 mb-6 md:mb-10", className)}
@@ -16,7 +20,7 @@ export function Header({ className, ...props }: HeaderProps) {
         <WavingHandIcon />
       </div>
       <p className="font-semibold text-2xl md:text-3xl">
-        Hola Juan! ¿Qué servicio deseas utilizar hoy?
+        {t("header.greeting")}
       </p>
     </div>
   );

@@ -252,6 +252,10 @@
     "content": "La seguridad de tu cuenta es ahora más fuerte y puedes estar seguro contra ingresos no autorizados.",
     "confirm": "Aceptar"
   },
+  "profile-dropdown": {
+    "goToAccount": "Ingresar a mi cuenta",
+    "signOut": "Cerrar sesión"
+  },
   "about": {
     "hero": {
       "title": "Sobre nosotros",
@@ -414,5 +418,43 @@
     },
     "legal": "Respaldo Legal y Compatibilidad Global",
     "legalTooltip": "  Adamo SIGN cumple con la normativa colombiana en materia de firma electrónica, incluyendo la Ley 527 de 1999 y el Decreto 2364 de 2012, garantizando autenticidad, integridad y trazabilidad a través de mecanismos como doble autenticación, sellos de tiempo confiables y respaldo en blockchain. <br></br><br></br>Nuestra solución ha sido diseñada bajo principios internacionales de seguridad jurídica, protección de datos y validez transfronteriza, lo que permite su interoperabilidad con marcos regulatorios de distintas jurisdicciones, incluyendo América Latina, Estados Unidos y Europa. <br></br><br></br>Aunque los requisitos específicos pueden variar según el país, Adamo SIGN está preparada para operar en entornos que exigen altos estándares de cumplimiento, privacidad y gobernanza digital."
+  },
+  "my-services": {
+    "header": {
+      "greeting": "¡Hola Juan! ¿Qué servicio deseas utilizar hoy?"
+    },
+    "services": {
+      "adamo-id": {
+        "description": "Servicio de identidad"
+      },
+      "adamo-pay": {
+        "description": "Servicio de pagos"
+      },
+      "adamo-risk": {
+        "description": "Servicio de riesgos"
+      },
+      "adamo-sign": {
+        "description": "Servicio de firmas"
+      }
+    },
+    "links": {
+      "title": "Links de interés",
+      "about": "Nosotros",
+      "privacy": "Políticas de privacidad",
+      "profile": "Mi perfil"
+    },
+    "card": {
+      "notSubscribed": "Sin suscribir",
+      "subscriptionUntil": "Suscripción hasta:",
+      "enter": "Ingresar",
+      "hireService": "Contratar servicio"
+    },
+    "videoDemo": {
+      "button": "Ver demo",
+      "title": "Demo del servicio",
+      "description": "Aquí puedes ver una demostración del servicio.",
+      "footer": "¿Tienes preguntas o quieres contratar el producto?",
+      "contactLink": "Habla con ventas ahora"
+    }
   }
 }

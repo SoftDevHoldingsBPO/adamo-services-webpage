@@ -1,7 +1,7 @@
 "use client";
 
-import { Header } from "@/app/my-services/components/header";
-import { Services } from "@/app/my-services/components/services";
+import { Header } from "@/features/my-services/components/header";
+import { Services } from "@/features/my-services/components/services";
 import { ProtectedRoute } from "@/features/auth/components/routing/protected-route";
 
 import Hero from "@/components/sections/Hero";

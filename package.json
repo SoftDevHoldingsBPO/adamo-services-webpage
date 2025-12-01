@@ -5,8 +5,10 @@
   "scripts": {
     "dev-secure": "next dev --turbopack --experimental-https",
     "dev": "next dev --turbopack",
+    "dev:host": "next dev --turbopack --hostname landing-local.adamoservices.co",
     "build": "next build",
     "start": "next start",
+    "start:host": "next start --hostname landing-local.adamoservices.co",
     "lint": "next lint",
     "sst:dev": "cross-env AWS_PROFILE=adamo-pay npx sst dev",
     "sst:prod:deploy": "cross-env AWS_PROFILE=adamo-pay npx sst deploy --stage production",
@@ -28,6 +30,7 @@
     "@radix-ui/react-select": "^2.2.2",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@radix-ui/react-visually-hidden": "^1.2.4",
     "@tanstack/react-query": "^5.79.0",
     "aws-cdk-lib": "^2.225.0",
     "axios": "^1.13.2",

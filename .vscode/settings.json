@@ -16,5 +16,6 @@
         "otpauth",
         "totp",
         "usehooks"
-    ]
+    ],
+    "cSpell.language": "en,es-ES"
 }

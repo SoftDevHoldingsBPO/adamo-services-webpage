@@ -1,7 +1,14 @@
+"use client";
+
+import { VideoDemoDialog } from "@/features/my-services/components/video-demo-dialog";
 import { ArrowRight, Calendar } from "lucide-react";
 
 import React, { ComponentType } from "react";
 
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
+
+import { getPolicyByLocale } from "@/lib/get-policy-by-locale";
 import { cn } from "@/lib/utils";
 
 import { AdamoIDIcon } from "@/components/icon/AdamoIdIcon";
@@ -12,7 +19,11 @@ import { CrownIcon } from "@/components/icon/CrownIcon";
 import { Button } from "@/components/ui/button";
 
 export function Services() {
+  const locale = useLocale();
+  const t = useTranslations("my-services");
+
   const services: {
+    id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign";
     name: string;
     description: string;
     plan: string;
@@ -22,8 +33,9 @@ export function Services() {
     color: string;
   }[] = [
     {
+      id: "adamo-id",
       name: "Adamo ID",
-      description: "Servicio de identidad",
+      description: t("services.adamo-id.description"),
       plan: "Starter Plan",
       subscriptionUntil: "2023-12-31",
       isHired: true,
@@ -31,17 +43,19 @@ export function Services() {
       color: "bg-adamo-id-700",
     },
     {
+      id: "adamo-pay",
       name: "Adamo Pay",
-      description: "Servicio de pagos",
+      description: t("services.adamo-pay.description"),
       plan: "Professional Plan",
       subscriptionUntil: "2023-12-31",
-      isHired: true,
+      isHired: false,
       icon: AdamoPayIcon,
       color: "bg-adamo-pay-700",
     },
     {
+      id: "adamo-risk",
       name: "Adamo Risk",
-      description: "Servicio de riesgo",
+      description: t("services.adamo-risk.description"),
       plan: "Starter Plan",
       subscriptionUntil: "2023-12-31",
       isHired: false,
@@ -49,8 +63,9 @@ export function Services() {
       color: "bg-adamo-risk-700",
     },
     {
+      id: "adamo-sign",
       name: "Adamo Sign",
-      description: "Servicio de firma",
+      description: t("services.adamo-sign.description"),
       plan: "Starter Plan",
       subscriptionUntil: "2023-12-31",
       isHired: false,
@@ -65,11 +80,17 @@ export function Services() {
         <ServiceCard key={service.name} {...service} />
       ))}
       <div className="xl:row-start-1 xl:col-start-5 xl:col-span-2 text-sm p-8">
-        <p className="text-left mb-8 text-neutral-500">Links de interés</p>
+        <p className="text-left mb-8 text-neutral-500">{t("links.title")}</p>
         <ul className="flex flex-col items-start gap-6 font-medium">
-          <li>Nosotros</li>
-          <li>Políticas de privacidad</li>
-          <li>Mi perfil</li>
+          <li>
+            <Link href="/about">{t("links.about")}</Link>
+          </li>
+          <li>
+            <Link href={getPolicyByLocale(locale)}>{t("links.privacy")}</Link>
+          </li>
+          <li>
+            <Link href="/profile">{t("links.profile")}</Link>
+          </li>
         </ul>
       </div>
     </ul>
@@ -77,6 +98,7 @@ export function Services() {
 }
 
 type ServiceCardProps = {
+  id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign";
   name: string;
   plan: string;
   description: string;
@@ -87,6 +109,7 @@ type ServiceCardProps = {
 };
 
 function ServiceCard({
+  id,
   name,
   plan,
   description,
@@ -95,6 +118,8 @@ function ServiceCard({
   icon,
   color,
 }: ServiceCardProps) {
+  const t = useTranslations("my-services");
+
   const Icon = icon;
 
   return (
@@ -123,7 +148,7 @@ function ServiceCard({
               "text-neutral-400": !isHired,
             })}
           >
-            {isHired ? plan : "Sin suscribir"}
+            {isHired ? plan : t("card.notSubscribed")}
           </p>
         </div>
       </header>
@@ -142,17 +167,27 @@ function ServiceCard({
               "text-neutral-400": !isHired,
             })}
           >
-            {isHired ? `Suscripción hasta: ${subscriptionUntil}` : description}
+            {isHired
+              ? `${t("card.subscriptionUntil")} ${subscriptionUntil}`
+              : description}
           </p>
         </div>
         <div className="flex items-center gap-6 flex-wrap">
-          <Button size="md">
-            <span>{isHired ? "Ingresar" : "Contratar servicio"}</span>
-            <ArrowRight />
-          </Button>
-          <Button size="md" variant="muted">
-            {isHired ? "Mejorar plan" : "Ver demo"}
-          </Button>
+          {isHired && (
+            <Button size="md">
+              {t("card.enter")}
+              <ArrowRight />
+            </Button>
+          )}
+          {!isHired && (
+            <Button size="md" asChild>
+              <Link href={`/contact?product=${id}`}>
+                {t("card.hireService")}
+                <ArrowRight />
+              </Link>
+            </Button>
+          )}
+          <VideoDemoDialog product={id} />
         </div>
       </div>
     </article>

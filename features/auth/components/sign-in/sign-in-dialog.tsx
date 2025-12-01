@@ -86,7 +86,7 @@ export function SignInDialog({
 type SignInContentProps = SignInDialogProps;
 
 function SignInContent({ onOpenChange }: SignInContentProps) {
-  const { setAuth } = useAuth();
+  const { fetchUserProfile } = useAuth();
 
   const [twoFAAccessToken, setTwoFAAccessToken] = useState<
     string | undefined
@@ -115,7 +115,7 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
 
   const { mutateAsync: signIn, isPending: isPendingSignIn } = useMutation({
     mutationFn: AuthService.signIn,
-    onSuccess: (signInResponse) => {
+    onSuccess: async (signInResponse) => {
       if ("twoFactorSetupRequired" in signInResponse.data) {
         setIsSetup2FADialogOpen(true);
         setTwoFAAccessToken(signInResponse.data.temporaryToken);
@@ -139,22 +139,9 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
       }
 
       if ("token" in signInResponse.data) {
-        const { token, refreshToken, expiresAt, user } = signInResponse.data;
-
-        // Store auth data in context
-        setAuth(
-          {
-            accessToken: token,
-            accessTokenExpiredAt: expiresAt,
-            refreshToken,
-          },
-          {
-            name: user.name,
-            lastName: user.surname,
-            email: user.email,
-            avatar: user.photo,
-          },
-        );
+        // Tokens are set as HTTP-only cookies by the API
+        // The token in response body indicates successful authentication
+        await fetchUserProfile();
 
         ToastManager.show({
           variant: "success",

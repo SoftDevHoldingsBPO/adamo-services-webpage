@@ -3,6 +3,9 @@ import { User } from "@/features/auth/entities/user.entity";
 
 import { ComponentProps } from "react";
 
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+
 import { getInitials } from "@/lib/get-initials";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +28,7 @@ export function ProfileDropdown({
   ...props
 }: ProfileDropdownProps) {
   const { signOut } = useAuth();
+  const t = useTranslations("profile-dropdown");
 
   return (
     <DropdownMenu>
@@ -41,10 +45,12 @@ export function ProfileDropdown({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>Ingresar a mi cuenta</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/profile">{t("goToAccount")}</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>
-          Cerrar sesión
+          {t("signOut")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

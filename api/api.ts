@@ -1,11 +1,8 @@
-import { AUTH_STORAGE_KEY } from "@/features/auth/contexts/auth.context";
-import { RefreshTokenResponse } from "@/features/auth/dtos/refresh-token.dto";
-import { Auth } from "@/features/auth/entities/auth.entity";
-import { User } from "@/features/auth/entities/user.entity";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 /**
  * Axios instance configured with base URL from environment variables
+ * Tokens are now managed via HTTP-only cookies (adamo_access_token, adamo_refresh_token)
  *
  * Environment variable required:
  * - NEXT_PUBLIC_API_BASE_URL: The base URL for API requests
@@ -18,6 +15,7 @@ export const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Enable sending cookies with requests
 });
 
 /**
@@ -39,25 +37,11 @@ function getLocaleFromCookie(): string {
 let isRefreshing = false;
 
 /**
- * Request interceptor - Add authentication token and locale if available
+ * Request interceptor - Add locale header
+ * Auth tokens are automatically sent via HTTP-only cookies
  */
 api.interceptors.request.use(
   (config) => {
-    // Get token from localStorage if available
-    const rawAuthentication = localStorage.getItem(AUTH_STORAGE_KEY);
-
-    if (rawAuthentication) {
-      try {
-        const authentication = JSON.parse(rawAuthentication);
-
-        if (authentication.auth.accessToken) {
-          config.headers.Authorization = `Bearer ${authentication.auth.accessToken}`;
-        }
-      } catch (error) {
-        console.error("Failed to parse authentication:", error);
-      }
-    }
-
     // Add Accept-Language header from locale cookie
     const locale = getLocaleFromCookie();
 
@@ -71,7 +55,8 @@ api.interceptors.request.use(
 );
 
 /**
- * Response interceptor - Handle common error cases
+ * Response interceptor - Handle token refresh on 401 errors
+ * Tokens are managed via HTTP-only cookies, refresh is automatic
  */
 api.interceptors.response.use(
   (response) => {
@@ -82,76 +67,35 @@ api.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // Handle 401 Unauthorized - differentiate between expired token and wrong credentials
-    if (error.response?.status === 401 && originalRequest) {
-      const rawAuthentication = localStorage.getItem(AUTH_STORAGE_KEY);
+    // Handle 401 Unauthorized - attempt token refresh
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry && !isRefreshing) {
+      originalRequest._retry = true;
+      isRefreshing = true;
 
-      // Only attempt refresh if there was an access token (expired/invalid token scenario)
-      // If no token exists, it's likely a failed login attempt with wrong credentials
-      if (rawAuthentication && !originalRequest._retry && !isRefreshing) {
-        try {
-          const authentication = JSON.parse(rawAuthentication) as {
-            auth: Auth;
-            user: User;
-          };
+      try {
+        // Attempt to refresh the token using the refresh token cookie
+        // The server will automatically read the adamo_refresh_token cookie
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/refresh`,
+          {},
+          {
+            withCredentials: true, // Send cookies with the request
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
 
-          // Check if access token and refresh token exist
-          if (authentication.auth?.accessToken && authentication.auth?.refreshToken) {
-            // Mark as retrying to prevent infinite loops
-            originalRequest._retry = true;
-            isRefreshing = true;
+        isRefreshing = false;
 
-            try {
-              // Attempt to refresh the token
-              // Use the expired access token in the Authorization header
-              const response = await axios.post<RefreshTokenResponse>(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/refresh`,
-                { refreshToken: authentication.auth.refreshToken },
-                {
-                  headers: {
-                    Authorization: `Bearer ${authentication.auth.accessToken}`,
-                    "Content-Type": "application/json",
-                  },
-                },
-              );
+        // Retry the original request - new token is now in the cookie
+        return api(originalRequest);
+      } catch (refreshError) {
+        // Refresh failed, redirect to home with session expired flag
+        isRefreshing = false;
+        window.location.href = "/?session_expired=true";
 
-              // Update the access token in storage
-              const newAuth: Auth = {
-                ...authentication.auth,
-                accessToken: response.data.data.token,
-                accessTokenExpiredAt: response.data.data.expiredAt,
-              };
-
-              localStorage.setItem(
-                AUTH_STORAGE_KEY,
-                JSON.stringify({ auth: newAuth, user: authentication.user }),
-              );
-
-              // Update the original request with the new token
-              originalRequest.headers.Authorization = `Bearer ${newAuth.accessToken}`;
-
-              isRefreshing = false;
-
-              // Retry the original request with the new token
-              return api(originalRequest);
-            } catch (refreshError) {
-              // Refresh failed, clear storage and redirect
-              isRefreshing = false;
-              localStorage.removeItem(AUTH_STORAGE_KEY);
-              window.location.href = "/?session_expired=true";
-
-              return Promise.reject(refreshError);
-            }
-          } else {
-            // No refresh token available, clear and redirect
-            localStorage.removeItem(AUTH_STORAGE_KEY);
-            window.location.href = "/";
-          }
-        } catch (parseError) {
-          // If parsing fails, clear corrupted data
-          localStorage.removeItem(AUTH_STORAGE_KEY);
-          window.location.href = "/";
-        }
+        return Promise.reject(refreshError);
       }
     }
 

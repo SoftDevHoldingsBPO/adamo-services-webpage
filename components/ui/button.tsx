@@ -21,6 +21,13 @@ const buttonVariants = cva(
           "bg-transparent text-white hover:text-neutral-100 active:text-neutral-200 !px-0",
         muted:
           "bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:bg-neutral-300 disabled:bg-neutral-50 disabled:text-neutral-400",
+        "destructive-medium": `
+          adm:bg-destructive-50 adm:text-destructive
+          adm:hover:bg-destructive/20
+          adm:focus-visible:ring-destructive/20
+          adm:dark:bg-destructive-50/60
+          adm:dark:focus-visible:ring-destructive/40
+        `,
       },
       size: {
         lg: "h-12 px-5 py-2 text-base",

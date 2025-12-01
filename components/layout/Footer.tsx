@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 
 import { Logo } from "../icon";
 import LocaleSelect from "../ui/locale-select";
+import { getPolicyByLocale } from "@/lib/get-policy-by-locale";
 
 const Footer = ({ locale }: { locale: string }) => {
   const pathname = usePathname();
@@ -52,11 +53,7 @@ const Footer = ({ locale }: { locale: string }) => {
           ))}
           <li key="personal-data-processing">
             <Link
-              href={
-                locale === "es"
-                  ? "/documents/politica-de-tratamiento-de-datos-personales-300925-139-SCJJLVG-VF.pdf"
-                  : "/documents/personal-data-processing-policy.pdf"
-              }
+              href={getPolicyByLocale(locale)}
               target="_blank"
               className="text-sm transition-colors text-neutral-500 hover:text-foreground"
             >
