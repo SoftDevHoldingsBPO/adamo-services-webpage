@@ -28,7 +28,7 @@ export const getBlogPosts = async (): Promise<BlogPostsResponse> => {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch blog posts");
+    throw new Error("Failed to fetch blog posts.");
   }
   return response.json() as Promise<BlogPostsResponse>;
 };
