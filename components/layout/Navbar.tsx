@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 
 import { ProfileDropdown } from "@/features/auth/components/profile/profile-dropdown";
 import { SignInDialog } from "@/features/auth/components/sign-in/sign-in-dialog";
+import { useSignInDialog } from "@/features/auth/hooks/use-sign-in-dialog";
 
 import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";
@@ -32,7 +33,7 @@ const Navbar = () => {
 
   const { isOpen, toggleMenu } = useNavigation();
 
-  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
+  const { isSignInDialogOpen, setIsSignInDialogOpen } = useSignInDialog();
 
   useLenis(({ scroll }) => {
     if (scroll <= SCROLL_TOP_THRESHOLD) {

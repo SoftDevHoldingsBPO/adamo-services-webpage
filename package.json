@@ -6,6 +6,7 @@
     "dev-secure": "next dev --turbopack --experimental-https",
     "dev": "next dev --turbopack",
     "dev:host": "next dev --turbopack --hostname landing-local.adamoservices.co",
+    "dev:host:secure": "next dev --turbopack --hostname landing-local.adamoservices.co --experimental-https",
     "build": "next build",
     "start": "next start",
     "start:host": "next start --hostname landing-local.adamoservices.co",

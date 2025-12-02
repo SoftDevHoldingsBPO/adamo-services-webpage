@@ -1,13 +1,14 @@
 "use client";
 
 import { useAuth } from "@/features/auth/contexts/auth.context";
+import { FullPageLoader } from "@/components/ui/full-page-loader";
 
 import { ReactNode, useEffect } from "react";
 
-interface ProtectedRouteProps {
+export type ProtectedRouteProps = Readonly<{
   children: ReactNode;
   redirectTo?: string;
-}
+}>;
 
 /**
  * ProtectedRoute component - Wraps content that requires authentication
@@ -31,42 +32,18 @@ export function ProtectedRoute({
   children,
   redirectTo = "/",
 }: ProtectedRouteProps) {
-  const { status, fetchUserProfile } = useAuth();
-
-  // Verify authentication when protected route is accessed
-  useEffect(() => {
-    const verifyAuth = async () => {
-      if (status === "authenticated") return;
-
-      await fetchUserProfile();
-    };
-
-    verifyAuth();
-  }, []); // Run once on mount
+  const { status } = useAuth();
 
   useEffect(() => {
-    if (status === "loading") return;
-
     if (status === "unauthenticated") {
       window.location.href = redirectTo;
     }
-  }, [status]);
+  }, [status, redirectTo]);
 
-  // Show full-page loading state while checking authentication
   if (status === "loading") {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="flex flex-col items-center gap-4">
-          {/* Spinner */}
-          <div className="relative">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-neutral-200 border-t-primary"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <FullPageLoader />;
   }
 
-  // Don't render children if not authenticated (will redirect)
   if (status === "unauthenticated") {
     return null;
   }

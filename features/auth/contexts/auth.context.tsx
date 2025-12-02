@@ -2,8 +2,8 @@
 
 import { User } from "@/features/auth/entities/user.entity";
 import AuthService from "@/features/auth/services/auth.service";
+import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { ProfileService } from "@/features/profile/services/profile.service";
-import { useQuery } from "@tanstack/react-query";
 
 import {
   ReactNode,
@@ -16,7 +16,9 @@ import {
 type AuthContextType = {
   user: User | null;
   status: "loading" | "authenticated" | "unauthenticated";
-  fetchUserProfile: () => Promise<void>;
+  setAuthenticated: (user: User) => void;
+  setUnauthenticated: () => void;
+  fetchAndSetUser: () => Promise<boolean>;
   signOut: () => Promise<void>;
 };
 
@@ -25,43 +27,79 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<
     "loading" | "authenticated" | "unauthenticated"
-  >("unauthenticated"); // Default to unauthenticated - ProtectedRoute will verify if needed
+  >("loading"); // Start with loading to check auth on mount
 
-  const { data: user, refetch: getUserProfile } = useQuery({
-    queryKey: [ProfileService.GET_PROFILE_QUERY_KEY],
-    queryFn: ProfileService.get,
-    enabled: status === "authenticated",
-    staleTime: Infinity,
-  });
+  const [user, setUser] = useState<User | null>(null);
 
-  const fetchUserProfile = async () => {
-    setStatus("loading"); // Set loading when actually checking auth
-
-    const result = await getUserProfile();
-
-    if (result.error) {
-      setStatus("unauthenticated");
-      return;
-    }
-
+  // Set authenticated state and user
+  const setAuthenticated = (user: User) => {
+    setUser(user);
     setStatus("authenticated");
+  };
+
+  // Set unauthenticated state
+  const setUnauthenticated = () => {
+    setUser(null);
+    setStatus("unauthenticated");
+  };
+
+  // Fetch user profile and set state
+  const fetchAndSetUser = async (): Promise<boolean> => {
+    setStatus("loading");
+
+    try {
+      const user = await ProfileService.get();
+
+      setAuthenticated(user);
+
+      return true;
+    } catch {
+      setUnauthenticated();
+
+      return false;
+    }
   };
 
   const signOut = async () => {
     try {
       await AuthService.signOut();
     } catch (error) {
+      // Silently handle logout errors
     } finally {
-      window.location.href = "/";
+      setUnauthenticated();
     }
   };
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      // Skip auth check if session expired (to avoid infinite loop)
+      if (AuthQueryUtils.hasSessionExpired(window.location.search)) {
+        setUnauthenticated();
+        return;
+      }
+
+      try {
+        // Try to get user profile (will use cookies automatically)
+        const user = await ProfileService.get();
+        setAuthenticated(user);
+      } catch {
+        // If it fails, user is not authenticated
+        setUnauthenticated();
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user: user ?? null,
+        user,
         status,
-        fetchUserProfile,
+        setAuthenticated,
+        setUnauthenticated,
+        fetchAndSetUser,
         signOut,
       }}
     >

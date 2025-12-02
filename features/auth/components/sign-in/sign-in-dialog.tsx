@@ -14,6 +14,7 @@ import {
   EmailSchema,
   PasswordSchema,
 } from "@/features/auth/schemas/auth.schema";
+import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import AuthService from "@/features/auth/services/auth.service";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +27,7 @@ import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -86,7 +88,9 @@ export function SignInDialog({
 type SignInContentProps = SignInDialogProps;
 
 function SignInContent({ onOpenChange }: SignInContentProps) {
-  const { fetchUserProfile } = useAuth();
+  const searchParams = useSearchParams();
+
+  const { fetchAndSetUser } = useAuth();
 
   const [twoFAAccessToken, setTwoFAAccessToken] = useState<
     string | undefined
@@ -119,15 +123,12 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
       if ("twoFactorSetupRequired" in signInResponse.data) {
         setIsSetup2FADialogOpen(true);
         setTwoFAAccessToken(signInResponse.data.temporaryToken);
-
         return;
       }
-
       if ("twoFactorRequired" in signInResponse.data) {
         setIsEnter2FADialogOpen(true);
         return;
       }
-
       if ("verification" in signInResponse.data) {
         if (
           signInResponse.data.verification.required &&
@@ -138,10 +139,19 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         }
       }
 
+      // The token in response body indicates successful authentication
       if ("token" in signInResponse.data) {
+        // Check for redirect_to query param
+        const redirectTo = AuthQueryUtils.getRedirectUrl(searchParams);
+
+        if (redirectTo) {
+          window.location.href = redirectTo;
+
+          return;
+        }
+
         // Tokens are set as HTTP-only cookies by the API
-        // The token in response body indicates successful authentication
-        await fetchUserProfile();
+        await fetchAndSetUser();
 
         ToastManager.show({
           variant: "success",
