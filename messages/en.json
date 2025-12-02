@@ -255,7 +255,8 @@
     "confirm": "Accept"
   },
   "profile-dropdown": {
-    "goToAccount": "Go to my account",
+    "goToDashboard": "Go to dashboard",
+    "goToAccount": "Go to my profile",
     "signOut": "Sign out",
     "goToAdamoId": "Go to Adamo ID",
     "goToAdamoPay": "Go to Adamo Pay",

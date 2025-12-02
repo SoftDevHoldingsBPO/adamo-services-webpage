@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -74,6 +75,8 @@ export function ProfileDropdown({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
         {currentApp && currentApp.url && (
           <>
             <DropdownMenuItem asChild>
@@ -84,6 +87,9 @@ export function ProfileDropdown({
             <DropdownMenuSeparator />
           </>
         )}
+        <DropdownMenuItem asChild>
+          <Link href="/my-services">{t("goToDashboard")}</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/profile">{t("goToAccount")}</Link>
         </DropdownMenuItem>
