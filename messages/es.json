@@ -139,7 +139,7 @@
     "forgot-password-action": "Haz click aquí.",
     "do-not-have-account": "¿No tienes cuenta?",
     "do-not-have-account-action": "Haz click aquí para registrarte.",
-    "success": "¡Inicio de sesión exitoso! Bienvenido de nuevo.",
+    "success": "¡Inicio de sesión exitoso!",
     "placeholders": {
       "email": "Correo electrónico",
       "password": "Contraseña"

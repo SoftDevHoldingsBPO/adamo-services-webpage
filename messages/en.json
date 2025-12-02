@@ -139,6 +139,7 @@
     "forgot-password-action": "Click here.",
     "do-not-have-account": "Don't have an account?",
     "do-not-have-account-action": "Click here to register.",
+    "success": "Sign in successful!",
     "placeholders": {
       "email": "Email",
       "password": "Password"

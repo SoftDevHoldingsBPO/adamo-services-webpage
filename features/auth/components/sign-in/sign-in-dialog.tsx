@@ -10,12 +10,13 @@ import { Setup2FADialog } from "@/features/auth/components/sign-in/setup-2fa-dia
 import { VerifyEmailDialog } from "@/features/auth/components/sign-in/verify-email-dialog";
 import { SignUpDialog } from "@/features/auth/components/sign-up/sign-up-dialog";
 import { useAuth } from "@/features/auth/contexts/auth.context";
+import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
 import {
   EmailSchema,
   PasswordSchema,
 } from "@/features/auth/schemas/auth.schema";
-import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import AuthService from "@/features/auth/services/auth.service";
+import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -27,7 +28,7 @@ import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -89,8 +90,10 @@ type SignInContentProps = SignInDialogProps;
 
 function SignInContent({ onOpenChange }: SignInContentProps) {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const { fetchAndSetUser } = useAuth();
+  const { checkAndClearFirstLogin } = useFirstLoginRedirect();
 
   const [twoFAAccessToken, setTwoFAAccessToken] = useState<
     string | undefined
@@ -146,7 +149,6 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
 
         if (redirectTo) {
           window.location.href = redirectTo;
-
           return;
         }
 
@@ -159,6 +161,14 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         });
 
         if (onOpenChange) onOpenChange(false);
+
+        // Check if this is a first login after registration
+        const isFirstLogin = checkAndClearFirstLogin();
+
+        if (isFirstLogin) {
+          // Redirect to my-services
+          router.push("/my-services");
+        }
       }
     },
     onError: (error) => {

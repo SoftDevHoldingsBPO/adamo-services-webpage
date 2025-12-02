@@ -1,5 +1,6 @@
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
 import { useSignUp } from "@/features/auth/contexts/sign-up.context";
+import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
 import { SixCodeSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
@@ -49,6 +50,7 @@ export function SignUpVerifyEmailStep() {
   const t = useTranslations("sign-up-dialog.code-step");
 
   const { email, setIsSignUpDialogOpen } = useSignUp();
+  const { markAsFirstLogin } = useFirstLoginRedirect();
 
   const form = useForm<SignUpVerifyEmailFormValues>({
     resolver: zodResolver(SignUpVerifyEmailFormSchema),
@@ -65,6 +67,9 @@ export function SignUpVerifyEmailStep() {
           variant: "success",
           message: t("success"),
         });
+
+        // Mark as first login for redirect on next sign-in
+        markAsFirstLogin();
 
         setIsSignUpDialogOpen(false);
       },
