@@ -1,11 +1,6 @@
 "use client";
 
-import { ChangePasswordCurrentStep } from "@/features/profile/components/change-password/change-password-current-step";
-import { ChangePasswordNewStep } from "@/features/profile/components/change-password/change-password-new-step";
-import {
-  ChangePasswordProvider,
-  useChangePassword,
-} from "@/features/profile/contexts/change-password.context";
+import { ChangePasswordForm } from "@/features/profile/components/change-password/change-password-form";
 import { useMediaQuery } from "usehooks-ts";
 
 import { ComponentProps } from "react";
@@ -31,30 +26,8 @@ export function ChangePasswordDialog({
         showCloseButton={isAtLeastTablet}
         isFullscreen={!isAtLeastTablet}
       >
-        <ChangePasswordProvider
-          isChangePasswordDialogOpen={open ?? false}
-          setIsChangePasswordDialogOpen={onOpenChange ?? (() => {})}
-        >
-          <ChangePasswordDialogContent onPasswordChanged={onPasswordChanged} />
-        </ChangePasswordProvider>
+        <ChangePasswordForm onPasswordChanged={onPasswordChanged} />
       </DialogContent>
     </Dialog>
-  );
-}
-
-type ChangePasswordDialogContentProps = ChangePasswordDialogProps;
-
-function ChangePasswordDialogContent({
-  onPasswordChanged,
-}: ChangePasswordDialogContentProps) {
-  const { changePasswordStep } = useChangePassword();
-
-  return (
-    <>
-      {changePasswordStep === "current" && <ChangePasswordCurrentStep />}
-      {changePasswordStep === "new" && (
-        <ChangePasswordNewStep onPasswordChanged={onPasswordChanged} />
-      )}
-    </>
   );
 }

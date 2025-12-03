@@ -507,23 +507,15 @@
     }
   },
   "change-password-dialog": {
-    "current-step": {
-      "title": "Cambiar contraseña",
-      "description": "Ingresa tu contraseña actual para continuar.",
-      "label": "Contraseña actual",
-      "cancel": "Cancelar",
-      "continue": "Continuar"
-    },
-    "new-step": {
-      "title": "Nueva contraseña",
-      "description": "Ingresa tu nueva contraseña y confírmala.",
-      "newPasswordLabel": "Nueva contraseña",
-      "confirmPasswordLabel": "Confirmar contraseña",
-      "passwordRequirements": "La contraseña debe tener al menos 8 caracteres",
-      "cancel": "Cancelar",
-      "save": "Guardar cambios",
-      "success": "Contraseña cambiada exitosamente"
-    }
+    "title": "Cambiar contraseña",
+    "description": "Ingresa tu contraseña actual y tu nueva contraseña.",
+    "currentPasswordLabel": "Contraseña actual",
+    "newPasswordLabel": "Nueva contraseña",
+    "confirmPasswordLabel": "Confirmar nueva contraseña",
+    "passwordRequirements": "La contraseña debe tener al menos 8 caracteres",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "success": "Contraseña cambiada exitosamente. Tu sesión se cerrará."
   },
   "enable-2fa-dialog": {
     "setup": {

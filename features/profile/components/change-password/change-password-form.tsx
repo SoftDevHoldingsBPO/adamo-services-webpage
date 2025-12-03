@@ -1,7 +1,6 @@
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
-import { PasswordWithConfirmationSchema } from "@/features/auth/schemas/auth.schema";
+import { PasswordSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
-import { useChangePassword } from "@/features/profile/contexts/change-password.context";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -14,7 +13,6 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
-  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -33,29 +31,34 @@ import {
 import { Input } from "@/components/ui/input";
 import LocaleSelect from "@/components/ui/locale-select";
 
-export const ChangePasswordNewFormSchema = PasswordWithConfirmationSchema;
+export const ChangePasswordFormSchema = z
+  .object({
+    currentPassword: PasswordSchema,
+    newPassword: PasswordSchema,
+    confirmNewPassword: PasswordSchema,
+  })
+  .refine((data) => data.newPassword === data.confirmNewPassword, {
+    message: "Passwords don't match",
+    path: ["confirmNewPassword"],
+  });
 
-export type ChangePasswordNewFormValues = z.infer<
-  typeof ChangePasswordNewFormSchema
->;
+export type ChangePasswordFormValues = z.infer<typeof ChangePasswordFormSchema>;
 
-export type ChangePasswordNewStepProps = Readonly<{
+export type ChangePasswordFormProps = Readonly<{
   onPasswordChanged?: () => void;
 }>;
 
-export function ChangePasswordNewStep({
+export function ChangePasswordForm({
   onPasswordChanged,
-}: ChangePasswordNewStepProps) {
-  const t = useTranslations("change-password-dialog.new-step");
+}: ChangePasswordFormProps) {
+  const t = useTranslations("change-password-dialog");
 
-  const { currentPassword, setIsChangePasswordDialogOpen } =
-    useChangePassword();
-
-  const form = useForm<ChangePasswordNewFormValues>({
-    resolver: zodResolver(ChangePasswordNewFormSchema),
+  const form = useForm<ChangePasswordFormValues>({
+    resolver: zodResolver(ChangePasswordFormSchema),
     defaultValues: {
-      password: "",
-      confirmPassword: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
     },
   });
 
@@ -67,8 +70,6 @@ export function ChangePasswordNewStep({
         message: t("success"),
       });
 
-      setIsChangePasswordDialogOpen(false);
-
       if (onPasswordChanged) onPasswordChanged();
     },
     onError: (error) => {
@@ -79,12 +80,8 @@ export function ChangePasswordNewStep({
     },
   });
 
-  const handleUpdatePassword = async (values: ChangePasswordNewFormValues) => {
-    await updatePassword({
-      currentPassword,
-      newPassword: values.password,
-      confirmNewPassword: values.confirmPassword,
-    });
+  const handleUpdatePassword = async (values: ChangePasswordFormValues) => {
+    await updatePassword(values);
   };
 
   return (
@@ -104,27 +101,42 @@ export function ChangePasswordNewStep({
       </DialogHeader>
       <Form {...form}>
         <form
-          id="change-password-new-step-form"
+          id="change-password-form"
           onSubmit={form.handleSubmit(handleUpdatePassword)}
         >
           <fieldset disabled={isPending} className="space-y-4">
             <FormField
               control={form.control}
-              name="password"
+              name="currentPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("newPasswordLabel")}</FormLabel>
+                  <FormLabel>{t("currentPasswordLabel")}</FormLabel>
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
-                  <FormDescription>{t("passwordRequirements")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="confirmPassword"
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("newPasswordLabel")}</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="password" />
+                  </FormControl>
+                  <FormDescription>
+                    {t("passwordRequirements")}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmNewPassword"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
@@ -146,7 +158,7 @@ export function ChangePasswordNewStep({
         </DialogClose>
         <Button
           type="submit"
-          form="change-password-new-step-form"
+          form="change-password-form"
           loading={isPending}
         >
           {t("save")}

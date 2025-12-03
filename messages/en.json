@@ -508,23 +508,15 @@
     }
   },
   "change-password-dialog": {
-    "current-step": {
-      "title": "Change password",
-      "description": "Enter your current password to continue.",
-      "label": "Current password",
-      "cancel": "Cancel",
-      "continue": "Continue"
-    },
-    "new-step": {
-      "title": "New password",
-      "description": "Enter your new password and confirm it.",
-      "newPasswordLabel": "New password",
-      "confirmPasswordLabel": "Confirm password",
-      "passwordRequirements": "Password must be at least 8 characters long",
-      "cancel": "Cancel",
-      "save": "Save changes",
-      "success": "Password changed successfully"
-    }
+    "title": "Change password",
+    "description": "Enter your current password and your new password.",
+    "currentPasswordLabel": "Current password",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password",
+    "passwordRequirements": "Password must be at least 8 characters long",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "success": "Password changed successfully. Your session will be closed."
   },
   "enable-2fa-dialog": {
     "setup": {

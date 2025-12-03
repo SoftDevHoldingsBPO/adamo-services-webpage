@@ -112,9 +112,9 @@ class AuthService {
   public static async updatePassword(args: {
     currentPassword: string;
     newPassword: string;
-    confirmPassword: string;
+    confirmNewPassword: string;
   }) {
-    const response = await api.post<void>("/api/v1/auth/update-password", args);
+    const response = await api.post<void>("/api/v1/auth/change-password", args);
     return response.data;
   }
 }
