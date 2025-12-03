@@ -1,9 +1,9 @@
 "use client";
 
-import { ProfileDropdown } from "@/features/auth/components/profile/profile-dropdown";
 import { SignInDialog } from "@/features/auth/components/sign-in/sign-in-dialog";
 import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useSignInDialog } from "@/features/auth/hooks/use-sign-in-dialog";
+import { ProfileDropdown } from "@/features/profile/components/profile-dropdown";
 import { useNavigation } from "@/providers/NavigationProvider";
 import { useLenis } from "lenis/react";
 import { useMediaQuery } from "usehooks-ts";
