@@ -1,6 +1,6 @@
 import { APISuccessResponse } from "@/api/types";
 
-export type ProfileDTO = {
+export type Profile = {
   uuid: string;
   name: string;
   surname: string;
@@ -18,12 +18,12 @@ export type ProfileDTO = {
   createdAt: Date;
   updatedAt: Date;
   acceptedTerms: any[];
-  sessionInfo: SessionInfo;
+  sessionInfo: Session;
 };
 
-export type SessionInfo = {
+export type Session = {
   sessionId: string;
   timestamp: Date;
 };
 
-export type GetProfileResponse = APISuccessResponse<ProfileDTO>;
+export type GetProfileResponse = APISuccessResponse<Profile>;

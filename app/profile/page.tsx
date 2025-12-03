@@ -17,6 +17,7 @@ export default function Page() {
           name: user?.name,
           lastName: user?.lastName,
           email: user?.email,
+          profilePhoto: user?.avatar,
         }}
         className="mb-10"
       />

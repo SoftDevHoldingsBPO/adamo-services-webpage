@@ -464,5 +464,76 @@
       "footer": "Have questions or want to hire the product?",
       "contactLink": "Talk to sales now"
     }
+  },
+  "profile-form": {
+    "title": "Update personal information",
+    "firstName": "First name(s)",
+    "lastName": "Last name(s)",
+    "email": "Email",
+    "emailHelp": "If you need to change your email, please contact <link>Customer Service</link>",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "photoTooLarge": "Photo must be less than 50MB",
+    "photoInvalidFormat": "Photo must be a PNG or JPEG image",
+    "nameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailInvalid": "Invalid email",
+    "successMessage": "Profile updated successfully"
+  },
+  "security-form": {
+    "title": "Security",
+    "description": "Update your password and/or manage Two-Factor Authentication (2FA) for greater security.",
+    "changePassword": "Change password",
+    "enable2FA": "Enable 2FA",
+    "disable2FA": "Disable 2FA"
+  },
+  "disable-2fa-dialog": {
+    "start": {
+      "title": "Disable Two-Factor Authentication (2FA)",
+      "description": "If you disable Two-Factor Authentication, your account security will be weakened and you will be exposed to unauthorized access.",
+      "cancel": "Cancel",
+      "disable": "Disable 2FA"
+    },
+    "code": {
+      "title": "Disable 2FA",
+      "description": "Enter the 6-digit code provided by the Authentication app.",
+      "cancel": "Cancel",
+      "disable": "Disable 2FA"
+    },
+    "disabled": {
+      "title": "Disable 2FA",
+      "description": "Two-Factor Authentication has been disabled. Your account security is now weaker and you may be exposed to unauthorized access.",
+      "warningMessage": "If you wish, you can re-enable it at any time from your user profile.",
+      "accept": "Accept"
+    }
+  },
+  "change-password-dialog": {
+    "title": "Change password",
+    "description": "Enter your current password and your new password.",
+    "currentPasswordLabel": "Current password",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password",
+    "passwordRequirements": "Password must be at least 8 characters long",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "success": "Password changed successfully. Your session will be closed."
+  },
+  "enable-2fa-dialog": {
+    "setup": {
+      "title": "Enable two-factor authentication",
+      "description": "Enhance the security of your account by enabling 2FA:",
+      "confirm": "Enable 2FA",
+      "instructions": {
+        "one": "Download an authentication app on your mobile device such as Google Authenticator",
+        "two": "Open the app and scan the following QR code, or manually enter the code: {code}",
+        "three": "Enter the 6-digit code provided by the authentication app:"
+      }
+    },
+    "enabled": {
+      "title": "Enable 2FA",
+      "description": "Two-factor authentication has been successfully enabled. Your account is now more secure.",
+      "successMessage": "You can disable it at any time from your user profile settings.",
+      "accept": "Accept"
+    }
   }
 }

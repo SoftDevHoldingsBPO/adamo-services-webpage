@@ -6,7 +6,9 @@ import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { ProfileService } from "@/features/profile/services/profile.service";
 
 import {
+  Dispatch,
   ReactNode,
+  SetStateAction,
   createContext,
   useContext,
   useEffect,
@@ -15,6 +17,7 @@ import {
 
 type AuthContextType = {
   user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
   status: "loading" | "authenticated" | "unauthenticated";
   setAuthenticated: (user: User) => void;
   setUnauthenticated: () => void;
@@ -96,6 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         status,
         setAuthenticated,
         setUnauthenticated,

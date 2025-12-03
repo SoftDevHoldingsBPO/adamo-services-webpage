@@ -70,7 +70,7 @@ export function ProfileDropdown({
           )}
           {...props}
         >
-          <AvatarImage src={user.avatar} />
+          <AvatarImage src={user.avatar} className="object-cover" />
           <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

@@ -132,7 +132,7 @@ function ServiceCard({
   return (
     <article
       className={cn(
-        "xl:nth-1:col-span-2 xl:nth-2:col-span-2 xl:nth-3:col-span-3 xl:nth-4:col-span-3 border-8 border-white/20 rounded-4xl",
+        "flex flex-col xl:nth-1:col-span-2 xl:nth-2:col-span-2 xl:nth-3:col-span-3 xl:nth-4:col-span-3 border-8 border-white/20 rounded-4xl",
       )}
     >
       <header
@@ -159,7 +159,7 @@ function ServiceCard({
           </p>
         </div>
       </header>
-      <div className="rounded-b-3xl bg-white p-8">
+      <div className="flex flex-col rounded-b-3xl bg-white p-8 grow">
         <p
           className={cn("text-left text-neutral-900 font-semibold mb-4", {
             "text-neutral-400": !isHired,

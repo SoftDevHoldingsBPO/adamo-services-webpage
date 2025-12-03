@@ -3,6 +3,7 @@ import { RefreshTokenResponse } from "@/features/auth/dtos/refresh-token.dto";
 import { Setup2FAResponse } from "@/features/auth/dtos/setup-2fa.dto";
 import { SignInResponse } from "@/features/auth/dtos/sign-in.dto";
 import { VerifyEmailForPasswordRecoveryResponse } from "@/features/auth/dtos/verify-email-for-password-recovery.dto";
+import { AxiosHeaders } from "axios";
 
 class AuthService {
   public static async signIn(args: {
@@ -28,11 +29,17 @@ class AuthService {
     await api.post<void>("/api/v1/auth/verify-email", args);
   }
 
-  public static async setup2FA(args: { accessToken: string }) {
+  public static async setup2FA(args?: { accessToken?: string }) {
+    const headers = new AxiosHeaders();
+
+    if (args?.accessToken) {
+      headers.set("Authorization", `Bearer ${args.accessToken}`);
+    }
+
     const response = await api.post<Setup2FAResponse>(
       "/api/v1/auth/setup-2fa",
       {},
-      { headers: { Authorization: `Bearer ${args.accessToken}` } },
+      { headers },
     );
 
     return response.data;
@@ -65,7 +72,7 @@ class AuthService {
     return response.data;
   }
 
-  public static async changePassword(args: {
+  public static async resetPassword(args: {
     email: string;
     temporaryPassword: string;
     newPassword: string;
@@ -94,6 +101,20 @@ class AuthService {
 
   public static async signOut() {
     const response = await api.post<void>("/api/v1/auth/logout");
+    return response.data;
+  }
+
+  public static async verifyPassword(args: { password: string }) {
+    const response = await api.post<void>("/api/v1/auth/verify-password", args);
+    return response.data;
+  }
+
+  public static async updatePassword(args: {
+    currentPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+  }) {
+    const response = await api.post<void>("/api/v1/auth/change-password", args);
     return response.data;
   }
 }

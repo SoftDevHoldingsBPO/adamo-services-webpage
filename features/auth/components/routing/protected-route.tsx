@@ -1,9 +1,12 @@
 "use client";
 
 import { useAuth } from "@/features/auth/contexts/auth.context";
-import { FullPageLoader } from "@/components/ui/full-page-loader";
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
+
+import { redirect } from "next/navigation";
+
+import { FullPageLoader } from "@/components/ui/full-page-loader";
 
 export type ProtectedRouteProps = Readonly<{
   children: ReactNode;
@@ -34,18 +37,12 @@ export function ProtectedRoute({
 }: ProtectedRouteProps) {
   const { status } = useAuth();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      window.location.href = redirectTo;
-    }
-  }, [status, redirectTo]);
-
   if (status === "loading") {
     return <FullPageLoader />;
   }
 
   if (status === "unauthenticated") {
-    return null;
+    redirect(redirectTo);
   }
 
   return <>{children}</>;

@@ -1,10 +1,13 @@
 "use client";
 
-import { PasswordRecoveryDialog } from "@/features/auth/components/password-recovery/password-recovery-dialog";
 import { useAuth } from "@/features/auth/contexts/auth.context";
+import { ChangePasswordDialog } from "@/features/profile/components/change-password/change-password-dialog";
 import { Disable2FADialog } from "@/features/profile/components/disable-2fa/disable-2fa-dialog";
+import { Enable2FADialog } from "@/features/profile/components/enable-2fa/enable-2fa-dialog";
 
 import { ComponentProps, useState } from "react";
+
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
@@ -13,12 +16,17 @@ import { Button } from "@/components/ui/button";
 export type SecurityFormProps = ComponentProps<"article">;
 
 export function SecurityForm({ className, ...props }: SecurityFormProps) {
-  const [isPasswordRecoveryDialogOpen, setIsPasswordRecoveryDialogOpen] =
+  const [isChangePasswordDialogOpen, setIsChangePasswordDialogOpen] =
     useState(false);
 
+  const [isEnable2FADialogOpen, setIsEnable2FADialogOpen] = useState(false);
   const [isDisable2FADialogOpen, setIsDisable2FADialogOpen] = useState(false);
 
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+
+  const t = useTranslations("security-form");
+
+  const isTwoFactorEnabled = user?.isTwoFactorEnabled ?? false;
 
   return (
     <>
@@ -31,28 +39,35 @@ export function SecurityForm({ className, ...props }: SecurityFormProps) {
         {...props}
       >
         <h2 className="font-semibold text-base text-neutral-900 mb-4">
-          Seguridad
+          {t("title")}
         </h2>
-        <p className="text-neutral-700 mb-10">
-          Actualiza tu contraseña y/o desactiva la Autenticación de doble
-          Factores (2FA) para mayor seguridad.
-        </p>
+        <p className="text-neutral-700 mb-10">{t("description")}</p>
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <Button
             variant="muted"
-            onClick={() => setIsPasswordRecoveryDialogOpen(true)}
+            onClick={() => setIsChangePasswordDialogOpen(true)}
           >
-            Cambiar contraseña
+            {t("changePassword")}
           </Button>
-          <Button onClick={() => setIsDisable2FADialogOpen(true)}>
-            Desactivar 2FA
-          </Button>
+          {isTwoFactorEnabled ? (
+            <Button onClick={() => setIsDisable2FADialogOpen(true)}>
+              {t("disable2FA")}
+            </Button>
+          ) : (
+            <Button onClick={() => setIsEnable2FADialogOpen(true)}>
+              {t("enable2FA")}
+            </Button>
+          )}
         </div>
       </article>
-      <PasswordRecoveryDialog
-        open={isPasswordRecoveryDialogOpen}
-        onOpenChange={setIsPasswordRecoveryDialogOpen}
+      <ChangePasswordDialog
+        open={isChangePasswordDialogOpen}
+        onOpenChange={setIsChangePasswordDialogOpen}
         onPasswordChanged={signOut}
+      />
+      <Enable2FADialog
+        open={isEnable2FADialogOpen}
+        onOpenChange={setIsEnable2FADialogOpen}
       />
       <Disable2FADialog
         open={isDisable2FADialogOpen}

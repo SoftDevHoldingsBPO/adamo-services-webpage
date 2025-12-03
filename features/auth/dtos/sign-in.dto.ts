@@ -1,7 +1,7 @@
 import { APISuccessResponse } from "@/api/types";
 
 // User data from sign-in API response
-export type SignInUserDTO = {
+export type SignInUser = {
   _id: string;
   uuid: string;
   subjectId: string;
@@ -47,14 +47,14 @@ export type SignInSuccess = {
   token: string;
   refreshToken: string;
   expiresAt: string;
-  user: SignInUserDTO;
+  user: SignInUser;
 };
 
 // Discriminated union type for all sign-in scenarios
-export type SignInDTO =
+export type SignIn =
   | SignInTwoFactorSetupRequired
   | SignInTwoFactorRequired
   | SignInVerificationRequired
   | SignInSuccess;
 
-export type SignInResponse = APISuccessResponse<SignInDTO>;
+export type SignInResponse = APISuccessResponse<SignIn>;

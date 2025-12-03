@@ -1,5 +1,7 @@
 import { useDisable2FA } from "@/features/profile/contexts/disable-2fa.context";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   DialogClose,
@@ -12,26 +14,23 @@ import {
 export function Disable2FAStartStep() {
   const { setDisable2FAStepWithCallback } = useDisable2FA();
 
+  const t = useTranslations("disable-2fa-dialog.start");
+
   return (
     <>
       <DialogHeader>
-        <DialogTitle>
-          Desactivar Doble Factor de Autenticación (2FA)
-        </DialogTitle>
-        <DialogDescription>
-          Si desactivas el Doble Factor de Autenticación, se debilitará la
-          seguridad de tu cuenta y estarás expuesto a ingresos no autorizados.
-        </DialogDescription>
+        <DialogTitle>{t("title")}</DialogTitle>
+        <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <DialogFooter>
         <DialogClose asChild>
-          <Button variant="muted">Cancelar</Button>
+          <Button variant="muted">{t("cancel")}</Button>
         </DialogClose>
         <Button
           variant="destructive-medium"
           onClick={() => setDisable2FAStepWithCallback("code")}
         >
-          Desactivar 2FA
+          {t("disable")}
         </Button>
       </DialogFooter>
     </>

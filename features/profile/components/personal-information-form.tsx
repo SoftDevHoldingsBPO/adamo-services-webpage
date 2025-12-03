@@ -1,12 +1,17 @@
 "use client";
 
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { ProfilePictureUpload } from "@/features/profile/components/profile-picture-upload";
-import { UpdateProfileRequest } from "@/features/profile/dtos/update-profile.dto";
+import { UpdateProfilePhotoRequest } from "@/features/profile/dtos/update-profile-photo.dto";
+import {
+  Profile,
+  UpdateProfileRequest,
+} from "@/features/profile/dtos/update-profile.dto";
 import { ProfileService } from "@/features/profile/services/profile.service";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import z from "zod";
 
 import { ComponentProps } from "react";
@@ -41,21 +46,21 @@ const PersonalInformationFormSchema = (
           if (value.size > 50 * 1024 * 1024) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Photo must be less than 50MB",
+              message: t("photoTooLarge"),
             });
           }
 
           if (!["image/png", "image/jpeg", "image/jpg"].includes(value.type)) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Photo must be a PNG or JPEG image",
+              message: t("photoInvalidFormat"),
             });
           }
         }
       }),
-    name: z.string().min(1, "El nombre requerido"),
-    lastName: z.string().min(1, "El apellido requerido"),
-    email: z.string().email("Correo electrónico inválido"),
+    name: z.string().min(1, t("nameRequired")),
+    lastName: z.string().min(1, t("lastNameRequired")),
+    email: z.string().email(t("emailInvalid")),
   });
 };
 
@@ -73,11 +78,11 @@ export function PersonalInformationForm({
   className,
   ...props
 }: PersonalInformationFormProps) {
-  const t = useTranslations();
+  const { setUser } = useAuth();
+
+  const t = useTranslations("profile-form");
 
   const FormSchema = PersonalInformationFormSchema(t);
-
-  const queryClient = useQueryClient();
 
   const form = useForm<PersonalInformationFormValues>({
     resolver: zodResolver(FormSchema),
@@ -92,22 +97,54 @@ export function PersonalInformationForm({
   const { mutateAsync: updateProfile, isPending: isUpdateProfilePending } =
     useMutation({
       mutationKey: [ProfileService.UPDATE_PROFILE_MUTATION_KEY],
-      mutationFn: ProfileService.update,
-      onSuccess: (_, { name, surname, photo }) => {
+      mutationFn: async ({
+        name,
+        surname,
+        photo,
+        deletePhoto,
+      }: UpdateProfileRequest &
+        Partial<UpdateProfilePhotoRequest> & { deletePhoto?: boolean }) => {
+        let latestProfile: Profile;
+
+        const updateResponse = await ProfileService.update({
+          name,
+          surname,
+        });
+
+        latestProfile = updateResponse.data.profile;
+
+        if (photo) {
+          const photoResponse = await ProfileService.updatePhoto({ photo });
+          latestProfile = photoResponse.data.profile;
+        }
+
+        if (deletePhoto) {
+          await ProfileService.deletePhoto();
+          latestProfile = { ...latestProfile, photo: "" };
+        }
+
+        return latestProfile;
+      },
+      onSuccess: (latestProfile, { name, surname, photo }) => {
         ToastManager.show({
           variant: "success",
-          message: "Profile updated successfully",
+          message: t("successMessage"),
         });
+
+        // Update user state with latest profile data
+        setUser((prev) => ({
+          ...prev!,
+          name: latestProfile.name,
+          lastName: latestProfile.surname,
+          email: latestProfile.email,
+          avatar: latestProfile.photo || undefined,
+        }));
 
         form.reset({
           name,
           lastName: surname,
           email: form.getValues("email"),
-          profilePhoto: photo ?? null,
-        });
-
-        queryClient.invalidateQueries({
-          queryKey: [ProfileService.GET_PROFILE_QUERY_KEY],
+          profilePhoto: latestProfile.photo || null,
         });
       },
       onError: (error) => {
@@ -138,11 +175,21 @@ export function PersonalInformationForm({
       surname: values.lastName,
     };
 
-    if (values.profilePhoto instanceof File) {
-      newProfileInfo.photo = values.profilePhoto;
-    }
+    const newProfilePhoto =
+      values.profilePhoto instanceof File ? values.profilePhoto : undefined;
 
-    await updateProfile(newProfileInfo);
+    /**
+     * Determine if the photo should be deleted
+     * - if there was an initial photo and now there isn't one
+     */
+    const deletePhoto = !!initialValues?.profilePhoto && !values.profilePhoto;
+
+    await updateProfile({
+      name: newProfileInfo.name,
+      surname: newProfileInfo.surname,
+      photo: newProfilePhoto,
+      deletePhoto,
+    });
   };
 
   return (
@@ -160,7 +207,7 @@ export function PersonalInformationForm({
           onSubmit={form.handleSubmit(handleSubmit)}
         >
           <h2 className="font-semibold text-base text-neutral-900 mb-10">
-            Actualizar información personal
+            {t("title")}
           </h2>
           <fieldset
             disabled={isUpdateProfilePending}
@@ -186,7 +233,7 @@ export function PersonalInformationForm({
                   name="name"
                   render={({ field }) => (
                     <FormItem className="flex-1">
-                      <FormLabel>Nombre/s</FormLabel>
+                      <FormLabel>{t("firstName")}</FormLabel>
                       <Input {...field} />
                     </FormItem>
                   )}
@@ -196,7 +243,7 @@ export function PersonalInformationForm({
                   name="lastName"
                   render={({ field }) => (
                     <FormItem className="flex-1">
-                      <FormLabel>Apellido/s</FormLabel>
+                      <FormLabel>{t("lastName")}</FormLabel>
                       <Input {...field} />
                     </FormItem>
                   )}
@@ -208,19 +255,23 @@ export function PersonalInformationForm({
                   name="email"
                   render={({ field }) => (
                     <FormItem className="flex-1">
-                      <FormLabel className="invisible">
-                        Correo electrónico
-                      </FormLabel>
+                      <FormLabel className="invisible">{t("email")}</FormLabel>
                       <Input {...field} type="email" disabled />
                     </FormItem>
                   )}
                 />
                 <p className="text-sm text-neutral-700 flex-1">
-                  Si necesitas cambiar tu correo electrónico, ponte en contacto
-                  con el{" "}
-                  <Link href="/contact" className="underline">
-                    Servicio de Atención al Cliente
-                  </Link>
+                  {t.rich("emailHelp", {
+                    link: (chunks) => (
+                      <Link
+                        href={process.env.NEXT_PUBLIC_WHATSAPP_URL || "#"}
+                        target="_blank"
+                        className="underline"
+                      >
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
                 </p>
               </div>
             </div>
@@ -228,14 +279,14 @@ export function PersonalInformationForm({
           {form.formState.isDirty && (
             <div className="flex gap-6 mt-10">
               <Button type="button" variant="muted" onClick={handleReset}>
-                Cancelar
+                {t("cancel")}
               </Button>
               <Button
                 type="submit"
                 form="personal-information-form"
                 loading={isUpdateProfilePending}
               >
-                Guardar cambios
+                {t("save")}
               </Button>
             </div>
           )}
