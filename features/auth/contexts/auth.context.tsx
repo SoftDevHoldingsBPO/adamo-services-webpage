@@ -15,6 +15,7 @@ import {
 
 type AuthContextType = {
   user: User | null;
+  setUser: (user: User | null) => void;
   status: "loading" | "authenticated" | "unauthenticated";
   setAuthenticated: (user: User) => void;
   setUnauthenticated: () => void;
@@ -96,6 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         status,
         setAuthenticated,
         setUnauthenticated,

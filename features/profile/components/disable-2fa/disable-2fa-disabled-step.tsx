@@ -6,6 +6,8 @@ import z from "zod";
 
 import { useForm } from "react-hook-form";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   DialogBack,
@@ -18,6 +20,8 @@ import {
 import LocaleSelect from "@/components/ui/locale-select";
 
 export function Disable2FADisabledStep() {
+  const t = useTranslations("disable-2fa-dialog.disabled");
+
   return (
     <>
       <DialogHeader>
@@ -26,30 +30,23 @@ export function Disable2FADisabledStep() {
             <DialogClose>
               <ArrowLeft />
             </DialogClose>
-            <DialogTitle>Desactivar 2FA</DialogTitle>
+            <DialogTitle>{t("title")}</DialogTitle>
           </div>
           <LocaleSelect />
         </div>
         <DialogClose asChild className="hidden md:flex">
           <DialogBack />
         </DialogClose>
-        <DialogTitle className="hidden md:block">Desactivar 2FA</DialogTitle>
-        <DialogDescription>
-          El Doble Factor de Autenticación ha sido desactivado. La seguridad de
-          tu cuenta es ahora más débil y puedes estar expuesto a ingresos no
-          autorizados.
-        </DialogDescription>
+        <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
+        <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <div className="bg-yellow-50 p-4 rounded-lg">
-        <p className="text-neutral-500">
-          Si deseas, puedes volver a activarlo en cualquier momento desde tu
-          perfil de usuario.
-        </p>
+        <p className="text-neutral-500">{t("warningMessage")}</p>
       </div>
       <DialogFooter>
         <DialogClose asChild>
           <Button type="button" variant="muted">
-            Aceptar
+            {t("accept")}
           </Button>
         </DialogClose>
       </DialogFooter>

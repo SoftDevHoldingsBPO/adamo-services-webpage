@@ -7,6 +7,8 @@ import z from "zod";
 
 import { useForm } from "react-hook-form";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   DialogBack,
@@ -39,6 +41,8 @@ export type Enter2FAFormValues = z.infer<typeof Enter2FAFormSchema>;
 export function Disable2FACodeStep() {
   const { setDisable2FAStepWithCallback } = useDisable2FA();
 
+  const t = useTranslations("disable-2fa-dialog.code");
+
   const form = useForm<Enter2FAFormValues>({
     resolver: zodResolver(Enter2FAFormSchema),
     defaultValues: {
@@ -58,18 +62,15 @@ export function Disable2FACodeStep() {
             <DialogClose>
               <ArrowLeft />
             </DialogClose>
-            <DialogTitle>Desactivar 2FA</DialogTitle>
+            <DialogTitle>{t("title")}</DialogTitle>
           </div>
           <LocaleSelect />
         </div>
         <DialogClose asChild className="hidden md:flex">
           <DialogBack />
         </DialogClose>
-        <DialogTitle className="hidden md:block">Desactivar 2FA</DialogTitle>
-        <DialogDescription>
-          Ingresa el código de 6 dígitos brindado por la aplicación de
-          Autenticación.
-        </DialogDescription>
+        <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
+        <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
       <Form {...form}>
         <form
@@ -126,7 +127,7 @@ export function Disable2FACodeStep() {
       <DialogFooter>
         <DialogClose asChild>
           <Button type="button" variant="muted">
-            Cancel
+            {t("cancel")}
           </Button>
         </DialogClose>
         <Button
@@ -134,7 +135,7 @@ export function Disable2FACodeStep() {
           form="enter-2fa-form"
           disabled={!form.formState.isValid}
         >
-          Desactivar 2FA
+          {t("disable")}
         </Button>
       </DialogFooter>
     </>

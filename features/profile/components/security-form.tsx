@@ -6,6 +6,8 @@ import { Disable2FADialog } from "@/features/profile/components/disable-2fa/disa
 
 import { ComponentProps, useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -20,6 +22,8 @@ export function SecurityForm({ className, ...props }: SecurityFormProps) {
 
   const { signOut } = useAuth();
 
+  const t = useTranslations("security-form");
+
   return (
     <>
       <article
@@ -31,21 +35,18 @@ export function SecurityForm({ className, ...props }: SecurityFormProps) {
         {...props}
       >
         <h2 className="font-semibold text-base text-neutral-900 mb-4">
-          Seguridad
+          {t("title")}
         </h2>
-        <p className="text-neutral-700 mb-10">
-          Actualiza tu contraseña y/o desactiva la Autenticación de doble
-          Factores (2FA) para mayor seguridad.
-        </p>
+        <p className="text-neutral-700 mb-10">{t("description")}</p>
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <Button
             variant="muted"
             onClick={() => setIsPasswordRecoveryDialogOpen(true)}
           >
-            Cambiar contraseña
+            {t("changePassword")}
           </Button>
           <Button onClick={() => setIsDisable2FADialogOpen(true)}>
-            Desactivar 2FA
+            {t("disable2FA")}
           </Button>
         </div>
       </article>

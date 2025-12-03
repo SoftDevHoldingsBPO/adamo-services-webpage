@@ -1,12 +1,10 @@
 import { APISuccessResponse } from "@/api/types";
 
-// Data required to update the profile
-export type UpdateProfileRequest = Partial<{
-  name: string;
-  surname: string;
-}>;
+export type UpdateProfilePhotoRequest = {
+  photo: File;
+};
 
-// Result returned after updating the profile
+// Result returned after updating the profile photo
 export type Profile = {
   uuid: string;
   name: string;
@@ -29,4 +27,4 @@ export type UpdatedProfile = {
   sessionInfo: SessionInfo;
 };
 
-export type UpdateProfileResponse = APISuccessResponse<UpdatedProfile>;
+export type UpdateProfilePhotoResponse = APISuccessResponse<UpdatedProfile>;

@@ -15,6 +15,9 @@ Comprehensive **client-side authentication** system with SSO support, automatic 
 - **Session expiration handling** - Graceful session expiry with user notification
 - **SSO Integration** - Single Sign-On support with redirect flows
 - **Query parameter utilities** - Centralized auth query param management
+- **First login redirect** - Automatic redirect to dashboard after first registration
+- **User profile management** - Update profile info with optional avatar support
+- **Profile state synchronization** - Real-time user state updates across the app
 
 ### 📂 Key Files & Structure
 
@@ -33,15 +36,30 @@ features/auth/
 ├── contexts/
 │   └── auth.context.tsx                 # Global auth state
 ├── hooks/
-│   └── use-sign-in-dialog.ts           # Sign in dialog with query params
+│   ├── use-sign-in-dialog.ts           # Sign in dialog with query params
+│   └── use-first-login-redirect.ts     # First login redirect logic
 ├── utils/
 │   └── auth-query.utils.ts             # Query parameter utilities
 ├── constants/
-│   └── auth-query-params.ts            # Query param constants
+│   ├── auth-query-params.ts            # Query param constants
+│   └── session-storage-keys.ts         # Session storage key constants
 ├── services/
 │   └── auth.service.ts                 # API authentication logic
 └── entities/
     └── user.entity.ts                   # User type definitions
+
+features/profile/
+├── components/
+│   ├── personal-information-form.tsx   # Profile editor with photo upload
+│   ├── profile-picture-upload.tsx      # Avatar upload component
+│   ├── security-form.tsx               # Security settings
+│   └── disable-2fa/                    # 2FA disable flow components
+├── dtos/
+│   ├── get-profile.dto.ts              # Profile response types
+│   ├── update-profile.dto.ts           # Profile update types
+│   └── update-profile-photo.dto.ts     # Photo update types
+└── services/
+    └── profile.service.ts              # Profile API methods
 
 api/
 └── api.ts                               # Axios with refresh interceptor
@@ -49,10 +67,16 @@ api/
 app/
 ├── logout/
 │   └── page.tsx                         # SSO logout endpoint
+├── profile/
+│   └── page.tsx                         # User profile page
 └── layout.tsx                           # AuthProvider wrapper
 
 components/ui/
 └── full-page-loader.tsx                 # Reusable loader component
+
+messages/
+├── en.json                              # English translations
+└── es.json                              # Spanish translations
 ```
 
 ---
@@ -221,6 +245,30 @@ window.location.href = "https://landing.adamoservices.co/logout";
 // 3. User is logged out from all Adamo services
 ```
 
+### Update User Profile State
+
+```tsx
+"use client";
+
+import { useAuth } from "@/features/auth/contexts/auth.context";
+
+export function MyComponent() {
+  const { user, setUser } = useAuth();
+
+  const handleUpdateProfile = () => {
+    // Update user state directly (e.g., after profile edit)
+    setUser({
+      name: "John",
+      lastName: "Doe",
+      email: "john@example.com",
+      avatar: "https://example.com/avatar.jpg", // Optional
+    });
+  };
+
+  return <div>{user?.name}</div>;
+}
+```
+
 ---
 
 ## 🔧 Customization
@@ -315,19 +363,35 @@ Defined in `features/auth/constants/auth-query-params.ts`:
    - May require 2FA verification
    - On success, calls `fetchAndSetUser()` to update global auth state
    - Checks for `redirect_to` query param and redirects if present
+   - **First login**: Marks first login in sessionStorage and redirects to `/my-services`
    - Shows success toast and closes dialog
 
-4. **Session Expiration**:
+4. **First Login Redirect**:
+
+   - After successful registration and email verification
+   - `useFirstLoginRedirect` hook marks login in sessionStorage
+   - Automatically redirects to `/my-services` dashboard
+   - Flag is cleared after redirect to prevent repeated redirects
+   - Uses Next.js `router.push()` for client-side navigation
+
+5. **Session Expiration**:
 
    - When refresh token expires, user is redirected to `/?session_expired=true`
    - `SessionExpiredNotification` component shows warning toast
    - Auth context skips verification to prevent infinite loop
    - User must sign in again
 
-5. **Sign Out Flow**:
+6. **Sign Out Flow**:
+
    - Calls `AuthService.signOut()` to clear server-side cookies
    - Updates auth context to `unauthenticated`
-   - Redirects to home page
+   - Uses Next.js `redirect()` for server-side navigation to home page
+
+7. **Profile Updates**:
+   - Profile changes update local auth state via `setUser()`
+   - Supports optional avatar (users can have no profile picture)
+   - Photo uploads handled separately from profile data
+   - Form state syncs with latest profile data after updates
 
 ### Authentication Methods
 
@@ -435,6 +499,29 @@ Make sure you're using:
 - Configured hosts file with all required domains
 - Accepted self-signed certificate in browser
 
+**Issue: Avatar not displaying**
+The avatar field is optional in the User entity. Check:
+
+- User has uploaded a profile photo
+- Photo URL is valid and accessible
+- Component handles `undefined` avatar gracefully
+- Use `object-cover` class for proper image sizing
+
+**Issue: Profile changes not reflecting**
+Make sure to call `setUser()` after profile updates:
+
+```tsx
+const { setUser } = useAuth();
+
+// After successful profile update
+setUser({
+  name: updatedProfile.name,
+  lastName: updatedProfile.surname,
+  email: updatedProfile.email,
+  avatar: updatedProfile.photo || undefined,
+});
+```
+
 ---
 
 ## 🎯 Best Practices
@@ -447,6 +534,73 @@ Make sure you're using:
 6. **Test SSO flows** with `npm run dev:host:secure` before deploying
 7. **Never store sensitive data** in client state or localStorage
 8. **Always validate auth** on the backend for sensitive operations
+9. **Use `setUser()`** to update auth state after profile changes
+10. **Use Next.js navigation** - `router.push()` for client-side, `redirect()` for server-side
+11. **Handle optional avatars** - User entity supports users without profile pictures
+
+---
+
+## 📝 Additional Features
+
+### User Profile Management
+
+The profile module provides comprehensive user profile editing with:
+
+- **Personal information** - Name, email (read-only), profile photo
+- **Photo upload** - Support for PNG/JPEG images up to 50MB
+- **Optional avatar** - Users can exist without profile pictures
+- **Security settings** - Password change and 2FA management
+- **Internationalization** - Full i18n support (English and Spanish)
+- **State synchronization** - Profile changes update auth context automatically
+
+**Profile Page Location**: `/profile`
+
+**Key Components**:
+- `PersonalInformationForm` - Edit user details and photo
+- `ProfilePictureUpload` - Avatar upload with preview
+- `SecurityForm` - Security settings
+- `Disable2FADialog` - Multi-step 2FA disable flow
+
+**Profile Service API**:
+```tsx
+import { ProfileService } from "@/features/profile/services/profile.service";
+
+// Get current user profile
+const user = await ProfileService.get();
+
+// Update profile info
+const response = await ProfileService.update({ name, surname });
+
+// Update profile photo
+const photoResponse = await ProfileService.updatePhoto({ photo: File });
+
+// Delete profile photo
+await ProfileService.deletePhoto();
+```
+
+### First Login Experience
+
+After user registration and email verification, the system automatically:
+
+1. Marks the login as "first login" in sessionStorage
+2. Redirects to `/my-services` dashboard
+3. Clears the first login flag to prevent repeated redirects
+
+**Implementation**:
+```tsx
+import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
+
+// In sign-up flow
+const { markAsFirstLogin } = useFirstLoginRedirect();
+markAsFirstLogin(); // After email verification
+
+// In sign-in flow
+const { checkAndClearFirstLogin } = useFirstLoginRedirect();
+const shouldRedirect = checkAndClearFirstLogin();
+if (shouldRedirect) {
+  router.push("/my-services");
+}
+```
 
 ---
 

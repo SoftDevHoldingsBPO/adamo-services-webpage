@@ -463,5 +463,46 @@
       "footer": "¿Tienes preguntas o quieres contratar el producto?",
       "contactLink": "Habla con ventas ahora"
     }
+  },
+  "profile-form": {
+    "title": "Actualizar información personal",
+    "firstName": "Nombre/s",
+    "lastName": "Apellido/s",
+    "email": "Correo electrónico",
+    "emailHelp": "Si necesitas cambiar tu correo electrónico, ponte en contacto con el <link>Servicio de Atención al Cliente</link>",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "photoTooLarge": "La foto debe ser menor a 50MB",
+    "photoInvalidFormat": "La foto debe ser una imagen PNG o JPEG",
+    "nameRequired": "El nombre requerido",
+    "lastNameRequired": "El apellido requerido",
+    "emailInvalid": "Correo electrónico inválido",
+    "successMessage": "Perfil actualizado exitosamente"
+  },
+  "security-form": {
+    "title": "Seguridad",
+    "description": "Actualiza tu contraseña y/o desactiva la Autenticación de doble Factores (2FA) para mayor seguridad.",
+    "changePassword": "Cambiar contraseña",
+    "disable2FA": "Desactivar 2FA"
+  },
+  "disable-2fa-dialog": {
+    "start": {
+      "title": "Desactivar Doble Factor de Autenticación (2FA)",
+      "description": "Si desactivas el Doble Factor de Autenticación, se debilitará la seguridad de tu cuenta y estarás expuesto a ingresos no autorizados.",
+      "cancel": "Cancelar",
+      "disable": "Desactivar 2FA"
+    },
+    "code": {
+      "title": "Desactivar 2FA",
+      "description": "Ingresa el código de 6 dígitos brindado por la aplicación de Autenticación.",
+      "cancel": "Cancelar",
+      "disable": "Desactivar 2FA"
+    },
+    "disabled": {
+      "title": "Desactivar 2FA",
+      "description": "El Doble Factor de Autenticación ha sido desactivado. La seguridad de tu cuenta es ahora más débil y puedes estar expuesto a ingresos no autorizados.",
+      "warningMessage": "Si deseas, puedes volver a activarlo en cualquier momento desde tu perfil de usuario.",
+      "accept": "Aceptar"
+    }
   }
 }
