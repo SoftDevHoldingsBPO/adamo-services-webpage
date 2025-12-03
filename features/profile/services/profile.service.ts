@@ -24,6 +24,7 @@ export class ProfileService {
       lastName: data.surname,
       email: data.email,
       avatar: data.photo || undefined,
+      isTwoFactorEnabled: data.twoFactorAuthEnabled,
     };
   }
 

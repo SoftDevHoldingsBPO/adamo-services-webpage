@@ -132,12 +132,13 @@ export function PersonalInformationForm({
         });
 
         // Update user state with latest profile data
-        setUser({
+        setUser((prev) => ({
+          ...prev!,
           name: latestProfile.name,
           lastName: latestProfile.surname,
           email: latestProfile.email,
           avatar: latestProfile.photo || undefined,
-        });
+        }));
 
         form.reset({
           name,
@@ -262,7 +263,11 @@ export function PersonalInformationForm({
                 <p className="text-sm text-neutral-700 flex-1">
                   {t.rich("emailHelp", {
                     link: (chunks) => (
-                      <Link href="/contact" className="underline">
+                      <Link
+                        href={process.env.NEXT_PUBLIC_WHATSAPP_URL || "#"}
+                        target="_blank"
+                        className="underline"
+                      >
                         {chunks}
                       </Link>
                     ),

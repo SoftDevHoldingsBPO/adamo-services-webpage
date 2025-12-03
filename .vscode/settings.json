@@ -15,7 +15,8 @@
         "inview",
         "otpauth",
         "totp",
-        "usehooks"
+        "usehooks",
+        "WHATSAPP"
     ],
     "cSpell.language": "en,es-ES"
 }

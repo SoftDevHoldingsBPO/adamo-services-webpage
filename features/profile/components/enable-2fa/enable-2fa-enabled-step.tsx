@@ -1,16 +1,9 @@
-import { SixCodeSchema } from "@/features/auth/schemas/auth.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { ArrowLeft } from "lucide-react";
-import z from "zod";
-
-import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
-  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -19,8 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import LocaleSelect from "@/components/ui/locale-select";
 
-export function Disable2FADisabledStep() {
-  const t = useTranslations("disable-2fa-dialog.disabled");
+export function Enable2FAEnabledStep() {
+  const t = useTranslations("enable-2fa-dialog.enabled");
 
   return (
     <>
@@ -30,15 +23,15 @@ export function Disable2FADisabledStep() {
             <DialogClose>
               <ArrowLeft />
             </DialogClose>
-            <DialogTitle>{t("title")}</DialogTitle>
           </div>
+          <DialogTitle>{t("title")}</DialogTitle>
           <LocaleSelect />
         </div>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
-      <div className="bg-yellow-50 p-4 rounded-lg">
-        <p className="text-neutral-500">{t("warningMessage")}</p>
+      <div className="bg-green-50 p-4 rounded-lg">
+        <p className="text-neutral-500">{t("successMessage")}</p>
       </div>
       <DialogFooter>
         <DialogClose asChild>

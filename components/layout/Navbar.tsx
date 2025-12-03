@@ -1,25 +1,28 @@
 "use client";
 
+import { ProfileDropdown } from "@/features/auth/components/profile/profile-dropdown";
+import { SignInDialog } from "@/features/auth/components/sign-in/sign-in-dialog";
+import { useAuth } from "@/features/auth/contexts/auth.context";
+import { useSignInDialog } from "@/features/auth/hooks/use-sign-in-dialog";
 import { useNavigation } from "@/providers/NavigationProvider";
 import { useLenis } from "lenis/react";
 import { useMediaQuery } from "usehooks-ts";
 
 import { useState } from "react";
 
-import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { ProfileDropdown } from "@/features/auth/components/profile/profile-dropdown";
-import { SignInDialog } from "@/features/auth/components/sign-in/sign-in-dialog";
-import { useSignInDialog } from "@/features/auth/hooks/use-sign-in-dialog";
+import { cn } from "@/lib/utils";
 
 import { CloseIcon, HamburgerMenuIcon, Logo } from "../icon";
 import { Button } from "../ui/button";
 import LocaleSelect from "../ui/locale-select";
 import BlogNavbar from "./BlogNavbar";
 import Navigation from "./Navigation";
+
+export { NavbarPortal } from "./navbar-portal";
 
 const SCROLL_TOP_THRESHOLD = 64;
 
@@ -54,6 +57,14 @@ const Navbar = () => {
     );
   }
 
+  const mustShowNavbarAsLightMode = ["/profile"].some(
+    (path) => pathname === path,
+  );
+
+  const mustShowMenu = ["/", "/contact"].some((path) => pathname === path);
+
+  const mustShowContact = ["/", "/contact"].some((path) => pathname === path);
+
   return (
     <>
       <SignInDialog
@@ -71,13 +82,28 @@ const Navbar = () => {
           transition: "padding 350ms ease-out, background-color 100ms ease-out",
         }}
       >
-        <Link href="/">
-          <Logo className="text-white md:text-primary group-data-[at-top=false]:text-primary transition-colors group-data-[open=true]:text-white" />
-        </Link>
+        <div data-navbar-portal>
+          <Link href="/">
+            <Logo
+              className={cn(
+                "text-white md:text-primary group-data-[at-top=false]:text-primary transition-colors group-data-[open=true]:text-white",
+                {
+                  "text-primary": mustShowNavbarAsLightMode,
+                },
+              )}
+            />
+          </Link>
+        </div>
         <div className="flex items-center gap-x-6">
           <LocaleSelect
             align={desktop ? "start" : "end"}
-            className="text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:!text-white"
+            className={cn(
+              "text-white active:text-neutral-100 group-data-[at-top=false]:text-neutral-600 group-data-[at-top=false]:hover:text-neutral-700 group-data-[at-top=false]:active:text-neutral-800 md:text-neutral-600 md:hover:text-neutral-700 md:active:text-neutral-800 group-data-[open=true]:!text-white",
+              {
+                "text-neutral-600 hover:text-neutral-700 active:text-neutral-800":
+                  mustShowNavbarAsLightMode,
+              },
+            )}
           />
 
           {/* Mobile */}
@@ -95,24 +121,30 @@ const Navbar = () => {
                 {t("login")}
               </Button>
             )}
-            <Button
-              size="md"
-              onClick={toggleMenu}
-              variant={isOpen ? "secondary" : isAtTop ? "secondary" : "primary"}
-            >
-              {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
-            </Button>
+            {(!currentUser || mustShowMenu) && (
+              <Button
+                size="md"
+                onClick={toggleMenu}
+                variant={
+                  isOpen ? "secondary" : isAtTop ? "secondary" : "primary"
+                }
+              >
+                {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+              </Button>
+            )}
           </div>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            <Button
-              asChild
-              size="md"
-              variant={isOpen ? "secondary" : "primary"}
-            >
-              <Link href="/contact">{t("contact")}</Link>
-            </Button>
+            {mustShowContact && (
+              <Button
+                asChild
+                size="md"
+                variant={isOpen ? "secondary" : "primary"}
+              >
+                <Link href="/contact">{t("contact")}</Link>
+              </Button>
+            )}
             {currentUser ? (
               <ProfileDropdown user={currentUser} />
             ) : (
@@ -127,15 +159,17 @@ const Navbar = () => {
           </div>
 
           {/* Desktop */}
-          <div className="hidden md:block">
-            <Button
-              size="md"
-              variant={isOpen ? "secondary" : "primary"}
-              onClick={toggleMenu}
-            >
-              {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
-            </Button>
-          </div>
+          {(!currentUser || mustShowMenu) && (
+            <div className="hidden md:block">
+              <Button
+                size="md"
+                variant={isOpen ? "secondary" : "primary"}
+                onClick={toggleMenu}
+              >
+                {isOpen ? <CloseIcon /> : <HamburgerMenuIcon />}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

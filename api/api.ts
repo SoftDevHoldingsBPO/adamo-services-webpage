@@ -22,11 +22,6 @@ function getLocaleFromCookie(): string {
 }
 
 /**
- * Flag to prevent infinite refresh loops
- */
-let isRefreshing = false;
-
-/**
  * Request interceptor - Add locale header
  * Auth tokens are automatically sent via HTTP-only cookies
  */
@@ -57,15 +52,13 @@ api.interceptors.request.use(
 //       _retry?: boolean;
 //     };
 
-//     // Handle 401 Unauthorized - attempt token refresh
+//     // Handle 401 Unauthorized - attempt token refresh only if access token was present
 //     if (
 //       error.response?.status === 401 &&
 //       originalRequest &&
-//       !originalRequest._retry &&
-//       !isRefreshing
+//       !originalRequest._retry
 //     ) {
 //       originalRequest._retry = true;
-//       isRefreshing = true;
 
 //       try {
 //         // Attempt to refresh the token using the refresh token cookie
@@ -75,20 +68,13 @@ api.interceptors.request.use(
 //           {},
 //           {
 //             withCredentials: true, // Send cookies with the request
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
 //           },
 //         );
-
-//         isRefreshing = false;
 
 //         // Retry the original request - new token is now in the cookie
 //         return api(originalRequest);
 //       } catch (refreshError) {
-//         // Refresh failed, redirect to home with session expired flag
-//         isRefreshing = false;
-
+//         // Refresh failed, redirect to home with session expired fla
 //         // Avoid infinite loop - only redirect if not already on session_expired page
 //         if (!window.location.search.includes("session_expired=true")) {
 //           window.location.href = "/?session_expired=true";

@@ -481,8 +481,9 @@
   },
   "security-form": {
     "title": "Seguridad",
-    "description": "Actualiza tu contraseña y/o desactiva la Autenticación de doble Factores (2FA) para mayor seguridad.",
+    "description": "Actualiza tu contraseña y/o gestiona el Doble Factor de Autenticación (2FA) para mayor seguridad.",
     "changePassword": "Cambiar contraseña",
+    "enable2FA": "Activar 2FA",
     "disable2FA": "Desactivar 2FA"
   },
   "disable-2fa-dialog": {
@@ -502,6 +503,43 @@
       "title": "Desactivar 2FA",
       "description": "El Doble Factor de Autenticación ha sido desactivado. La seguridad de tu cuenta es ahora más débil y puedes estar expuesto a ingresos no autorizados.",
       "warningMessage": "Si deseas, puedes volver a activarlo en cualquier momento desde tu perfil de usuario.",
+      "accept": "Aceptar"
+    }
+  },
+  "change-password-dialog": {
+    "current-step": {
+      "title": "Cambiar contraseña",
+      "description": "Ingresa tu contraseña actual para continuar.",
+      "label": "Contraseña actual",
+      "cancel": "Cancelar",
+      "continue": "Continuar"
+    },
+    "new-step": {
+      "title": "Nueva contraseña",
+      "description": "Ingresa tu nueva contraseña y confírmala.",
+      "newPasswordLabel": "Nueva contraseña",
+      "confirmPasswordLabel": "Confirmar contraseña",
+      "passwordRequirements": "La contraseña debe tener al menos 8 caracteres",
+      "cancel": "Cancelar",
+      "save": "Guardar cambios",
+      "success": "Contraseña cambiada exitosamente"
+    }
+  },
+  "enable-2fa-dialog": {
+    "setup": {
+      "title": "Activar Doble Factor de Autenticación",
+      "description": "Mejora la seguridad de tu cuenta activando 2FA:",
+      "confirm": "Activar 2FA",
+      "instructions": {
+        "one": "Descarga una aplicación de autenticación en tu dispositivo móvil como Google Authenticator",
+        "two": "Abre la aplicación y escanea el siguiente código QR, o ingresa manualmente el código: {code}",
+        "three": "Ingresa el código de 6 dígitos brindado por la aplicación de Autenticación:"
+      }
+    },
+    "enabled": {
+      "title": "Activar 2FA",
+      "description": "El Doble Factor de Autenticación ha sido activado exitosamente. Tu cuenta ahora es más segura.",
+      "successMessage": "Puedes desactivarlo en cualquier momento desde la configuración de tu perfil de usuario.",
       "accept": "Aceptar"
     }
   }

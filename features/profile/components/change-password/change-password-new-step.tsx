@@ -1,10 +1,11 @@
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
-import { usePasswordRecovery } from "@/features/auth/contexts/password-recovery.context";
 import { PasswordWithConfirmationSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
+import { useChangePassword } from "@/features/profile/contexts/change-password.context";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { ArrowLeft } from "lucide-react";
 import z from "zod";
 
 import { useForm } from "react-hook-form";
@@ -13,6 +14,7 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
+  DialogBack,
   DialogClose,
   DialogDescription,
   DialogFooter,
@@ -25,47 +27,47 @@ import {
   FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import LocaleSelect from "@/components/ui/locale-select";
 
-export const PasswordRecoveryNewPasswordFormSchema =
-  PasswordWithConfirmationSchema;
+export const ChangePasswordNewFormSchema = PasswordWithConfirmationSchema;
 
-export type PasswordRecoveryNewPasswordFormValues = z.infer<
-  typeof PasswordRecoveryNewPasswordFormSchema
+export type ChangePasswordNewFormValues = z.infer<
+  typeof ChangePasswordNewFormSchema
 >;
 
-export type PasswordRecoveryNewPasswordStepProps = Readonly<{
+export type ChangePasswordNewStepProps = Readonly<{
   onPasswordChanged?: () => void;
 }>;
 
-export function PasswordRecoveryNewPasswordStep({
+export function ChangePasswordNewStep({
   onPasswordChanged,
-}: PasswordRecoveryNewPasswordStepProps) {
-  const t = useTranslations("password-recovery-dialog.new-password-step");
+}: ChangePasswordNewStepProps) {
+  const t = useTranslations("change-password-dialog.new-step");
 
-  const { email, tempPassword, setIsPasswordRecoveryDialogOpen } =
-    usePasswordRecovery();
+  const { currentPassword, setIsChangePasswordDialogOpen } =
+    useChangePassword();
 
-  const form = useForm<PasswordRecoveryNewPasswordFormValues>({
-    resolver: zodResolver(PasswordRecoveryNewPasswordFormSchema),
+  const form = useForm<ChangePasswordNewFormValues>({
+    resolver: zodResolver(ChangePasswordNewFormSchema),
     defaultValues: {
       password: "",
       confirmPassword: "",
     },
   });
 
-  const { mutateAsync: resetPassword, isPending } = useMutation({
-    mutationFn: AuthService.resetPassword,
+  const { mutateAsync: updatePassword, isPending } = useMutation({
+    mutationFn: AuthService.updatePassword,
     onSuccess: () => {
       ToastManager.show({
         variant: "success",
         message: t("success"),
       });
 
-      setIsPasswordRecoveryDialogOpen(false);
+      setIsChangePasswordDialogOpen(false);
 
       if (onPasswordChanged) onPasswordChanged();
     },
@@ -77,12 +79,9 @@ export function PasswordRecoveryNewPasswordStep({
     },
   });
 
-  const handleChangePassword = async (
-    values: PasswordRecoveryNewPasswordFormValues,
-  ) => {
-    await resetPassword({
-      email,
-      temporaryPassword: tempPassword,
+  const handleUpdatePassword = async (values: ChangePasswordNewFormValues) => {
+    await updatePassword({
+      currentPassword,
       newPassword: values.password,
       confirmPassword: values.confirmPassword,
     });
@@ -93,6 +92,9 @@ export function PasswordRecoveryNewPasswordStep({
       <DialogHeader>
         <div className="md:hidden flex gap-2 items-center justify-between mb-6">
           <div className="flex items-center gap-2">
+            <DialogClose>
+              <ArrowLeft />
+            </DialogClose>
             <DialogTitle>{t("title")}</DialogTitle>
           </div>
           <LocaleSelect />
@@ -102,26 +104,20 @@ export function PasswordRecoveryNewPasswordStep({
       </DialogHeader>
       <Form {...form}>
         <form
-          id="password-recovery-new-password-step-form"
-          onSubmit={form.handleSubmit(handleChangePassword)}
+          id="change-password-new-step-form"
+          onSubmit={form.handleSubmit(handleUpdatePassword)}
         >
           <fieldset disabled={isPending} className="space-y-4">
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem className="mb-6">
+                <FormItem>
+                  <FormLabel>{t("newPasswordLabel")}</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder={t("placeholders.password")}
-                      isError={!!form.formState.errors.password}
-                      {...field}
-                    />
+                    <Input {...field} type="password" />
                   </FormControl>
-                  <FormDescription>
-                    {t("descriptions.password")}
-                  </FormDescription>
+                  <FormDescription>{t("passwordRequirements")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -130,14 +126,10 @@ export function PasswordRecoveryNewPasswordStep({
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
-                <FormItem className="mb-6">
+                <FormItem>
+                  <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      isError={!!form.formState.errors.confirmPassword}
-                      placeholder={t("placeholders.confirm-password")}
-                      {...field}
-                    />
+                    <Input {...field} type="password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -154,11 +146,10 @@ export function PasswordRecoveryNewPasswordStep({
         </DialogClose>
         <Button
           type="submit"
-          form="password-recovery-new-password-step-form"
+          form="change-password-new-step-form"
           loading={isPending}
-          disabled={!form.formState.isValid || isPending}
         >
-          {t("change-password")}
+          {t("save")}
         </Button>
       </DialogFooter>
     </>

@@ -66,9 +66,6 @@ export function Disable2FACodeStep() {
           </div>
           <LocaleSelect />
         </div>
-        <DialogClose asChild className="hidden md:flex">
-          <DialogBack />
-        </DialogClose>
         <DialogTitle className="hidden md:block">{t("title")}</DialogTitle>
         <DialogDescription>{t("description")}</DialogDescription>
       </DialogHeader>
