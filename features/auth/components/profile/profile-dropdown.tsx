@@ -5,6 +5,7 @@ import { ComponentProps } from "react";
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { getInitials } from "@/lib/get-initials";
 import { cn } from "@/lib/utils";
@@ -14,9 +15,33 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+const APP_ROUTES = [
+  {
+    path: "/adamo-id",
+    translationKey: "goToAdamoId" as const,
+    url: process.env.NEXT_PUBLIC_ADAMO_ID_URL,
+  },
+  {
+    path: "/adamo-pay",
+    translationKey: "goToAdamoPay" as const,
+    url: process.env.NEXT_PUBLIC_ADAMO_PAY_URL,
+  },
+  {
+    path: "/adamo-sign",
+    translationKey: "goToAdamoSign" as const,
+    url: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL,
+  },
+  {
+    path: "/adamo-risk",
+    translationKey: "goToAdamoRisk" as const,
+    url: process.env.NEXT_PUBLIC_ADAMO_RISK_URL,
+  },
+] as const;
 
 export type ProfileDropdownProps = { user: User } & ComponentProps<
   typeof Avatar
@@ -27,8 +52,13 @@ export function ProfileDropdown({
   className,
   ...props
 }: ProfileDropdownProps) {
-  const { signOut } = useAuth();
   const t = useTranslations("profile-dropdown");
+
+  const pathname = usePathname();
+
+  const { signOut } = useAuth();
+
+  const currentApp = APP_ROUTES.find((app) => pathname.startsWith(app.path));
 
   return (
     <DropdownMenu>
@@ -45,13 +75,26 @@ export function ProfileDropdown({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {currentApp && currentApp.url && (
+          <>
+            <DropdownMenuItem asChild>
+              <a href={currentApp.url} rel="noopener noreferrer">
+                {t(currentApp.translationKey)}
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        <DropdownMenuItem asChild>
+          <Link href="/my-services">{t("goToDashboard")}</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/profile">{t("goToAccount")}</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
-          {t("signOut")}
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={signOut}>{t("signOut")}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

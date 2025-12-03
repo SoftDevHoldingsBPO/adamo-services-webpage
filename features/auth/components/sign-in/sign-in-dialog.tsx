@@ -10,11 +10,13 @@ import { Setup2FADialog } from "@/features/auth/components/sign-in/setup-2fa-dia
 import { VerifyEmailDialog } from "@/features/auth/components/sign-in/verify-email-dialog";
 import { SignUpDialog } from "@/features/auth/components/sign-up/sign-up-dialog";
 import { useAuth } from "@/features/auth/contexts/auth.context";
+import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
 import {
   EmailSchema,
   PasswordSchema,
 } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
+import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -26,6 +28,7 @@ import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -86,7 +89,11 @@ export function SignInDialog({
 type SignInContentProps = SignInDialogProps;
 
 function SignInContent({ onOpenChange }: SignInContentProps) {
-  const { fetchUserProfile } = useAuth();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const { fetchAndSetUser } = useAuth();
+  const { checkAndClearFirstLogin } = useFirstLoginRedirect();
 
   const [twoFAAccessToken, setTwoFAAccessToken] = useState<
     string | undefined
@@ -119,15 +126,12 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
       if ("twoFactorSetupRequired" in signInResponse.data) {
         setIsSetup2FADialogOpen(true);
         setTwoFAAccessToken(signInResponse.data.temporaryToken);
-
         return;
       }
-
       if ("twoFactorRequired" in signInResponse.data) {
         setIsEnter2FADialogOpen(true);
         return;
       }
-
       if ("verification" in signInResponse.data) {
         if (
           signInResponse.data.verification.required &&
@@ -138,10 +142,18 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         }
       }
 
+      // The token in response body indicates successful authentication
       if ("token" in signInResponse.data) {
+        // Check for redirect_to query param
+        const redirectTo = AuthQueryUtils.getRedirectUrl(searchParams);
+
+        if (redirectTo) {
+          window.location.href = redirectTo;
+          return;
+        }
+
         // Tokens are set as HTTP-only cookies by the API
-        // The token in response body indicates successful authentication
-        await fetchUserProfile();
+        await fetchAndSetUser();
 
         ToastManager.show({
           variant: "success",
@@ -149,6 +161,14 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         });
 
         if (onOpenChange) onOpenChange(false);
+
+        // Check if this is a first login after registration
+        const isFirstLogin = checkAndClearFirstLogin();
+
+        if (isFirstLogin) {
+          // Redirect to my-services
+          router.push("/my-services");
+        }
       }
     },
     onError: (error) => {

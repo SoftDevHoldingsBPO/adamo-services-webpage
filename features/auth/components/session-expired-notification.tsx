@@ -1,6 +1,7 @@
 "use client";
 
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
+import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 
 import { useEffect } from "react";
 
@@ -11,7 +12,7 @@ import { useSearchParams } from "next/navigation";
  * Client component that detects session expiration from query parameters
  * and shows a toast notification to the user.
  *
- * When refresh token expires, the API redirects to /?session_expired=true
+ * When refresh token expires, the API redirects with session_expired parameter
  * This component detects that and shows an appropriate message.
  */
 export function SessionExpiredNotification() {
@@ -20,7 +21,7 @@ export function SessionExpiredNotification() {
 
   useEffect(() => {
     // Check if user was redirected due to session expiration
-    if (searchParams.get("session_expired") === "true") {
+    if (AuthQueryUtils.isSessionExpired(searchParams)) {
       setTimeout(() => {
         ToastManager.show({
           variant: "warning",

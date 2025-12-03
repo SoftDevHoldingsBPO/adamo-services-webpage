@@ -31,6 +31,7 @@ export function Services() {
     isHired: boolean;
     icon: ComponentType;
     color: string;
+    href: string;
   }[] = [
     {
       id: "adamo-id",
@@ -41,6 +42,7 @@ export function Services() {
       isHired: true,
       icon: AdamoIDIcon,
       color: "bg-adamo-id-700",
+      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
     },
     {
       id: "adamo-pay",
@@ -51,6 +53,7 @@ export function Services() {
       isHired: false,
       icon: AdamoPayIcon,
       color: "bg-adamo-pay-700",
+      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
     },
     {
       id: "adamo-risk",
@@ -61,6 +64,7 @@ export function Services() {
       isHired: false,
       icon: AdamoRiskIcon,
       color: "bg-adamo-risk-700",
+      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
     },
     {
       id: "adamo-sign",
@@ -71,6 +75,7 @@ export function Services() {
       isHired: false,
       icon: AdamoSignIcon,
       color: "bg-adamo-sign-700",
+      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
     },
   ];
 
@@ -106,6 +111,7 @@ type ServiceCardProps = {
   isHired: boolean;
   icon: ComponentType;
   color: string;
+  href: string;
 };
 
 function ServiceCard({
@@ -117,6 +123,7 @@ function ServiceCard({
   isHired,
   icon,
   color,
+  href,
 }: ServiceCardProps) {
   const t = useTranslations("my-services");
 
@@ -174,9 +181,11 @@ function ServiceCard({
         </div>
         <div className="flex items-center gap-6 flex-wrap">
           {isHired && (
-            <Button size="md">
-              {t("card.enter")}
-              <ArrowRight />
+            <Button size="md" asChild>
+              <Link href={href}>
+                {t("card.enter")}
+                <ArrowRight />
+              </Link>
             </Button>
           )}
           {!isHired && (

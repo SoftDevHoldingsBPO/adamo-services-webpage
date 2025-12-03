@@ -1,7 +1,9 @@
 {
   "common": {
     "loading": "Cargando...",
-    "session-expired": "Tu sesión ha expirado. Por favor, inicia sesión nuevamente."
+    "session-expired": "Tu sesión ha expirado. Por favor, inicia sesión nuevamente.",
+    "logging-out": "Cerrando sesión...",
+    "redirecting": "Redirigiendo..."
   },
   "metadata": {
     "title": ".: ADAMO :. | Tus retos son distintos. Nuestras soluciones también."
@@ -137,7 +139,7 @@
     "forgot-password-action": "Haz click aquí.",
     "do-not-have-account": "¿No tienes cuenta?",
     "do-not-have-account-action": "Haz click aquí para registrarte.",
-    "success": "¡Inicio de sesión exitoso! Bienvenido de nuevo.",
+    "success": "¡Inicio de sesión exitoso!",
     "placeholders": {
       "email": "Correo electrónico",
       "password": "Contraseña"
@@ -253,8 +255,13 @@
     "confirm": "Aceptar"
   },
   "profile-dropdown": {
-    "goToAccount": "Ingresar a mi cuenta",
-    "signOut": "Cerrar sesión"
+    "goToDashboard": "Ir al panel",
+    "goToAccount": "Ir a mi perfil",
+    "signOut": "Cerrar sesión",
+    "goToAdamoId": "Ir a Adamo ID",
+    "goToAdamoPay": "Ir a Adamo Pay",
+    "goToAdamoSign": "Ir a Adamo Sign",
+    "goToAdamoRisk": "Ir a Adamo Risk"
   },
   "about": {
     "hero": {

@@ -1,7 +1,9 @@
 {
   "common": {
     "loading": "Loading...",
-    "session-expired": "Your session has expired. Please sign in again."
+    "session-expired": "Your session has expired. Please sign in again.",
+    "logging-out": "Logging out...",
+    "redirecting": "Redirecting..."
   },
   "metadata": {
     "title": ".: ADAMO :. | Your challenges are unique. Our solutions are too."
@@ -137,6 +139,7 @@
     "forgot-password-action": "Click here.",
     "do-not-have-account": "Don't have an account?",
     "do-not-have-account-action": "Click here to register.",
+    "success": "Sign in successful!",
     "placeholders": {
       "email": "Email",
       "password": "Password"
@@ -167,6 +170,7 @@
     "new-password-step": {
       "title": "New password",
       "description": "Enter your new password below:",
+      "success": "Password changed successfully!",
       "cancel": "Cancel",
       "change-password": "Change password",
       "descriptions": {
@@ -200,6 +204,7 @@
       "description": "We have sent a confirmation code to the email:",
       "cancel": "Cancel",
       "confirm": "Create account",
+      "success": "Account created successfully! Welcome to Adamo Services.",
       "code-not-received": "Didn't receive the code?",
       "code-not-received-cooldown": "Resend code in",
       "code-not-received-action": "Resend code"
@@ -216,6 +221,34 @@
       }
     }
   },
+  "setup-2fa-dialog": {
+    "title": "Enable two-factor authentication",
+    "description": "Before continuing, it is necessary to enable 2FA to provide greater security to your account:",
+    "confirm": "Enable 2FA",
+    "success": "Two-factor authentication successfully enabled!",
+    "instructions": {
+      "one": "Download an authentication app on your mobile device such as Google Authenticator",
+      "two": "Open the app and scan the following QR code, or manually enter the code: {code}",
+      "three": "Enter the 6-digit code provided by the authentication app:"
+    }
+  },
+  "enter-2fa-dialog": {
+    "title": "Two-factor authentication",
+    "description": "Enter the 6-digit code from your authentication app:",
+    "cancel": "Cancel",
+    "confirm": "Verify",
+    "success": "Successfully authenticated!"
+  },
+  "verify-email-dialog": {
+    "title": "Verify your email",
+    "description": "We have sent a verification code to:",
+    "cancel": "Cancel",
+    "confirm": "Verify",
+    "success": "Email verified successfully!",
+    "code-not-received": "Didn't receive the code?",
+    "code-not-received-cooldown": "Resend code in",
+    "code-not-received-action": "Resend code"
+  },
   "2fa-activated": {
     "title": "Two-factor authentication (2FA) activated!",
     "description": "Two-factor authentication has been successfully activated:",
@@ -223,8 +256,13 @@
     "confirm": "Accept"
   },
   "profile-dropdown": {
-    "goToAccount": "Go to my account",
-    "signOut": "Sign out"
+    "goToDashboard": "Go to dashboard",
+    "goToAccount": "Go to my profile",
+    "signOut": "Sign out",
+    "goToAdamoId": "Go to Adamo ID",
+    "goToAdamoPay": "Go to Adamo Pay",
+    "goToAdamoSign": "Go to Adamo Sign",
+    "goToAdamoRisk": "Go to Adamo Risk"
   },
   "about": {
     "hero": {
