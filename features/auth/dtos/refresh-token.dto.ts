@@ -1,8 +1,8 @@
 import { APISuccessResponse } from "@/api/types";
 
-export type RefreshTokenDTO = {
+export type RefreshToken = {
   token: string;
   expiredAt: string;
 };
 
-export type RefreshTokenResponse = APISuccessResponse<RefreshTokenDTO>;
+export type RefreshTokenResponse = APISuccessResponse<RefreshToken>;

@@ -1,8 +1,8 @@
 import { APISuccessResponse } from "@/api/types";
 
-export type VerifyEmailForPasswordRecoveryDTO = {
+export type VerifyEmailForPasswordRecovery = {
   temporaryPassword: string;
 };
 
 export type VerifyEmailForPasswordRecoveryResponse =
-  APISuccessResponse<VerifyEmailForPasswordRecoveryDTO>;
+  APISuccessResponse<VerifyEmailForPasswordRecovery>;
