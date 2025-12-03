@@ -47,6 +47,31 @@ jobs:
           else
             echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_DEV }}" >> .env
           fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_ID_URL=${{ secrets.NEXT_PUBLIC_ADAMO_ID_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_ID_URL=${{ secrets.NEXT_PUBLIC_ADAMO_ID_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_SIGN_URL=${{ secrets.NEXT_PUBLIC_ADAMO_SIGN_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_SIGN_URL=${{ secrets.NEXT_PUBLIC_ADAMO_SIGN_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_PAY_URL=${{ secrets.NEXT_PUBLIC_ADAMO_PAY_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_PAY_URL=${{ secrets.NEXT_PUBLIC_ADAMO_PAY_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_RISK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_RISK_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_RISK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_RISK_URL_DEV }}" >> .env
+          fi
+
           echo "NEXT_PUBLIC_WHATSAPP_URL=${{ secrets.NEXT_PUBLIC_WHATSAPP_URL }}" >> .env
           echo "NEXT_PUBLIC_REGION=${{ secrets.NEXT_PUBLIC_REGION }}" >> .env
 
