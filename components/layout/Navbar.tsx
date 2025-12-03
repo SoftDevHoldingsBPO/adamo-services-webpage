@@ -121,7 +121,7 @@ const Navbar = () => {
                 {t("login")}
               </Button>
             )}
-            {(!currentUser || mustShowMenu) && (
+            {mustShowMenu && (
               <Button
                 size="md"
                 onClick={toggleMenu}
@@ -159,7 +159,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop */}
-          {(!currentUser || mustShowMenu) && (
+          {mustShowMenu && (
             <div className="hidden md:block">
               <Button
                 size="md"
