@@ -81,7 +81,10 @@ class AuthService {
     await api.post<void>("/api/v1/auth/reset-password", args);
   }
 
-  public static async resendCode(args: { email: string }) {
+  public static async resendCode(args: {
+    email: string;
+    email_type: "new_register" | "recovery_password";
+  }) {
     await api.post<void>("/api/v1/auth/resend-otp", args);
   }
 

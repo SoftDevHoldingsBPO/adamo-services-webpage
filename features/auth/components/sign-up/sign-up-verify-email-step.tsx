@@ -89,7 +89,7 @@ export function SignUpVerifyEmailStep() {
   };
 
   const handleResendCode = async () => {
-    await AuthService.resendCode({ email });
+    await AuthService.resendCode({ email, email_type: "new_register" });
   };
 
   return (

@@ -86,7 +86,7 @@ export function PasswordRecoveryVerifyEmailStep() {
   };
 
   const handleResendCode = async () => {
-    await AuthService.resendCode({ email });
+    await AuthService.resendCode({ email, email_type: "recovery_password" });
   };
 
   return (
@@ -162,7 +162,7 @@ export function PasswordRecoveryVerifyEmailStep() {
                 {t("code-not-received")}{" "}
               </p>
               <CountdownText
-                initialSeconds={10}
+                initialSeconds={59}
                 text={t("code-not-received-cooldown")}
                 completedText={t("code-not-received-action")}
                 onCompletedClick={handleResendCode}
