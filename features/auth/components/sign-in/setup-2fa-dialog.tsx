@@ -234,7 +234,8 @@ function Setup2FAContent({ accessToken, onOpenChange }: Setup2FAContentProps) {
         <Button
           type="submit"
           form="setup-2fa-form"
-          disabled={!form.formState.isValid}
+          disabled={!form.formState.isValid || isPendingVerify2FA}
+          loading={isPendingVerify2FA}
         >
           {t("confirm")}
         </Button>

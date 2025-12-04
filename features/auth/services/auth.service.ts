@@ -117,6 +117,14 @@ class AuthService {
     const response = await api.post<void>("/api/v1/auth/change-password", args);
     return response.data;
   }
+
+  public static async disable2FA(args: { code: string }) {
+    const response = await api.post<void>("/api/v1/auth/disable-2fa", {
+      totp: args.code,
+    });
+
+    return response.data;
+  }
 }
 
 export default AuthService;

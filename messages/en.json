@@ -515,7 +515,7 @@
     "confirmPasswordLabel": "Confirm new password",
     "passwordRequirements": "Password must be at least 8 characters long",
     "cancel": "Cancel",
-    "save": "Save changes",
+    "save": "Change password",
     "success": "Password changed successfully. Your session will be closed."
   },
   "enable-2fa-dialog": {

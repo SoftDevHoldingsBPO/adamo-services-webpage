@@ -186,7 +186,7 @@ function VerifyEmailContent({
                 {t("code-not-received")}{" "}
               </p>
               <CountdownText
-                initialSeconds={10}
+                initialSeconds={59}
                 text={t("code-not-received-cooldown")}
                 completedText={t("code-not-received-action")}
                 onCompletedClick={handleResendCode}
@@ -204,8 +204,8 @@ function VerifyEmailContent({
         <Button
           type="submit"
           form="verify-email-form"
-          loading={isPendingVerifyEmail}
           disabled={!form.formState.isValid || isPendingVerifyEmail}
+          loading={isPendingVerifyEmail}
         >
           {t("confirm")}
         </Button>

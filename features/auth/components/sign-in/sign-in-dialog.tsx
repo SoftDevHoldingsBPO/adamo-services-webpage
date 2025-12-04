@@ -211,6 +211,7 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
 
   const handleEmailVerified = () => {
     setIsVerifyEmailDialogOpen(false);
+    setIsSetup2FADialogOpen(true);
   };
 
   return (
@@ -291,8 +292,8 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
           <Button
             form="sign-in-form"
             type="submit"
-            loading={isPendingSignIn}
             disabled={isPendingSignIn || !form.formState.isValid}
+            loading={isPendingSignIn}
           >
             {t("sign-in")}
           </Button>

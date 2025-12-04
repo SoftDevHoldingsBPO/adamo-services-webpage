@@ -62,23 +62,24 @@ export function ChangePasswordForm({
     },
   });
 
-  const { mutateAsync: updatePassword, isPending } = useMutation({
-    mutationFn: AuthService.updatePassword,
-    onSuccess: () => {
-      ToastManager.show({
-        variant: "success",
-        message: t("success"),
-      });
+  const { mutateAsync: updatePassword, isPending: isPendingUpdatePassword } =
+    useMutation({
+      mutationFn: AuthService.updatePassword,
+      onSuccess: () => {
+        ToastManager.show({
+          variant: "success",
+          message: t("success"),
+        });
 
-      if (onPasswordChanged) onPasswordChanged();
-    },
-    onError: (error) => {
-      ToastManager.show({
-        variant: "destructive",
-        message: getFirstAxiosErrorMessage(error),
-      });
-    },
-  });
+        if (onPasswordChanged) onPasswordChanged();
+      },
+      onError: (error) => {
+        ToastManager.show({
+          variant: "destructive",
+          message: getFirstAxiosErrorMessage(error),
+        });
+      },
+    });
 
   const handleUpdatePassword = async (values: ChangePasswordFormValues) => {
     await updatePassword(values);
@@ -104,7 +105,7 @@ export function ChangePasswordForm({
           id="change-password-form"
           onSubmit={form.handleSubmit(handleUpdatePassword)}
         >
-          <fieldset disabled={isPending} className="space-y-4">
+          <fieldset disabled={isPendingUpdatePassword} className="space-y-4">
             <FormField
               control={form.control}
               name="currentPassword"
@@ -127,9 +128,7 @@ export function ChangePasswordForm({
                   <FormControl>
                     <Input {...field} type="password" />
                   </FormControl>
-                  <FormDescription>
-                    {t("passwordRequirements")}
-                  </FormDescription>
+                  <FormDescription>{t("passwordRequirements")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -159,7 +158,8 @@ export function ChangePasswordForm({
         <Button
           type="submit"
           form="change-password-form"
-          loading={isPending}
+          disabled={!form.formState.isValid || isPendingUpdatePassword}
+          loading={isPendingUpdatePassword}
         >
           {t("save")}
         </Button>

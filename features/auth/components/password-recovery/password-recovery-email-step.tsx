@@ -126,8 +126,8 @@ export function PasswordRecoveryEmailStep() {
         <Button
           type="submit"
           form="password-recovery-email-step-form"
-          loading={isPendingRecoverPassword}
           disabled={!form.formState.isValid || isPendingRecoverPassword}
+          loading={isPendingRecoverPassword}
         >
           {t("recover-password")}
         </Button>

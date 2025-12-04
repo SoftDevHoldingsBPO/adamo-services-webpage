@@ -112,7 +112,7 @@ function Enter2FAContent({ loading, onSubmit }: Enter2FAContentProps) {
               control={form.control}
               name="code"
               render={({ field }) => (
-                <FormItem className="mb-6">
+                <FormItem>
                   <FormControl>
                     <InputOTP
                       maxLength={6}

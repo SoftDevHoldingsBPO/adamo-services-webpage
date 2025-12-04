@@ -183,6 +183,7 @@ export function SignUpVerifyEmailStep() {
         <Button
           type="submit"
           form="sign-up-code-step-form"
+          disabled={!form.formState.isValid || isPendingVerifyEmail}
           loading={isPendingVerifyEmail}
         >
           {t("confirm")}
