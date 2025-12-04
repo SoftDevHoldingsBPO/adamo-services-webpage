@@ -86,6 +86,7 @@ export function PersonalInformationForm({
 
   const form = useForm<PersonalInformationFormValues>({
     resolver: zodResolver(FormSchema),
+    mode: "onChange",
     defaultValues: {
       profilePhoto: initialValues?.profilePhoto ?? null,
       name: initialValues?.name ?? "",
@@ -132,13 +133,16 @@ export function PersonalInformationForm({
         });
 
         // Update user state with latest profile data
-        setUser((prev) => ({
-          ...prev!,
-          name: latestProfile.name,
-          lastName: latestProfile.surname,
-          email: latestProfile.email,
-          avatar: latestProfile.photo || undefined,
-        }));
+        setUser(
+          (prevUser) =>
+            prevUser && {
+              ...prevUser,
+              name: latestProfile.name,
+              lastName: latestProfile.surname,
+              email: latestProfile.email,
+              avatar: latestProfile.photo || undefined,
+            },
+        );
 
         form.reset({
           name,
@@ -284,6 +288,7 @@ export function PersonalInformationForm({
               <Button
                 type="submit"
                 form="personal-information-form"
+                disabled={!form.formState.isValid || isUpdateProfilePending}
                 loading={isUpdateProfilePending}
               >
                 {t("save")}

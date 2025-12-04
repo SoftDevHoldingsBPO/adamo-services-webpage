@@ -57,25 +57,26 @@ export function PasswordRecoveryNewPasswordStep({
     },
   });
 
-  const { mutateAsync: resetPassword, isPending } = useMutation({
-    mutationFn: AuthService.resetPassword,
-    onSuccess: () => {
-      ToastManager.show({
-        variant: "success",
-        message: t("success"),
-      });
+  const { mutateAsync: resetPassword, isPending: isPendingResetPassword } =
+    useMutation({
+      mutationFn: AuthService.resetPassword,
+      onSuccess: () => {
+        ToastManager.show({
+          variant: "success",
+          message: t("success"),
+        });
 
-      setIsPasswordRecoveryDialogOpen(false);
+        setIsPasswordRecoveryDialogOpen(false);
 
-      if (onPasswordChanged) onPasswordChanged();
-    },
-    onError: (error) => {
-      ToastManager.show({
-        variant: "destructive",
-        message: getFirstAxiosErrorMessage(error),
-      });
-    },
-  });
+        if (onPasswordChanged) onPasswordChanged();
+      },
+      onError: (error) => {
+        ToastManager.show({
+          variant: "destructive",
+          message: getFirstAxiosErrorMessage(error),
+        });
+      },
+    });
 
   const handleChangePassword = async (
     values: PasswordRecoveryNewPasswordFormValues,
@@ -105,7 +106,7 @@ export function PasswordRecoveryNewPasswordStep({
           id="password-recovery-new-password-step-form"
           onSubmit={form.handleSubmit(handleChangePassword)}
         >
-          <fieldset disabled={isPending} className="space-y-4">
+          <fieldset disabled={isPendingResetPassword} className="space-y-4">
             <FormField
               control={form.control}
               name="password"
@@ -155,8 +156,8 @@ export function PasswordRecoveryNewPasswordStep({
         <Button
           type="submit"
           form="password-recovery-new-password-step-form"
-          loading={isPending}
-          disabled={!form.formState.isValid || isPending}
+          disabled={!form.formState.isValid || isPendingResetPassword}
+          loading={isPendingResetPassword}
         >
           {t("change-password")}
         </Button>

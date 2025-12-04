@@ -180,8 +180,8 @@ export function PasswordRecoveryVerifyEmailStep() {
         <Button
           type="submit"
           form="password-recovery-code-step-form"
-          loading={isPendingVerifyCode}
           disabled={!form.formState.isValid || isPendingVerifyCode}
+          loading={isPendingVerifyCode}
         >
           {t("continue")}
         </Button>

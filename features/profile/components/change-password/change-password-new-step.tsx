@@ -59,25 +59,26 @@ export function ChangePasswordNewStep({
     },
   });
 
-  const { mutateAsync: updatePassword, isPending } = useMutation({
-    mutationFn: AuthService.updatePassword,
-    onSuccess: () => {
-      ToastManager.show({
-        variant: "success",
-        message: t("success"),
-      });
+  const { mutateAsync: updatePassword, isPending: isPendingUpdatePassword } =
+    useMutation({
+      mutationFn: AuthService.updatePassword,
+      onSuccess: () => {
+        ToastManager.show({
+          variant: "success",
+          message: t("success"),
+        });
 
-      setIsChangePasswordDialogOpen(false);
+        setIsChangePasswordDialogOpen(false);
 
-      if (onPasswordChanged) onPasswordChanged();
-    },
-    onError: (error) => {
-      ToastManager.show({
-        variant: "destructive",
-        message: getFirstAxiosErrorMessage(error),
-      });
-    },
-  });
+        if (onPasswordChanged) onPasswordChanged();
+      },
+      onError: (error) => {
+        ToastManager.show({
+          variant: "destructive",
+          message: getFirstAxiosErrorMessage(error),
+        });
+      },
+    });
 
   const handleUpdatePassword = async (values: ChangePasswordNewFormValues) => {
     await updatePassword({
@@ -107,7 +108,7 @@ export function ChangePasswordNewStep({
           id="change-password-new-step-form"
           onSubmit={form.handleSubmit(handleUpdatePassword)}
         >
-          <fieldset disabled={isPending} className="space-y-4">
+          <fieldset disabled={isPendingUpdatePassword} className="space-y-4">
             <FormField
               control={form.control}
               name="password"
@@ -147,7 +148,8 @@ export function ChangePasswordNewStep({
         <Button
           type="submit"
           form="change-password-new-step-form"
-          loading={isPending}
+          disabled={!form.formState.isValid || isPendingUpdatePassword}
+          loading={isPendingUpdatePassword}
         >
           {t("save")}
         </Button>

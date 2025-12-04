@@ -1,6 +1,11 @@
+import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { SixCodeSchema } from "@/features/auth/schemas/auth.schema";
+import AuthService from "@/features/auth/services/auth.service";
 import { useDisable2FA } from "@/features/profile/contexts/disable-2fa.context";
+import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { ArrowLeft } from "lucide-react";
 import z from "zod";
@@ -39,6 +44,8 @@ export const Enter2FAFormSchema = z.object({
 export type Enter2FAFormValues = z.infer<typeof Enter2FAFormSchema>;
 
 export function Disable2FACodeStep() {
+  const { setUser } = useAuth();
+
   const { setDisable2FAStepWithCallback } = useDisable2FA();
 
   const t = useTranslations("disable-2fa-dialog.code");
@@ -50,8 +57,25 @@ export function Disable2FACodeStep() {
     },
   });
 
+  const { mutateAsync: disable2FA, isPending: isPendingDisable2FA } =
+    useMutation({
+      mutationFn: AuthService.disable2FA,
+      onSuccess: () => {
+        setDisable2FAStepWithCallback("disabled");
+        setUser(
+          (prevUser) => prevUser && { ...prevUser, isTwoFactorEnabled: false },
+        );
+      },
+      onError: (error) => {
+        ToastManager.show({
+          variant: "destructive",
+          message: getFirstAxiosErrorMessage(error),
+        });
+      },
+    });
+
   const handleEnter2FASubmit = async (values: Enter2FAFormValues) => {
-    setDisable2FAStepWithCallback("disabled");
+    await disable2FA({ code: values.code });
   };
 
   return (
@@ -74,12 +98,12 @@ export function Disable2FACodeStep() {
           id="enter-2fa-form"
           onSubmit={form.handleSubmit(handleEnter2FASubmit)}
         >
-          <fieldset className="space-y-4">
+          <fieldset disabled={isPendingDisable2FA} className="space-y-4">
             <FormField
               control={form.control}
               name="code"
               render={({ field }) => (
-                <FormItem className="mb-6">
+                <FormItem>
                   <FormControl>
                     <InputOTP
                       maxLength={6}
@@ -130,7 +154,8 @@ export function Disable2FACodeStep() {
         <Button
           type="submit"
           form="enter-2fa-form"
-          disabled={!form.formState.isValid}
+          disabled={!form.formState.isValid || isPendingDisable2FA}
+          loading={isPendingDisable2FA}
         >
           {t("disable")}
         </Button>

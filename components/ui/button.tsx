@@ -65,7 +65,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       aria-label={ariaLabel}
       aria-busy={loading}
-      disabled={loading || props.disabled}
+      disabled={props.disabled || loading}
       {...props}
     >
       {loading ? (

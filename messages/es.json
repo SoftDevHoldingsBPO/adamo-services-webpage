@@ -514,7 +514,7 @@
     "confirmPasswordLabel": "Confirmar nueva contraseña",
     "passwordRequirements": "La contraseña debe tener al menos 8 caracteres",
     "cancel": "Cancelar",
-    "save": "Guardar cambios",
+    "save": "Cambiar contraseña",
     "success": "Contraseña cambiada exitosamente. Tu sesión se cerrará."
   },
   "enable-2fa-dialog": {

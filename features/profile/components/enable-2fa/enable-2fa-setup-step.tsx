@@ -1,4 +1,5 @@
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { SixCodeSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { useEnable2FA } from "@/features/profile/contexts/enable-2fa.context";
@@ -47,10 +48,12 @@ export function Enable2FASetupStep() {
   const [code, setCode] = useState<string | null>(null);
   const [base64QrCode, setBase64QrCode] = useState<string | null>(null);
 
+  const { setUser } = useAuth();
+
   const t = useTranslations("enable-2fa-dialog.setup");
   const tCommon = useTranslations("common");
 
-  const { setEnable2FAStep, setIsEnable2FADialogOpen } = useEnable2FA();
+  const { setEnable2FAStep } = useEnable2FA();
 
   const form = useForm<Enable2FASetupFormValues>({
     resolver: zodResolver(Enable2FASetupFormSchema),
@@ -73,18 +76,23 @@ export function Enable2FASetupStep() {
     },
   });
 
-  const { mutateAsync: verify2FA, isPending } = useMutation({
-    mutationFn: AuthService.verify2FA,
-    onSuccess: () => {
-      setEnable2FAStep("enabled");
+  const { mutateAsync: verify2FA, isPending: isPendingVerify2FA } = useMutation(
+    {
+      mutationFn: AuthService.verify2FA,
+      onSuccess: () => {
+        setEnable2FAStep("enabled");
+        setUser(
+          (prevUser) => prevUser && { ...prevUser, isTwoFactorEnabled: true },
+        );
+      },
+      onError: (error) => {
+        ToastManager.show({
+          variant: "destructive",
+          message: getFirstAxiosErrorMessage(error),
+        });
+      },
     },
-    onError: (error) => {
-      ToastManager.show({
-        variant: "destructive",
-        message: getFirstAxiosErrorMessage(error),
-      });
-    },
-  });
+  );
 
   useEffect(() => {
     setup2FA({});
@@ -117,7 +125,7 @@ export function Enable2FASetupStep() {
           id="enable-2fa-setup-form"
           onSubmit={form.handleSubmit(handleSetup2FASubmit)}
         >
-          <fieldset disabled={isPending}>
+          <fieldset disabled={isPendingVerify2FA}>
             <ul className="flex flex-col gap-8 w-full">
               <li className="flex gap-2 w-full">
                 <div className="text-sm text-neutral-700 font-medium grid place-content-center border border-neutral-300 bg-neutral-100 size-7 aspect-square rounded-full">
@@ -202,7 +210,8 @@ export function Enable2FASetupStep() {
         <Button
           type="submit"
           form="enable-2fa-setup-form"
-          disabled={!form.formState.isValid}
+          disabled={!form.formState.isValid || isPendingVerify2FA}
+          loading={isPendingVerify2FA}
         >
           {t("confirm")}
         </Button>

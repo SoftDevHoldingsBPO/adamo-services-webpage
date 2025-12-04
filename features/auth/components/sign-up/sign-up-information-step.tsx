@@ -210,6 +210,7 @@ export function SignUpInformationStep() {
         <Button
           type="submit"
           form="sign-up-information-step-form"
+          disabled={!form.formState.isValid || isPendingSignUp}
           loading={isPendingSignUp}
         >
           {t("confirm")}
