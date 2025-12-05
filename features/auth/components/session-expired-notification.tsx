@@ -1,7 +1,7 @@
 "use client";
 
-import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
+import { ToastManager } from "@adamosuiteservices/ui/toaster";
 
 import { useEffect } from "react";
 
@@ -32,7 +32,7 @@ export function SessionExpiredNotification() {
         window.history.replaceState({}, "", "/");
       }, 0);
     }
-  }, [searchParams, t]);
+  }, [searchParams]);
 
   // This component doesn't render anything
   return null;

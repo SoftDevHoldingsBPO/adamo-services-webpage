@@ -1,5 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+import { APIErrorResponse } from "./types";
+
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   headers: {
@@ -7,6 +9,29 @@ export const api = axios.create({
   },
   withCredentials: true, // Enable sending cookies with requests
 });
+
+// Queue to store pending requests during token refresh
+let isRefreshing = false;
+
+let failedQueue: Array<{
+  resolve: (value?: unknown) => void;
+  reject: (reason?: unknown) => void;
+}> = [];
+
+/**
+ * Process all queued requests after token refresh
+ */
+const processQueue = (error: unknown = null) => {
+  failedQueue.forEach((promise) => {
+    if (error) {
+      promise.reject(error);
+    } else {
+      promise.resolve();
+    }
+  });
+
+  failedQueue = [];
+};
 
 /**
  * Helper function to get locale from cookie on client side
@@ -40,50 +65,73 @@ api.interceptors.request.use(
 );
 
 /**
- * Response interceptor - Handle token refresh on 401 errors
+ * Response interceptor - Handle token refresh
  * Tokens are managed via HTTP-only cookies, refresh is automatic
  */
-// api.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   async (error: AxiosError) => {
-//     const originalRequest = error.config as InternalAxiosRequestConfig & {
-//       _retry?: boolean;
-//     };
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error: AxiosError<APIErrorResponse>) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
-//     // Handle 401 Unauthorized - attempt token refresh only if access token was present
-//     if (
-//       error.response?.status === 401 &&
-//       originalRequest &&
-//       !originalRequest._retry
-//     ) {
-//       originalRequest._retry = true;
+    // Check if the error is 401 and specifically an ACCESS_TOKEN_EXPIRED error
+    const isAccessTokenExpired = error.response?.data?.errors?.includes(
+      "ACCESS_TOKEN_EXPIRED",
+    );
 
-//       try {
-//         // Attempt to refresh the token using the refresh token cookie
-//         // The server will automatically read the adamo_refresh_token cookie
-//         await axios.post(
-//           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/refresh`,
-//           {},
-//           {
-//             withCredentials: true, // Send cookies with the request
-//           },
-//         );
+    // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
+    if (isAccessTokenExpired && originalRequest && !originalRequest._retry) {
+      // If a refresh is already in progress, queue this request
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then(() => {
+            return api(originalRequest);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }
 
-//         // Retry the original request - new token is now in the cookie
-//         return api(originalRequest);
-//       } catch (refreshError) {
-//         // Refresh failed, redirect to home with session expired fla
-//         // Avoid infinite loop - only redirect if not already on session_expired page
-//         if (!window.location.search.includes("session_expired=true")) {
-//           window.location.href = "/?session_expired=true";
-//         }
+      originalRequest._retry = true;
+      isRefreshing = true;
 
-//         return Promise.reject(refreshError);
-//       }
-//     }
+      try {
+        // Attempt to refresh the token using the refresh token cookie
+        // The server will automatically read the adamo_refresh_token cookie
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/refresh`,
+          {},
+          {
+            withCredentials: true, // Send cookies with the request
+          },
+        );
 
-//     return Promise.reject(error);
-//   },
-// );
+        // Process all queued requests
+        processQueue();
+        isRefreshing = false;
+
+        // Retry the original request - new token is now in the cookie
+        return api(originalRequest);
+      } catch (refreshError) {
+        // Process queue with error
+        processQueue(refreshError);
+        isRefreshing = false;
+
+        // Refresh failed, redirect to home with session expired flag
+        // Avoid infinite loop - only redirect if not already on session_expired page
+        if (!window.location.search.includes("session_expired=true")) {
+          window.location.href = "/?session_expired=true";
+        }
+
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
