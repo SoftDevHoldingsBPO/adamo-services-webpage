@@ -5,7 +5,6 @@ import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
-import { redirect } from "next/navigation";
 
 import { FullPageLoader } from "@/components/ui/full-page-loader";
 
@@ -25,7 +24,7 @@ export default function LogoutPage() {
       } finally {
         setIsLoggingOut(false);
 
-        redirect("/");
+        window.location.href = "/";
       }
     };
 
