@@ -77,7 +77,7 @@ api.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // Check if the error is 401 and specifically an ACCESS_TOKEN_EXPIRED error
+    // Check if the error is ACCESS_TOKEN_EXPIRED error
     const isAccessTokenExpired = error.response?.data?.errors?.includes(
       "ACCESS_TOKEN_EXPIRED",
     );
