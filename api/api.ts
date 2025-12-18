@@ -78,9 +78,27 @@ api.interceptors.response.use(
     };
 
     // Check if the error is ACCESS_TOKEN_EXPIRED error
+    const is401Error = error.response?.status === 401;
     const isAccessTokenExpired = error.response?.data?.errors?.includes(
       "ACCESS_TOKEN_EXPIRED",
     );
+
+    // Handle 401 errors that are NOT token expiration (invalid credentials, etc.)
+    if (is401Error && !isAccessTokenExpired && !originalRequest._retry) {
+      // Mark as retried to prevent multiple redirects
+      originalRequest._retry = true;
+
+      // Reject all queued requests
+      processQueue(error);
+      isRefreshing = false;
+
+      // Redirect to home with session expired flag
+      if (!window.location.search.includes("session_expired=true")) {
+        window.location.href = "/?session_expired=true";
+      }
+
+      return Promise.reject(error);
+    }
 
     // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
     if (isAccessTokenExpired && originalRequest && !originalRequest._retry) {
