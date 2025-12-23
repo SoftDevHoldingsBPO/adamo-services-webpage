@@ -28,8 +28,14 @@ export function SessionExpiredNotification() {
           message: t("session-expired"),
         });
 
-        // Clean up URL by removing the query parameter
-        window.history.replaceState({}, "", "/");
+        // Clean up URL by removing only the session_expired parameter
+        const params = new URLSearchParams(searchParams.toString());
+
+        params.delete("session_expired");
+
+        const newUrl = params.toString() ? `/?${params.toString()}` : "/";
+
+        window.history.replaceState({}, "", newUrl);
       }, 0);
     }
   }, [searchParams]);
