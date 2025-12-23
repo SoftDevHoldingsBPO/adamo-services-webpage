@@ -61,9 +61,23 @@ const Navbar = () => {
     (path) => pathname === path,
   );
 
-  const mustShowMenu = ["/", "/contact"].some((path) => pathname === path);
+  const mustShowMenu = [
+    "/",
+    "/contact",
+    "/adamo-id",
+    "/adamo-sign",
+    "/adamo-risk",
+    "/adamo-pay",
+  ].some((path) => pathname === path);
 
-  const mustShowContact = ["/", "/contact"].some((path) => pathname === path);
+  const mustShowContact = [
+    "/",
+    "/contact",
+    "/adamo-id",
+    "/adamo-sign",
+    "/adamo-risk",
+    "/adamo-pay",
+  ].some((path) => pathname === path);
 
   return (
     <>
