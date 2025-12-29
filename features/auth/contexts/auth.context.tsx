@@ -15,6 +15,14 @@ import {
   useState,
 } from "react";
 
+/**
+ * Internal handler for imperatively updating auth state from outside React
+ * (e.g., from axios interceptors)
+ */
+let authHandlers: {
+  setUnauthenticated: () => void;
+} | null = null;
+
 type AuthContextType = {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
@@ -73,6 +81,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Register auth state handler for external updates
+  // This allows the axios interceptor to update auth state
+  authHandlers = {
+    setUnauthenticated,
+  };
+
+  // Cleanup handler when component unmounts
+  useEffect(() => {
+    return () => {
+      authHandlers = null;
+    };
+  }, []);
+
   // Check authentication on mount
   useEffect(() => {
     const checkAuth = async () => {
@@ -120,4 +141,16 @@ export function useAuth() {
   }
 
   return context;
+}
+
+/**
+ * Notify the auth system that authentication has failed.
+ * This can be called from outside React (e.g., axios interceptors)
+ * to update the auth state, which will trigger re-renders in ProtectedRoute
+ * and redirect users away from protected pages.
+ */
+export function notifyUnauthenticated(): void {
+  if (authHandlers) {
+    authHandlers.setUnauthenticated();
+  }
 }

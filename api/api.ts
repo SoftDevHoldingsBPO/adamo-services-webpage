@@ -1,5 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+import { notifyUnauthenticated } from "@/features/auth/contexts/auth.context";
+
 import { APIErrorResponse } from "./types";
 
 export const api = axios.create({
@@ -82,6 +84,22 @@ api.interceptors.response.use(
     const isAccessTokenExpired = error.response?.data?.errors?.includes(
       "ACCESS_TOKEN_EXPIRED",
     );
+
+    // Handle 401 errors that are NOT token expiration (invalid credentials, etc.)
+    if (is401Error && !isAccessTokenExpired && !originalRequest._retry) {
+      // Mark as retried to prevent multiple redirects
+      originalRequest._retry = true;
+
+      // Reject all queued requests
+      processQueue(error);
+      isRefreshing = false;
+
+      // Notify auth context to update state
+      // This will cause ProtectedRoute to re-render and redirect if on a protected page
+      notifyUnauthenticated();
+
+      return Promise.reject(error);
+    }
 
     // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
     if (is401Error && isAccessTokenExpired && !originalRequest._retry) {
