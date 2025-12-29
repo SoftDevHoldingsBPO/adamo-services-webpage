@@ -83,25 +83,9 @@ api.interceptors.response.use(
       "ACCESS_TOKEN_EXPIRED",
     );
 
-    // Handle 401 errors that are NOT token expiration (invalid credentials, etc.)
-    if (is401Error && !isAccessTokenExpired && !originalRequest._retry) {
-      // Mark as retried to prevent multiple redirects
-      originalRequest._retry = true;
-
-      // Reject all queued requests
-      processQueue(error);
-      isRefreshing = false;
-
-      // Redirect to home with session expired flag
-      if (!window.location.search.includes("session_expired=true")) {
-        window.location.href = "/?session_expired=true";
-      }
-
-      return Promise.reject(error);
-    }
 
     // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
-    if (isAccessTokenExpired && originalRequest && !originalRequest._retry) {
+    if (is401Error && isAccessTokenExpired && !originalRequest._retry) {
       // If a refresh is already in progress, queue this request
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
