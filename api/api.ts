@@ -1,5 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+import { notifyUnauthenticated } from "@/features/auth/contexts/auth.context";
+
 import { APIErrorResponse } from "./types";
 
 export const api = axios.create({
@@ -92,16 +94,15 @@ api.interceptors.response.use(
       processQueue(error);
       isRefreshing = false;
 
-      // Redirect to home with session expired flag
-      if (!window.location.search.includes("session_expired=true")) {
-        window.location.href = "/?session_expired=true";
-      }
+      // Notify auth context to update state
+      // This will cause ProtectedRoute to re-render and redirect if on a protected page
+      notifyUnauthenticated();
 
       return Promise.reject(error);
     }
 
     // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
-    if (isAccessTokenExpired && originalRequest && !originalRequest._retry) {
+    if (is401Error && isAccessTokenExpired && !originalRequest._retry) {
       // If a refresh is already in progress, queue this request
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
