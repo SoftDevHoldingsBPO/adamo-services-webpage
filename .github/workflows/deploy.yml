@@ -1,0 +1,150 @@
+name: 🚀 Deploy AdamoServices Next.js with SST (dev & prod)
+
+on:
+  push:
+    branches: [develop, main]
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: us-east-1
+  SST_STAGE: ${{ github.ref_name == 'main' && 'production' || 'development' }}
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    name: 🌍 SST Deploy (${{ github.ref_name }})
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'development' }}
+
+    steps:
+      - name: 🕓 Record start time
+        id: start-time
+        run: echo "timestamp=$(date +%s)" >> $GITHUB_OUTPUT
+
+      - name: 📦 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: 🔎 Print stage
+        run: echo "SST_STAGE=${{ env.SST_STAGE }} | BRANCH=${{ github.ref_name }}"
+
+      - name: 🛠️ Create .env file
+        run: |
+          echo "NEXT_PUBLIC_CLOUD_ENV=${{ github.ref_name == 'main' && 'prod' || 'dev' }}" >> .env
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_ID_URL=${{ secrets.NEXT_PUBLIC_ADAMO_ID_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_ID_URL=${{ secrets.NEXT_PUBLIC_ADAMO_ID_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_SIGN_URL=${{ secrets.NEXT_PUBLIC_ADAMO_SIGN_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_SIGN_URL=${{ secrets.NEXT_PUBLIC_ADAMO_SIGN_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_PAY_URL=${{ secrets.NEXT_PUBLIC_ADAMO_PAY_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_PAY_URL=${{ secrets.NEXT_PUBLIC_ADAMO_PAY_URL_DEV }}" >> .env
+          fi
+
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_RISK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_RISK_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_RISK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_RISK_URL_DEV }}" >> .env
+          fi
+
+          echo "NEXT_PUBLIC_WHATSAPP_URL=${{ secrets.NEXT_PUBLIC_WHATSAPP_URL }}" >> .env
+          echo "NEXT_PUBLIC_REGION=${{ secrets.NEXT_PUBLIC_REGION }}" >> .env
+
+      - name: 🔎 Echo chosen env
+        run: grep NEXT_PUBLIC_CLOUD_ENV .env || true
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧩 Ensure SST CLI for linux-x64
+        run: npm install --no-save sst-linux-x64
+
+      - name: 🔐 Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 🧹 SST Remove (DEV on demand)
+        if: ${{ contains(github.event.head_commit.message, '[reset-dev]') && env.SST_STAGE == 'development' }}
+        run: yes | npx sst remove --stage ${{ env.SST_STAGE }} --print-logs
+
+      - name: 🧹 SST Remove (PROD on demand)
+        if: ${{ contains(github.event.head_commit.message, '[reset-prod]') && env.SST_STAGE == 'production' && github.ref_name == 'main' }}
+        run: yes | npx sst remove --stage ${{ env.SST_STAGE }} --print-logs
+
+      - name: 🚀 Deploy with SST (stage from branch)
+        run: npx sst deploy --stage ${{ env.SST_STAGE }} --print-logs
+
+      - name: 📣 Notify Telegram on success
+        if: success()
+        run: |
+          END_TIME=$(date +%s)
+          START_TIME=${{ steps.start-time.outputs.timestamp }}
+          DURATION=$(( END_TIME - START_TIME ))
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+
+          MESSAGE="✅ *[Frontend] SST Deploy Successful*\n\n"
+          MESSAGE+="🌐 *Stage:* \`${{ env.SST_STAGE }}\`\n"
+          MESSAGE+="👤 *By:* \`${{ github.actor }}\`\n"
+          MESSAGE+="📂 *Branch:* \`${{ github.ref_name }}\`\n"
+          MESSAGE+="📝 *Commit:* [\`${SHORT_SHA}\`](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\n"
+          MESSAGE+="💬 *Message:* _${{ github.event.head_commit.message }}_\n"
+          MESSAGE+="⏱ *Started at:* \`${{ github.event.head_commit.timestamp }}\`\n"
+          MESSAGE+="⌛ *Duration:* ${DURATION}s\n"
+          MESSAGE+="🔗 [View GitHub Job](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode=Markdown \
+            -d text="$MESSAGE"
+
+      - name: ❌ Notify Telegram on failure
+        if: failure()
+        run: |
+          END_TIME=$(date +%s)
+          START_TIME=${{ steps.start-time.outputs.timestamp }}
+          DURATION=$(( END_TIME - START_TIME ))
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+
+          MESSAGE="🚨 *[Frontend] SST Deploy Failed*\n\n"
+          MESSAGE+="🌐 *Stage:* \`${{ env.SST_STAGE }}\`\n"
+          MESSAGE+="👤 *By:* \`${{ github.actor }}\`\n"
+          MESSAGE+="📂 *Branch:* \`${{ github.ref_name }}\`\n"
+          MESSAGE+="📝 *Commit:* [\`${SHORT_SHA}\`](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\n"
+          MESSAGE+="💬 *Message:* _${{ github.event.head_commit.message }}_\n"
+          MESSAGE+="⏱ *Started at:* \`${{ github.event.head_commit.timestamp }}\`\n"
+          MESSAGE+="⌛ *Duration:* ${DURATION}s\n"
+          MESSAGE+="❗ *Check the logs for details.*\n"
+          MESSAGE+="🔗 [View GitHub Job](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode=Markdown \
+            -d text="$MESSAGE"

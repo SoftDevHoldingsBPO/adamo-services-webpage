@@ -45,6 +45,5 @@ next-env.d.ts
 /.open-next/
 /.sst/
 sst-env.d.ts
-sst.config.ts
 
 certificates
