@@ -5,7 +5,7 @@ export default $config({
   app(input) {
     return {
       name: "adamo-services",
-      removal: input?.stage === "production" ? "retain" : "remove",
+      removal: "remove",
       home: "aws",
       region: "us-east-1",
     };
