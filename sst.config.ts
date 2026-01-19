@@ -7,7 +7,7 @@ export default $config({
       name: "adamo-services",
       removal: input?.stage === "production" ? "retain" : "remove",
       home: "aws",
-      region: "us-east-1",
+      region: "sa-east-1",
     };
   },
   async run() {
