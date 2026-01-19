@@ -7,7 +7,7 @@ export default $config({
       name: "adamo-services",
       removal: input?.stage === "production" ? "retain" : "remove",
       home: "aws",
-      region: "sa-east-1",
+      region: "us-east-1",
     };
   },
   async run() {
@@ -34,12 +34,7 @@ export default $config({
         },
       },
       cdk: {
-        distribution: {
-          defaultBehavior: {
-            cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-            originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
-          },
-        },
+        distribution: {},
       },
     });
   },
