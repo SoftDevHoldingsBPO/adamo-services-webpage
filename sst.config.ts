@@ -34,7 +34,12 @@ export default $config({
         },
       },
       cdk: {
-        distribution: {},
+        distribution: {
+          defaultBehavior: {
+            cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+            originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
+          },
+        },
       },
     });
   },
