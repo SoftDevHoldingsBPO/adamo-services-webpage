@@ -91,6 +91,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: 🧰 Setup Pulumi (fix pulumi-language-nodejs mismatch)
+        uses: pulumi/setup-pulumi@v2
+        with:
+          pulumi-version: 3.146.0
+
       - name: 🧹 SST Remove (DEV on demand)
         if: ${{ contains(github.event.head_commit.message, '[reset-dev]') && env.SST_STAGE == 'development' }}
         run: yes | npx sst remove --stage ${{ env.SST_STAGE }} --print-logs
