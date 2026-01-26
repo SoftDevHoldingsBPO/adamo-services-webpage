@@ -94,9 +94,22 @@ const HomeHero = () => {
             aria-label="Hero actions"
             className="mt-28 flex flex-col items-start gap-8 md:flex-row md:justify-center"
           >
-            <div data-inview data-inview-delay={0.3} className="relative z-30">
+            <div data-inview data-inview-delay={0.375} className="relative z-30">
               <Button
                 variant="secondary"
+                aria-label={t("button2")}
+                asChild
+                onClick={handleStopPropagation}
+                data-cursor-text=""
+              >
+                <Link href="/planes">
+                  {t("button2")}
+                </Link>
+              </Button>
+            </div>
+            <div data-inview data-inview-delay={0.3} className="relative z-30">
+              <Button
+                variant="primary"
                 aria-label={t("button1")}
                 onClick={handleScrollToServices}
               >
@@ -106,13 +119,13 @@ const HomeHero = () => {
             <div data-inview data-inview-delay={0.45} className="relative z-30">
               <Button
                 variant="ghost"
-                aria-label={t("button2")}
+                aria-label={t("button3")}
                 asChild
                 onClick={handleStopPropagation}
                 data-cursor-text=""
               >
                 <Link href="/contact">
-                  {t("button2")} <ArrowRight aria-hidden="true" />
+                  {t("button3")} <ArrowRight aria-hidden="true" />
                 </Link>
               </Button>
             </div>

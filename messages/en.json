@@ -12,8 +12,7 @@
     "servicesTitle": "What do you need to solve today?",
     "socialsTitle": "Let's stay in touch",
     "navigation": "More information",
-    "solutions": "Solutions",
-    "faqs": "FAQs",
+    "solutions": "Solutions",    "planes": "Plans",    "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
     "contact": "Contact sales",
@@ -51,7 +50,8 @@
     "title": "Your challenges are unique. <accent>Our solutions are too.</accent>",
     "subtitle": "We design technologies for businesses that need to move forward with confidence: verify identities, automate payments, manage risks, or sign documents… each product is independent, but they all share one goal: making your life easier.",
     "button1": "Explore solutions",
-    "button2": "Contact sales",
+    "button2": "View plans",
+    "button3": "Contact sales",
     "cursor-text": "DISCOVER"
   },
   "faq": {
@@ -534,6 +534,133 @@
       "description": "Two-factor authentication has been successfully enabled. Your account is now more secure.",
       "successMessage": "You can disable it at any time from your user profile settings.",
       "accept": "Accept"
+    }
+  },
+  "planes": {
+    "hero": {
+      "cursorText": "DISCOVER",
+      "title": "Choose the perfect plan for your business",
+      "subtitle": "From free trials to complete enterprise solutions. Access the tools you need to verify identities, sign documents, and process payments with confidence."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price": "$0",
+        "period": "/month",
+        "description": "Perfect for testing our solutions",
+        "badge": "Trial",
+        "cta": "Create free account",
+        "features": [
+          "$3 USD initial credit",
+          "Access to Adamo Sign",
+          "Access to Adamo ID",
+          "Document validation",
+          "Basic biometric verification",
+          "Simple electronic signature",
+          "Email support"
+        ],
+        "limitations": [
+          "No access to Adamo Pay",
+          "Limited non-renewable credit",
+          "Basic features only"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "Custom",
+        "period": "",
+        "description": "For professionals and small teams",
+        "badge": "Recommended",
+        "cta": "Contact sales",
+        "features": [
+          "Full access to Adamo Sign",
+          "Full access to Adamo ID",
+          "Full access to Adamo Pay",
+          "Advanced biometric verification",
+          "Legally valid electronic signature",
+          "Real-time payment processing",
+          "Currency conversion",
+          "Full API access",
+          "Priority support",
+          "Reports and analytics"
+        ],
+        "limitations": [
+          "Single-user account only",
+          "No admin subaccounts"
+        ]
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "period": "",
+        "description": "For companies that need to scale",
+        "badge": "Enterprise",
+        "cta": "Talk to sales",
+        "features": [
+          "Everything in Pro",
+          "Enterprise account",
+          "Up to 3 admin subaccounts",
+          "Centralized user management",
+          "Each subaccount can manage any product",
+          "Customizable permissions and roles",
+          "Guaranteed SLA",
+          "24/7 dedicated support",
+          "Custom integrations",
+          "Advanced regulatory compliance",
+          "Enterprise reporting",
+          "Personalized onboarding"
+        ],
+        "limitations": []
+      }
+    },
+    "comparison": {
+      "buttonText": "Compare plans in detail",
+      "dialogTitle": "Detailed plan comparison",
+      "dialogDescription": "Review all features and find the perfect plan for your needs.",
+      "table": {
+        "feature": "Feature",
+        "features": {
+          "pricing": "Pricing",
+          "initialCredit": "Initial credit",
+          "adamoSign": "Adamo Sign",
+          "adamoId": "Adamo ID",
+          "adamoPay": "Adamo Pay",
+          "biometricVerification": "Biometric verification",
+          "documentValidation": "Document validation",
+          "electronicSignature": "Electronic signature",
+          "paymentProcessing": "Payment processing",
+          "currencyExchange": "Currency exchange",
+          "api": "API access",
+          "subaccounts": "Admin subaccounts",
+          "userManagement": "User management",
+          "customPermissions": "Custom permissions",
+          "support": "Support",
+          "sla": "Guaranteed SLA",
+          "analytics": "Reports and analytics",
+          "customIntegrations": "Custom integrations",
+          "compliance": "Regulatory compliance",
+          "onboarding": "Personalized onboarding"
+        },
+        "values": {
+          "basic": "Basic",
+          "advanced": "Advanced",
+          "full": "Full",
+          "limited": "Limited",
+          "email": "Email",
+          "priority": "Priority",
+          "dedicated": "24/7 Dedicated",
+          "yes": "Yes",
+          "no": "No",
+          "upTo3": "Up to 3",
+          "included": "Included",
+          "notIncluded": "Not included"
+        }
+      }
+    },
+    "cta": {
+      "title": "Not sure which plan to choose?",
+      "description": "Our sales team can help you find the perfect solution for your business.",
+      "button": "Talk to an expert"
     }
   }
 }

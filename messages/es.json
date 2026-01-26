@@ -6,13 +6,18 @@
     "redirecting": "Redirigiendo..."
   },
   "metadata": {
-    "title": ".: ADAMO :. | Tus retos son distintos. Nuestras soluciones también."
+    "title": ".: ADAMO :. | Tus retos son distintos. Nuestras soluciones también.",
+    "planes": {
+      "title": "Planes y Precios | ADAMO Services",
+      "description": "Elige el plan perfecto para tu negocio. Desde pruebas gratuitas hasta soluciones empresariales completas."
+    }
   },
   "nav": {
     "servicesTitle": "¿Qué necesitas resolver hoy?",
     "socialsTitle": "Estemos en contacto",
     "navigation": "Más información",
     "solutions": "Soluciones",
+    "planes": "Planes",
     "faqs": "FAQ's",
     "blog": "Blog",
     "about": "Nosotros",
@@ -51,7 +56,8 @@
     "title": "Tus retos son distintos. <accent>Nuestras soluciones también</accent>",
     "subtitle": "Diseñamos tecnologías para empresas que necesitan avanzar con confianza: valida identidades, automatiza pagos, gestiona riesgos o firma documentos… cada producto es independiente, pero todos comparten algo: resolverte la vida.",
     "button1": "Conocer soluciones",
-    "button2": "Hablar con ventas",
+    "button2": "Conocer planes",
+    "button3": "Hablar con ventas",
     "cursor-text": "DESCUBRIR"
   },
   "faq": {
@@ -533,6 +539,133 @@
       "description": "El Doble Factor de Autenticación ha sido activado exitosamente. Tu cuenta ahora es más segura.",
       "successMessage": "Puedes desactivarlo en cualquier momento desde la configuración de tu perfil de usuario.",
       "accept": "Aceptar"
+    }
+  },
+  "planes": {
+    "hero": {
+      "cursorText": "DESCUBRE",
+      "title": "Elige el plan perfecto para tu negocio",
+      "subtitle": "Desde pruebas gratuitas hasta soluciones empresariales completas. Accede a las herramientas que necesitas para verificar identidades, firmar documentos y procesar pagos con confianza."
+    },
+    "plans": {
+      "free": {
+        "name": "Gratuito",
+        "price": "$0",
+        "period": "/mes",
+        "description": "Perfecto para probar nuestras soluciones",
+        "badge": "Prueba",
+        "cta": "Crear cuenta gratis",
+        "features": [
+          "$3 USD de crédito inicial",
+          "Acceso a Adamo Sign",
+          "Acceso a Adamo ID",
+          "Validación de documentos",
+          "Verificación biométrica básica",
+          "Firma electrónica simple",
+          "Soporte por email"
+        ],
+        "limitations": [
+          "Sin acceso a Adamo Pay",
+          "Crédito limitado no renovable",
+          "Funciones básicas únicamente"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "Personalizado",
+        "period": "",
+        "description": "Para profesionales y equipos pequeños",
+        "badge": "Recomendado",
+        "cta": "Contactar ventas",
+        "features": [
+          "Acceso completo a Adamo Sign",
+          "Acceso completo a Adamo ID",
+          "Acceso completo a Adamo Pay",
+          "Verificación biométrica avanzada",
+          "Firma electrónica con validez legal",
+          "Procesamiento de pagos en tiempo real",
+          "Conversión de divisas",
+          "API completa",
+          "Soporte prioritario",
+          "Reportes y analytics"
+        ],
+        "limitations": [
+          "Uso unipersonal (una sola cuenta)",
+          "Sin subcuentas administrativas"
+        ]
+      },
+      "enterprise": {
+        "name": "Empresarial",
+        "price": "Personalizado",
+        "period": "",
+        "description": "Para empresas que necesitan escalar",
+        "badge": "Empresas",
+        "cta": "Hablar con ventas",
+        "features": [
+          "Todo lo incluido en Pro",
+          "Cuenta empresarial",
+          "Hasta 3 subcuentas administradoras",
+          "Gestión centralizada de usuarios",
+          "Cada subcuenta puede administrar cualquier producto",
+          "Permisos y roles personalizables",
+          "SLA garantizado",
+          "Soporte dedicado 24/7",
+          "Integraciones personalizadas",
+          "Cumplimiento regulatorio avanzado",
+          "Reportes empresariales",
+          "Onboarding personalizado"
+        ],
+        "limitations": []
+      }
+    },
+    "comparison": {
+      "buttonText": "Comparar planes detalladamente",
+      "dialogTitle": "Comparación detallada de planes",
+      "dialogDescription": "Revisa todas las características y encuentra el plan perfecto para tus necesidades.",
+      "table": {
+        "feature": "Característica",
+        "features": {
+          "pricing": "Precio",
+          "initialCredit": "Crédito inicial",
+          "adamoSign": "Adamo Sign",
+          "adamoId": "Adamo ID",
+          "adamoPay": "Adamo Pay",
+          "biometricVerification": "Verificación biométrica",
+          "documentValidation": "Validación de documentos",
+          "electronicSignature": "Firma electrónica",
+          "paymentProcessing": "Procesamiento de pagos",
+          "currencyExchange": "Conversión de divisas",
+          "api": "Acceso a API",
+          "subaccounts": "Subcuentas administrativas",
+          "userManagement": "Gestión de usuarios",
+          "customPermissions": "Permisos personalizables",
+          "support": "Soporte",
+          "sla": "SLA garantizado",
+          "analytics": "Reportes y analytics",
+          "customIntegrations": "Integraciones personalizadas",
+          "compliance": "Cumplimiento regulatorio",
+          "onboarding": "Onboarding personalizado"
+        },
+        "values": {
+          "basic": "Básico",
+          "advanced": "Avanzado",
+          "full": "Completo",
+          "limited": "Limitado",
+          "email": "Email",
+          "priority": "Prioritario",
+          "dedicated": "Dedicado 24/7",
+          "yes": "Sí",
+          "no": "No",
+          "upTo3": "Hasta 3",
+          "included": "Incluido",
+          "notIncluded": "No incluido"
+        }
+      }
+    },
+    "cta": {
+      "title": "¿No estás seguro qué plan elegir?",
+      "description": "Nuestro equipo de ventas puede ayudarte a encontrar la solución perfecta para tu negocio.",
+      "button": "Hablar con un experto"
     }
   }
 }
