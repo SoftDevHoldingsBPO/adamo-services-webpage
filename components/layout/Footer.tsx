@@ -135,6 +135,14 @@ const Footer = ({ locale }: { locale: string }) => {
             </li>
           )}
         </ul>
+        <ul className="flex gap-6 flex-wrap">
+          <li key="personal-data-processing">
+            <p className="text-sm transition-colors text-neutral-500 hover:text-foreground">
+              ADAMO S.A.S. Carrera 16 Bis # 8 – 24, Edificio Oko Tower, Piso 6
+              pereira-Risaralda contact@adamoservices.co. +57 321 626 5361.
+            </p>
+          </li>
+        </ul>
       </div>
       <div>
         <LocaleSelect hasLangText />
