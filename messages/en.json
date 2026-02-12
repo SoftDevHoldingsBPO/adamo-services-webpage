@@ -19,7 +19,11 @@
     "contact": "Contact sales",
     "sign-in": "Sign in",
     "login": "Sign in",
-    "dataProcessingPolicy": "Data processing policy"
+    "dataProcessingPolicy": "Data processing policy",
+    "adamo-id": "T&C Adamo ID",
+    "adamo-pay": "T&C Adamo Pay",
+    "adamo-sign": "T&C Adamo Sign",
+    "adamo-risk": "T&C Adamo Risk"
   },
   "services": {
     "servicesTitle": "What do you need to solve today?",

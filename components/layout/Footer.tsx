@@ -8,9 +8,10 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { getPolicyByLocale } from "@/lib/get-policy-by-locale";
+
 import { Logo } from "../icon";
 import LocaleSelect from "../ui/locale-select";
-import { getPolicyByLocale } from "@/lib/get-policy-by-locale";
 
 const Footer = ({ locale }: { locale: string }) => {
   const pathname = usePathname();

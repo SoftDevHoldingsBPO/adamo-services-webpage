@@ -19,7 +19,11 @@
     "contact": "Hablar con ventas",
     "sign-in": "Iniciar sesión",
     "login": "Ingresar",
-    "dataProcessingPolicy": "Política de tratamiento de datos"
+    "dataProcessingPolicy": "Política de tratamiento de datos",
+    "adamo-id": "T&C Adamo ID",
+    "adamo-pay": "T&C Adamo Pay",
+    "adamo-sign": "T&C Adamo Sign",
+    "adamo-risk": "T&C Adamo Risk"
   },
   "services": {
     "servicesTitle": "¿Qué necesitas resolver hoy?",
