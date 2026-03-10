@@ -433,7 +433,8 @@
   },
   "my-services": {
     "header": {
-      "greeting": "Hello Juan! Which service would you like to use today?"
+      "greeting": "Hello, {name}! Which service would you like to use today?",
+      "greetingFallback": "Hello! Which service would you like to use today?"
     },
     "services": {
       "adamo-id": {
