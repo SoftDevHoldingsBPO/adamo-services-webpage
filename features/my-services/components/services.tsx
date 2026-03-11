@@ -72,7 +72,7 @@ export function Services() {
       description: t("services.adamo-sign.description"),
       plan: "Starter Plan",
       subscriptionUntil: "2023-12-31",
-      isHired: false,
+      isHired: true,
       icon: AdamoSignIcon,
       color: "bg-adamo-sign-700",
       href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
@@ -174,9 +174,10 @@ function ServiceCard({
               "text-neutral-400": !isHired,
             })}
           >
-            {isHired
+            {/* {isHired
               ? `${t("card.subscriptionUntil")} ${subscriptionUntil}`
-              : description}
+              : description} */}
+            {description}
           </p>
         </div>
         <div className="flex items-center gap-6 flex-wrap">
