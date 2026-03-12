@@ -53,7 +53,7 @@ export function Services() {
       isHired: false,
       icon: AdamoPayIcon,
       color: "bg-adamo-pay-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
+      href: process.env.NEXT_PUBLIC_ADAMO_PAY_URL || "#",
     },
     {
       id: "adamo-risk",
@@ -64,7 +64,7 @@ export function Services() {
       isHired: false,
       icon: AdamoRiskIcon,
       color: "bg-adamo-risk-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
+      href: process.env.NEXT_PUBLIC_ADAMO_RISK_URL || "#",
     },
     {
       id: "adamo-sign",
@@ -75,15 +75,17 @@ export function Services() {
       isHired: true,
       icon: AdamoSignIcon,
       color: "bg-adamo-sign-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
+      href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
     },
   ];
 
   return (
     <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4">
-      {services.map((service) => (
-        <ServiceCard key={service.name} {...service} />
-      ))}
+      {[...services]
+        .sort((a, b) => Number(b.isHired) - Number(a.isHired))
+        .map((service) => (
+          <ServiceCard key={service.name} {...service} />
+        ))}
       <div className="xl:row-start-1 xl:col-start-5 xl:col-span-2 text-sm p-8">
         <p className="text-left mb-8 text-neutral-500">{t("links.title")}</p>
         <ul className="flex flex-col items-start gap-6 font-medium">
