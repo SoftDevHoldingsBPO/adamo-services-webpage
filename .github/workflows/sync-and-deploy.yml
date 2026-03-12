@@ -1,0 +1,170 @@
+name: Sync from HoldingsBPO and Deploy
+
+on:
+  repository_dispatch:
+    types: [sync_and_deploy]
+
+permissions:
+  contents: write
+
+jobs:
+  sync_and_deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      TARGET_BRANCH: develop
+      BOT_NAME: adamo-sync-bot
+      BOT_EMAIL: adamo-sync-bot@users.noreply.github.com
+      SOURCE_OWNER: SoftDevHoldingsBPO
+      SOURCE_REPO_NAME: adamo-services-webpage
+      SOURCE_REPO: SoftDevHoldingsBPO/adamo-services-webpage
+
+    steps:
+      - name: "Checkout TARGET repo (adminqash)"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # ✅ Leer payload 1 sola vez y exportar variables
+      - name: "Read payload -> env"
+        shell: bash
+        run: |
+          echo "SOURCE_REF=$(echo '${{ github.event.client_payload.source_ref }}' | tr -d '\r')" >> $GITHUB_ENV
+          echo "BASE_BRANCH=$(echo '${{ github.event.client_payload.base_branch }}' | tr -d '\r')" >> $GITHUB_ENV
+
+          # ✅ Mensaje de merge centralizado
+          echo "MERGE_MSG=BOT: Sync ${SOURCE_REPO}@$(echo '${{ github.event.client_payload.source_ref }}' | tr -d '\r') -> ${TARGET_BRANCH} | run=${{ github.run_id }} | event=${{ github.event_name }}" >> $GITHUB_ENV
+
+      - name: "Log variables (centralizadas)"
+        run: |
+          echo "SOURCE_REPO=$SOURCE_REPO"
+          echo "SOURCE_REF=$SOURCE_REF"
+          echo "TARGET_BRANCH=$TARGET_BRANCH"
+          echo "BASE_BRANCH(payload)=$BASE_BRANCH"
+          echo "MERGE_MSG=$MERGE_MSG"
+
+      - name: "Create GitHub App token - SOURCE"
+        id: source_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.SYNC_APP_ID }}
+          private-key: ${{ secrets.SYNC_APP_PRIVATE_KEY }}
+          owner: ${{ env.SOURCE_OWNER }}
+          repositories: ${{ env.SOURCE_REPO_NAME }}
+
+      - name: "Create GitHub App token - TARGET"
+        id: target_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.SYNC_APP_ID }}
+          private-key: ${{ secrets.SYNC_APP_PRIVATE_KEY }}
+          owner: adminqash
+
+      - name: "Checkout SOURCE repo (SoftDevHoldingsBPO) to ./__source"
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          token: ${{ steps.source_token.outputs.token }}
+          path: __source
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: "Add SOURCE remote (local path) and fetch"
+        run: |
+          git remote get-url source >/dev/null 2>&1 && git remote remove source || true
+          git remote add source "$(pwd)/__source"
+          git fetch source --prune --tags
+
+      - name: "Auth TARGET origin with GitHub App token"
+        env:
+          GH_TOKEN: ${{ steps.target_token.outputs.token }}
+        run: |
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git config --global url."https://x-access-token:${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+      - name: "Checkout TARGET_BRANCH (TARGET, track origin)"
+        run: |
+          set -e
+          git fetch origin --prune
+          git checkout -B "${TARGET_BRANCH}" "origin/${TARGET_BRANCH}" || git checkout -B "${TARGET_BRANCH}"
+          git branch --set-upstream-to="origin/${TARGET_BRANCH}" "${TARGET_BRANCH}" || true
+
+      - name: "Set git identity (BOT)"
+        run: |
+          git config user.name "${BOT_NAME}"
+          git config user.email "${BOT_EMAIL}"
+
+      - name: "Show incoming commits (for trace)"
+        run: |
+          echo "Commits a integrar desde source/${SOURCE_REF} hacia ${TARGET_BRANCH}:"
+          git log --oneline --decorate --max-count=20 "${TARGET_BRANCH}..source/${SOURCE_REF}" || true
+
+      - name: "Merge SOURCE into TARGET_BRANCH (prefer SOURCE on conflicts)"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # 1) Intento merge normal
+          if git merge --no-ff "source/${SOURCE_REF}" -m "${MERGE_MSG}"; then
+            echo "✅ Merge sin conflictos"
+            exit 0
+          fi
+
+          echo "⚠️ Merge con conflictos. Resolviendo TODOS a favor del SOURCE (theirs)..."
+
+          # 2) Para TODOS los archivos en conflicto:
+          # - checkout --theirs aplica la versión del branch que se está mergeando (source)
+          # - funciona para conflictos de contenido y muchos casos delete/modify
+          CONFLICTS="$(git diff --name-only --diff-filter=U || true)"
+
+          if [ -z "${CONFLICTS}" ]; then
+            echo "❌ Merge falló pero no se detectaron archivos marcados como unmerged."
+            git merge --abort || true
+            exit 1
+          fi
+
+          # Aplica "theirs" a cada archivo en conflicto
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+
+            # Si el archivo existe en SOURCE, lo tomamos.
+            # Si no existe en SOURCE, lo eliminamos (porque SOURCE lo borró).
+            if git cat-file -e "source/${SOURCE_REF}:$f" 2>/dev/null; then
+              git checkout --theirs -- "$f" || true
+              git add -- "$f" || true
+            else
+              git rm -f -- "$f" || true
+            fi
+          done <<< "${CONFLICTS}"
+
+          # 3) Verifica que ya no queden conflictos
+          if git diff --name-only --diff-filter=U | grep -q .; then
+            echo "❌ Aún quedan conflictos sin resolver:"
+            git diff --name-only --diff-filter=U
+            git merge --abort || true
+            exit 1
+          fi
+
+          # Finaliza el merge (si Git dejó el merge en progreso, habrá index listo)
+          git commit -m "${MERGE_MSG}" || true
+
+          echo "✅ Conflictos resueltos usando SOURCE para todo"
+
+      - name: "Push to target repo (adminqash) - TARGET_BRANCH"
+        run: |
+          git push origin "${TARGET_BRANCH}"
+
+      - name: "Write run summary"
+        run: |
+          {
+            echo "## ✅ Sync completed"
+            echo ""
+            echo "- **From:** \`${SOURCE_REPO}@${SOURCE_REF}\`"
+            echo "- **To:** \`${{ github.repository }}:${TARGET_BRANCH}\`"
+            echo "- **Run:** \`${{ github.run_id }}\`"
+            echo "- **Actor:** \`${{ github.actor }}\`"
+            echo ""
+            echo "### Last commit on ${TARGET_BRANCH}"
+            git log -1 --oneline || true
+          } >> $GITHUB_STEP_SUMMARY
