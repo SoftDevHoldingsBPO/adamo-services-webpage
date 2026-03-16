@@ -33,16 +33,16 @@ import LocaleSelect from "@/components/ui/locale-select";
 
 export const ChangePasswordFormSchema = z
   .object({
-    currentPassword: PasswordSchema,
+    currentPassword: z.string().min(1),
     newPassword: PasswordSchema,
     confirmNewPassword: PasswordSchema,
   })
   .refine((data) => data.newPassword === data.confirmNewPassword, {
-    message: "Passwords don't match",
+    params: { i18n: { key: "errors.confirm_password" } },
     path: ["confirmNewPassword"],
   })
   .refine((data) => data.currentPassword !== data.newPassword, {
-    message: "New password must be different from current password",
+    params: { i18n: { key: "errors.new_password_same" } },
     path: ["newPassword"],
   });
 
@@ -162,7 +162,7 @@ export function ChangePasswordForm({
         <Button
           type="submit"
           form="change-password-form"
-          disabled={!form.formState.isValid || isPendingUpdatePassword}
+          disabled={isPendingUpdatePassword}
           loading={isPendingUpdatePassword}
         >
           {t("save")}

@@ -18,13 +18,20 @@ export const SixCodeSchema = z
 export const PasswordSchema = z
   .string()
   .min(8)
-  .refine((value) => /^(?=.*[A-Z])(?=.*\d).*$/.test(value), {
-    params: {
-      i18n: {
-        key: "errors.password",
+  .max(128)
+  .refine(
+    (value) =>
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).*$/.test(
+        value,
+      ),
+    {
+      params: {
+        i18n: {
+          key: "errors.password",
+        },
       },
     },
-  });
+  );
 
 export const ConfirmPasswordSchema = z.string().min(1);
 
