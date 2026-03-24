@@ -1,5 +1,4 @@
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
-import { PasswordSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { useChangePassword } from "@/features/profile/contexts/change-password.context";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
@@ -33,7 +32,7 @@ import { Input } from "@/components/ui/input";
 import LocaleSelect from "@/components/ui/locale-select";
 
 export const ChangePasswordCurrentFormSchema = z.object({
-  currentPassword: PasswordSchema,
+  currentPassword: z.string().min(1),
 });
 
 export type ChangePasswordCurrentFormValues = z.infer<

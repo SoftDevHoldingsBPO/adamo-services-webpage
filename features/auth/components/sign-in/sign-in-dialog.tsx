@@ -13,7 +13,6 @@ import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
 import {
   EmailSchema,
-  PasswordSchema,
 } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
@@ -52,7 +51,7 @@ import LocaleSelect from "@/components/ui/locale-select";
 
 const SignInFormSchema = z.object({
   email: EmailSchema,
-  password: PasswordSchema,
+  password: z.string().min(1),
 });
 
 export type SignInFormValues = z.infer<typeof SignInFormSchema>;
