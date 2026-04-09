@@ -122,8 +122,10 @@ function Setup2FAContent({ accessToken, onOpenChange }: Setup2FAContentProps) {
   );
 
   useEffect(() => {
+    if (!accessToken) return;
+
     setup2FA({ accessToken });
-  }, []);
+  }, [accessToken]);
 
   const handleSetup2FASubmit = async (values: Setup2FAFormValues) => {
     await verify2FA({

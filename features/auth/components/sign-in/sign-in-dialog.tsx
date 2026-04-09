@@ -11,9 +11,7 @@ import { VerifyEmailDialog } from "@/features/auth/components/sign-in/verify-ema
 import { SignUpDialog } from "@/features/auth/components/sign-up/sign-up-dialog";
 import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-redirect";
-import {
-  EmailSchema,
-} from "@/features/auth/schemas/auth.schema";
+import { EmailSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
@@ -179,7 +177,9 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
   });
 
   const handleOpenSignUpDialog = () => {
-    setIsSignUpDialogOpen(true);
+    // setIsSignUpDialogOpen(true);
+    router.push("/register");
+    onOpenChange?.(false);
   };
 
   const handleOpenPasswordRecoveryDialog = () => {

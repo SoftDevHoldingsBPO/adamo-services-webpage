@@ -14,6 +14,7 @@ interface CountryDropdownProps {
   triggerPlaceholder?: string;
   placeholder?: string;
   dropdownClassName?: string;
+  isError?: boolean;
   onChange: (value: string) => void;
 }
 
@@ -23,6 +24,7 @@ const CountryDropdown: React.FC<CountryDropdownProps> = ({
   triggerPlaceholder,
   placeholder,
   dropdownClassName,
+  isError,
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,11 +58,17 @@ const CountryDropdown: React.FC<CountryDropdownProps> = ({
   };
 
   return (
-    <div data-lenis-prevent className="relative z-10" ref={ref}>
+    <div
+      data-lenis-prevent
+      className={cn("relative", isOpen ? "z-30" : "z-10")}
+      ref={ref}
+    >
       <button
         className={cn(
           "p-3 outline outline-neutral-200 rounded-lg w-full text-left flex items-center justify-between active:outline-neutral-600 active:ring-[5px] active:ring-neutral-200",
           value ? "text-primary" : "text-neutral-400",
+          isError &&
+            "outline-destructive shadow-[0px_0px_0px_4px_rgba(239,68,68,0.1)]",
         )}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}

@@ -16,6 +16,7 @@
     "faqs": "FAQ's",
     "blog": "Blog",
     "about": "Nosotros",
+    "createFreeAccount": "Crear cuenta gratuita",
     "contact": "Hablar con ventas",
     "sign-in": "Iniciar sesión",
     "login": "Ingresar",
@@ -538,6 +539,154 @@
       "description": "El Doble Factor de Autenticación ha sido activado exitosamente. Tu cuenta ahora es más segura.",
       "successMessage": "Puedes desactivarlo en cualquier momento desde la configuración de tu perfil de usuario.",
       "accept": "Aceptar"
+    }
+  },
+  "register-page": {
+    "header-title": "Registrarse en Adamo Services",
+    "steps": {
+      "personal-information": "Información personal",
+      "verification": "Verificación",
+      "products": "Productos"
+    },
+    "personal-information": {
+      "title": "Registrarse en Adamo Services",
+      "description": "Ingresa a continuación tu información personal para continuar:",
+      "labels": {
+        "email": "Correo electrónico corporativo",
+        "fullName": "Nombre completo",
+        "companyName": "Nombre de la empresa",
+        "position": "Cargo",
+        "industry": "Industria",
+        "country": "País",
+        "phone": "Teléfono"
+      },
+      "placeholders": {
+        "email": "Ingresa tu correo corporativo",
+        "fullName": "Ingresa tu nombre completo",
+        "companyName": "Ingresa el nombre de la empresa",
+        "position": "Selecciona",
+        "industry": "Selecciona",
+        "country": "Selecciona",
+        "phone": "Ingresa el número"
+      },
+      "cancel": "Cancelar",
+      "continue": "Continuar",
+      "submitError": "Algo salió mal. Por favor intenta de nuevo.",
+      "errors": {
+        "required": "Este campo es obligatorio",
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "emailPersonal": "Usa tu correo corporativo (no se permiten proveedores personales como Gmail u Outlook)",
+        "emailDomainInvalid": "Ingresa una dirección de correo corporativa válida",
+        "nameTooShort": "Debe tener al menos 3 caracteres",
+        "nameInvalid": "Ingresa un nombre completo válido",
+        "companyTooShort": "Debe tener al menos 3 caracteres",
+        "companyInvalid": "Ingresa un nombre de empresa válido",
+        "phoneRequired": "Ingresa tu número de teléfono",
+        "phoneInvalid": "Ingresa un número de teléfono válido (solo dígitos, 6–15 caracteres)",
+        "countryPhoneMismatch": "El país seleccionado y el código telefónico deben coincidir"
+      }
+    },
+    "positions": {
+      "CEO_FOUNDER": "CEO / Fundador",
+      "CTO_CPO": "CTO / CPO",
+      "CFO_FINANCE_DIRECTOR": "CFO / Director Financiero",
+      "CISO_COMPLIANCE": "CISO / Cumplimiento",
+      "DIRECTOR_VP": "Director / VP",
+      "AREA_MANAGER": "Gerente de Área",
+      "ANALYST_SPECIALIST": "Analista / Especialista",
+      "EXTERNAL_CONSULTANT": "Consultor Externo"
+    },
+    "industries": {
+      "FINTECH_PAYMENTS": "Fintech / Pagos",
+      "BANKING_INSURANCE": "Banca / Seguros",
+      "LEGAL": "Legal",
+      "HEALTH_PHARMA": "Salud / Farmacéutica",
+      "TECH_SAAS": "Tecnología / SaaS",
+      "ECOMMERCE": "Comercio electrónico",
+      "GOVERNMENT": "Gobierno",
+      "REAL_ESTATE": "Bienes raíces",
+      "CRYPTO_WEB3": "Crypto / Web3",
+      "EDUCATION": "Educación",
+      "OTHER": "Otro"
+    },
+    "verification": {
+      "title": "Verifica tu correo electrónico",
+      "description": "Ingresa el código de verificación que enviamos a:",
+      "cancel": "Cancelar",
+      "continue": "Continuar",
+      "submitError": "Algo salió mal. Por favor intenta de nuevo.",
+      "codeNotReceived": "¿No recibiste el código?",
+      "resendCooldown": "Reenviar en {time}",
+      "resend": "Reenviar código",
+      "errors": {
+        "codeInvalid": "El código es incorrecto. Por favor verifica e intenta de nuevo."
+      },
+      "apiErrors": {
+        "invalid_otp": "El código de verificación no es válido. Por favor revisa tu correo e intenta de nuevo.",
+        "serverError": "Algo salió mal en nuestro lado. Por favor intenta de nuevo."
+      },
+      "resendSuccess": "Un nuevo código ha sido enviado a tu correo.",
+      "resendError": "No se pudo reenviar el código. Por favor intenta de nuevo."
+    },
+    "products": {
+      "title": "Selecciona los productos",
+      "description": "¿Qué productos quieres usar? — todos tienen beneficios incluidos.",
+      "cancel": "Cancelar",
+      "createAccount": "Crear cuenta",
+      "submitError": "Algo salió mal. Por favor intenta de nuevo.",
+      "selectPlaceholder": "Selecciona",
+      "errors": {
+        "required": "Este campo es obligatorio."
+      },
+      "apiErrors": {
+        "serverError": "Algo salió mal. Por favor intenta de nuevo."
+      },
+      "terms": {
+        "accept": "Acepto los ",
+        "termsOfService": "Términos de Servicio",
+        "and": " y la ",
+        "privacyPolicy": "Política de Privacidad",
+        "company": " de AdamoServices."
+      },
+      "adamo-id": {
+        "name": "Adamo ID",
+        "badge": "10 validaciones incluidas",
+        "description": "Valida empresas y personas en segundos.",
+        "dropdownLabel": "Volumen de verificaciones ID al mes"
+      },
+      "adamo-sign": {
+        "name": "Adamo Sign",
+        "badge": "20 firmas disponibles",
+        "description": "Firma documentos con validez legal.",
+        "dropdownLabel": "Número de firmas al mes"
+      },
+      "adamo-pay": {
+        "name": "Adamo Pay",
+        "description": "Monetiza y distribuye pagos cross-border.",
+        "volumeLabel": "Volumen estimado al mes",
+        "dollars": "Dólares",
+        "euros": "Euros",
+        "payCountLabel": "Cantidad de pagos al mes",
+        "countriesLabel": "Países donde opera"
+      },
+      "adamo-risk": {
+        "name": "Adamo Risk",
+        "badge": "3.000 consultas disponibles",
+        "description": "Detecta riesgos automáticamente.",
+        "dropdownLabel": "Consultas AML al mes"
+      },
+      "adamo-check": {
+        "name": "Adamo Check",
+        "badge": "Hasta 5 empleados disponibles",
+        "description": "Consulta asistencia de tu equipo.",
+        "dropdownLabel": "Empleados a verificar al mes"
+      }
+    },
+    "success": {
+      "title": "¡Registro exitoso!",
+      "description": "Tu registro fue exitoso, ahora puedes disfrutar de tus productos de Adamo. Recuerda que un correo electrónico será enviado a tu correo con tus datos de inicio de sesión.",
+      "goHome": "Ir al inicio",
+      "signIn": "Iniciar sesión"
     }
   }
 }

@@ -16,6 +16,7 @@
     "faqs": "FAQs",
     "blog": "Blog",
     "about": "About Us",
+    "createFreeAccount": "Create free account",
     "contact": "Contact sales",
     "sign-in": "Sign in",
     "login": "Sign in",
@@ -539,6 +540,154 @@
       "description": "Two-factor authentication has been successfully enabled. Your account is now more secure.",
       "successMessage": "You can disable it at any time from your user profile settings.",
       "accept": "Accept"
+    }
+  },
+  "register-page": {
+    "header-title": "Register at Adamo Services",
+    "steps": {
+      "personal-information": "Personal information",
+      "verification": "Verification",
+      "products": "Products"
+    },
+    "personal-information": {
+      "title": "Register at Adamo Services",
+      "description": "Enter your personal information below to continue:",
+      "labels": {
+        "email": "Corporate email",
+        "fullName": "Full name",
+        "companyName": "Company name",
+        "position": "Position",
+        "industry": "Industry",
+        "country": "Country",
+        "phone": "Phone"
+      },
+      "placeholders": {
+        "email": "Enter your corporate email",
+        "fullName": "Enter your full name",
+        "companyName": "Enter the company name",
+        "position": "Select",
+        "industry": "Select",
+        "country": "Select",
+        "phone": "Enter the number"
+      },
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "submitError": "Something went wrong. Please try again.",
+      "errors": {
+        "required": "This field is required",
+        "emailInvalid": "Enter a valid email address",
+        "emailPersonal": "Use your corporate email (personal providers like Gmail or Outlook are not allowed)",
+        "emailDomainInvalid": "Enter a valid corporate email address",
+        "nameTooShort": "Must be at least 3 characters",
+        "nameInvalid": "Enter a valid full name",
+        "companyTooShort": "Must be at least 3 characters",
+        "companyInvalid": "Enter a valid company name",
+        "phoneRequired": "Enter your phone number",
+        "phoneInvalid": "Enter a valid phone number (digits only, 6–15 characters)",
+        "countryPhoneMismatch": "The selected country and phone code must match"
+      }
+    },
+    "positions": {
+      "CEO_FOUNDER": "CEO / Founder",
+      "CTO_CPO": "CTO / CPO",
+      "CFO_FINANCE_DIRECTOR": "CFO / Finance Director",
+      "CISO_COMPLIANCE": "CISO / Compliance",
+      "DIRECTOR_VP": "Director / VP",
+      "AREA_MANAGER": "Area Manager",
+      "ANALYST_SPECIALIST": "Analyst / Specialist",
+      "EXTERNAL_CONSULTANT": "External Consultant"
+    },
+    "industries": {
+      "FINTECH_PAYMENTS": "Fintech / Payments",
+      "BANKING_INSURANCE": "Banking / Insurance",
+      "LEGAL": "Legal",
+      "HEALTH_PHARMA": "Health / Pharma",
+      "TECH_SAAS": "Tech / SaaS",
+      "ECOMMERCE": "E-commerce",
+      "GOVERNMENT": "Government",
+      "REAL_ESTATE": "Real Estate",
+      "CRYPTO_WEB3": "Crypto / Web3",
+      "EDUCATION": "Education",
+      "OTHER": "Other"
+    },
+    "verification": {
+      "title": "Verify your email",
+      "description": "Enter the verification code we sent to:",
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "submitError": "Something went wrong. Please try again.",
+      "codeNotReceived": "Didn't receive the code?",
+      "resendCooldown": "Resend in {time}",
+      "resend": "Resend code",
+      "errors": {
+        "codeInvalid": "The code is incorrect. Please check and try again."
+      },
+      "apiErrors": {
+        "invalid_otp": "The verification code is invalid. Please check your email and try again.",
+        "serverError": "Something went wrong on our end. Please try again."
+      },
+      "resendSuccess": "A new code has been sent to your email.",
+      "resendError": "Failed to resend the code. Please try again."
+    },
+    "products": {
+      "title": "Select products",
+      "description": "Which products do you want to use? — they all have included benefits.",
+      "cancel": "Cancel",
+      "createAccount": "Create account",
+      "submitError": "Something went wrong. Please try again.",
+      "selectPlaceholder": "Select",
+      "errors": {
+        "required": "This field is required."
+      },
+      "apiErrors": {
+        "serverError": "Something went wrong. Please try again."
+      },
+      "terms": {
+        "accept": "I accept the ",
+        "termsOfService": "Terms of Service",
+        "and": " and the ",
+        "privacyPolicy": "Privacy Policy",
+        "company": " of AdamoServices."
+      },
+      "adamo-id": {
+        "name": "Adamo ID",
+        "badge": "10 validations included",
+        "description": "Validate companies and people in seconds.",
+        "dropdownLabel": "Volume of ID verifications per month"
+      },
+      "adamo-sign": {
+        "name": "Adamo Sign",
+        "badge": "20 signatures available",
+        "description": "Sign documents with legal validity.",
+        "dropdownLabel": "Number of signatures per month"
+      },
+      "adamo-pay": {
+        "name": "Adamo Pay",
+        "description": "Monetize and distribute cross-border payments.",
+        "volumeLabel": "Estimated volume per month",
+        "dollars": "Dollars",
+        "euros": "Euros",
+        "payCountLabel": "Number of payments per month",
+        "countriesLabel": "Countries where it operates"
+      },
+      "adamo-risk": {
+        "name": "Adamo Risk",
+        "badge": "3,000 queries available",
+        "description": "Detect risks automatically.",
+        "dropdownLabel": "AML queries per month"
+      },
+      "adamo-check": {
+        "name": "Adamo Check",
+        "badge": "Up to 5 employees available",
+        "description": "Check your team's assistance.",
+        "dropdownLabel": "Employees to verify per month"
+      }
+    },
+    "success": {
+      "title": "Registration successful!",
+      "description": "Your registration was successful, now you can enjoy your Adamo products. Remember that an email will be sent to your email with your login information.",
+      "goHome": "Go home",
+      "signIn": "Sign in"
     }
   }
 }
