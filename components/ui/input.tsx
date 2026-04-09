@@ -81,7 +81,7 @@ function Input({
             leftIcon && "pl-11",
             (effectiveRightIcon || shouldShowPasswordToggle) && "pr-11",
             isError &&
-              "outline-destructive focus-visible:outline-destructive focus-visible:ring-destructive/20",
+              "outline-destructive shadow-[0px_0px_0px_4px_rgba(239,68,68,0.1)] focus-visible:outline-destructive focus-visible:ring-destructive/20",
             className,
           )}
           // Pass the disabled prop down to the native input element

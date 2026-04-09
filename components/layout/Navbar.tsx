@@ -150,7 +150,7 @@ const Navbar = () => {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            {mustShowContact && (
+            {/* {mustShowContact && (
               <Button
                 asChild
                 size="md"
@@ -158,7 +158,7 @@ const Navbar = () => {
               >
                 <Link href="/contact">{t("contact")}</Link>
               </Button>
-            )}
+            )} */}
             {currentUser ? (
               <ProfileDropdown user={currentUser} />
             ) : (
@@ -170,6 +170,17 @@ const Navbar = () => {
                 {t("sign-in")}
               </Button>
             )}
+            <Button
+              asChild
+              size="md"
+              style={{
+                color: "var(--neutral-900)",
+                backgroundColor: "var(--adamo-pay-300)",
+              }}
+              variant={isOpen ? "secondary" : "primary"}
+            >
+              <Link href="/register">{t("createFreeAccount")}</Link>
+            </Button>
           </div>
 
           {/* Desktop */}

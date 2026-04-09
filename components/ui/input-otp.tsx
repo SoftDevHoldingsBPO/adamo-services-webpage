@@ -72,7 +72,8 @@ function InputOTPSlot({
       data-active={isActive}
       className={cn(
         "data-[active=true]:border-ring data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:ring-destructive/20 dark:data-[active=true]:aria-invalid:ring-destructive/40 aria-invalid:border-destructive data-[active=true]:aria-invalid:border-destructive dark:bg-input/30 border-input relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-xs transition-all outline outline-transparent first:rounded-l-md first:border-l last:rounded-r-md data-[active=true]:z-10 data-[active=true]:ring-[3px]",
-        isError && "outline-destructive focus-visible:outline-destructive focus-visible:ring-destructive/20",
+        isError &&
+          "outline-destructive focus-visible:outline-destructive focus-visible:ring-destructive/20",
         className,
       )}
       {...props}
@@ -97,7 +98,9 @@ function CustomInputOTPSlot({
       {...props}
       isError={isError}
       className={cn(
-        "w-full shadow-none border border-neutral-200 rounded-lg h-auto aspect-square md:aspect-[16/11]",
+        "w-full h-12 shadow-none border border-neutral-200 rounded-lg",
+        isError &&
+          "border-destructive shadow-[0px_0px_0px_4px_rgba(239,68,68,0.1)]",
         className,
       )}
     />
