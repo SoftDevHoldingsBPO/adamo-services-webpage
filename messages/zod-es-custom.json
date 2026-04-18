@@ -3,6 +3,8 @@
     "password": "La contraseña debe tener entre 8 y 128 caracteres e incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial (!@#$%^&*(),.?\":{}|<>)",
     "confirm_password": "Las contraseñas no coinciden. Por favor verifica",
     "new_password_same": "La nueva contraseña debe ser diferente a la contraseña actual",
-    "code": "El código ingresado es inválido. Por favor verifica"
+    "code": "El código ingresado es inválido. Por favor verifica",
+    "role_required": "Por favor selecciona un rol",
+    "at_least_one_service": "Se requiere al menos un servicio con rol asignado"
   }
 }

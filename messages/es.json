@@ -148,6 +148,9 @@
     "placeholders": {
       "email": "Correo electrónico",
       "password": "Contraseña"
+    },
+    "errors": {
+      "invalid_totp": "El código de autenticación es incorrecto. Por favor, inténtalo de nuevo."
     }
   },
   "password-recovery-dialog": {
@@ -448,6 +451,9 @@
       },
       "adamo-sign": {
         "description": "Servicio de firmas"
+      },
+      "adamo-check": {
+        "description": "Servicio de verificación"
       }
     },
     "links": {
@@ -480,8 +486,9 @@
     "save": "Guardar cambios",
     "photoTooLarge": "La foto debe ser menor a 50MB",
     "photoInvalidFormat": "La foto debe ser una imagen PNG o JPEG",
-    "nameRequired": "El nombre requerido",
-    "lastNameRequired": "El apellido requerido",
+    "roleRequired": "Al menos un rol de servicio debe ser seleccionado",
+    "nameRequired": "El nombre es requerido",
+    "lastNameRequired": "El apellido es requerido",
     "emailInvalid": "Correo electrónico inválido",
     "successMessage": "Perfil actualizado exitosamente"
   },
@@ -491,6 +498,74 @@
     "changePassword": "Cambiar contraseña",
     "enable2FA": "Activar 2FA",
     "disable2FA": "Desactivar 2FA"
+  },
+  "users-table": {
+    "count": "{count} Usuarios",
+    "addUser": "Añadir usuario",
+    "searchPlaceholder": "Buscar usuario...",
+    "noData": "Sin datos para mostrar",
+    "columns": {
+      "name": "Nombre",
+      "serviceRole": "Servicio / Rol",
+      "status": "Estado"
+    },
+    "status": {
+      "active": "Activo",
+      "disabled": "Deshabilitado"
+    },
+    "actions": {
+      "open": "Abrir acciones",
+      "editRoles": "Editar Roles",
+      "disableUser": "Deshabilitar usuario",
+      "enableUser": "Habilitar usuario",
+      "removeUser": "Eliminar usuario",
+      "disableSuccess": "{name} ha sido deshabilitado.",
+      "enableSuccess": "{name} ha sido habilitado.",
+      "toggleError": "Algo salió mal. Por favor, inténtalo de nuevo.",
+      "addSuccess": "{name} ha sido añadido exitosamente.",
+      "addError": "Algo salió mal. Por favor intenta de nuevo.",
+      "editSuccess": "{name} ha sido actualizado exitosamente.",
+      "editError": "Algo salió mal. Por favor intenta de nuevo.",
+      "removeSuccess": "{name} ha sido eliminado exitosamente.",
+      "removeError": "Algo salió mal. Por favor intenta de nuevo."
+    }
+  },
+  "add-user-dialog": {
+    "title": "Añadir usuario",
+    "editTitle": "Editar roles",
+    "description": "Elegí los servicios a los que tendrá acceso y asignale un rol:",
+    "fullName": "Nombre completo",
+    "fullNamePlaceholder": "Ingresa el nombre",
+    "name": "Nombre",
+    "namePlaceholder": "Ingresa el nombre",
+    "surname": "Apellido",
+    "surnamePlaceholder": "Ingresa el apellido",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Ingresa el correo",
+    "services": {
+      "pay": "Adamo Pay",
+      "id": "Adamo ID",
+      "risk": "Adamo Risk",
+      "sign": "Adamo Sign",
+      "check": "Adamo Check"
+    },
+    "rolePlaceholder": "Selecciona",
+    "roles": {
+      "admin": "Administrador",
+      "preparer": "Preparador",
+      "auditor": "Auditor",
+      "compliance": "Compliance",
+      "supervisor": "Supervisor"
+    },
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "save": "Guardar cambios"
+  },
+  "remove-user-dialog": {
+    "title": "Eliminar usuario",
+    "description": "\u00bfEst\u00e1s seguro que deseas eliminar a {name}?",
+    "cancel": "Cancelar",
+    "remove": "Eliminar"
   },
   "disable-2fa-dialog": {
     "start": {
@@ -662,6 +737,7 @@
       },
       "adamo-pay": {
         "name": "Adamo Pay",
+        "notAvailable": "Aún no disponible en tu país",
         "description": "Monetiza y distribuye pagos cross-border.",
         "volumeLabel": "Volumen estimado al mes",
         "dollars": "Dólares",

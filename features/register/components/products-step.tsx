@@ -27,6 +27,7 @@ export function ProductsStep() {
     fieldErrors,
     isLoading,
     isSubmitEnabled,
+    isPayRestricted,
     setField,
     toggleProduct,
     handleSubmit,
@@ -213,6 +214,41 @@ export function ProductsStep() {
       <div className="flex flex-col gap-3 w-full">
         {PRODUCTS.map(({ id, color, Icon, hasBadge }) => {
           const selected = selectedProducts.has(id);
+          const restricted = id === "adamo-pay" && isPayRestricted;
+
+          if (restricted) {
+            return (
+              <div
+                key={id}
+                className="flex flex-col gap-6 items-start w-full pl-6 pr-8 py-4 rounded-3xl border border-transparent bg-neutral-50 opacity-60 cursor-not-allowed select-none"
+              >
+                <div className="flex gap-8 items-center w-full">
+                  {/* Icon — greyscale */}
+                  <div className="size-10 rounded-full flex items-center justify-center flex-shrink-0 bg-neutral-300">
+                    <Icon className="size-6 text-neutral-500" />
+                  </div>
+
+                  {/* Title + not-available tag + description */}
+                  <div className="flex flex-1 flex-col gap-2 items-start min-w-0">
+                    <div className="flex gap-4 items-center flex-wrap">
+                      <span className="text-neutral-400 font-bold text-base whitespace-nowrap">
+                        {t(`${id}.name`)}
+                      </span>
+                      <span className="bg-neutral-200 text-neutral-500 text-xs font-medium px-2.5 h-7 flex items-center rounded-full whitespace-nowrap">
+                        {t("adamo-pay.notAvailable")}
+                      </span>
+                    </div>
+                    <p className="text-neutral-400 text-base">
+                      {t(`${id}.description`)}
+                    </p>
+                  </div>
+
+                  {/* Disabled circle indicator */}
+                  <div className="size-5 rounded-full border border-neutral-300 bg-neutral-100 flex-shrink-0" />
+                </div>
+              </div>
+            );
+          }
 
           return (
             <div

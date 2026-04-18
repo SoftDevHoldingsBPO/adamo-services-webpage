@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  PAY_RESTRICTED_COUNTRIES,
   PRODUCT_FIELDS,
   ProductId,
   TERM_ID,
@@ -16,7 +17,12 @@ import { useTranslations } from "next-intl";
 
 export function useProductsForm() {
   const t = useTranslations("register-page.products");
-  const { setCurrentStep, registrationEmail } = useRegister();
+  const { setCurrentStep, registrationEmail, personalInfoValues } =
+    useRegister();
+
+  const isPayRestricted = PAY_RESTRICTED_COUNTRIES.has(
+    personalInfoValues.country ?? "",
+  );
 
   const [selectedProducts, setSelectedProducts] = useState<Set<ProductId>>(
     new Set(),
@@ -75,11 +81,28 @@ export function useProductsForm() {
       return;
     }
 
+    console.log({
+      email: registrationEmail,
+      productInterests: buildProductInterests(
+        selectedProducts,
+        fieldValues,
+        personalInfoValues.country ?? "",
+      ),
+      acceptedTerms: {
+        termId: TERM_ID,
+        updatedAt: new Date().toISOString(),
+      },
+    });
+
     setIsLoading(true);
     try {
       await RegisterService.completeRegistration({
         email: registrationEmail,
-        productInterests: buildProductInterests(selectedProducts, fieldValues),
+        productInterests: buildProductInterests(
+          selectedProducts,
+          fieldValues,
+          personalInfoValues.country ?? "",
+        ),
         acceptedTerms: {
           termId: TERM_ID,
           updatedAt: new Date().toISOString(),
@@ -112,6 +135,7 @@ export function useProductsForm() {
     fieldErrors,
     isLoading,
     isSubmitEnabled,
+    isPayRestricted,
     setField,
     toggleProduct,
     handleSubmit,

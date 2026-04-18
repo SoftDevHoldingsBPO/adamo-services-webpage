@@ -23,7 +23,8 @@ export const inViewAnimation = () => {
       });
     },
     {
-      threshold: 0.25,
+      threshold: 0,
+      rootMargin: "0px 0px -64px 0px",
     },
   );
 

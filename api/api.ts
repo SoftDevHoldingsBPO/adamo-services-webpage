@@ -1,6 +1,6 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
-
 import { notifyUnauthenticated } from "@/features/auth/contexts/auth.context";
+import AuthService from "@/features/auth/services/auth.service";
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 import { APIErrorResponse } from "./types";
 
@@ -141,9 +141,16 @@ api.interceptors.response.use(
         processQueue(refreshError);
         isRefreshing = false;
 
-        // Refresh failed, redirect to home with session expired flag
+        // Refresh failed — call logout to clear server-side session cookies,
+        // then redirect to home with session expired flag.
+        // Uses plain axios (not `api`) to avoid re-triggering this interceptor.
         // Avoid infinite loop - only redirect if not already on session_expired page
         if (!window.location.search.includes("session_expired=true")) {
+          try {
+            await AuthService.signOut();
+          } catch {
+            // Ignore logout errors — session is already invalid
+          }
           window.location.href = "/?session_expired=true";
         }
 
