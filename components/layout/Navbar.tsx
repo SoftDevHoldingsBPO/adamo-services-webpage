@@ -162,25 +162,27 @@ const Navbar = () => {
             {currentUser ? (
               <ProfileDropdown user={currentUser} />
             ) : (
-              <Button
-                size="md"
-                onClick={() => setIsSignInDialogOpen(true)}
-                variant={isOpen ? "secondary" : "primary"}
-              >
-                {t("sign-in")}
-              </Button>
+              <>
+                <Button
+                  size="md"
+                  onClick={() => setIsSignInDialogOpen(true)}
+                  variant={isOpen ? "secondary" : "primary"}
+                >
+                  {t("sign-in")}
+                </Button>
+                <Button
+                  asChild
+                  size="md"
+                  style={{
+                    color: "var(--neutral-900)",
+                    backgroundColor: "var(--adamo-pay-300)",
+                  }}
+                  variant={isOpen ? "secondary" : "primary"}
+                >
+                  <Link href="/register">{t("createFreeAccount")}</Link>
+                </Button>
+              </>
             )}
-            <Button
-              asChild
-              size="md"
-              style={{
-                color: "var(--neutral-900)",
-                backgroundColor: "var(--adamo-pay-300)",
-              }}
-              variant={isOpen ? "secondary" : "primary"}
-            >
-              <Link href="/register">{t("createFreeAccount")}</Link>
-            </Button>
           </div>
 
           {/* Desktop */}

@@ -160,18 +160,24 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         if (onOpenChange) onOpenChange(false);
 
         // Check if this is a first login after registration
-        const isFirstLogin = checkAndClearFirstLogin();
+        // const isFirstLogin = checkAndClearFirstLogin();
 
-        if (isFirstLogin) {
-          // Redirect to my-services
-          router.push("/my-services");
-        }
+        // if (isFirstLogin) {
+        // Redirect to my-services
+        router.push("/my-services");
+        // }
       }
     },
     onError: (error) => {
+      const errorCode = getFirstAxiosErrorMessage(error);
+      const message =
+        errorCode === "errors.auth.invalid_totp"
+          ? t("errors.invalid_totp")
+          : errorCode;
+
       ToastManager.show({
         variant: "destructive",
-        message: getFirstAxiosErrorMessage(error),
+        message,
       });
     },
   });

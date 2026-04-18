@@ -57,6 +57,13 @@
   --adamo-risk-800: #5720b7;
   --adamo-risk-900: #491c96;
 
+  /* AdamoCheck */
+  --adamo-check-100: #e8ebff;
+  --adamo-check-600: #6179ff;
+  --adamo-check-700: #4d69ff;
+  --adamo-check-800: #3a54e0;
+  --adamo-check-900: #2840c7;
+
   /* Neutrals */
   --neutral-25: #fcfcfd;
   --neutral-50: #f9fafb;
@@ -178,6 +185,12 @@
   --color-adamo-risk-700: var(--adamo-risk-700);
   --color-adamo-risk-800: var(--adamo-risk-800);
   --color-adamo-risk-900: var(--adamo-risk-900);
+
+  --color-adamo-check-100: var(--adamo-check-100);
+  --color-adamo-check-600: var(--adamo-check-600);
+  --color-adamo-check-700: var(--adamo-check-700);
+  --color-adamo-check-800: var(--adamo-check-800);
+  --color-adamo-check-900: var(--adamo-check-900);
 
   --color-error-25: var(--error-25);
   --color-error-50: var(--error-50);

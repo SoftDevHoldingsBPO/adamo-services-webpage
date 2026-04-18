@@ -54,12 +54,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setStatus("unauthenticated");
   };
 
+  // Fetch user profile and, if primary_user, also fetch org users
+  const fetchProfileWithOrgUsers = async (): Promise<User> => {
+    const user = await ProfileService.get();
+
+    if (user.role === "primary_user") {
+      const orgUsers = await ProfileService.getOrgUsers(user.email);
+      return { ...user, orgUsers };
+    }
+
+    return user;
+  };
+
   // Fetch user profile and set state
   const fetchAndSetUser = async (): Promise<boolean> => {
     setStatus("loading");
 
     try {
-      const user = await ProfileService.get();
+      const user = await fetchProfileWithOrgUsers();
 
       setAuthenticated(user);
 
@@ -105,7 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       try {
         // Try to get user profile (will use cookies automatically)
-        const user = await ProfileService.get();
+        const user = await fetchProfileWithOrgUsers();
         setAuthenticated(user);
       } catch {
         // If it fails, user is not authenticated

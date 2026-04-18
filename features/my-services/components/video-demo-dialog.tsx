@@ -18,7 +18,12 @@ import {
 } from "@/components/ui/dialog";
 
 export type VideoDemoDialogProps = Readonly<{
-  product: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign";
+  product:
+    | "adamo-id"
+    | "adamo-pay"
+    | "adamo-risk"
+    | "adamo-sign"
+    | "adamo-check";
 }>;
 
 export function VideoDemoDialog({ product }: VideoDemoDialogProps) {
@@ -39,6 +44,10 @@ export function VideoDemoDialog({ product }: VideoDemoDialogProps) {
       en: "/video/AdamoId-EN.mp4",
     },
     "adamo-sign": {
+      es: "/video/AdamoId-ES.mp4",
+      en: "/video/AdamoId-EN.mp4",
+    },
+    "adamo-check": {
       es: "/video/AdamoId-ES.mp4",
       en: "/video/AdamoId-EN.mp4",
     },

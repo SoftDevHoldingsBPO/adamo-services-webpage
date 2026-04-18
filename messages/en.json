@@ -148,6 +148,9 @@
     "placeholders": {
       "email": "Email",
       "password": "Password"
+    },
+    "errors": {
+      "invalid_totp": "The authentication code is incorrect. Please try again."
     }
   },
   "password-recovery-dialog": {
@@ -449,6 +452,9 @@
       },
       "adamo-sign": {
         "description": "Signature service"
+      },
+      "adamo-check": {
+        "description": "Verification service"
       }
     },
     "links": {
@@ -481,6 +487,7 @@
     "save": "Save changes",
     "photoTooLarge": "Photo must be less than 50MB",
     "photoInvalidFormat": "Photo must be a PNG or JPEG image",
+    "roleRequired": "At least one service role must be selected",
     "nameRequired": "First name is required",
     "lastNameRequired": "Last name is required",
     "emailInvalid": "Invalid email",
@@ -492,6 +499,74 @@
     "changePassword": "Change password",
     "enable2FA": "Enable 2FA",
     "disable2FA": "Disable 2FA"
+  },
+  "users-table": {
+    "count": "{count} Users",
+    "addUser": "Add user",
+    "searchPlaceholder": "Search user...",
+    "noData": "No data to display",
+    "columns": {
+      "name": "Name",
+      "serviceRole": "Service / Role",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "disabled": "Disabled"
+    },
+    "actions": {
+      "open": "Open actions",
+      "editRoles": "Edit Roles",
+      "disableUser": "Disable user",
+      "enableUser": "Enable user",
+      "removeUser": "Remove user",
+      "disableSuccess": "{name} has been disabled.",
+      "enableSuccess": "{name} has been enabled.",
+      "toggleError": "Something went wrong. Please try again.",
+      "addSuccess": "{name} has been added successfully.",
+      "addError": "Something went wrong. Please try again.",
+      "editSuccess": "{name} has been updated successfully.",
+      "editError": "Something went wrong. Please try again.",
+      "removeSuccess": "{name} has been removed successfully.",
+      "removeError": "Something went wrong. Please try again."
+    }
+  },
+  "add-user-dialog": {
+    "title": "Add user",
+    "editTitle": "Edit roles",
+    "description": "Choose the services they will have access to and assign them a role:",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter name",
+    "name": "First name",
+    "namePlaceholder": "Enter first name",
+    "surname": "Last name",
+    "surnamePlaceholder": "Enter last name",
+    "email": "Email address",
+    "emailPlaceholder": "Enter email",
+    "services": {
+      "pay": "Adamo Pay",
+      "id": "Adamo ID",
+      "risk": "Adamo Risk",
+      "sign": "Adamo Sign",
+      "check": "Adamo Check"
+    },
+    "rolePlaceholder": "Select",
+    "roles": {
+      "admin": "Administrator",
+      "preparer": "Preparer",
+      "auditor": "Auditor",
+      "compliance": "Compliance",
+      "supervisor": "Supervisor"
+    },
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "save": "Save changes"
+  },
+  "remove-user-dialog": {
+    "title": "Remove user",
+    "description": "Are you sure you want to remove {name}?",
+    "cancel": "Cancel",
+    "remove": "Remove"
   },
   "disable-2fa-dialog": {
     "start": {
@@ -663,6 +738,7 @@
       },
       "adamo-pay": {
         "name": "Adamo Pay",
+        "notAvailable": "Not available in your country yet",
         "description": "Monetize and distribute cross-border payments.",
         "volumeLabel": "Estimated volume per month",
         "dollars": "Dollars",

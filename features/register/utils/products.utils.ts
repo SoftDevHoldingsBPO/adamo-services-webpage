@@ -9,6 +9,7 @@ export function parseRangeMax(range: string): number {
 export function buildProductInterests(
   selectedProducts: Set<string>,
   fieldValues: Record<string, string>,
+  operatingCountry: string,
 ): Record<string, object> {
   const productInterests: Record<string, object> = {};
 
@@ -33,6 +34,7 @@ export function buildProductInterests(
             : { estimatedVolumeEUR: volumeValue, estimatedVolumeUSD: 0 }),
           paymentsPerMonth: parseRangeMax(fieldValues["adamo-pay-count"]),
           operatingRegion: fieldValues["adamo-pay-countries"],
+          operatingCountry,
         };
         break;
       }

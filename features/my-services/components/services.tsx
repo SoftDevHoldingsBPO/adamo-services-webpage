@@ -11,6 +11,7 @@ import Link from "next/link";
 import { getPolicyByLocale } from "@/lib/get-policy-by-locale";
 import { cn } from "@/lib/utils";
 
+import { AdamoCheckIcon } from "@/components/icon/AdamoCheckIcon";
 import { AdamoIDIcon } from "@/components/icon/AdamoIdIcon";
 import { AdamoPayIcon } from "@/components/icon/AdamoPayIcon";
 import { AdamoRiskIcon } from "@/components/icon/AdamoRiskIcon";
@@ -23,7 +24,7 @@ export function Services() {
   const t = useTranslations("my-services");
 
   const services: {
-    id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign";
+    id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
     name: string;
     description: string;
     plan: string;
@@ -77,6 +78,17 @@ export function Services() {
       color: "bg-adamo-sign-700",
       href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
     },
+    {
+      id: "adamo-check",
+      name: "Adamo Check",
+      description: t("services.adamo-check.description"),
+      plan: "Starter Plan",
+      subscriptionUntil: "2023-12-31",
+      isHired: false,
+      icon: AdamoCheckIcon,
+      color: "bg-adamo-check-700",
+      href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
+    },
   ];
 
   return (
@@ -105,7 +117,7 @@ export function Services() {
 }
 
 type ServiceCardProps = {
-  id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign";
+  id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
   name: string;
   plan: string;
   description: string;
@@ -134,7 +146,7 @@ function ServiceCard({
   return (
     <article
       className={cn(
-        "flex flex-col xl:nth-1:col-span-2 xl:nth-2:col-span-2 xl:nth-3:col-span-3 xl:nth-4:col-span-3 border-8 border-white/20 rounded-4xl",
+        "flex flex-col xl:nth-1:col-span-2 xl:nth-2:col-span-2 xl:nth-3:col-span-2 xl:nth-4:col-span-2 xl:nth-5:col-span-2 border-8 border-white/20 rounded-4xl",
       )}
     >
       <header

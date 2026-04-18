@@ -118,6 +118,12 @@ function Enter2FAContent({ loading, onSubmit }: Enter2FAContentProps) {
                       maxLength={6}
                       pattern={REGEXP_ONLY_DIGITS}
                       {...field}
+                      onChange={(value) => {
+                        field.onChange(value);
+                        if (value.length === 6) {
+                          form.handleSubmit(handleEnter2FASubmit)();
+                        }
+                      }}
                     >
                       <CustomInputOTPGroup>
                         <CustomInputOTPSlot

@@ -5,6 +5,7 @@ import { useAuth } from "@/features/auth/contexts/auth.context";
 import { PersonalInformationForm } from "@/features/profile/components/personal-information-form";
 import { ProfileHeader } from "@/features/profile/components/profile-header";
 import { SecurityForm } from "@/features/profile/components/security-form";
+import { UsersTable } from "@/features/profile/components/users-table";
 
 export default function Page() {
   const { user } = useAuth();
@@ -21,7 +22,10 @@ export default function Page() {
         }}
         className="mb-10"
       />
-      <SecurityForm />
+      <SecurityForm className="mb-10" />
+      {(user?.role === "primary_user" || user?.role === "admin") && (
+        <UsersTable className="mb-16" />
+      )}
     </ProtectedRoute>
   );
 }

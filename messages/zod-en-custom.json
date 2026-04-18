@@ -3,6 +3,8 @@
     "password": "Password must be 8–128 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*(),.?\":{}|<>)",
     "confirm_password": "Passwords do not match. Please verify",
     "new_password_same": "New password must be different from current password",
-    "code": "The entered code is invalid. Please verify"
+    "code": "The entered code is invalid. Please verify",
+    "role_required": "Please select a role",
+    "at_least_one_service": "At least one service with a role is required"
   }
 }
