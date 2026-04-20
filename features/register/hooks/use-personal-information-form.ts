@@ -117,6 +117,7 @@ export function usePersonalInformationForm() {
       ...values,
       fullName: capitalizedFullName,
       companyName: capitalizedCompanyName,
+      country: countryISO,
     });
     setRegistrationEmail(values.email);
 

@@ -92,28 +92,27 @@ export const PRODUCT_FIELDS: Record<ProductId, string[]> = {
 };
 
 export const PAY_RESTRICTED_COUNTRIES = new Set([
-  "Afghanistan",
-  "Bangladesh",
-  "Burundi",
-  "Cambodia",
-  "Central African Republic",
-  "Chad",
-  "Congo (Brazzaville)",
-  "Gaza Strip",
-  "Guinea",
-  "Guinea-Bissau",
-  "Iran",
-  "Iraq",
-  "Myanmar",
-  "Niger",
-  "North Korea",
-  "Somalia",
-  "South Sudan",
-  "Sudan",
-  "Suriname",
-  "Syria",
-  "Venezuela",
-  "West Bank (Palestinian Territory)",
-  "Yemen",
-  "Zimbabwe",
+  "AF", // Afghanistan
+  "BD", // Bangladesh
+  "BI", // Burundi
+  "KH", // Cambodia
+  "CF", // Central African Republic
+  "TD", // Chad
+  "CG", // Congo (Brazzaville)
+  "PS", // Palestine / Gaza Strip
+  "GN", // Guinea
+  "GW", // Guinea-Bissau
+  "IR", // Iran
+  "IQ", // Iraq
+  "MM", // Myanmar
+  "NE", // Niger
+  "KP", // North Korea
+  "SO", // Somalia
+  "SS", // South Sudan
+  "SD", // Sudan
+  "SR", // Suriname
+  "SY", // Syria
+  "VE", // Venezuela
+  "YE", // Yemen
+  "ZW", // Zimbabwe
 ]);
