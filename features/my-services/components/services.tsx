@@ -84,7 +84,7 @@ export function Services() {
       description: t("services.adamo-check.description"),
       plan: "Starter Plan",
       subscriptionUntil: "2023-12-31",
-      isHired: false,
+      isHired: true,
       icon: AdamoCheckIcon,
       color: "bg-adamo-check-700",
       href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",

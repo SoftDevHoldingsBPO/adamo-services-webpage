@@ -1,8 +1,9 @@
+import { useAuth } from "@/features/auth/contexts/auth.context";
+
 import { ComponentProps } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { useAuth } from "@/features/auth/contexts/auth.context";
 import { cn } from "@/lib/utils";
 
 import { WavingHandIcon } from "@/components/icon/WavingHandIcon";
@@ -25,9 +26,7 @@ export function Header({ className, ...props }: HeaderProps) {
       <div className="p-4 border-8 border-white/20 rounded-full bg-neutral-800">
         <WavingHandIcon />
       </div>
-      <p className="font-semibold text-2xl md:text-3xl">
-        {greeting}
-      </p>
+      <p className="font-semibold text-2xl md:text-3xl">{greeting}</p>
     </div>
   );
 }
