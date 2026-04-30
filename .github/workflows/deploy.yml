@@ -53,6 +53,12 @@ jobs:
           else
             echo "NEXT_PUBLIC_ADAMO_ID_URL=${{ secrets.NEXT_PUBLIC_ADAMO_ID_URL_DEV }}" >> .env
           fi
+          
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "NEXT_PUBLIC_ADAMO_CHECK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_CHECK_URL_PROD }}" >> .env
+          else
+            echo "NEXT_PUBLIC_ADAMO_CHECK_URL=${{ secrets.NEXT_PUBLIC_ADAMO_CHECK_URL_DEV }}" >> .env
+          fi
 
           if [ "${{ github.ref_name }}" = "main" ]; then
             echo "NEXT_PUBLIC_ADAMO_SIGN_URL=${{ secrets.NEXT_PUBLIC_ADAMO_SIGN_URL_PROD }}" >> .env
