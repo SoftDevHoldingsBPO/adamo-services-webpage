@@ -62,14 +62,28 @@ export const RegisterPersonalInfoSchema = z.object({
       return !FREE_EMAIL_DOMAINS.includes(domain);
     }, "errors.emailPersonal")
     .refine(isPlausibleDomain, "errors.emailDomainInvalid"),
-  fullName: z
+  name: z
     .string()
-    .min(3, "errors.nameTooShort")
-    .refine(isPlausibleName, "errors.nameInvalid"),
+    .min(2, "errors.nameTooShort")
+    .refine(
+      (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
+      "errors.nameInvalid",
+    ),
+  surname: z
+    .string()
+    .min(2, "errors.nameTooShort")
+    .refine(
+      (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
+      "errors.nameInvalid",
+    ),
   companyName: z
     .string()
     .min(3, "errors.companyTooShort")
     .refine(isPlausibleName, "errors.companyInvalid"),
+  companyIdentification: z
+    .string()
+    .min(1, "errors.required")
+    .regex(/^[a-zA-Z0-9]+$/, "errors.companyIdentificationInvalid"),
   position: z.string().min(1, "errors.required"),
   industry: z.string().min(1, "errors.required"),
   country: z.string().min(1, "errors.required"),

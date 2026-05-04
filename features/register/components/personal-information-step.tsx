@@ -63,52 +63,75 @@ export function PersonalInformationStep() {
           className="w-full"
         >
           <div className="grid gap-y-6 gap-x-4 md:grid-cols-2">
-            {/* Row 1: Email + Full name */}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("labels.email")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      isError={!!form.formState.errors.email}
-                      placeholder={t("placeholders.email")}
-                    />
-                  </FormControl>
-                  {fieldError("email") && (
-                    <p className="text-destructive text-xs">
-                      {fieldError("email")}
-                    </p>
-                  )}
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("labels.fullName")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      isError={!!form.formState.errors.fullName}
-                      placeholder={t("placeholders.fullName")}
-                    />
-                  </FormControl>
-                  {fieldError("fullName") && (
-                    <p className="text-destructive text-xs">
-                      {fieldError("fullName")}
-                    </p>
-                  )}
-                </FormItem>
-              )}
-            />
+            {/* Row 1: Email + Name + Surname (3-column) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-6 md:col-span-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("labels.email")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        isError={!!form.formState.errors.email}
+                        placeholder={t("placeholders.email")}
+                      />
+                    </FormControl>
+                    {fieldError("email") && (
+                      <p className="text-destructive text-xs">
+                        {fieldError("email")}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("labels.name")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        isError={!!form.formState.errors.name}
+                        placeholder={t("placeholders.name")}
+                      />
+                    </FormControl>
+                    {fieldError("name") && (
+                      <p className="text-destructive text-xs">
+                        {fieldError("name")}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="surname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("labels.surname")}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        isError={!!form.formState.errors.surname}
+                        placeholder={t("placeholders.surname")}
+                      />
+                    </FormControl>
+                    {fieldError("surname") && (
+                      <p className="text-destructive text-xs">
+                        {fieldError("surname")}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            {/* Row 2: Company name + Position */}
+            {/* Row 2: Company name + Company identification */}
             <FormField
               control={form.control}
               name="companyName"
@@ -130,6 +153,34 @@ export function PersonalInformationStep() {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="companyIdentification"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("labels.companyIdentification")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      isError={!!form.formState.errors.companyIdentification}
+                      placeholder={t("placeholders.companyIdentification")}
+                      onChange={(e) => {
+                        field.onChange(
+                          e.target.value.replace(/[^a-zA-Z0-9]/g, ""),
+                        );
+                      }}
+                    />
+                  </FormControl>
+                  {fieldError("companyIdentification") && (
+                    <p className="text-destructive text-xs">
+                      {fieldError("companyIdentification")}
+                    </p>
+                  )}
+                </FormItem>
+              )}
+            />
+
+            {/* Row 3: Position + Industry */}
             <Controller
               control={form.control}
               name="position"
@@ -154,8 +205,6 @@ export function PersonalInformationStep() {
                 </FormItem>
               )}
             />
-
-            {/* Row 3: Industry + Country */}
             <Controller
               control={form.control}
               name="industry"
@@ -180,6 +229,8 @@ export function PersonalInformationStep() {
                 </FormItem>
               )}
             />
+
+            {/* Row 4: Country + Phone */}
             <Controller
               control={form.control}
               name="country"
@@ -204,8 +255,6 @@ export function PersonalInformationStep() {
                 </FormItem>
               )}
             />
-
-            {/* Row 4: Phone (half-width) */}
             <div className="grid gap-2 md:col-span-1">
               <FormLabel>{t("labels.phone")}</FormLabel>
               <div className="flex gap-4 items-center">

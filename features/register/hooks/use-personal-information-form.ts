@@ -53,8 +53,10 @@ export function usePersonalInformationForm() {
     reValidateMode: "onChange",
     defaultValues: {
       email: "",
-      fullName: "",
+      name: "",
+      surname: "",
       companyName: "",
+      companyIdentification: "",
       position: "",
       industry: "",
       country: "",
@@ -66,8 +68,10 @@ export function usePersonalInformationForm() {
 
   const watched = form.watch([
     "email",
-    "fullName",
+    "name",
+    "surname",
     "companyName",
+    "companyIdentification",
     "position",
     "industry",
     "country",
@@ -110,12 +114,13 @@ export function usePersonalInformationForm() {
       return;
     }
 
-    const capitalizedFullName = capitalizeFullName(values.fullName);
+    const capitalizedFullName = capitalizeFullName(
+      `${values.name.trim()} ${values.surname.trim()}`,
+    );
     const capitalizedCompanyName = capitalizeCompanyName(values.companyName);
 
     setPersonalInfoValues({
       ...values,
-      fullName: capitalizedFullName,
       companyName: capitalizedCompanyName,
       country: countryISO,
     });
@@ -125,9 +130,12 @@ export function usePersonalInformationForm() {
     try {
       await RegisterService.checkEmail(values.email);
       await RegisterService.registerUser({
+        name: capitalizeFullName(values.name.trim()),
         email: values.email,
+        surname: capitalizeFullName(values.surname.trim()),
         fullName: capitalizedFullName,
         companyName: capitalizedCompanyName,
+        companyIdentification: values.companyIdentification,
         jobTitle: values.position,
         industry: values.industry,
         country: countryISO,
