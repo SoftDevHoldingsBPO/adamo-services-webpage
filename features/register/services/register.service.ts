@@ -2,8 +2,11 @@ import { api } from "@/api/api";
 
 interface RegisterUserPayload {
   email: string;
-  fullName: string;
+  name: string;
+  surname: string;
+  fullName?: string;
   companyName: string;
+  companyIdentification: string;
   jobTitle: string;
   industry: string;
   country: string;
