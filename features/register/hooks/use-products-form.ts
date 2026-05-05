@@ -14,9 +14,11 @@ import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { useState } from "react";
 
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export function useProductsForm() {
   const t = useTranslations("register-page.products");
+  const locale = useLocale();
   const { setCurrentStep, registrationEmail, personalInfoValues } =
     useRegister();
 
@@ -128,6 +130,7 @@ export function useProductsForm() {
 
   return {
     t,
+    locale,
     selectedProducts,
     termsAccepted,
     setTermsAccepted,

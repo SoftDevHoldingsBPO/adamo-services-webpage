@@ -748,7 +748,13 @@
         "dollars": "Dólares",
         "euros": "Euros",
         "payCountLabel": "Cantidad de pagos al mes",
-        "countriesLabel": "Países donde opera"
+        "countriesLabel": "Países donde opera",
+        "countries": {
+          "LATAM": "América Latina",
+          "NORTH_AMERICA": "América del Norte",
+          "EUROPE": "Europa",
+          "GLOBAL": "Global"
+        }
       },
       "adamo-risk": {
         "name": "Adamo Risk",

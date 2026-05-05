@@ -43,13 +43,15 @@ function isPlausibleName(value: string): boolean {
 // "kjfdewofjwero.co" without relying on a domain whitelist.
 //  1. SLD must have ≥ 2 distinct characters (rejects "jjjjj", "aaaaa", etc.)
 //  2. SLD of 5+ characters must contain at least one vowel (rejects "kjfde", "bgrths")
-//  3. SLD of 5+ characters cannot start with 4+ consecutive consonants (rejects "kjfdewofjwero")
+//  3. SLD without hyphens of 5+ characters cannot start with 4+ consecutive consonants (rejects "kjfdewofjwero")
+//  Note: hyphens are skipped in check 3 because they are valid in corporate SLDs (e.g. "cm-group")
 function isPlausibleDomain(email: string): boolean {
   const sld = email.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
   if (!sld) return false;
   if (new Set(sld).size < 2) return false;
   if (sld.length >= 5 && !/[aeiou]/.test(sld)) return false;
-  if (sld.length >= 5 && /^[^aeiou]{4,}/.test(sld)) return false;
+  if (!sld.includes("-") && sld.length >= 5 && /^[^aeiou]{4,}/.test(sld))
+    return false;
   return true;
 }
 

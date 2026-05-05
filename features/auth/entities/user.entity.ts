@@ -8,10 +8,12 @@ export type OrgUser = {
 
 export type User = {
   name: string;
-  role: string;
+  role?: string;
   lastName: string;
   email: string;
   avatar?: string;
   isTwoFactorEnabled: boolean;
+  isAdminUser?: boolean;
+  isPrimaryUser?: boolean;
   orgUsers?: OrgUser[];
 };
