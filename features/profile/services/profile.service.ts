@@ -23,9 +23,10 @@ export class ProfileService {
       name: data.name,
       email: data.email,
       lastName: data.surname,
-      role: data.roles[0].role,
       avatar: data.photo || undefined,
       isTwoFactorEnabled: data.twoFactorAuthEnabled,
+      isAdminUser: data.roles.some((r) => r.role === "admin"),
+      isPrimaryUser: data.roles.some((r) => r.role === "primary_user"),
     };
   }
 

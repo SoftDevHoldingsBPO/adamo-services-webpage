@@ -23,7 +23,7 @@ export default function Page() {
         className="mb-10"
       />
       <SecurityForm className="mb-10" />
-      {(user?.role === "primary_user" || user?.role === "admin") && (
+      {(user?.isAdminUser || user?.isPrimaryUser) && (
         <UsersTable className="mb-16" />
       )}
     </ProtectedRoute>

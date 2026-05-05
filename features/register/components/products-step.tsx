@@ -13,6 +13,10 @@ import {
 } from "@/features/register/constants/products.constants";
 import { useProductsForm } from "@/features/register/hooks/use-products-form";
 
+import {
+  getPolicyByLocale,
+  getTermsByLocale,
+} from "@/lib/get-policy-by-locale";
 import { cn } from "@/lib/utils";
 
 import OptionsDropdown from "@/components/ui/options-dropdown";
@@ -20,6 +24,7 @@ import OptionsDropdown from "@/components/ui/options-dropdown";
 export function ProductsStep() {
   const {
     t,
+    locale,
     selectedProducts,
     termsAccepted,
     setTermsAccepted,
@@ -148,7 +153,10 @@ export function ProductsStep() {
                   {t("adamo-pay.countriesLabel")}
                 </label>
                 <OptionsDropdown
-                  options={PAY_COUNTRIES_OPTIONS}
+                  options={PAY_COUNTRIES_OPTIONS.map((opt) => ({
+                    ...opt,
+                    label: t(`adamo-pay.countries.${opt.value}`),
+                  }))}
                   value={fieldValues["adamo-pay-countries"] ?? ""}
                   placeholder={t("selectPlaceholder")}
                   isError={!!fieldErrors["adamo-pay-countries"]}
@@ -370,7 +378,9 @@ export function ProductsStep() {
         <span className="text-[#6c737f] text-base leading-6">
           {t("terms.accept")}
           <a
-            href="/terms"
+            href={getTermsByLocale(locale)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[#1f2a37] underline"
             onClick={(e) => e.stopPropagation()}
           >
@@ -378,7 +388,9 @@ export function ProductsStep() {
           </a>
           {t("terms.and")}
           <a
-            href="/privacy"
+            href={getPolicyByLocale(locale)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[#1f2a37] underline"
             onClick={(e) => e.stopPropagation()}
           >
