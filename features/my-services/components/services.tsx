@@ -162,14 +162,13 @@ function ServiceCard({
             isHired ? "bg-white/20" : "bg-white/50",
           )}
         >
-          {isHired && <CrownIcon />}
           <p
             className={cn("font-semibold text-sm", {
               "text-white": isHired,
               "text-neutral-400": !isHired,
             })}
           >
-            {isHired ? plan : t("card.notSubscribed")}
+            {isHired ? t("card.acquired") : t("card.notAcquired")}
           </p>
         </div>
       </header>
