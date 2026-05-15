@@ -1,5 +1,4 @@
 import { notifyUnauthenticated } from "@/features/auth/contexts/auth.context";
-import AuthService from "@/features/auth/services/auth.service";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 import { APIErrorResponse } from "./types";
@@ -147,7 +146,11 @@ api.interceptors.response.use(
         // Avoid infinite loop - only redirect if not already on session_expired page
         if (!window.location.search.includes("session_expired=true")) {
           try {
-            await AuthService.signOut();
+            await axios.post(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/logout`,
+              {},
+              { withCredentials: true },
+            );
           } catch {
             // Ignore logout errors — session is already invalid
           }
