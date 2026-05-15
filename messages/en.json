@@ -465,6 +465,8 @@
     },
     "card": {
       "notSubscribed": "Not subscribed",
+      "acquired": "Acquired",
+      "notAcquired": "Not acquired",
       "subscriptionUntil": "Subscription until:",
       "enter": "Enter",
       "hireService": "Hire service"
