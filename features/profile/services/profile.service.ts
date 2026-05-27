@@ -14,8 +14,10 @@ export class ProfileService {
   public static GET_PROFILE_QUERY_KEY = "get-profile";
   public static UPDATE_PROFILE_MUTATION_KEY = "update-profile";
 
-  public static async get(): Promise<User> {
-    const response = await api.get<GetProfileResponse>("/api/v1/user/profile");
+  public static async get(options?: { isInitialAuthCheck?: boolean }): Promise<User> {
+    const response = await api.get<GetProfileResponse>("/api/v1/user/profile", {
+      ...(options?.isInitialAuthCheck && { _isInitialAuthCheck: true }),
+    });
 
     const { data } = response.data;
 
