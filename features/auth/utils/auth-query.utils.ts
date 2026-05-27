@@ -76,6 +76,28 @@ export class AuthQueryUtils {
   }
 
   /**
+   * Whether the request is part of an SSO flow and should not be redirected away.
+   */
+  public static isSsoFlow(
+    searchParams: URLSearchParams,
+    pathname: string,
+  ): boolean {
+    if (pathname === "/logout") {
+      return true;
+    }
+
+    if (this.shouldOpenLogin(searchParams)) {
+      return true;
+    }
+
+    if (searchParams.has(AUTH_QUERY_PARAMS.REDIRECT_TO)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
    * Clean authentication-related query parameters from URL
    * Removes session_expired, login_open, and redirect_to parameters
    */
