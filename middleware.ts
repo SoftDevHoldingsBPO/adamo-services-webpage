@@ -7,7 +7,7 @@ const LOVABLE_APP_URL = "https://adamoservices.lovable.app/";
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  if (AuthQueryUtils.isSsoFlow(searchParams, pathname)) {
+  if (AuthQueryUtils.shouldSkipLovableRedirect(searchParams, pathname)) {
     return NextResponse.next();
   }
 
