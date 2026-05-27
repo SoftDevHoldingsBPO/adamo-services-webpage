@@ -7,8 +7,10 @@ import {
 } from "@/features/register/constants/personal-information.constants";
 import { useRegister } from "@/features/register/contexts/register.context";
 import {
-  RegisterPersonalInfoSchema,
+  createRegisterPersonalInfoSchema,
+  DEFAULT_REGISTRATION_EMAIL_VALIDATION,
   RegisterPersonalInfoValues,
+  RegistrationEmailValidationOptions,
 } from "@/features/register/schemas/register.schema";
 import RegisterService from "@/features/register/services/register.service";
 import {
@@ -19,7 +21,7 @@ import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useLocale, useTranslations } from "next-intl";
@@ -39,6 +41,34 @@ export function usePersonalInformationForm() {
   } = useRegister();
   const locale = useLocale();
 
+  const [emailValidation, setEmailValidation] =
+    useState<RegistrationEmailValidationOptions>(
+      DEFAULT_REGISTRATION_EMAIL_VALIDATION,
+    );
+  const [settingsLoading, setSettingsLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    RegisterService.getRegistrationSettings()
+      .then((settings) => {
+        if (!cancelled) setEmailValidation(settings);
+      })
+      .catch(() => {
+        if (!cancelled) setEmailValidation(DEFAULT_REGISTRATION_EMAIL_VALIDATION);
+      })
+      .finally(() => {
+        if (!cancelled) setSettingsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const schema = useMemo(
+    () => createRegisterPersonalInfoSchema(emailValidation),
+    [emailValidation],
+  );
+
   const countryDisplayNames = new Intl.DisplayNames([locale], {
     type: "region",
   });
@@ -48,7 +78,7 @@ export function usePersonalInformationForm() {
   }));
 
   const form = useForm<RegisterPersonalInfoValues>({
-    resolver: zodResolver(RegisterPersonalInfoSchema),
+    resolver: zodResolver(schema),
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {
@@ -66,6 +96,10 @@ export function usePersonalInformationForm() {
     },
   });
 
+  useEffect(() => {
+    form.clearErrors();
+  }, [schema, form]);
+
   const watched = form.watch([
     "email",
     "name",
@@ -80,6 +114,8 @@ export function usePersonalInformationForm() {
   const allFilled = watched.every((v) => (v ?? "").trim().length > 0);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const useCorporateEmailCopy = emailValidation.requireCorporateEmail;
 
   function translateError(message: string | undefined): string | undefined {
     if (!message) return undefined;
@@ -165,6 +201,8 @@ export function usePersonalInformationForm() {
     form,
     allFilled,
     isLoading,
+    settingsLoading,
+    useCorporateEmailCopy,
     allCountries,
     handleSubmit: form.handleSubmit(onSubmit),
     handleCancel,

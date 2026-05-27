@@ -628,8 +628,10 @@
     "personal-information": {
       "title": "Registrarse en Adamo Services",
       "description": "Ingresa a continuación tu información personal para continuar:",
+      "loadingSettings": "Cargando configuración de registro...",
       "labels": {
         "email": "Correo electrónico corporativo",
+        "emailAny": "Correo electrónico",
         "name": "Nombre",
         "surname": "Apellido",
         "companyName": "Nombre de la empresa",
@@ -641,6 +643,7 @@
       },
       "placeholders": {
         "email": "Ingresa tu correo corporativo",
+        "emailAny": "Ingresa tu correo electrónico",
         "name": "Ingresa tu nombre",
         "surname": "Ingresa tu apellido",
         "companyName": "Ingresa el nombre de la empresa",

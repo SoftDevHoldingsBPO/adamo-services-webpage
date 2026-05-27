@@ -44,10 +44,27 @@ export function PersonalInformationStep() {
     form,
     allFilled,
     isLoading,
+    settingsLoading,
+    useCorporateEmailCopy,
     allCountries,
     handleSubmit,
     fieldError,
   } = usePersonalInformationForm();
+
+  const emailLabel = useCorporateEmailCopy
+    ? t("labels.email")
+    : t("labels.emailAny");
+  const emailPlaceholder = useCorporateEmailCopy
+    ? t("placeholders.email")
+    : t("placeholders.emailAny");
+
+  if (settingsLoading) {
+    return (
+      <div className="flex flex-col gap-2 py-8 text-neutral-500 text-sm">
+        {t("loadingSettings")}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -70,13 +87,13 @@ export function PersonalInformationStep() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("labels.email")}</FormLabel>
+                    <FormLabel>{emailLabel}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         type="text"
                         isError={!!form.formState.errors.email}
-                        placeholder={t("placeholders.email")}
+                        placeholder={emailPlaceholder}
                       />
                     </FormControl>
                     {fieldError("email") && (
