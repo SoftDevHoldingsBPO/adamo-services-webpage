@@ -65,16 +65,16 @@ function isPlausibleDomain(email: string): boolean {
 export function createRegisterPersonalInfoSchema(
   options: RegistrationEmailValidationOptions = DEFAULT_REGISTRATION_EMAIL_VALIDATION,
 ) {
-  let emailSchema = z.string().email("errors.emailInvalid");
+  const baseEmailSchema = z.string().email("errors.emailInvalid");
 
-  if (options.requireCorporateEmail) {
-    emailSchema = emailSchema
-      .refine((val) => {
-        const domain = val.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
-        return !FREE_EMAIL_DOMAINS.includes(domain);
-      }, "errors.emailPersonal")
-      .refine(isPlausibleDomain, "errors.emailDomainInvalid");
-  }
+  const emailSchema = options.requireCorporateEmail
+    ? baseEmailSchema
+        .refine((val) => {
+          const domain = val.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
+          return !FREE_EMAIL_DOMAINS.includes(domain);
+        }, "errors.emailPersonal")
+        .refine(isPlausibleDomain, "errors.emailDomainInvalid")
+    : baseEmailSchema;
 
   return z.object({
     email: emailSchema,

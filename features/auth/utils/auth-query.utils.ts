@@ -3,6 +3,15 @@ import {
   AUTH_QUERY_VALUES,
 } from "@/features/auth/constants/auth-query-params";
 
+/** App routes that must not redirect to the Lovable landing. */
+export const LOVABLE_REDIRECT_EXCLUDED_PATHS = [
+  "/register",
+  "/sign-in",
+  "/my-services",
+  "/profile",
+  "/logout",
+] as const;
+
 /**
  * Utility class for handling authentication-related query parameters and URLs
  */
@@ -76,16 +85,18 @@ export class AuthQueryUtils {
   }
 
   /**
+   * Whether the request targets an in-app route that must not redirect to Lovable.
+   */
+  public static isExcludedAppPath(pathname: string): boolean {
+    return LOVABLE_REDIRECT_EXCLUDED_PATHS.some(
+      (path) => pathname === path || pathname.startsWith(`${path}/`),
+    );
+  }
+
+  /**
    * Whether the request is part of an SSO flow and should not be redirected away.
    */
-  public static isSsoFlow(
-    searchParams: URLSearchParams,
-    pathname: string,
-  ): boolean {
-    if (pathname === "/logout") {
-      return true;
-    }
-
+  public static isSsoFlow(searchParams: URLSearchParams): boolean {
     if (this.shouldOpenLogin(searchParams)) {
       return true;
     }
@@ -95,6 +106,16 @@ export class AuthQueryUtils {
     }
 
     return false;
+  }
+
+  /**
+   * Whether the request should skip the Lovable redirect (SSO or in-app routes).
+   */
+  public static shouldSkipLovableRedirect(
+    searchParams: URLSearchParams,
+    pathname: string,
+  ): boolean {
+    return this.isExcludedAppPath(pathname) || this.isSsoFlow(searchParams);
   }
 
   /**
