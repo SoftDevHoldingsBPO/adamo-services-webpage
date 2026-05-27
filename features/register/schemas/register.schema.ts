@@ -37,7 +37,7 @@ export type RegistrationEmailValidationOptions = {
 
 export const DEFAULT_REGISTRATION_EMAIL_VALIDATION: RegistrationEmailValidationOptions =
   {
-    requireCorporateEmail: true,
+    requireCorporateEmail: false,
     enforceUniqueOrganizationDomain: true,
   };
 
