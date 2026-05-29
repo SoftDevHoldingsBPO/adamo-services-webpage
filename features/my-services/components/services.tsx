@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { VideoDemoDialog } from "@/features/my-services/components/video-demo-dialog";
 import { ArrowRight, Calendar } from "lucide-react";
 
@@ -21,13 +22,21 @@ import { Button } from "@/components/ui/button";
 
 export function Services() {
   const locale = useLocale();
+
   const t = useTranslations("my-services");
+
+  const { user } = useAuth();
+
+  const activePlanName =
+    user?.organizationSubscriptions?.find(
+      (subscription) => subscription.status === "active",
+    )?.planName ?? null;
 
   const services: {
     id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
     name: string;
     description: string;
-    plan: string;
+    plan: string | null;
     subscriptionUntil: string;
     isHired: boolean;
     icon: ComponentType;
@@ -38,7 +47,7 @@ export function Services() {
       id: "adamo-id",
       name: "Adamo ID",
       description: t("services.adamo-id.description"),
-      plan: "Starter Plan",
+      plan: activePlanName,
       subscriptionUntil: "2023-12-31",
       isHired: true,
       icon: AdamoIDIcon,
@@ -49,7 +58,7 @@ export function Services() {
       id: "adamo-pay",
       name: "Adamo Pay",
       description: t("services.adamo-pay.description"),
-      plan: "Professional Plan",
+      plan: null,
       subscriptionUntil: "2023-12-31",
       isHired: false,
       icon: AdamoPayIcon,
@@ -60,7 +69,7 @@ export function Services() {
       id: "adamo-risk",
       name: "Adamo Risk",
       description: t("services.adamo-risk.description"),
-      plan: "Starter Plan",
+      plan: null,
       subscriptionUntil: "2023-12-31",
       isHired: false,
       icon: AdamoRiskIcon,
@@ -71,7 +80,7 @@ export function Services() {
       id: "adamo-sign",
       name: "Adamo Sign",
       description: t("services.adamo-sign.description"),
-      plan: "Starter Plan",
+      plan: activePlanName,
       subscriptionUntil: "2023-12-31",
       isHired: true,
       icon: AdamoSignIcon,
@@ -82,7 +91,7 @@ export function Services() {
       id: "adamo-check",
       name: "Adamo Check",
       description: t("services.adamo-check.description"),
-      plan: "Starter Plan",
+      plan: activePlanName,
       subscriptionUntil: "2023-12-31",
       isHired: true,
       icon: AdamoCheckIcon,
@@ -119,7 +128,7 @@ export function Services() {
 type ServiceCardProps = {
   id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
   name: string;
-  plan: string;
+  plan: string | null;
   description: string;
   subscriptionUntil: string;
   isHired: boolean;
@@ -162,13 +171,14 @@ function ServiceCard({
             isHired ? "bg-white/20" : "bg-white/50",
           )}
         >
+          {isHired && <CrownIcon className="size-4" />}
           <p
             className={cn("font-semibold text-sm", {
               "text-white": isHired,
               "text-neutral-400": !isHired,
             })}
           >
-            {isHired ? t("card.acquired") : t("card.notAcquired")}
+            {isHired ? (plan ?? t("card.acquired")) : t("card.notAcquired")}
           </p>
         </div>
       </header>
