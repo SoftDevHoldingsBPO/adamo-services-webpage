@@ -1,5 +1,11 @@
+import {
+  AuthRequestConfig,
+  clearValidSession,
+  hadValidSession,
+  markValidSession,
+} from "@/api/auth-request-config";
 import { notifyUnauthenticated } from "@/features/auth/contexts/auth.context";
-import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError } from "axios";
 
 import { APIErrorResponse } from "./types";
 
@@ -74,9 +80,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error: AxiosError<APIErrorResponse>) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & {
-      _retry?: boolean;
-    };
+    const originalRequest = error.config as AuthRequestConfig;
 
     // Check if the error is ACCESS_TOKEN_EXPIRED error
     const is401Error = error.response?.status === 401;
@@ -102,6 +106,12 @@ api.interceptors.response.use(
 
     // Handle ACCESS_TOKEN_EXPIRED - attempt token refresh
     if (is401Error && isAccessTokenExpired && !originalRequest._retry) {
+      // Initial auth probe: no cookies or stale session — fail quietly
+      if (originalRequest._isInitialAuthCheck) {
+        notifyUnauthenticated();
+        return Promise.reject(error);
+      }
+
       // If a refresh is already in progress, queue this request
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
@@ -129,6 +139,8 @@ api.interceptors.response.use(
           },
         );
 
+        markValidSession();
+
         // Process all queued requests
         processQueue();
         isRefreshing = false;
@@ -140,11 +152,15 @@ api.interceptors.response.use(
         processQueue(refreshError);
         isRefreshing = false;
 
-        // Refresh failed — call logout to clear server-side session cookies,
-        // then redirect to home with session expired flag.
-        // Uses plain axios (not `api`) to avoid re-triggering this interceptor.
-        // Avoid infinite loop - only redirect if not already on session_expired page
-        if (!window.location.search.includes("session_expired=true")) {
+        // Only treat as "session expired" when the user had an active session
+        // during this page visit (not for anonymous visitors or initial auth checks).
+        const shouldNotifySessionExpired =
+          hadValidSession() &&
+          !window.location.search.includes("session_expired=true");
+
+        clearValidSession();
+
+        if (shouldNotifySessionExpired) {
           try {
             await axios.post(
               `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/logout`,
@@ -155,6 +171,8 @@ api.interceptors.response.use(
             // Ignore logout errors — session is already invalid
           }
           window.location.href = "/?session_expired=true";
+        } else {
+          notifyUnauthenticated();
         }
 
         return Promise.reject(refreshError);

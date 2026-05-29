@@ -1,8 +1,13 @@
 "use client";
 
+import {
+  clearValidSession,
+  markValidSession,
+} from "@/api/auth-request-config";
 import { User } from "@/features/auth/entities/user.entity";
 import AuthService from "@/features/auth/services/auth.service";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
+import { SessionIndicator } from "@/features/auth/utils/session-indicator.utils";
 import { ProfileService } from "@/features/profile/services/profile.service";
 
 import {
@@ -44,19 +49,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Set authenticated state and user
   const setAuthenticated = (user: User) => {
+    SessionIndicator.mark();
+    markValidSession();
     setUser(user);
     setStatus("authenticated");
   };
 
   // Set unauthenticated state
   const setUnauthenticated = () => {
+    SessionIndicator.clear();
+    clearValidSession();
     setUser(null);
     setStatus("unauthenticated");
   };
 
   // Fetch user profile and, if primary_user, also fetch org users
-  const fetchProfileWithOrgUsers = async (): Promise<User> => {
-    const user = await ProfileService.get();
+  const fetchProfileWithOrgUsers = async (options?: {
+    isInitialAuthCheck?: boolean;
+  }): Promise<User> => {
+    const user = await ProfileService.get(options);
 
     if (user.role === "primary_user") {
       const orgUsers = await ProfileService.getOrgUsers(user.email);
@@ -115,12 +126,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
+      // Skip API calls for visitors who have never signed in on this browser
+      if (!SessionIndicator.has()) {
+        setUnauthenticated();
+        return;
+      }
+
       try {
-        // Try to get user profile (will use cookies automatically)
-        const user = await fetchProfileWithOrgUsers();
+        const user = await fetchProfileWithOrgUsers({
+          isInitialAuthCheck: true,
+        });
         setAuthenticated(user);
       } catch {
-        // If it fails, user is not authenticated
         setUnauthenticated();
       }
     };

@@ -30,6 +30,17 @@ const FREE_EMAIL_DOMAINS = [
   "126",
 ];
 
+export type RegistrationEmailValidationOptions = {
+  requireCorporateEmail: boolean;
+  enforceUniqueOrganizationDomain: boolean;
+};
+
+export const DEFAULT_REGISTRATION_EMAIL_VALIDATION: RegistrationEmailValidationOptions =
+  {
+    requireCorporateEmail: false,
+    enforceUniqueOrganizationDomain: true,
+  };
+
 // Heuristic: checks that the name contains at least 2 alphabetic "runs" of 2+
 // characters each, preventing repetitions like "kkkkk" or random strings.
 const NAME_RE = /[a-záéíóúüñ]{2,}/gi;
@@ -41,10 +52,6 @@ function isPlausibleName(value: string): boolean {
 
 // Heuristic: catches obviously fake/gibberish email domains like "jjjj.co" or
 // "kjfdewofjwero.co" without relying on a domain whitelist.
-//  1. SLD must have ≥ 2 distinct characters (rejects "jjjjj", "aaaaa", etc.)
-//  2. SLD of 5+ characters must contain at least one vowel (rejects "kjfde", "bgrths")
-//  3. SLD without hyphens of 5+ characters cannot start with 4+ consecutive consonants (rejects "kjfdewofjwero")
-//  Note: hyphens are skipped in check 3 because they are valid in corporate SLDs (e.g. "cm-group")
 function isPlausibleDomain(email: string): boolean {
   const sld = email.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
   if (!sld) return false;
@@ -55,47 +62,58 @@ function isPlausibleDomain(email: string): boolean {
   return true;
 }
 
-export const RegisterPersonalInfoSchema = z.object({
-  email: z
-    .string()
-    .email("errors.emailInvalid")
-    .refine((val) => {
-      const domain = val.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
-      return !FREE_EMAIL_DOMAINS.includes(domain);
-    }, "errors.emailPersonal")
-    .refine(isPlausibleDomain, "errors.emailDomainInvalid"),
-  name: z
-    .string()
-    .min(2, "errors.nameTooShort")
-    .refine(
-      (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
-      "errors.nameInvalid",
-    ),
-  surname: z
-    .string()
-    .min(2, "errors.nameTooShort")
-    .refine(
-      (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
-      "errors.nameInvalid",
-    ),
-  companyName: z
-    .string()
-    .min(3, "errors.companyTooShort")
-    .refine(isPlausibleName, "errors.companyInvalid"),
-  companyIdentification: z
-    .string()
-    .min(1, "errors.required")
-    .regex(/^[a-zA-Z0-9]+$/, "errors.companyIdentificationInvalid"),
-  position: z.string().min(1, "errors.required"),
-  industry: z.string().min(1, "errors.required"),
-  country: z.string().min(1, "errors.required"),
-  phoneCode: z.string().optional(),
-  phone: z
-    .string()
-    .min(1, "errors.phoneRequired")
-    .regex(/^\d{6,15}$/, "errors.phoneInvalid"),
-});
+export function createRegisterPersonalInfoSchema(
+  options: RegistrationEmailValidationOptions = DEFAULT_REGISTRATION_EMAIL_VALIDATION,
+) {
+  const baseEmailSchema = z.string().email("errors.emailInvalid");
+
+  const emailSchema = options.requireCorporateEmail
+    ? baseEmailSchema
+        .refine((val) => {
+          const domain = val.split("@")[1]?.split(".")[0]?.toLowerCase() ?? "";
+          return !FREE_EMAIL_DOMAINS.includes(domain);
+        }, "errors.emailPersonal")
+        .refine(isPlausibleDomain, "errors.emailDomainInvalid")
+    : baseEmailSchema;
+
+  return z.object({
+    email: emailSchema,
+    name: z
+      .string()
+      .min(2, "errors.nameTooShort")
+      .refine(
+        (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
+        "errors.nameInvalid",
+      ),
+    surname: z
+      .string()
+      .min(2, "errors.nameTooShort")
+      .refine(
+        (val) => /^[a-zA-ZÀ-ÿ\s'-]+$/.test(val.trim()),
+        "errors.nameInvalid",
+      ),
+    companyName: z
+      .string()
+      .min(3, "errors.companyTooShort")
+      .refine(isPlausibleName, "errors.companyInvalid"),
+    companyIdentification: z
+      .string()
+      .min(1, "errors.required")
+      .regex(/^[a-zA-Z0-9]+$/, "errors.companyIdentificationInvalid"),
+    position: z.string().min(1, "errors.required"),
+    industry: z.string().min(1, "errors.required"),
+    country: z.string().min(1, "errors.required"),
+    phoneCode: z.string().optional(),
+    phone: z
+      .string()
+      .min(1, "errors.phoneRequired")
+      .regex(/^\d{6,15}$/, "errors.phoneInvalid"),
+  });
+}
+
+/** @deprecated Use createRegisterPersonalInfoSchema() — kept for type inference */
+export const RegisterPersonalInfoSchema = createRegisterPersonalInfoSchema();
 
 export type RegisterPersonalInfoValues = z.infer<
-  typeof RegisterPersonalInfoSchema
+  ReturnType<typeof createRegisterPersonalInfoSchema>
 >;

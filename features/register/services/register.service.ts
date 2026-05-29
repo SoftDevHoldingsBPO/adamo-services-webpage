@@ -1,4 +1,8 @@
 import { api } from "@/api/api";
+import {
+  DEFAULT_REGISTRATION_EMAIL_VALIDATION,
+  RegistrationEmailValidationOptions,
+} from "@/features/register/schemas/register.schema";
 
 interface RegisterUserPayload {
   email: string;
@@ -25,6 +29,23 @@ interface CompleteRegistrationPayload {
 }
 
 const RegisterService = {
+  getRegistrationSettings: async (): Promise<RegistrationEmailValidationOptions> => {
+    const { data: body } = await api.get<{
+      data: RegistrationEmailValidationOptions;
+    }>("/api/v1/commercial/registration-settings");
+
+    const settings = body?.data;
+    if (!settings) {
+      return DEFAULT_REGISTRATION_EMAIL_VALIDATION;
+    }
+
+    return {
+      requireCorporateEmail: settings.requireCorporateEmail !== false,
+      enforceUniqueOrganizationDomain:
+        settings.enforceUniqueOrganizationDomain !== false,
+    };
+  },
+
   checkEmail: async (email: string): Promise<void> => {
     await api.post("/api/v1/commercial/check-email", { email });
   },
