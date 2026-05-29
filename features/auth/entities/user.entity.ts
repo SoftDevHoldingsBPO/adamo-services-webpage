@@ -1,3 +1,7 @@
+import type { OrganizationSubscription } from "@/features/profile/dtos/get-profile.dto";
+
+export type { OrganizationSubscription };
+
 export type OrgUser = {
   uuid: string;
   fullName: string;
@@ -16,4 +20,5 @@ export type User = {
   isAdminUser?: boolean;
   isPrimaryUser?: boolean;
   orgUsers?: OrgUser[];
+  organizationSubscriptions?: OrganizationSubscription[];
 };
