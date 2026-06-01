@@ -1,45 +1,28 @@
 import { APISuccessResponse } from "@/api/types";
 
-<<<<<<< Updated upstream
 export type OrganizationSubscriptionFeature = {
   key: string;
   limit: number;
-  product: string;
-  description: string;
-  unit: string;
-  resetPeriod: string;
-  requiresContact: boolean;
+  product?: string;
+  description?: string;
+  unit?: string;
+  resetPeriod?: string;
+  requiresContact?: boolean;
 };
 
 export type OrganizationSubscription = {
-=======
-export type OrganizationSubscriptionSummary = {
->>>>>>> Stashed changes
   uuid: string;
   planSlug: string;
   planName: string;
   planVersion: number;
   status: string;
-<<<<<<< Updated upstream
-  currentPeriodStart: string;
-  currentPeriodEnd: string;
-  features: OrganizationSubscriptionFeature[];
-=======
   productScope?: string;
   currentPeriodStart: string;
   currentPeriodEnd: string;
   trialEndsAt?: string;
   endDate?: string;
   lastPaymentStatus?: string;
-  features: Array<{
-    key: string;
-    limit: number;
-    product?: string;
-    description?: string;
-    unit?: string;
-    requiresContact?: boolean;
-  }>;
->>>>>>> Stashed changes
+  features: OrganizationSubscriptionFeature[];
 };
 
 export type Profile = {
@@ -55,9 +38,6 @@ export type Profile = {
   twoFactorAuthEnabled: boolean;
   roles: any[];
   permissions: any[];
-<<<<<<< Updated upstream
-  organizationSubscriptions: OrganizationSubscription[];
-=======
   organizationId?: string;
   allowedProducts: string[];
   availableProducts: string[];
@@ -68,8 +48,7 @@ export type Profile = {
     plan?: string;
     allowedProducts: string[];
   };
-  organizationSubscriptions?: OrganizationSubscriptionSummary[];
->>>>>>> Stashed changes
+  organizationSubscriptions?: OrganizationSubscription[];
   lastLoginAt: Date;
   lastLoginIP: string;
   createdAt: Date;

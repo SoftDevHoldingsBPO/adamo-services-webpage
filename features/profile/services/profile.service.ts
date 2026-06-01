@@ -29,12 +29,9 @@ export class ProfileService {
       isTwoFactorEnabled: data.twoFactorAuthEnabled,
       isAdminUser: data.roles.some((r) => r.role === "admin"),
       isPrimaryUser: data.roles.some((r) => r.role === "primary_user"),
-<<<<<<< Updated upstream
       organizationSubscriptions: data.organizationSubscriptions,
-=======
       allowedProducts: data.allowedProducts ?? data.organization?.allowedProducts ?? [],
       availableProducts: data.availableProducts ?? [],
->>>>>>> Stashed changes
     };
   }
 

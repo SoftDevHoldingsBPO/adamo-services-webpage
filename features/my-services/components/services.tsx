@@ -3,7 +3,6 @@
 import { useAuth } from "@/features/auth/contexts/auth.context";
 import { VideoDemoDialog } from "@/features/my-services/components/video-demo-dialog";
 import { isProductAllowed } from "@/features/my-services/utils/product-slugs";
-import { useAuth } from "@/features/auth/contexts/auth.context";
 import { ArrowRight, Calendar } from "lucide-react";
 
 import React, { ComponentType, useMemo } from "react";
@@ -19,6 +18,7 @@ import { AdamoIDIcon } from "@/components/icon/AdamoIdIcon";
 import { AdamoPayIcon } from "@/components/icon/AdamoPayIcon";
 import { AdamoRiskIcon } from "@/components/icon/AdamoRiskIcon";
 import { AdamoSignIcon } from "@/components/icon/AdamoSignIcon";
+import { CrownIcon } from "@/components/icon/CrownIcon";
 import { Button } from "@/components/ui/button";
 
 type ServiceId =
@@ -30,13 +30,10 @@ type ServiceId =
 
 export function Services() {
   const locale = useLocale();
-
   const t = useTranslations("my-services");
   const { user } = useAuth();
 
   const allowedProducts = user?.allowedProducts ?? [];
-
-  const { user } = useAuth();
 
   const activePlanName =
     user?.organizationSubscriptions?.find(
@@ -47,80 +44,20 @@ export function Services() {
     id: ServiceId;
     name: string;
     description: string;
-<<<<<<< Updated upstream
     plan: string | null;
-    subscriptionUntil: string;
-=======
->>>>>>> Stashed changes
     isHired: boolean;
     icon: ComponentType;
     color: string;
     href: string;
-<<<<<<< Updated upstream
-  }[] = [
-    {
-      id: "adamo-id",
-      name: "Adamo ID",
-      description: t("services.adamo-id.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoIDIcon,
-      color: "bg-adamo-id-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
-    },
-    {
-      id: "adamo-pay",
-      name: "Adamo Pay",
-      description: t("services.adamo-pay.description"),
-      plan: null,
-      subscriptionUntil: "2023-12-31",
-      isHired: false,
-      icon: AdamoPayIcon,
-      color: "bg-adamo-pay-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_PAY_URL || "#",
-    },
-    {
-      id: "adamo-risk",
-      name: "Adamo Risk",
-      description: t("services.adamo-risk.description"),
-      plan: null,
-      subscriptionUntil: "2023-12-31",
-      isHired: false,
-      icon: AdamoRiskIcon,
-      color: "bg-adamo-risk-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_RISK_URL || "#",
-    },
-    {
-      id: "adamo-sign",
-      name: "Adamo Sign",
-      description: t("services.adamo-sign.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoSignIcon,
-      color: "bg-adamo-sign-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
-    },
-    {
-      id: "adamo-check",
-      name: "Adamo Check",
-      description: t("services.adamo-check.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoCheckIcon,
-      color: "bg-adamo-check-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
-    },
-  ];
-=======
   }[] = useMemo(
     () => [
       {
         id: "adamo-id",
         name: "Adamo ID",
         description: t("services.adamo-id.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-id")
+          ? activePlanName
+          : null,
         isHired: isProductAllowed(allowedProducts, "adamo-id"),
         icon: AdamoIDIcon,
         color: "bg-adamo-id-700",
@@ -130,6 +67,9 @@ export function Services() {
         id: "adamo-pay",
         name: "Adamo Pay",
         description: t("services.adamo-pay.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-pay")
+          ? activePlanName
+          : null,
         isHired: isProductAllowed(allowedProducts, "adamo-pay"),
         icon: AdamoPayIcon,
         color: "bg-adamo-pay-700",
@@ -139,6 +79,9 @@ export function Services() {
         id: "adamo-risk",
         name: "Adamo Risk",
         description: t("services.adamo-risk.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-risk")
+          ? activePlanName
+          : null,
         isHired: isProductAllowed(allowedProducts, "adamo-risk"),
         icon: AdamoRiskIcon,
         color: "bg-adamo-risk-700",
@@ -148,6 +91,9 @@ export function Services() {
         id: "adamo-sign",
         name: "Adamo Sign",
         description: t("services.adamo-sign.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-sign")
+          ? activePlanName
+          : null,
         isHired: isProductAllowed(allowedProducts, "adamo-sign"),
         icon: AdamoSignIcon,
         color: "bg-adamo-sign-700",
@@ -157,15 +103,17 @@ export function Services() {
         id: "adamo-check",
         name: "Adamo Check",
         description: t("services.adamo-check.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-check")
+          ? activePlanName
+          : null,
         isHired: isProductAllowed(allowedProducts, "adamo-check"),
         icon: AdamoCheckIcon,
         color: "bg-adamo-check-700",
         href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
       },
     ],
-    [allowedProducts, t],
+    [activePlanName, allowedProducts, t],
   );
->>>>>>> Stashed changes
 
   return (
     <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4">
@@ -195,10 +143,7 @@ export function Services() {
 type ServiceCardProps = {
   id: ServiceId;
   name: string;
-<<<<<<< Updated upstream
   plan: string | null;
-=======
->>>>>>> Stashed changes
   description: string;
   isHired: boolean;
   icon: ComponentType;
@@ -209,6 +154,7 @@ type ServiceCardProps = {
 function ServiceCard({
   id,
   name,
+  plan,
   description,
   isHired,
   icon,
