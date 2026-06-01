@@ -735,13 +735,13 @@
       },
       "adamo-id": {
         "name": "Adamo ID",
-        "badge": "10 validaciones incluidas",
+        "badge": "{limit} validaciones incluidas",
         "description": "Valida empresas y personas en segundos.",
         "dropdownLabel": "Volumen de verificaciones ID al mes"
       },
       "adamo-sign": {
         "name": "Adamo Sign",
-        "badge": "20 firmas disponibles",
+        "badge": "{limit} firmas disponibles",
         "description": "Firma documentos con validez legal.",
         "dropdownLabel": "Número de firmas al mes"
       },
@@ -763,13 +763,13 @@
       },
       "adamo-risk": {
         "name": "Adamo Risk",
-        "badge": "3.000 consultas disponibles",
+        "badge": "{limit} consultas disponibles",
         "description": "Detecta riesgos automáticamente.",
         "dropdownLabel": "Consultas AML al mes"
       },
       "adamo-check": {
         "name": "Adamo Check",
-        "badge": "Hasta 5 empleados disponibles",
+        "badge": "Hasta {limit} empleados disponibles",
         "description": "Consulta asistencia de tu equipo.",
         "dropdownLabel": "Empleados a verificar al mes"
       }

@@ -7,11 +7,12 @@ import {
   TERM_ID,
 } from "@/features/register/constants/products.constants";
 import { useRegister } from "@/features/register/contexts/register.context";
+import type { PlanFeature } from "@/features/register/services/register.service";
 import RegisterService from "@/features/register/services/register.service";
 import { buildProductInterests } from "@/features/register/utils/products.utils";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
@@ -33,6 +34,36 @@ export function useProductsForm() {
   const [fieldValues, setFieldValues] = useState<Record<string, string>>({});
   const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [freemiumBadges, setFreemiumBadges] = useState<
+    Partial<Record<ProductId, number>>
+  >({});
+
+  useEffect(() => {
+    const PRODUCT_ID_MAP: Record<string, ProductId> = {
+      adamo_id: "adamo-id",
+      adamo_sign: "adamo-sign",
+      adamo_risk: "adamo-risk",
+      adamo_check: "adamo-check",
+    };
+
+    const fetchFreemiumPlan = async () => {
+      try {
+        const { features } = await RegisterService.getFreemiumPlan();
+        const badges: Partial<Record<ProductId, number>> = {};
+        features.forEach((feature: PlanFeature) => {
+          const productId = PRODUCT_ID_MAP[feature.product];
+          if (productId && !feature.requiresContact) {
+            badges[productId] = feature.limit;
+          }
+        });
+        setFreemiumBadges(badges);
+      } catch (error) {
+        console.error("Error fetching freemium plan:", error);
+      }
+    };
+
+    fetchFreemiumPlan();
+  }, []);
 
   const setField = (key: string, value: string) => {
     setFieldValues((prev) => ({ ...prev, [key]: value }));
@@ -139,6 +170,7 @@ export function useProductsForm() {
     isLoading,
     isSubmitEnabled,
     isPayRestricted,
+    freemiumBadges,
     setField,
     toggleProduct,
     handleSubmit,
