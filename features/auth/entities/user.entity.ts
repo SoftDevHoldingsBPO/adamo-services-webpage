@@ -19,6 +19,10 @@ export type User = {
   isTwoFactorEnabled: boolean;
   isAdminUser?: boolean;
   isPrimaryUser?: boolean;
+  /** Productos habilitados para la organización (adamo_sign, adamo_pay, …) */
+  allowedProducts?: string[];
+  /** Productos a los que el usuario puede acceder según roles */
+  availableProducts?: string[];
   orgUsers?: OrgUser[];
   organizationSubscriptions?: OrganizationSubscription[];
 };

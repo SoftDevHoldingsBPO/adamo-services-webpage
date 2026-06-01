@@ -2,9 +2,11 @@
 
 import { useAuth } from "@/features/auth/contexts/auth.context";
 import { VideoDemoDialog } from "@/features/my-services/components/video-demo-dialog";
+import { isProductAllowed } from "@/features/my-services/utils/product-slugs";
+import { useAuth } from "@/features/auth/contexts/auth.context";
 import { ArrowRight, Calendar } from "lucide-react";
 
-import React, { ComponentType } from "react";
+import React, { ComponentType, useMemo } from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -17,13 +19,22 @@ import { AdamoIDIcon } from "@/components/icon/AdamoIdIcon";
 import { AdamoPayIcon } from "@/components/icon/AdamoPayIcon";
 import { AdamoRiskIcon } from "@/components/icon/AdamoRiskIcon";
 import { AdamoSignIcon } from "@/components/icon/AdamoSignIcon";
-import { CrownIcon } from "@/components/icon/CrownIcon";
 import { Button } from "@/components/ui/button";
+
+type ServiceId =
+  | "adamo-id"
+  | "adamo-pay"
+  | "adamo-risk"
+  | "adamo-sign"
+  | "adamo-check";
 
 export function Services() {
   const locale = useLocale();
 
   const t = useTranslations("my-services");
+  const { user } = useAuth();
+
+  const allowedProducts = user?.allowedProducts ?? [];
 
   const { user } = useAuth();
 
@@ -33,15 +44,19 @@ export function Services() {
     )?.planName ?? null;
 
   const services: {
-    id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
+    id: ServiceId;
     name: string;
     description: string;
+<<<<<<< Updated upstream
     plan: string | null;
     subscriptionUntil: string;
+=======
+>>>>>>> Stashed changes
     isHired: boolean;
     icon: ComponentType;
     color: string;
     href: string;
+<<<<<<< Updated upstream
   }[] = [
     {
       id: "adamo-id",
@@ -99,6 +114,58 @@ export function Services() {
       href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
     },
   ];
+=======
+  }[] = useMemo(
+    () => [
+      {
+        id: "adamo-id",
+        name: "Adamo ID",
+        description: t("services.adamo-id.description"),
+        isHired: isProductAllowed(allowedProducts, "adamo-id"),
+        icon: AdamoIDIcon,
+        color: "bg-adamo-id-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
+      },
+      {
+        id: "adamo-pay",
+        name: "Adamo Pay",
+        description: t("services.adamo-pay.description"),
+        isHired: isProductAllowed(allowedProducts, "adamo-pay"),
+        icon: AdamoPayIcon,
+        color: "bg-adamo-pay-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_PAY_URL || "#",
+      },
+      {
+        id: "adamo-risk",
+        name: "Adamo Risk",
+        description: t("services.adamo-risk.description"),
+        isHired: isProductAllowed(allowedProducts, "adamo-risk"),
+        icon: AdamoRiskIcon,
+        color: "bg-adamo-risk-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_RISK_URL || "#",
+      },
+      {
+        id: "adamo-sign",
+        name: "Adamo Sign",
+        description: t("services.adamo-sign.description"),
+        isHired: isProductAllowed(allowedProducts, "adamo-sign"),
+        icon: AdamoSignIcon,
+        color: "bg-adamo-sign-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
+      },
+      {
+        id: "adamo-check",
+        name: "Adamo Check",
+        description: t("services.adamo-check.description"),
+        isHired: isProductAllowed(allowedProducts, "adamo-check"),
+        icon: AdamoCheckIcon,
+        color: "bg-adamo-check-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
+      },
+    ],
+    [allowedProducts, t],
+  );
+>>>>>>> Stashed changes
 
   return (
     <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4">
@@ -126,11 +193,13 @@ export function Services() {
 }
 
 type ServiceCardProps = {
-  id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
+  id: ServiceId;
   name: string;
+<<<<<<< Updated upstream
   plan: string | null;
+=======
+>>>>>>> Stashed changes
   description: string;
-  subscriptionUntil: string;
   isHired: boolean;
   icon: ComponentType;
   color: string;
@@ -140,9 +209,7 @@ type ServiceCardProps = {
 function ServiceCard({
   id,
   name,
-  plan,
   description,
-  subscriptionUntil,
   isHired,
   icon,
   color,
@@ -197,9 +264,6 @@ function ServiceCard({
               "text-neutral-400": !isHired,
             })}
           >
-            {/* {isHired
-              ? `${t("card.subscriptionUntil")} ${subscriptionUntil}`
-              : description} */}
             {description}
           </p>
         </div>
