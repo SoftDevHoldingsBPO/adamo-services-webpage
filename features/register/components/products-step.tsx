@@ -33,6 +33,7 @@ export function ProductsStep() {
     isLoading,
     isSubmitEnabled,
     isPayRestricted,
+    freemiumBadges,
     setField,
     toggleProduct,
     handleSubmit,
@@ -285,9 +286,9 @@ export function ProductsStep() {
                     <span className="text-[#384250] font-bold text-base whitespace-nowrap">
                       {t(`${id}.name`)}
                     </span>
-                    {hasBadge && (
-                      <span className="bg-[#e5f3fa] px-2 h-8 flex items-center rounded-xl text-[#384250] text-sm whitespace-nowrap">
-                        {t(`${id}.badge`)}
+                    {hasBadge && freemiumBadges[id] !== undefined && (
+                      <span className="bg-[#e5f3fa] px-2 h-8 flex items-center rounded-xl text-[#384250] text-sm min-w-0 max-w-[140px] sm:max-w-none sm:whitespace-nowrap truncate">
+                        {t(`${id}.badge`, { limit: freemiumBadges[id] })}
                       </span>
                     )}
                   </div>
