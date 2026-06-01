@@ -3,11 +3,11 @@ import { APISuccessResponse } from "@/api/types";
 export type OrganizationSubscriptionFeature = {
   key: string;
   limit: number;
-  product: string;
-  description: string;
-  unit: string;
-  resetPeriod: string;
-  requiresContact: boolean;
+  product?: string;
+  description?: string;
+  unit?: string;
+  resetPeriod?: string;
+  requiresContact?: boolean;
 };
 
 export type OrganizationSubscription = {
@@ -16,8 +16,12 @@ export type OrganizationSubscription = {
   planName: string;
   planVersion: number;
   status: string;
+  productScope?: string;
   currentPeriodStart: string;
   currentPeriodEnd: string;
+  trialEndsAt?: string;
+  endDate?: string;
+  lastPaymentStatus?: string;
   features: OrganizationSubscriptionFeature[];
 };
 
@@ -34,7 +38,17 @@ export type Profile = {
   twoFactorAuthEnabled: boolean;
   roles: any[];
   permissions: any[];
-  organizationSubscriptions: OrganizationSubscription[];
+  organizationId?: string;
+  allowedProducts: string[];
+  availableProducts: string[];
+  organization?: {
+    uuid: string;
+    name: string;
+    type: string;
+    plan?: string;
+    allowedProducts: string[];
+  };
+  organizationSubscriptions?: OrganizationSubscription[];
   lastLoginAt: Date;
   lastLoginIP: string;
   createdAt: Date;

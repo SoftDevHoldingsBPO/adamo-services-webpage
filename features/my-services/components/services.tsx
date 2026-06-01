@@ -2,9 +2,10 @@
 
 import { useAuth } from "@/features/auth/contexts/auth.context";
 import { VideoDemoDialog } from "@/features/my-services/components/video-demo-dialog";
+import { isProductAllowed } from "@/features/my-services/utils/product-slugs";
 import { ArrowRight, Calendar } from "lucide-react";
 
-import React, { ComponentType } from "react";
+import React, { ComponentType, useMemo } from "react";
 
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -20,12 +21,19 @@ import { AdamoSignIcon } from "@/components/icon/AdamoSignIcon";
 import { CrownIcon } from "@/components/icon/CrownIcon";
 import { Button } from "@/components/ui/button";
 
+type ServiceId =
+  | "adamo-id"
+  | "adamo-pay"
+  | "adamo-risk"
+  | "adamo-sign"
+  | "adamo-check";
+
 export function Services() {
   const locale = useLocale();
-
   const t = useTranslations("my-services");
-
   const { user } = useAuth();
+
+  const allowedProducts = user?.allowedProducts ?? [];
 
   const activePlanName =
     user?.organizationSubscriptions?.find(
@@ -33,72 +41,79 @@ export function Services() {
     )?.planName ?? null;
 
   const services: {
-    id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
+    id: ServiceId;
     name: string;
     description: string;
     plan: string | null;
-    subscriptionUntil: string;
     isHired: boolean;
     icon: ComponentType;
     color: string;
     href: string;
-  }[] = [
-    {
-      id: "adamo-id",
-      name: "Adamo ID",
-      description: t("services.adamo-id.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoIDIcon,
-      color: "bg-adamo-id-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
-    },
-    {
-      id: "adamo-pay",
-      name: "Adamo Pay",
-      description: t("services.adamo-pay.description"),
-      plan: null,
-      subscriptionUntil: "2023-12-31",
-      isHired: false,
-      icon: AdamoPayIcon,
-      color: "bg-adamo-pay-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_PAY_URL || "#",
-    },
-    {
-      id: "adamo-risk",
-      name: "Adamo Risk",
-      description: t("services.adamo-risk.description"),
-      plan: null,
-      subscriptionUntil: "2023-12-31",
-      isHired: false,
-      icon: AdamoRiskIcon,
-      color: "bg-adamo-risk-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_RISK_URL || "#",
-    },
-    {
-      id: "adamo-sign",
-      name: "Adamo Sign",
-      description: t("services.adamo-sign.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoSignIcon,
-      color: "bg-adamo-sign-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
-    },
-    {
-      id: "adamo-check",
-      name: "Adamo Check",
-      description: t("services.adamo-check.description"),
-      plan: activePlanName,
-      subscriptionUntil: "2023-12-31",
-      isHired: true,
-      icon: AdamoCheckIcon,
-      color: "bg-adamo-check-700",
-      href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
-    },
-  ];
+  }[] = useMemo(
+    () => [
+      {
+        id: "adamo-id",
+        name: "Adamo ID",
+        description: t("services.adamo-id.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-id")
+          ? activePlanName
+          : null,
+        isHired: isProductAllowed(allowedProducts, "adamo-id"),
+        icon: AdamoIDIcon,
+        color: "bg-adamo-id-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_ID_URL || "#",
+      },
+      {
+        id: "adamo-pay",
+        name: "Adamo Pay",
+        description: t("services.adamo-pay.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-pay")
+          ? activePlanName
+          : null,
+        isHired: isProductAllowed(allowedProducts, "adamo-pay"),
+        icon: AdamoPayIcon,
+        color: "bg-adamo-pay-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_PAY_URL || "#",
+      },
+      {
+        id: "adamo-risk",
+        name: "Adamo Risk",
+        description: t("services.adamo-risk.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-risk")
+          ? activePlanName
+          : null,
+        isHired: isProductAllowed(allowedProducts, "adamo-risk"),
+        icon: AdamoRiskIcon,
+        color: "bg-adamo-risk-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_RISK_URL || "#",
+      },
+      {
+        id: "adamo-sign",
+        name: "Adamo Sign",
+        description: t("services.adamo-sign.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-sign")
+          ? activePlanName
+          : null,
+        isHired: isProductAllowed(allowedProducts, "adamo-sign"),
+        icon: AdamoSignIcon,
+        color: "bg-adamo-sign-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_SIGN_URL || "#",
+      },
+      {
+        id: "adamo-check",
+        name: "Adamo Check",
+        description: t("services.adamo-check.description"),
+        plan: isProductAllowed(allowedProducts, "adamo-check")
+          ? activePlanName
+          : null,
+        isHired: isProductAllowed(allowedProducts, "adamo-check"),
+        icon: AdamoCheckIcon,
+        color: "bg-adamo-check-700",
+        href: process.env.NEXT_PUBLIC_ADAMO_CHECK_URL || "#",
+      },
+    ],
+    [activePlanName, allowedProducts, t],
+  );
 
   return (
     <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-4">
@@ -126,11 +141,10 @@ export function Services() {
 }
 
 type ServiceCardProps = {
-  id: "adamo-id" | "adamo-pay" | "adamo-risk" | "adamo-sign" | "adamo-check";
+  id: ServiceId;
   name: string;
   plan: string | null;
   description: string;
-  subscriptionUntil: string;
   isHired: boolean;
   icon: ComponentType;
   color: string;
@@ -142,7 +156,6 @@ function ServiceCard({
   name,
   plan,
   description,
-  subscriptionUntil,
   isHired,
   icon,
   color,
@@ -197,9 +210,6 @@ function ServiceCard({
               "text-neutral-400": !isHired,
             })}
           >
-            {/* {isHired
-              ? `${t("card.subscriptionUntil")} ${subscriptionUntil}`
-              : description} */}
             {description}
           </p>
         </div>
