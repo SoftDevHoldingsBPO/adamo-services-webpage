@@ -7,8 +7,7 @@ const LOCAL_DEVELOPMENT_HOSTNAMES = new Set([
   "localhost",
   "127.0.0.1",
   "landing-services-local.adamoservices.co",
-  "dev-sign.adamoservices.co",
-  "dev-id.adamoservices.co",
+  "9997648bd26c4c0f.adamoservices.co",
 ]);
 
 function isLocalDevelopmentRequest(request: NextRequest): boolean {
@@ -30,7 +29,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };
