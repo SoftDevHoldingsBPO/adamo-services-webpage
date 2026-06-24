@@ -7,6 +7,8 @@ const LOCAL_DEVELOPMENT_HOSTNAMES = new Set([
   "localhost",
   "127.0.0.1",
   "landing-services-local.adamoservices.co",
+  "dev-sign.adamoservices.co",
+  "dev-id.adamoservices.co",
 ]);
 
 function isLocalDevelopmentRequest(request: NextRequest): boolean {
