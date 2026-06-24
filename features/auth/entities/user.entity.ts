@@ -16,6 +16,7 @@ export type User = {
   lastName: string;
   email: string;
   avatar?: string;
+  lang?: string;
   isTwoFactorEnabled: boolean;
   isAdminUser?: boolean;
   isPrimaryUser?: boolean;

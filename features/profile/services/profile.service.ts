@@ -14,7 +14,9 @@ export class ProfileService {
   public static GET_PROFILE_QUERY_KEY = "get-profile";
   public static UPDATE_PROFILE_MUTATION_KEY = "update-profile";
 
-  public static async get(options?: { isInitialAuthCheck?: boolean }): Promise<User> {
+  public static async get(options?: {
+    isInitialAuthCheck?: boolean;
+  }): Promise<User> {
     const response = await api.get<GetProfileResponse>("/api/v1/user/profile", {
       ...(options?.isInitialAuthCheck && { _isInitialAuthCheck: true }),
     });
@@ -26,13 +28,19 @@ export class ProfileService {
       email: data.email,
       lastName: data.surname,
       avatar: data.photo || undefined,
+      lang: data.language,
       isTwoFactorEnabled: data.twoFactorAuthEnabled,
       isAdminUser: data.roles.some((r) => r.role === "admin"),
       isPrimaryUser: data.roles.some((r) => r.role === "primary_user"),
       organizationSubscriptions: data.organizationSubscriptions,
-      allowedProducts: data.allowedProducts ?? data.organization?.allowedProducts ?? [],
+      allowedProducts:
+        data.allowedProducts ?? data.organization?.allowedProducts ?? [],
       availableProducts: data.availableProducts ?? [],
     };
+  }
+
+  public static async updateLanguage(language: string): Promise<void> {
+    await api.put("/api/v1/user/profile/language", { language });
   }
 
   public static async update(

@@ -79,14 +79,26 @@ api.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error: AxiosError<APIErrorResponse>) => {
+  async (
+    error: AxiosError<
+      APIErrorResponse & {
+        // The backend has this inconsistent error structure, we need to check both levels to be safe
+        errors?: string[];
+        error?: string;
+        data: { errors?: string[]; error?: string };
+      }
+    >,
+  ) => {
     const originalRequest = error.config as AuthRequestConfig;
 
     // Check if the error is ACCESS_TOKEN_EXPIRED error
     const is401Error = error.response?.status === 401;
-    const isAccessTokenExpired = error.response?.data?.errors?.includes(
-      "ACCESS_TOKEN_EXPIRED",
-    );
+
+    const isAccessTokenExpired =
+      error.response?.data?.data?.errors?.includes("ACCESS_TOKEN_EXPIRED") ||
+      error.response?.data?.errors?.includes("ACCESS_TOKEN_EXPIRED") ||
+      error.response?.data?.data?.error === "token_expired" ||
+      error.response?.data?.error === "token_expired";
 
     // Handle 401 errors that are NOT token expiration (invalid credentials, etc.)
     if (is401Error && !isAccessTokenExpired && !originalRequest._retry) {

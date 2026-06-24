@@ -1,14 +1,13 @@
 "use client";
 
-import {
-  clearValidSession,
-  markValidSession,
-} from "@/api/auth-request-config";
+import { clearValidSession, markValidSession } from "@/api/auth-request-config";
 import { User } from "@/features/auth/entities/user.entity";
 import AuthService from "@/features/auth/services/auth.service";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
 import { SessionIndicator } from "@/features/auth/utils/session-indicator.utils";
 import { ProfileService } from "@/features/profile/services/profile.service";
+import { type Locale, defaultLocale, locales } from "@/i18n/config";
+import { setUserLocale } from "@/services/locale";
 
 import {
   Dispatch,
@@ -19,6 +18,18 @@ import {
   useEffect,
   useState,
 } from "react";
+
+import { useRouter } from "next/navigation";
+
+function getLocaleCookie(): Locale {
+  if (typeof document === "undefined") return defaultLocale;
+
+  const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]+)/);
+
+  const value = match?.[1];
+
+  return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
+}
 
 /**
  * Internal handler for imperatively updating auth state from outside React
@@ -47,12 +58,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const [user, setUser] = useState<User | null>(null);
 
+  const router = useRouter();
+
   // Set authenticated state and user
   const setAuthenticated = (user: User) => {
     SessionIndicator.mark();
+
     markValidSession();
+
     setUser(user);
     setStatus("authenticated");
+
+    if (user.lang) {
+      const lang: Locale = locales.includes(user.lang as Locale)
+        ? (user.lang as Locale)
+        : defaultLocale;
+
+      if (lang !== getLocaleCookie()) {
+        setUserLocale(lang).then(() => router.refresh());
+      }
+    }
   };
 
   // Set unauthenticated state
