@@ -565,7 +565,7 @@
   },
   "remove-user-dialog": {
     "title": "Eliminar usuario",
-    "description": "\u00bfEst\u00e1s seguro que deseas eliminar a {name}?",
+    "description": "¿Estás seguro que deseas eliminar a {name}?",
     "cancel": "Cancelar",
     "remove": "Eliminar"
   },
@@ -780,5 +780,9 @@
       "goHome": "Ir al inicio",
       "signIn": "Iniciar sesión"
     }
+  },
+  "LocaleSelect": {
+    "success": "Idioma actualizado correctamente",
+    "error": "No se pudo actualizar el idioma. Por favor, inténtalo de nuevo."
   }
 }

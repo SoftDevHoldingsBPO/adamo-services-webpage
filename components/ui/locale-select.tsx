@@ -1,12 +1,16 @@
 "use client";
 
+import { useAuth } from "@/features/auth/contexts/auth.context";
+import { ProfileService } from "@/features/profile/services/profile.service";
 import { locales } from "@/i18n/config";
 import { setUserLocale } from "@/services/locale";
+import { FullScreenLoaderManager } from "@adamosuiteservices/ui/full-screen-loader";
+import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { useLenis } from "lenis/react";
 
 import { useState, useTransition } from "react";
 
-import { Locale, useLocale } from "next-intl";
+import { Locale, useLocale, useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
@@ -16,7 +20,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 const items: Array<Record<Locale, string[]>> = [
   {
-    es: ["Lenguaje (Español ES)", "Español (ES)", "(ES)"],
+    es: ["Lenguaje (Español ES)", "Español (ES)", "(ES)"],
     en: ["Language (English EN)", "English (EN)", "(EN)"],
   },
 ];
@@ -34,15 +38,32 @@ const LocaleSelect = ({
 }: LangSelectProps) => {
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
-
   const [isOpen, setIsOpen] = useState(false);
+  const { status } = useAuth();
+  const t = useTranslations("LocaleSelect");
 
-  const handleSelect = (locale: string) => {
-    if (locale === "es" || locale === "en") {
-      startTransition(() => {
-        setUserLocale(locale);
-        setIsOpen(false);
-      });
+  const handleSelect = (selectedLocale: string) => {
+    if (selectedLocale !== "es" && selectedLocale !== "en") return;
+
+    startTransition(() => {
+      setUserLocale(selectedLocale);
+      setIsOpen(false);
+    });
+
+    if (status === "authenticated") {
+      const successMsg = t("success");
+      const errorMsg = t("error");
+
+      FullScreenLoaderManager.show();
+
+      ProfileService.updateLanguage(selectedLocale)
+        .then(() =>
+          ToastManager.show({ message: successMsg, variant: "success" }),
+        )
+        .catch(() =>
+          ToastManager.show({ message: errorMsg, variant: "destructive" }),
+        )
+        .finally(() => FullScreenLoaderManager.hide());
     }
   };
 

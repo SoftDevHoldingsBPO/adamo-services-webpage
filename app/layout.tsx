@@ -4,6 +4,7 @@ import { NavigationProvider } from "@/providers/NavigationProvider";
 import { ZodI18nProvider } from "@/providers/ZodI18nProvider";
 import Providers from "@/providers/providers";
 import { Toaster } from "@adamosuiteservices/ui/toaster";
+import { FullScreenLoaderRoot } from "@/components/ui/full-screen-loader";
 
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -69,6 +70,7 @@ export default async function RootLayout({
           </Providers>
         </NavigationProvider>
         <Toaster />
+        <FullScreenLoaderRoot />
       </body>
     </html>
   );
