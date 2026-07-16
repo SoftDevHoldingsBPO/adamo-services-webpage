@@ -1,5 +1,6 @@
 "use client";
 
+import { markValidSession } from "@/api/auth-request-config";
 import { getFirstAxiosErrorMessage } from "@/api/get-axios-error-message";
 import { PasswordRecoveryDialog } from "@/features/auth/components/password-recovery/password-recovery-dialog";
 import {
@@ -14,6 +15,7 @@ import { useFirstLoginRedirect } from "@/features/auth/hooks/use-first-login-red
 import { EmailSchema } from "@/features/auth/schemas/auth.schema";
 import AuthService from "@/features/auth/services/auth.service";
 import { AuthQueryUtils } from "@/features/auth/utils/auth-query.utils";
+import { SessionIndicator } from "@/features/auth/utils/session-indicator.utils";
 import { ToastManager } from "@adamosuiteservices/ui/toaster";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -145,6 +147,12 @@ function SignInContent({ onOpenChange }: SignInContentProps) {
         const redirectTo = AuthQueryUtils.getRedirectUrl(searchParams);
 
         if (redirectTo) {
+          // Mark the session before leaving this origin so that a later visit
+          // to a protected page on this app (e.g. via a cross-app SSO redirect)
+          // doesn't skip the profile check and bounce the user out.
+          SessionIndicator.mark();
+          markValidSession();
+
           window.location.href = redirectTo;
           return;
         }
